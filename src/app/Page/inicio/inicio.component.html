@@ -1,0 +1,13 @@
+
+
+<app-navbar-index></app-navbar-index>
+<div class="container">
+    <p>inicio works!</p>
+
+    <p *ngIf="p===2 ; else otrovalor"> si es 2  </p>
+   
+    <ng-template #otrovalor>
+        <p>Da otro </p>
+    </ng-template>
+</div>
+<app-footer></app-footer>
