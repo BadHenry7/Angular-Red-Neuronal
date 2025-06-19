@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavbarindexComponent} from '../../Componentes/navbarindex/navbarindex.component'
+import {NavbarindexComponent} from '../../../Componentes/navbarindex/navbarindex.component'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

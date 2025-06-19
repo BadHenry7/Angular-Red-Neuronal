@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import {LoginComponent} from '../app/Page/login/login.component'
 import {InicioComponent} from '../app/Page/inicio/inicio.component'
-import {ReportesComponent} from '../app/Page/reportes/reportes.component'
-import {CreateComponent} from '../app/Page/gestionuser/create/create.component'
-import {ConsultarComponent} from '../app/Page/gestionuser/consultar/consultar.component'
-import {GestioncitaComponent} from '../app/Page/gestioncita/gestioncita.component'
-import {IncapacidadComponent} from '../app/Page/incapacidad/incapacidad.component'
-import {DashboardComponent} from '../app/Page/dashboard/dashboard.component'
+import {ReportesComponent} from './Page/Administrador/reportes/reportes.component'
+import {CreateComponent} from '../app/Page/Administrador/gestionuser/create/create.component'
+import {ConsultarComponent} from '../app/Page/Administrador/gestionuser/consultar/consultar.component'
+import {GestioncitaComponent} from '../app/Page/Administrador/gestioncita/gestioncita.component'
+import {IncapacidadComponent} from '../app/Page/Pacientes/incapacidad/incapacidad.component'
+import {DashboardComponent} from './Page/Administrador/dashboard/dashboard.component'
 import {DefaultComponent} from '../app/Page/default/default.component'
 import {UbicacionesComponent} from '../app/Page/ubicaciones/ubicaciones.component'
 
@@ -20,10 +20,8 @@ export const routes: Routes = [
 
     {path: 'gestioncita', component: GestioncitaComponent},
     {path: 'incapacidad', component: IncapacidadComponent},
-    {path: 'dashboard', component: DashboardComponent},
+    {path: 'administrador/dashboard', component: DashboardComponent},
     {path: 'ubicaciones', component: UbicacionesComponent},
-
-
 
 
     {path: '**', component: DefaultComponent},

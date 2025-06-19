@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavbarindexComponent } from '../../../Componentes/navbarindex/navbarindex.component';
+import { NavbarindexComponent } from '../../../../Componentes/navbarindex/navbarindex.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
+//HttpClient
 @Component({
   selector: 'app-consultar',
-  imports: [NavbarindexComponent, CommonModule, FormsModule],
+  imports: [NavbarindexComponent, CommonModule],
   templateUrl: './consultar.component.html',
   styleUrl: './consultar.component.css'
 })

@@ -33,16 +33,24 @@ Para ver la pagina:
 
 
 
-Pasar esta paginas:
-Inicio 
-Acerca de
-Salud y bienestar
-Ubicación
-Registrar
-(Tienen navbar index y footer)
 
 
-Iniciar sesión
+
+
+
+
+/Para usar ngIf o ngFor CommonModule
+/FormsModule para usar ngModel
+
+
+
+
+
+
+
+
+
+
 
 
 

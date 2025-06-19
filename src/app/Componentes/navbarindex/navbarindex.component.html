@@ -1,41 +1,23 @@
 <app-header></app-header>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand " routerLink="/">
-            <img src="/assess/hostipal.png" alt="Logo" height="60" width="100">
+   <div class="container">
+       <a class="navbar-brand" href="/">
+        <img src="hostipal.png" alt="Logo" height="50" width="100">
 
-            <!-- <span class="fs-4">Hostipal</span>-->
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-label="para celulares">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" routerLink="/Login">Iniciar sesión</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/">Principal</a></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Gestión de usuarios
-                    </a>
-                    <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" routerLink="/gestionuser/create">Crear usuario</a></li>
-                    <li><a class="dropdown-item" routerLink="/gestionuser/consultar">Consultar usuario</a></li>
-                    
-                    
-                    </ul>
-                </li>
-
-
-
-                <li class="nav-item"><a class="nav-link" routerLink="/gestioncita">Gestión de citas</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/incapacidad">Incapacidad</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/dashboard">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/Login">Cerrar sesión</a></li>
-
-
-            </ul>
-        </div>
-    </div>
+          <!-- <span class="fs-4">Hostipal</span>-->
+       </a>
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="para celulares">
+           <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav ms-auto">
+               <li class="nav-item"><a class="nav-link" RouterLink="/">Inicio</a></li>
+               <li class="nav-item"><a class="nav-link" href="/acerca_de">Acerca de</a></li>
+               <li class="nav-item"><a class="nav-link" href="/salud">Salud y bienestar</a></li>
+               <li class="nav-item"><a class="nav-link" href="/ubicaciones">Ubicación</a></li>
+               <li class="nav-item"><a class="nav-link" href="/Register">Registrar</a></li>
+               <li class="nav-item"><a class="nav-link" href="/Login">Iniciar sesión</a></li>
+           </ul>
+       </div>
+   </div>
 </nav>
