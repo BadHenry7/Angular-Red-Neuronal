@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { ImagenDefaultComponent } from '../../Componentes/imagen-default/imagen-default.component';
 
 @Component({
   selector: 'app-default',
-  imports: [],
+  imports: [ImagenDefaultComponent],
   templateUrl: './default.component.html',
   styleUrl: './default.component.css'
 })

@@ -1,0 +1,107 @@
+<app-navbarindex></app-navbarindex>
+<div class="container">
+    <p class="fs-3 mt-4 text-center"><b>¡Agendar cita!</b></p>
+    <hr>
+    <p class="text-center">Aquí puedes agendar las citas de los pacientes. Después de seleccionar los datos, haz clic en "Agendar" para completar el registro</p>
+
+    <div class="row pt-2">
+
+        <!--Primera columna-->
+        <div class="col-lg-3 col-md-4 col-sm-4 col-4 col-xl-4">
+            <div class="">
+                <label for=""><b>Seleccione una fecha</b></label>
+                <input type="date" id="c_m_d"  [(ngModel)]="fechaSeleccionada" class="form-control"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
+            </div>
+            <!--Eliga un doctor-->
+            <div class="mt-5">
+                <label for="" ><b>Elija un Doctor</b></label>
+            </div>
+            <select class="form-select" id="medico" required  [(ngModel)]="doctorSeleccionado"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
+                <option selected>Seleccione</option>
+                <option value="Oscar Lopez">Oscar Lopez</option>
+                <option value="Maria Gomez">Maria Gomez</option>
+            </select>
+
+
+            <!--Eliga un paciente-->
+            <div class="mt-5">
+                <label for=""><b>Elija un Paciente</b></label>
+            </div>
+            <select class="form-select" id="paciente" required [(ngModel)]="pacienteSeleccionado">
+                <option value="" disabled selected>Seleccione</option>
+                <option value="Paula Vargas">Paula Vargas</option>
+                <option value="Henry Romero">Henry Romero</option>
+                <option value="Moises Diaz">moises diaz</option>
+            </select>
+
+            <div class="mt-5">
+                <label for=""><b>Elija una ubicacion</b></label>
+            </div>
+            <!--Eliga la ubicacion-->
+            <select  id="ubicacion" class="form-select" [(ngModel)]="ubicacionSeleccionada"  required>
+                <option selected>Seleccione</option>
+                  <option value="Hospital Nazareth">Hospital Nazareth</option>
+          <option value="Paso de la 21">Paso la 21</option>
+            </select>
+
+        </div>
+
+
+        <!--Segunda columna-->
+        <div class="col-lg-5 col-md-4 col-sm-4 col-4 col-xl-4">
+            <label for=""><b>Seleccione una hora</b></label>
+            <div class="row">
+                <ng-container *ngFor="let hour of hours; let i=index">
+
+                    <ng-container *ngIf="hour> v_horas">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6 col-xl-6">
+                            <div class="input-group">   
+                                <i class="input-group-text bi bi-clock time-icon bg-primary" style="color: aliceblue;  "></i>
+                                <input type="time" [value]="hour"(click)="horaSeleccionada = hour" class="form-control" readonly>
+                            </div>
+                       </div>
+
+
+                        <div *ngIf="(i + 1) % 2 === 0" class="mt-3"></div>
+                    </ng-container>
+
+                </ng-container>
+            </div>
+        </div>
+
+       
+       
+
+
+        <!--Tercera columna-->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-4 col-xl-4">
+
+           
+            <div class="text-center fs-4"><p><b>Detalles de la cita:</b></p></div>
+           <p><span><b>Fecha seleccionada:</b></span><span class="mx-3" id="mostrar_fecha">{{ fechaSeleccionada | date:'fullDate' }}</span></p>
+           
+           <p><b>Hora seleccionada:</b><span class="mx-3" id="mostrar_hora">
+  La cita será a las {{ horaSeleccionada ? (horaSeleccionada | slice:0:2) + ' horas con ' + (horaSeleccionada | slice:3) + ' minutos' : '00:00' }}
+</span>
+</p>
+
+            <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor"> {{ doctorSeleccionado | uppercase }}</span></p>
+            <p><b>Paciente seleccionado:</b><span class="mx-3" id="mostrar_paciente"> {{ pacienteSeleccionado | titlecase }}</span></p>
+            <p><b>Ubicación:</b> <span class="mx-3">{{ ubicacionSeleccionada | uppercase }}</span></p>
+
+
+            <div class="d-flex" style="justify-content: center; align-items: center;">
+            <button class="btn btn-primary " (click)="ConfirmarAgendar()">
+                Agendar
+            </button>
+              </div>
+           
+        </div>
+        <div class="mt-5 fs-5">
+        <p class="text-center text-muted">Asegúrate de revisar cuidadosamente la información antes de confirmar la cita. Verifica que los datos del paciente, la fecha y la hora sean correctos para evitar inconvenientes.</p>
+        </div>
+
+    </div>
+
+
+</div>

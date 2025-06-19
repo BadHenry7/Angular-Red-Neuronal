@@ -1,0 +1,110 @@
+
+.offcanvas-footer{
+    padding: 2rem 2rem;
+    border-top: 1px solid #2bff00;
+    background-color: #007bff;
+    
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    
+}
+
+.offcanvas-footer input, button{
+    border-radius: 100px;
+
+}
+
+
+    .tonyo_select {
+        position: fixed;
+        right: 1%;
+        top: 70%;
+        width: 70px;
+        height: 50px;
+        background-color: #007bff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;/* Alinea el contenido (texto o ícono) horizontalmente en el centro. */
+        align-items: center;/*Alinea el contenido verticalmente en el centro.*/
+        color: white;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+        transition: width 0.5s ease;
+    }
+
+    .tonyo_select:hover {
+        width: 150px;
+        height: 70px;
+        border-radius: 25px;
+        justify-content: space-around;
+        background-color: cornflowerblue;
+    }
+
+    .tonyo-text {
+        display: none;
+        color: white;
+        font-size: 14px;
+    }
+
+    .tonyo_select:hover .tonyo-text {
+        display: block;
+    }
+
+    
+    .tonyo_body{
+       margin-top: 100px;
+       margin-bottom: 110px;
+       margin-right: 10px;
+       border-radius: 25px;
+       
+    }
+
+    .input-area {
+        position: absolute;
+        padding-top: 5px;
+        bottom: 4px;
+        right: 22px;
+        width: 90%;
+       
+
+
+    }
+
+    
+
+
+
+    .typing-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f1f1f1;
+        border-radius: 15px;
+        width: 60px;
+        height: 30px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .typing-dots span {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+        background-color: #3498db;
+        border-radius: 50%;
+        animation: typingAnimation 1.5s infinite;
+    }
+    
+    .typing-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .typing-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes typingAnimation {
+        0% { opacity: 0.3; transform: translateY(0px); }
+        50% { opacity: 1; transform: translateY(-5px); }
+        100% { opacity: 0.3; transform: translateY(0px); }
+    }

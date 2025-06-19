@@ -1,0 +1,62 @@
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        gap: 20px;
+        padding: 40px;
+    }
+
+    .card {
+        background: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease-in-out;
+        text-align: center;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+  
+    h1, h2 {
+        color: #333;
+        font-family: 'Arial', sans-serif;
+    }
+
+    p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+   
+    .button {
+        background: #007BFF;
+        color: white;
+        padding: 12px 24px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .button:hover {
+        background: #0056b3;
+    }
+
+
+    @media (max-width: 768px) {
+        .container {
+            grid-template-columns: 1fr; /* En pantallas pequeñas, 1 columna */
+        }
+
+        .card {
+            width: 100%;
+        }
+    }

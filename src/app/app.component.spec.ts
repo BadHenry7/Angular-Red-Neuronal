@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'Angular-Red-Neuronal' title`, () => {
+  it(`should have the 'hostipal_IA' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Angular-Red-Neuronal');
+    expect(app.title).toEqual('hostipal_IA');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Angular-Red-Neuronal');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, hostipal_IA');
   });
 });

@@ -1,13 +1,52 @@
+<app-navbarindex></app-navbarindex>
 
+<div class="bg-light">
+    <!-- Barra superior -->
+    
 
-<app-navbar-index></app-navbar-index>
-<div class="container">
-    <p>inicio works!</p>
+    <app-slide></app-slide>
+    <!-- Sección de Citas -->
+    <section class="text-white py-5 text-center" style="background-color: cornflowerblue;">
+        <h2 class="fs-3 fw-bold">Agenda tu cita en línea</h2>
+        <button class="btn btn-light text-primary mt-3">Reservar cita</button>
+    </section>
 
-    <p *ngIf="p===2 ; else otrovalor"> si es 2  </p>
-   
-    <ng-template #otrovalor>
-        <p>Da otro </p>
-    </ng-template>
+    <!-- Sección de Facilitando tu atencion medica -->
+    <section class="container text-center py-5">
+        <h2 class="fs-3 text-success fw-bold">Facilitando tu atención médica</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <i class="fas fa-heartbeat text-success display-4"></i>
+                <h3 class="fs-4 mt-3">Gestión de citas médicas</h3>
+                <p>Agenda y administra tus citas médicas de forma rápida y sencilla.</p>
+                
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-envelope text-success display-4"></i>
+                <h3 class="fs-4 mt-3">Confirmación automática de tu cita</h3>
+                <p>Recibe un correo con los detalles de tu cita médica inmediatamente después de agendarla..</p>
+                
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-brain   text-success display-4"></i>
+                <h3 class="fs-4 mt-3">Detección de enfermedades</h3>
+                <p>Utilizamos redes neuronales para detectar enfermedades básicas y brindarte orientación.</p>
+                
+            </div>
+        </div>
+    </section>
+
+ 
+    <section class="bg-light py-5 text-center">
+        <i class="fas fa-clock text-success display-4"></i>
+        <h3 class="fs-4 mt-3">Citas médicas sin largas esperas</h3>
+        <p>Olvídate de las filas y agenda tu consulta en el horario que más te convenga.</p>
+        
+    </section>
+
+    <!-- Footer -->
+    <Footer></Footer>
 </div>
+<app-chatbox></app-chatbox>
+
 <app-footer></app-footer>

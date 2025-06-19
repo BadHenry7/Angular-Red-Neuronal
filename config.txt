@@ -43,3 +43,22 @@ Registrar
 
 
 Iniciar sesión
+
+
+
+
+<p *ngIf="p===2 ; else otrovalor"> si es 2  </p>
+
+<ng-template #otrovalor>
+    <p>Da otro </p>
+</ng-template>
+
+
+
+p: number = 4;
+
+nsame(s:string) {
+let p_2: number = 4;
+  
+}  
+(click)="redirigir()"

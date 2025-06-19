@@ -1,20 +1,15 @@
 import { Component } from '@angular/core';
-import {FooterComponent} from '../../Components/footer/footer.component'
-import {NavbarIndexComponent} from '../../Components/navbar-index/navbar-index.component'
-import { CommonModule } from '@angular/common'; //Para usar ngIf o ngFor
+import {NavbarindexComponent} from '../../Componentes/navbarindex/navbarindex.component'
+import {FooterComponent} from '../../Componentes/footer/footer.component'
+import { SlideComponent } from '../../Componentes/slide/slide.component';
+import { ChatboxComponent } from '../../Componentes/chatbox/chatbox.component';
 
 @Component({
   selector: 'app-inicio',
-  imports: [FooterComponent,NavbarIndexComponent, CommonModule],
+  imports: [NavbarindexComponent, FooterComponent, SlideComponent, ChatboxComponent],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
 export class InicioComponent {
-p: number = 4;
-
-// nsame(s:string) {
-// let p_2: number = 4;
-  
-// }  
 
 }
