@@ -1,0 +1,74 @@
+<app-navbar-doctor></app-navbar-doctor>
+<div class="container">
+    <h1 class="text-center mt-5">Predicción de Enfermedades</h1>
+
+    <div class="grid">
+        <!-- Izquierda: Lista de síntomas -->
+        <div class="sintomas-box">
+            <input
+                type="text"
+                placeholder="Buscar síntomas..."
+                bind:value={filtro}
+                class="search-box"
+            />
+
+            <div class="sintomas-list">
+                 
+            <div>
+              <label class="sintoma-item">
+                    <input type="checkbox" value="Fiebre" /> Fiebre
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Tos seca" /> Tos seca
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Dolor de cabeza" /> Dolor de cabeza
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Dolor muscular" /> Dolor muscular
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Fatiga" /> Fatiga
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Dificultad para respirar" /> Dificultad para respirar
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Pérdida del olfato" /> Pérdida del olfato
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Pérdida del gusto" /> Pérdida del gusto
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Dolor abdominal" /> Dolor abdominal
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Náuseas" /> Náuseas
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Vómito" /> Vómito
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Diarrea" /> Diarrea
+                </label>
+                <label class="sintoma-item">
+                    <input type="checkbox" value="Erupciones cutáneas" /> Erupciones cutáneas
+                </label>
+            </div>
+             
+            </div>
+        </div>
+
+        <!-- Derecha: Síntomas seleccionados -->
+        <div class="seleccionados-box">
+            <h3>Síntomas Seleccionados</h3>
+            <ul>
+               
+            </ul>
+
+            <button type="button" class="btn" >
+                Predecir
+            </button>
+        </div>
+    </div>
+</div>

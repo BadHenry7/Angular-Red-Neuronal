@@ -1,0 +1,93 @@
+
+{
+  "users": [
+    {
+      "id": 1,
+      "nombre": "henry",
+      "usuario": "Henryd",
+      "password": "0000",
+      "rol": "Administrador",
+      "apellido": "Romero",
+      "documento": "12345",
+      "telefono": "320515"
+    },
+    {
+      "id": 2,
+      "nombre": "MoISEs",
+      "usuario": "Moisex",
+      "password": "0000",
+      "rol": "Paciente",
+      "apellido": "Diaz",
+      "documento": "21212",
+      "telefono": "318212"
+    },{
+      "id": 3,
+      "nombre": "JesUs",
+      "usuario": "JesusC",
+      "password": "0000",
+      "rol": "Doctor",
+      "apellido": "Coronado",
+      "documento": "312313",
+      "telefono": "413243"
+   },{
+      "id": 4,
+      "nombre": "Juan",
+      "usuario": "Juand",
+      "password": "0000",
+      "rol": "Doctor",
+      "apellido": "Charris",
+      "documento": "31122313",
+      "telefono": "41321243"
+   }
+  ],
+  "citas": [
+    {
+      "id": 101,
+      "paciente": "Moises",
+      "medico": "JesUs",
+      "fecha": "2025-06-18",
+      "hora": "10:00",
+      "ubicacion":"Nazareth",
+      "salas":"Sala 12"
+    },
+    {
+      "id": 102,
+      "paciente": "Eduardo",
+      "medico": "Oscar",
+      "fecha": "2025-06-14",
+      "hora": "15:00",
+      "ubicacion":"Paso la 21",
+      "salas":"Sala A1-2"
+    },
+    {
+      "id": 104,
+      "paciente": "Carlitos",
+      "medico": "JesUs",
+      "fecha": "2025-06-22",
+      "hora": "09:00",
+      "ubicacion":"Nazareth",
+      "salas":"Sala 12"
+    },
+    {
+      "id": 110,
+      "paciente": "Luis",
+      "medico": "Juan",
+      "fecha": "2025-06-21",
+      "hora": "14:00",
+      "ubicacion":"Paso la 21",
+      "salas":"Sala A1-4"
+    },
+    {
+      "id": 120,
+      "paciente": "Jaime",
+      "medico": "JesUs",
+      "fecha": "2025-06-21",
+      "hora": "15:00",
+      "ubicacion":"Nazareth",
+      "salas":"Sala 12"
+    }
+  ]
+}
+
+
+

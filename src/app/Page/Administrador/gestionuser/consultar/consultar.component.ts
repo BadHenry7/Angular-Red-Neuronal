@@ -1,51 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarindexComponent } from '../../../../Componentes/navbarindex/navbarindex.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+
+import { Prueba } from '../../../../services/servicios';
+import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 //HttpClient
 @Component({
   selector: 'app-consultar',
-  imports: [NavbarindexComponent, CommonModule],
+  imports: [ CommonModule, FormsModule, NavbarAdministradorComponent],
   templateUrl: './consultar.component.html',
   styleUrl: './consultar.component.css'
 })
-export class ConsultarComponent {
+export class ConsultarComponent implements OnInit{
   //todos: any[] = [];  
     loading: boolean = false;
   error: string | null = null;
+  todos: any;
+  constructor(private prueba: Prueba){}
 
-   todos: any[] = [
-    {
-      id: 1,
-      usuario: 'hdavidromero',
-      nombre: 'Henry',
-      apellido: 'Romero',
-      documento: '123456789',
-      telefono: '5551234',
-      nombre_rol: 'Administrador',
-      estado: true
-    },
-    {
-      id: 2,
-      usuario: 'mdiaz',
-      nombre: 'Moises',
-      apellido: 'Diaz',
-      documento: '987654321',
-      telefono: '5555678',
-      nombre_rol: 'Usuario',
-      estado: false
-    },
-    {
-      id: 3,
-      usuario: 'jcoronadov',
-      nombre: 'Jesus',
-      apellido: 'Coronado',
-      documento: '555666777',
-      telefono: '5557890',
-      nombre_rol: 'Usuario',
-      estado: true
+  
+  ngOnInit(): void {
+    this.prueba.getPrueba()
+    .subscribe({
+      next: (prueba: any)=>{
+        this.todos= prueba.users
+        console.log(this.todos.users)
+      },
+      error:(err: any)=>{
+        console.error(err)
+      },
+      complete:()=>{
+        console.log('completado')
+      }
+    })
     }
-  ];
+   
 
 }

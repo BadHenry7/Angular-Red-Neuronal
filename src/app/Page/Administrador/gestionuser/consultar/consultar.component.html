@@ -1,4 +1,5 @@
-<app-navbarindex></app-navbarindex>
+<app-navbar-administrador></app-navbar-administrador>
+
 
 
 <div id="Mostrarusuario">
@@ -55,7 +56,7 @@
     <td class="py-2 border">{{ todo.apellido | titlecase }}</td>
     <td class="py-2 border">{{ todo.documento | number }}</td>
     <td class="py-2 border">{{ todo.telefono  | number }}</td>
-    <td class="py-2 border">{{ todo.nombre_rol | uppercase }}</td>
+    <td class="py-2 border">{{ todo.rol | uppercase }}</td>
 
     <td class="py-2 border">
       <span [ngClass]="todo.estado ? 'text-green-600' : 'text-red-600'">

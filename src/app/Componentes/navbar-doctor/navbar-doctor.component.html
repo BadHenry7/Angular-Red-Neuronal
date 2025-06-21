@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand mx-4" href="/doctor/principal" id="name" aria-label="Name del medico" >{{nombre | uppercase}}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="Menu-usuarios" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item mx-4">
+              <a class="nav-link" routerLink="/doctor/citas_medico">Agenda</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" routerLink="/medico_vista/historial_clinico">Paciente</a>
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link" routerLink="/doctor/reportes">Reportes</a><!---->
+            </li>
+            <li class="nav-item mx-4">
+              <a class="nav-link " routerLink="/doctor/smartbot">SmartBot IA🤖</a>
+            </li>
+          </ul>
+  
+          <form class="d-flex   nav-item nav-link ms-auto">
+            <a class="btn btn-outline-dark" routerLink="/">Cerrar sesion</a>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="modal fade"  id="perfil_modal" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="mleModalLabel">
+                      <b>Perfil del medico</b>
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card text-center border-dark mt-4">
+                <div class="card-header">Bienvenido al apartado de Informacion personal</div>
+  
+  
+                <div class="row">
+                  <div class="col-md-6">
+                    <!--Correo/usuario-->
+                    <div class="mb-3 mt-2 mx-2">
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
+                          <input type="text" class="form-control" id="nav_correo" required autocomplete="off" readonly>
+                      </div>
+                   </div>
+  
+                    <!--password-->
+                   <div class="mb-3 mt-2 mx-2" role="presentation">
+                    <div class="input-group" >
+                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control" name="password" id="nav_password" required autocomplete="off" readonly>
+                    </div> 
+                   </div>
+                   <!--nombre-->
+                   <div class="mb-3 mt-2 mx-2">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="nav_nombre" required autocomplete="off" readonly>
+                    </div> 
+                   </div>
+                   <!--apellido-->
+                   <div class="mb-3 mt-2 mx-2">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="nav_apellido" required autocomplete="off" readonly>
+                    </div> 
+                   </div>
+                    <!--Documento-->
+                    <div class="mb-3 mt-2 mx-2">
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="bi bi-card-list"></i></span>
+                          <input type="text" class="form-control" id="nav_documento" required autocomplete="off" readonly>
+                      </div> 
+                     </div>
+                     <!--Telefono-->
+                    <div class="mb-3 mt-2 mx-2">
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                          <input type="text" class="form-control" id="nav_telefono" required autocomplete="off" readonly>
+                      </div> 
+                     </div>
+                   
+                 </div>
+  
+  
+                  <div class="col-md-6">
+                    <img src="/assess/image.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                    
+                  </div>
+               </div>
+  
+            
+                <div class="card-footer">
+            
+                    <p>Recuerda que para cambiar tu informacion personal debes enviar un correo al hostipalinc.github&#64;gmail.com</p>
+                    
+                </div>
+            </div>
+              </div>
+            
+          </div>
+      </div>
+  </div>

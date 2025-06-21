@@ -1,0 +1,181 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-1">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/administrador/principal" id="name" >Henry</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Menu-usuarios" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="Menu-usuarios">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <!--Aca empieza otro-->
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuarios
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" routerLink="/administrador/gestionuser/create">Registrar usuario</a></li>
+              <li><a class="dropdown-item" routerLink="/administrador/gestionuser/consultar_user">Buscar usuario</a></li>
+            </ul>
+            <!--Aca empieza otro-->
+          </li>
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Citas medicas
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" routerLink="/administrador/gestioncita/create_cita">Asignar citas</a></li>
+              <li><a class="dropdown-item" routerLink="/administrador/gestioncita/consultar_cita">Gestionar citas</a></li>
+            </ul>
+<!--Aca empieza otro-->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Medicos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" routerLink="/administrador_vista/Doctor_adm/regis_medicos">Registrar medico</a></li>
+                <li><a class="dropdown-item" routerLink="/administrador_vista/Doctor_adm/buscar_medicos">Buscar medico</a></li>
+              <!--  <li><a class="dropdown-item" >Actualizar medico</a></li>
+                <li><a class="dropdown-item" >Desactivar medico</a></li> -->
+              </ul>
+
+             </li>
+          <!--Aca empieza otro-->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/administrador_vista/Reportes">Reportes</a>
+          </li>
+
+          
+          <li class="nav-item">
+            <a class="nav-link"   routerLink="/administrador/dasboard">Dashboard</a><!---->
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/administrador_vista/perfil_adm">Perfil</a>
+          </li>
+          -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/administrador_vista/create_rol">Roles</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/botci">SmartBot IA🤖</a>
+
+          </li>
+
+        </ul>
+
+        
+
+        
+        <form class="d-flex   nav-item nav-link ms-auto">
+          <button class="btn btn-outline-dark  nav-item"  routerLink="#" aria-label="Cerrar edición de usuario">Cerrar sesion</button>
+        </form>
+       
+      </div>
+    </div>
+  </nav>
+
+  <div class="modal fade"  id="perfil_modal" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mleModalLabel">
+                    <b>Perfil del administrador</b>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card text-center border-dark mt-4">
+              <div class="card-header">Informacion del administrador</div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <!--Correo/usuario-->
+                  <div class="mb-3 mt-2 mx-2">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
+                        <input type="text" class="form-control" id="nav_correo" required autocomplete="off" readonly>
+                    </div>
+                 </div>
+
+                  <!--password-->
+                 <div class="mb-3 mt-2 mx-2" role="presentation">
+                  <div class="input-group" >
+                      <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                      <input type="password" class="form-control" name="password" id="nav_password" required autocomplete="off" readonly>
+                  </div> 
+                 </div>
+                 <!--nombre-->
+                 <div class="mb-3 mt-2 mx-2">
+                  <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-person"></i></span>
+                      <input type="text" class="form-control" id="nav_nombre" required autocomplete="off" readonly>
+                  </div> 
+                 </div>
+                 <!--apellido-->
+                 <div class="mb-3 mt-2 mx-2">
+                  <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-person"></i></span>
+                      <input type="text" class="form-control" id="nav_apellido" required autocomplete="off" readonly>
+                  </div> 
+                 </div>
+                  <!--Documento-->
+                  <div class="mb-3 mt-2 mx-2">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-card-list"></i></span>
+                        <input type="text" class="form-control" id="nav_documento" required autocomplete="off" readonly>
+                    </div> 
+                   </div>
+                   <!--Telefono-->
+                  <div class="mb-3 mt-2 mx-2">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        <input type="text" class="form-control" id="nav_telefono" required autocomplete="off" readonly>
+                    </div> 
+                   </div>
+                 
+               </div>
+
+
+                <div class="col-md-6">
+                
+                  @if (image){
+                      <img src={{image}} alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;">
+
+                  }
+                @else{
+
+                    <img src="/image.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                }
+
+             
+                </div>
+             </div>
+
+          
+              <div class="card-footer">
+          
+                @if(henry){
+                    
+                    <!-- Mostrar botón "Desactivar" si el usuario está activo -->
+                    <button class="btn btn-success">
+                      Editar
+                    </button>
+                }
+                  @else{
+
+                      <!-- Mostrar botón "Activar" si el usuario está desactivado -->
+                      <button class="btn btn-outline-info" id="sendMessage">
+                        Actualizar
+                      </button>
+                  }
+                  
+                  
+              </div>
+          </div>
+            </div>
+          
+        </div>
+    </div>
+</div>

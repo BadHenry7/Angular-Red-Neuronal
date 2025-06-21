@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavbarindexComponent } from '../../../../Componentes/navbarindex/navbarindex.component';
 import { CommonModule } from '@angular/common';//Para usar ngIf o ngFor
+import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 
 
 @Component({
   selector: 'app-create',
-  imports: [NavbarindexComponent, CommonModule],
+  imports: [NavbarAdministradorComponent, CommonModule],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })

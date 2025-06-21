@@ -1,32 +1,74 @@
 import { Routes } from '@angular/router';
-import {LoginComponent} from '../app/Page/login/login.component'
+
+//Aca paginas sin inicio de  sesion
 import {InicioComponent} from '../app/Page/inicio/inicio.component'
-import {ReportesComponent} from './Page/Administrador/reportes/reportes.component'
+import {AcercaDeComponent} from './Page/acerca-de/acerca-de.component';
+import {SaludComponent} from './Page/salud/salud.component';
+
+import {UbicacionesComponent} from '../app/Page/ubicaciones/ubicaciones.component'
+import {LoginComponent} from '../app/Page/login/login.component'
+import { RegistrarComponent } from './Page/registrar/registrar.component';
+import {DefaultComponent} from '../app/Page/default/default.component'
+//Paciente
+import {PacientePrincipalComponent} from '../app/Page/Pacientes/paciente-principal/paciente-principal.component'
+import {IncapacidadComponent} from '../app/Page/Pacientes/incapacidad/incapacidad.component'
+import {ReportesPacienteComponent} from '../app/Page/Pacientes/reportes-paciente/reportes-paciente.component'
+//Doctor
+import {DoctorPrincipalComponent} from '../app/Page/Doctor/doctor-principal/doctor-principal.component'
+import {CitasMedicasComponent} from '../app/Page/Doctor/citas-medicas/citas-medicas.component'
+import { ReportesMedicoComponent } from "../app/Page/Doctor/reportes-medico/reportes-medico.component";
+import { BotciComponent } from "../app/Page/Doctor/botci/botci.component";
+//Administrador
+import {AdministradorPrincipalComponent} from '../app/Page/Administrador/administrador-principal/administrador-principal.component'
 import {CreateComponent} from '../app/Page/Administrador/gestionuser/create/create.component'
 import {ConsultarComponent} from '../app/Page/Administrador/gestionuser/consultar/consultar.component'
-import {GestioncitaComponent} from '../app/Page/Administrador/gestioncita/gestioncita.component'
-import {IncapacidadComponent} from '../app/Page/Pacientes/incapacidad/incapacidad.component'
+import { CreateCitaComponent } from './Page/Administrador/gestioncita/create-cita/create-cita.component';
+import {ReportesComponent} from './Page/Administrador/reportes/reportes.component'
 import {DashboardComponent} from './Page/Administrador/dashboard/dashboard.component'
-import {DefaultComponent} from '../app/Page/default/default.component'
-import {UbicacionesComponent} from '../app/Page/ubicaciones/ubicaciones.component'
+import { ConsultarCitaComponent } from './Page/Administrador/gestioncita/consultar-cita/consultar-cita.component';
 
 
 export const routes: Routes = [ 
+
+    //Aca paginas sin inicio de  sesion
     {path: '', component: InicioComponent},
-    {path: 'Login', component: LoginComponent},
-    {path: 'reportes', component: ReportesComponent},
-    {path: 'gestionuser/create', component: CreateComponent},
-    {path: 'gestionuser/consultar', component: ConsultarComponent},
-
-    {path: 'gestioncita', component: GestioncitaComponent},
-    {path: 'incapacidad', component: IncapacidadComponent},
-    {path: 'administrador/dashboard', component: DashboardComponent},
+    {path: 'acerca_de', component: AcercaDeComponent},
+    {path: 'salud', component: SaludComponent},
     {path: 'ubicaciones', component: UbicacionesComponent},
+    {path: 'Login', component: LoginComponent},
+    {path: 'registrar', component: RegistrarComponent },
+    
+    
+    
+    //Aca paginas Paciente
+    {path: 'pacientes/principal', component: PacientePrincipalComponent},
+    {path: 'pacientes/incapacidad', component: IncapacidadComponent},
+    {path: 'pacientes/reportes', component: ReportesPacienteComponent},
+    
+    
+    //Aca Rol medico
+    {path: 'doctor/principal', component: DoctorPrincipalComponent},
+    {path: 'doctor/citas_medico', component: CitasMedicasComponent},
+    {path: 'doctor/reportes', component: ReportesMedicoComponent},
+    {path: 'doctor/smartbot', component: BotciComponent},
+    
+    //Aca Rol Administrador
+    {path: 'administrador/principal', component: AdministradorPrincipalComponent},
+
+    {path: 'administrador/gestionuser/create', component: CreateComponent},
+    {path: 'administrador/gestionuser/consultar_user', component: ConsultarComponent},
+
+    {path: 'administrador/gestioncita/create_cita', component: CreateCitaComponent},
+    {path: 'administrador/gestioncita/consultar_cita', component: ConsultarCitaComponent},
+    {path: 'administrador/dasboard', component: DashboardComponent},
 
 
+
+    {path: 'reportes', component: ReportesComponent},
+    {path: 'administrador/dashboard', component: DashboardComponent},
+    
+    
     {path: '**', component: DefaultComponent},
-
-
-   // {path: '**', redirectTo: '', pathMatch: 'full'}
+    
     
 ];

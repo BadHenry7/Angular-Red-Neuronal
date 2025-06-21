@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import {NavbarindexComponent} from '../../../Componentes/navbarindex/navbarindex.component'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 @Component({
-  selector: 'app-gestioncita',
-  imports: [NavbarindexComponent,CommonModule,FormsModule ],
-  templateUrl: './gestioncita.component.html',
-  styleUrl: './gestioncita.component.css'
+  selector: 'app-create-cita',
+  imports: [CommonModule, FormsModule, NavbarAdministradorComponent],
+  templateUrl: './create-cita.component.html',
+  styleUrl: './create-cita.component.css'
 })
-export class GestioncitaComponent {
+export class CreateCitaComponent {
  date = new Date();
 
 horas = this.date.getHours() < 10 ? '0' + this.date.getHours() : this.date.getHours().toString();

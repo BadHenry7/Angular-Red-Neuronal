@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GestioncitaComponent } from './gestioncita.component';
+import { NavbarDoctorComponent } from './navbar-doctor.component';
 
-describe('GestioncitaComponent', () => {
-  let component: GestioncitaComponent;
-  let fixture: ComponentFixture<GestioncitaComponent>;
+describe('NavbarDoctorComponent', () => {
+  let component: NavbarDoctorComponent;
+  let fixture: ComponentFixture<NavbarDoctorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GestioncitaComponent]
+      imports: [NavbarDoctorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GestioncitaComponent);
+    fixture = TestBed.createComponent(NavbarDoctorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

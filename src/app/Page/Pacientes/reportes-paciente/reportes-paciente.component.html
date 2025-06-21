@@ -1,0 +1,39 @@
+<app-navbar-paciente></app-navbar-paciente>
+
+
+<div class="container d-flex justify-content-between mt-3">
+  <!-- Card weeeeeeeeeeeeey -->
+  <div class="card shadow-lg p-4" style="width: 500px; background: #f0f4f8; border-radius: 12px;">
+    <h3 class="text-center mb-4 text-danger">Reportes</h3>
+
+    <select class="form-select mb-3" [(ngModel)]="opcion" name="opcion" required>
+      <option [value]="1">Ultima cita medica</option>
+      <option [value]="2">Citas agendadas</option>
+    </select>
+
+    <!--Calendario -->
+    <div class="">
+      <!-- aqui iria el calendario real -->
+      <p class="text-center text-secondary ">
+        <input type="date" class="form-control">
+      </p>
+    </div>
+
+    <button class="btn btn-success mt-1" (click)="generar()">Generar</button>
+  </div>
+
+  <!-- Vista previa PDF -->
+  <div *ngIf="visualizar; else PdfAvisualizar" class="ms-4">
+    <iframe title="pdf" [src]="pdfUrl" style="width: 800px; height: 600px;"></iframe>
+  </div>
+  <ng-template #PdfAvisualizar>
+    <div class="card shadow-lg border-0 ms-4" style="width: 800px; height: 600px;">
+      <div class="card-body">
+        <h3 class="text-center text-primary fw-bold">Vista previa de documentos PDF</h3>
+        <p class="text-secondary mt-3" style="text-align: justify; line-height: 1.6;">
+          Aquí podrás visualizar tus archivos PDF antes de proceder con la descarga...
+        </p>
+      </div>
+    </div>
+  </ng-template>
+</div>

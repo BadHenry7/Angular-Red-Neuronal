@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {NavbarindexComponent} from '../../../Componentes/navbarindex/navbarindex.component'
+import {NavbarPacienteComponent} from '../../../Componentes/navbar-paciente/navbar-paciente.component'
 
 @Component({
   selector: 'app-incapacidad',
-  imports: [NavbarindexComponent],
+  imports: [NavbarPacienteComponent],
   templateUrl: './incapacidad.component.html',
   styleUrl: './incapacidad.component.css'
 })
