@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {NavbarindexComponent} from '../../Componentes/navbarindex/navbarindex.component'
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; 
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -38,7 +38,7 @@ constructor (private rg: FormBuilder){
 
   //
   registrar(){
-      //Obtencion del formulario:
+    //Obtencion del formulario:
   const nombre= String(this.RegisterForm.value.v_nombre);
   const apellido= String(this.RegisterForm.value.v_apellido);
   const documento= String(this.RegisterForm.value.v_documento);
@@ -48,6 +48,10 @@ constructor (private rg: FormBuilder){
   const usuario= String(this.RegisterForm.value.v_usuario);
   const password= String(this.RegisterForm.value.v_password);
 
+
+  console.log("Datos a registrar:"+"\n"+nombre+"\n"+apellido+"\n"+documento+"\n"+telefono+"\n"+genero+"\n"+edad
+    +"\n"+usuario+"\n"+password
+  )
 
 
   }

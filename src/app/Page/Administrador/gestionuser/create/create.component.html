@@ -4,7 +4,7 @@
         <!-- Sección de la imagen -->
         <div class="col-md-6 d-none d-md-block p-0">
             <!--d-md-block significa que a partir del tamaño md (≥768px), el div se vuelve visible y se muestra como un bloque (display: block;).
-Junto con d-none, esto hace que el div esté oculto en móviles pero visible en pantallas medianas y grandes.-->
+            Junto con d-none, esto hace que el div esté oculto en móviles pero visible en pantallas medianas y grandes.-->
             <img src="/assess/image4.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;">
         </div>
 
@@ -13,65 +13,95 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
             <div class="w-75">
                 <h2 class="text-center fw-bold mb-4">Registro de paciente</h2>
 
-                <form name="formulario" id="formulario" class="container">
+                <form [formGroup]="RegisterAdminForm" class="container" (ngSubmit)="registrar()">
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" bind:value={v_nombre} placeholder="Nombre">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Nombre" formControlName="v_nombre">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_nombre'].invalid && RegisterAdminForm.controls['v_nombre'].touched;">
+                            <small class="error">&#10060;Ingrese un nombre valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" bind:value={v_apellido} placeholder="Apellido">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Apellido" formControlName="v_apellido">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_apellido'].invalid && RegisterAdminForm.controls['v_apellido'].touched;">
+                            <small class="error">&#10060;Ingrese un apellido valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-card-list"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" bind:value={v_documento} placeholder="Documento">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Documento" formControlName="v_documento">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_documento'].invalid && RegisterAdminForm.controls['v_documento'].touched;">
+                            <small class="error">&#10060;Ingrese un documento valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off"  bind:value={v_telefono} placeholder="Teléfono">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Teléfono" formControlName="v_telefono">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_telefono'].invalid && RegisterAdminForm.controls['v_telefono'].touched;">
+                            <small class="error">&#10060;Ingrese un telefono valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                      <div class="input-group">
-                        <span class="input-group-text"> <i class="bi bi-gender-neuter"> </i></span>
-                        <select class="form-select" bind:value={v_genero} required>
-                            <option value="">Seleccione Género</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
+                        <div class="input-group">
+                            <span class="input-group-text"> <i class="bi bi-gender-neuter"> </i></span>
+                            <select class="form-select" required formControlName="v_genero">
+                                <option value="">Seleccione Género</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_genero'].invalid && RegisterAdminForm.controls['v_genero'].touched;">
+                            <small class="error">&#10060;Seleccione un genero</small>
+                        </div>
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                            <input type="number" class="form-control" required autocomplete="off" bind:value={v_edad} placeholder="Edad">
+                            <input type="number" class="form-control" required autocomplete="off" placeholder="Edad" formControlName="v_edad">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_edad'].invalid && RegisterAdminForm.controls['v_edad'].touched;">
+                            <small class="error">&#10060;Ingrese un edad valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" bind:value={v_usuario} placeholder="Usuario">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Usuario" formControlName="v_usuario">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_usuario'].invalid && RegisterAdminForm.controls['v_usuario'].touched;">
+                            <small class="error">&#10060;Ingrese un correo valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off" bind:value={v_password} placeholder="Contraseña">
+                            <input type="password" class="form-control" required autocomplete="off" placeholder="Contraseña" formControlName="v_password">
+                        </div>
+                        <div *ngIf="RegisterAdminForm.controls['v_password'].invalid && RegisterAdminForm.controls['v_password'].touched;">
+                            <small class="error">&#10060;Ingrese una contraseña valida,
+                                Recuerde que debe contener al menos: 
+                                <li>1 Mayuscula</li>
+                                <li>1 miniscula</li>
+                                <li>1 caracter especial</li>
+                                <li>numeros(&#64;$!%*?&.)</li> 
+                            </small>
                         </div>
                     </div>
 
@@ -79,7 +109,7 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                      <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off" bind:value={r_pass} placeholder="Repetir la contraseña">
+                            <input type="password" class="form-control" required autocomplete="off" placeholder="Repetir la contraseña">
                         </div>
                     </div>
 
@@ -96,7 +126,7 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
 
 
                     
-                    <button type="submit" class="btn btn-primary w-100">Registrar</button>
+                    <button type="submit" [disabled]="RegisterAdminForm.invalid"  class="btn btn-primary w-100">Registrar</button>
                 </form>
             </div>
         </div>

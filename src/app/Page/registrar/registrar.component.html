@@ -18,9 +18,8 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                     <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" autocomplete="off" placeholder="Nombre" formControlName="v_nombre">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Nombre" formControlName="v_nombre">
                            
-                               
                         </div>
                          <div *ngIf="RegisterForm.controls['v_nombre'].invalid && RegisterForm.controls['v_nombre'].touched;">
                                 <small class="error">&#10060;Ingrese un nombre valido</small>
@@ -42,8 +41,8 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                             <span class="input-group-text"><i class="bi bi-card-list"></i></span>
                             <input type="text" class="form-control" required autocomplete="off"  placeholder="Documento" formControlName="v_documento">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_documento'].invalid && RegisterForm.controls['v_documento'].touched;">
-                                <small class="error">&#10060;Ingrese un documento valido</small>
+                        <div *ngIf="RegisterForm.controls['v_documento'].invalid && RegisterForm.controls['v_documento'].touched;">
+                            <small class="error">&#10060;Ingrese un documento valido</small>
                         </div>
                     </div>
 
@@ -52,24 +51,23 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                             <span class="input-group-text"><i class="bi bi-telephone"></i></span>
                             <input type="text" class="form-control" required autocomplete="off" placeholder="Teléfono" formControlName="v_telefono">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_telefono'].invalid && RegisterForm.controls['v_telefono'].touched;">
-                                <small class="error">&#10060;Ingrese un telefono valido</small>
+                        <div *ngIf="RegisterForm.controls['v_telefono'].invalid && RegisterForm.controls['v_telefono'].touched;">
+                            <small class="error">&#10060;Ingrese un telefono valido</small>
                         </div>
                     </div>
 
                     <div class="mb-3">
                       <div class="input-group">
-                        <span class="input-group-text"> <i class="bi bi-gender-neuter"> </i></span>
-                        <select class="form-select"  required formControlName="v_genero">
-                            <option value="">Seleccione Género</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                       
-                    </div>
-                      <div *ngIf="RegisterForm.controls['v_genero'].invalid && RegisterForm.controls['v_genero'].touched;">
-                                <small class="error">&#10060;Seleccione un genero</small>
+                            <span class="input-group-text"> <i class="bi bi-gender-neuter"> </i></span>
+                            <select class="form-select"  required formControlName="v_genero">
+                                <option value="">Seleccione Género</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div *ngIf="RegisterForm.controls['v_genero'].invalid && RegisterForm.controls['v_genero'].touched;">
+                            <small class="error">&#10060;Seleccione un genero</small>
                         </div>
                     </div>
 
@@ -78,7 +76,7 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                             <span class="input-group-text"><i class="bi bi-calendar"></i></span>
                             <input type="number" class="form-control" required autocomplete="off"  placeholder="Edad" formControlName="v_edad">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_edad'].invalid && RegisterForm.controls['v_edad'].touched;">
+                        <div *ngIf="RegisterForm.controls['v_edad'].invalid && RegisterForm.controls['v_edad'].touched;">
                                 <small class="error">&#10060;Ingrese un edad valido</small>
                         </div>
                     </div>
@@ -98,7 +96,7 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
                             <input type="password" class="form-control" required autocomplete="off"  placeholder="Contraseña" formControlName="v_password">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_password'].invalid && RegisterForm.controls['v_password'].touched;">
+                        <div *ngIf="RegisterForm.controls['v_password'].invalid && RegisterForm.controls['v_password'].touched;">
                             <small class="error">&#10060;Ingrese una contraseña valida,
                                 Recuerde que debe contener al menos: 
                                 <li>1 Mayuscula</li>
@@ -113,22 +111,20 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                      <div class="mb-3">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off"  placeholder="Repetir la contraseña">
+                            <input type="password" class="form-control" required autocomplete="off" placeholder="Repetir la contraseña">
                         </div>
                     </div>
 
                     <div class="mb-3 ">
                         <input type="checkbox" id="terminos" required />
                         <button class="btn btn-link p-0" href="#" data-bs-toggle="modal" data-bs-target="#TerminosCondiciones">
-                                Acepto los términos y condiciones</button>
-
-                                <a routerLink="/" class="mx-5">¿Ya tienes una cuenta?</a>
-                      
+                            Acepto los términos y condiciones</button>
+                        <a routerLink="/" class="mx-5">¿Ya tienes una cuenta?</a>
                     </div>
 
                     
                     
-                    <button type="submit" [disabled]="RegisterForm.invalid" class="btn btn-primary w-100">Registrar</button>
+                    <button type="submit" [disabled]="RegisterForm.invalid"  class="btn btn-primary w-100">Registrar</button>
                 </form>
             </div>
         </div>
