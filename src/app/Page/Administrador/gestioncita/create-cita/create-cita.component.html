@@ -15,10 +15,10 @@
                     <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " formControlName="v_fecha"
                         class="form-control"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
                     
-                    <div *ngIf="asigncita.controls['v_fecha'].invalid && asigncita.controls['v_fecha'].touched  ;else validamos"> 
+                    <div *ngIf="asigncita.controls['v_fecha'].invalid && asigncita.controls['v_fecha'].touched  ; "> 
                         <small>⚠️Seleccione una fecha</small>
                     </div>
-                    <ng-template #validamos></ng-template>
+                   
 
                 </div>
                 <!--Eliga un doctor-->
@@ -30,9 +30,10 @@
                     <option value="Oscar Lopez">Oscar Lopez</option>
                     <option value="Maria Gomez">Maria Gomez</option>
                 </select>
-                 <div *ngIf="asigncita.controls['v_doctor'].invalid && asigncita.controls['v_doctor'].touched  ;else validamos">        
+                 <div *ngIf="asigncita.controls['v_doctor'].invalid && asigncita.controls['v_doctor'].touched ">        
+                    <small>⚠️Seleccione un doctor</small>
                 </div>
-                    <ng-template #validamos> <small>⚠️Seleccione un doctor</small></ng-template>
+                   
 
 
                 <!--Eliga un paciente-->
@@ -45,10 +46,10 @@
                     <option value="Henry Romero">Henry Romero</option>
                     <option value="Moises Diaz">moises diaz</option>
                 </select>
-                <div *ngIf="asigncita.controls['v_paciente'].invalid && asigncita.controls['v_paciente'].touched  ;else validamos"> 
+                <div *ngIf="asigncita.controls['v_paciente'].invalid && asigncita.controls['v_paciente'].touched  ; "> 
                         <small>⚠️Seleccione un paciente</small>
                     </div>
-                    <ng-template #validamos></ng-template>
+                   
 
                 <div class="mt-5">
                     <label for=""><b>Elija una ubicacion</b></label>
@@ -59,10 +60,10 @@
                     <option value="Hospital Nazareth">Hospital Nazareth</option>
                     <option value="Paso de la 21">Paso la 21</option>
                 </select>
-                    <div *ngIf="asigncita.controls['v_ubicacion'].invalid && asigncita.controls['v_ubicacion'].touched  ;else validamos"> 
+                    <div *ngIf="asigncita.controls['v_ubicacion'].invalid && asigncita.controls['v_ubicacion'].touched  ; "> 
                         <small>⚠️Seleccione una ubicacion</small>
                     </div>
-                    <ng-template #validamos></ng-template>
+                   
             </div>
 
             <!--Segunda columna-->

@@ -1,6 +1,13 @@
 <app-navbar-paciente></app-navbar-paciente>
 
-
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+/>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.10.0/dist/css/coreui.min.css"
+/> 
 <div class="container d-flex justify-content-between mt-3">
   <!-- Card weeeeeeeeeeeeey -->
   <div class="card shadow-lg p-4" style="width: 500px; background: #f0f4f8; border-radius: 12px;">
@@ -9,15 +16,14 @@
     <select class="form-select mb-3" [(ngModel)]="opcion" name="opcion" required>
       <option [value]="1">Ultima cita medica</option>
       <option [value]="2">Citas agendadas</option>
+      <option [value]="3">Usuarios que han tenido citas</option>
     </select>
 
     <!--Calendario -->
-    <div class="">
-      <!-- aqui iria el calendario real -->
-      <p class="text-center text-secondary ">
-        <input type="date" class="form-control">
-      </p>
-    </div>
+   <div class="d-flex justify-content-center">
+         <div id="calendarElement"></div>
+        </div>        
+
 
     <button class="btn btn-success mt-1" (click)="generar()">Generar</button>
   </div>

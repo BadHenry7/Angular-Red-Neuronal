@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarPacienteComponent } from "../../../Componentes/navbar-paciente/navbar-paciente.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+declare var coreui: any;
 
 @Component({
   selector: 'app-reportes-paciente',
@@ -10,6 +11,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './reportes-paciente.component.css'
 })
 export class ReportesPacienteComponent implements OnInit {
+  
+ ngAfterViewInit() {
+    const calendarElement = document.getElementById('calendarElement');
+
+    if (calendarElement) {
+      const calendarInstance = new coreui.Calendar(calendarElement, {
+        locale: 'es-ES',
+        calendars: 1,
+        range: true,
+      });
+    }}
+
   
 opcion: number = 1;
   fecha_de: string = '';
@@ -53,3 +66,4 @@ opcion: number = 1;
     
   }
 }
+

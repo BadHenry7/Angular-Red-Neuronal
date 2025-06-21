@@ -23,9 +23,12 @@ import {AdministradorPrincipalComponent} from '../app/Page/Administrador/adminis
 import {CreateComponent} from '../app/Page/Administrador/gestionuser/create/create.component'
 import {ConsultarComponent} from '../app/Page/Administrador/gestionuser/consultar/consultar.component'
 import { CreateCitaComponent } from './Page/Administrador/gestioncita/create-cita/create-cita.component';
+import { ConsultarCitaComponent } from './Page/Administrador/gestioncita/consultar-cita/consultar-cita.component';
+import { RegisMedicosComponent } from './Page/Administrador/Doctor_adm/regis-medicos/regis-medicos.component';
+import { BuscarMedicosComponent } from './Page/Administrador/Doctor_adm/buscar-medicos/buscar-medicos.component';
 import {ReportesComponent} from './Page/Administrador/reportes/reportes.component'
 import {DashboardComponent} from './Page/Administrador/dashboard/dashboard.component'
-import { ConsultarCitaComponent } from './Page/Administrador/gestioncita/consultar-cita/consultar-cita.component';
+import { RolesComponent } from './Page/Administrador/roles/roles.component';
 
 
 export const routes: Routes = [ 
@@ -60,12 +63,14 @@ export const routes: Routes = [
 
     {path: 'administrador/gestioncita/create_cita', component: CreateCitaComponent},
     {path: 'administrador/gestioncita/consultar_cita', component: ConsultarCitaComponent},
+    {path: 'administrador/Doctor_adm/regis_medicos', component: RegisMedicosComponent},
+    {path: 'administrador/Doctor_adm/buscar_medicos', component: BuscarMedicosComponent},
+
     {path: 'administrador/dasboard', component: DashboardComponent},
-
-
-
-    {path: 'reportes', component: ReportesComponent},
+    {path: 'administrador/reportes', component: ReportesComponent},
     {path: 'administrador/dashboard', component: DashboardComponent},
+    {path: 'administrador/create_rol', component: RolesComponent},
+
     
     
     {path: '**', component: DefaultComponent},

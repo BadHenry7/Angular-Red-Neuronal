@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { NavbarAdministradorComponent } from '../../../Componentes/navbar-administrador/navbar-administrador.component';
 
 @Component({
-  selector: 'app-reportes',
+  selector: 'app-roles',
   imports: [NavbarAdministradorComponent],
-  templateUrl: './reportes.component.html',
-  styleUrl: './reportes.component.css'
+  templateUrl: './roles.component.html',
+  styleUrl: './roles.component.css'
 })
-export class ReportesComponent {
+export class RolesComponent {
 
 }
