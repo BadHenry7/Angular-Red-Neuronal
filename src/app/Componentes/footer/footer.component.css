@@ -1,0 +1,110 @@
+.footer {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #00214d;
+  padding: 40px 0px 0;
+  border-top: 1px solid #ccc;
+  background-image: url(../../../../public/assess/fondootro.png);
+  background-size: 50vh;
+  background-attachment: fixed;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 250px;
+  font-size: 15px;
+}
+
+.contact-info p {
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.contact-info i {
+  color: #4a90e2;
+  font-size: 16px;
+}
+
+.footer-links {
+  display: flex;
+  flex: 3;
+  justify-content: space-between;
+  flex-wrap: wrap;
+    padding: 0px 200px 0;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 180px;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: #00214d;
+  font-size: 15px;
+  position: relative;
+}
+
+.footer-links ul li a::before {
+  content: '›';
+  margin-right: 8px;
+  color: #4a90e2;
+}
+
+.footer-links ul li a:hover {
+  color: #4a90e2;
+}
+
+.footer-bottom {
+  background-color: #80b4e3;
+  color: white;
+  margin-top: 40px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 10px 10px 0 0;
+}
+
+.footer-bottom .social a {
+  color: white;
+  margin-right: 20px;
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.footer-bottom .social a:hover {
+  transform: scale(1.2);
+  color: #00214d;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 14px;
+}
+
+@keyframes flotar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+
+img{
+    animation: flotar 3s ease-in-out infinite;
+    transition: transform 0.3s, box-shadow 0.3s;
+}

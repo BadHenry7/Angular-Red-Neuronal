@@ -10,8 +10,10 @@ declare const L: any;
   styleUrl: './ubicaciones.component.css'
 })
 export class UbicacionesComponent {
-  
+
   ngOnInit(): void {
+   window.scrollTo(0, 0); // <- Esto hace scroll al tope
+ 
     const map = L.map('map').setView([10.960658, -74.801816], 16);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

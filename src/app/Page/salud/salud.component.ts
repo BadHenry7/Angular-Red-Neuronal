@@ -10,4 +10,8 @@ import { FooterComponent } from '../../Componentes/footer/footer.component';
 })
 export class SaludComponent {
 
+    ngOnInit(): void {
+    window.scrollTo(0, 0);
+  }
+
 }

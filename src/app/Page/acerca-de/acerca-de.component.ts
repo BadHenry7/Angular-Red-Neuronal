@@ -10,4 +10,10 @@ import {FooterComponent} from '../../Componentes/footer/footer.component'
 })
 export class AcercaDeComponent {
 
+  ngOnInit() {
+  window.scrollTo(0, 0);
 }
+
+}
+
+

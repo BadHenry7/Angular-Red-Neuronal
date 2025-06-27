@@ -1,51 +1,82 @@
 <app-navbarindex></app-navbarindex>
+<br>
+<br><br><br>
+<br>
+  <!-- Este es el slide -->
+<app-slide></app-slide>
+  <!-- Boton de reserva -->
+  <div class="reserva">
+    <div class="texto-reserva">
+      <h3><b>Reserve su cita aquí</b></h3>
+      <p><b>No pierdas más el tiempo, no dejes <br>pasar más el tiempo 
+         la solución esta <br> aquí no esperes más.</b></p>
+    </div>
+    <button href="" class="btn btn-success"> Reservar </button>
 
-<div class="bg-light">
-    <!-- Barra superior -->
-    
-
-    <app-slide></app-slide>
-    <!-- Sección de Citas -->
-    <section class="text-white py-5 text-center" style="background-color: cornflowerblue;">
-        <h2 class="fs-3 fw-bold">Agenda tu cita en línea</h2>
-        <button class="btn btn-light text-primary mt-3">Reservar cita</button>
-    </section>
-
-    <!-- Sección de Facilitando tu atencion medica -->
-    <section class="container text-center py-5">
-        <h2 class="fs-3 text-success fw-bold">Facilitando tu atención médica</h2>
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <i class="fas fa-heartbeat text-success display-4"></i>
-                <h3 class="fs-4 mt-3">Gestión de citas médicas</h3>
-                <p>Agenda y administra tus citas médicas de forma rápida y sencilla.</p>
-                
-            </div>
-            <div class="col-md-4">
-                <i class="fas fa-envelope text-success display-4"></i>
-                <h3 class="fs-4 mt-3">Confirmación automática de tu cita</h3>
-                <p>Recibe un correo con los detalles de tu cita médica inmediatamente después de agendarla..</p>
-                
-            </div>
-            <div class="col-md-4">
-                <i class="fas fa-brain   text-success display-4"></i>
-                <h3 class="fs-4 mt-3">Detección de enfermedades</h3>
-                <p>Utilizamos redes neuronales para detectar enfermedades básicas y brindarte orientación.</p>
-                
-            </div>
-        </div>
-    </section>
-
- 
-    <section class="bg-light py-5 text-center">
-        <i class="fas fa-clock text-success display-4"></i>
-        <h3 class="fs-4 mt-3">Citas médicas sin largas esperas</h3>
-        <p>Olvídate de las filas y agenda tu consulta en el horario que más te convenga.</p>
         
-    </section>
+  </div>
 
-    <!-- Footer -->
-    <Footer></Footer>
-</div>
+  <!-- cartas ... -->
+        <h1 style="text-align: center; margin-top: 5vh;
+           font-family: poppins; color: #022a63;">
+           Beneficios con nosotros
+        </h1>
 
+  <div class="cartas">
+
+        <div class="card">
+            <img src="/assess/gestion.png" alt="">
+            <h3 class="fs-5 mt-3">Gestión de citas médicas</h3>
+            <p>Agenda y administra tus citas médicas de forma rápida y sencilla.</p>
+        </div>
+
+        <div class="card">
+            <img src="/assess/carta.png" alt="">
+            <h3 class="fs-5 mt-3">Confirmación automática de tu cita</h3>
+                <p>Recibe un correo con los detalles de tu cita médica inmediatamente después de agendarla.</p>
+        </div>
+
+        <div class="card">
+            <img src="/assess/detectar.png" alt="">
+            <h3 class="fs-5 mt-3">Detección de enfermedades</h3>
+            <p>Utilizamos redes neuronales para detectar enfermedades básicas y brindarte orientación.</p>
+        </div>
+
+        <div class="card">
+            <img src="/assess/tiempo.png" alt="">
+            <h3 class="fs-5 mt-3" >Citas médicas sin largas esperas</h3>
+            <p>Olvídate de las filas y agenda tu consulta en el horario que más te convenga.</p>
+        </div>
+
+  </div>
+      <!-- Cartas de Logos -->
+    <h1 style="text-align: center; margin-top: 5vh;
+     font-family: poppins; color: #022a63;">
+     Servicios e información
+    </h1>
+
+    <div class="logos">
+
+        <div class="card-logo" id="icono-1">
+        <img src="assess/tonyopng.png" alt="" >
+            <p>Chatbot</p>
+        </div>
+
+        <div class="card-logo" id="icono-2">
+            <a routerLink="/ubicaciones" class="btn"><img src="assess/ubicacion.png" alt="">
+            <p>Ubicación</p>
+            </a>    
+        </div>
+
+        <div class="card-logo" id="icono-3">
+        <a routerLink="/acerca_de" class="btn"><img src="assess/nosotros.png" alt=""></a>
+            <p>Nosotros</p>
+        </div>
+
+        <div class="card-logo" id="icono-4">
+        <a routerLink="/salud"><img src="assess/salud.png" alt="/salud"></a>
+            <p>Salud & Bienestar</p>
+        </div>
+
+  </div>
 <app-footer></app-footer>
