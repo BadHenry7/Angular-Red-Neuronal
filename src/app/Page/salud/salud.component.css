@@ -1,0 +1,125 @@
+
+
+section{
+    animation-timeline: --scroll;
+}
+
+    .cartas:hover{  
+      transform: translateY(-10px); 
+      box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+      background-color: #e0f7fa;
+      
+    }
+
+    .cartas img{
+            margin-top: 12px;
+            width: 200px;
+            height: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+    }
+
+
+    .animar {
+    animation: mover 10s ease-out forwards;
+      animation-timeline: --scroll;
+    animation-range: entry  0% entry  100%;
+
+}
+    @keyframes mover{
+        0%{
+            transform: translateX(100%);
+        }
+           100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    }
+
+.letra_cambiar_color{
+animation-name: color_letra;
+  animation-duration: 4s;
+     animation-timeline: --altura;
+    animation-range: entry 0% entry  100%;
+}
+
+    
+@keyframes slide-up {
+  0% {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+@keyframes color_letra {
+  from {color: white}
+  to {color: black}
+}
+    
+
+.scale-in-center {
+    animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation-timeline: --altura;
+  animation-range: entry 0% entry 100%;
+}
+
+.scale-in-hor-left {
+	animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      animation-timeline: --pulso;
+  animation-range: entry 0% entry 100%;
+}
+
+.scale-in-hor-right {
+	animation: scale-in-hor-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation-timeline: --peso;
+    animation-range: entry  0% entry  100%;  
+}
+
+
+
+
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in-hor-left {
+  0% {
+    transform: scaleX(0);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+
+
+@keyframes scale-in-hor-right {
+  0% {
+    transform: scaleX(0);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+}
+
