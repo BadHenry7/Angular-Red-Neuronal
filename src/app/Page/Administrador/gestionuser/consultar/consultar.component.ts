@@ -1,40 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarindexComponent } from '../../../../Componentes/navbarindex/navbarindex.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { Prueba } from '../../../../services/servicios';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
+import { User, UsersService } from '../../../../services/usuarios.service';
 //HttpClient
 @Component({
   selector: 'app-consultar',
   imports: [ CommonModule, FormsModule, NavbarAdministradorComponent],
   templateUrl: './consultar.component.html',
+  //standalone: true,
   styleUrl: './consultar.component.css'
 })
 export class ConsultarComponent implements OnInit{
-  //todos: any[] = [];  
-    loading: boolean = false;
-  error: string | null = null;
-  todos: any;
-  constructor(private prueba: Prueba){}
 
+  error: String|null= null;
+  loading: Boolean= false
+
+  todos: User[] =[];
   
-  ngOnInit(): void {
-    this.prueba.getPrueba()
-    .subscribe({
-      next: (prueba: any)=>{
-        this.todos= prueba.users
-        console.log(this.todos.users)
-      },
-      error:(err: any)=>{
-        console.error(err)
-      },
-      complete:()=>{
-        console.log('completado')
-      }
-    })
-    }
-   
+  constructor (private userService: UsersService){}
 
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void{
+    this.userService.getUsers().subscribe(todos =>{ this.todos = todos;
+      console.log(this.todos);
+    });
+    
+    
+
+    
+
+  }
+  
 }

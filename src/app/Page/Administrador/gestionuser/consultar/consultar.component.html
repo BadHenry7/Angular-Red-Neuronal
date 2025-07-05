@@ -56,7 +56,7 @@
     <td class="py-2 border">{{ todo.apellido | titlecase }}</td>
     <td class="py-2 border">{{ todo.documento | number }}</td>
     <td class="py-2 border">{{ todo.telefono  | number }}</td>
-    <td class="py-2 border">{{ todo.rol | uppercase }}</td>
+    <td class="py-2 border">{{ todo.id_rol }}</td>
 
     <td class="py-2 border">
       <span [ngClass]="todo.estado ? 'text-green-600' : 'text-red-600'">
@@ -81,7 +81,7 @@
               aria-label="activar"
               class="btn btn-danger"
              >
-        <i class="bi bi-toggle-off"></i>
+        <i class="bi bi-toggle-off" ></i>
       </button>
     </td>
   </tr>

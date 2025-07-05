@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import {NavbarindexComponent} from '../../Componentes/navbarindex/navbarindex.component'
 import { CommonModule } from '@angular/common'; 
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { UsersService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-registrar',
@@ -12,11 +13,11 @@ import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angula
 })
 export class RegistrarComponent {
 valido: string="";
-
+todos: any=[]
 //Declaracion del formulario reactivo
 RegisterForm: FormGroup;
 
-constructor (private rg: FormBuilder){
+constructor (private rg: FormBuilder, private userService: UsersService){
 //Creacion del registro de usuarios con tres campos:
 // -nombre, apellido, documento, telefono, genero, edad, usuario, contraseña
 
@@ -44,9 +45,28 @@ constructor (private rg: FormBuilder){
   const documento= String(this.RegisterForm.value.v_documento);
   const telefono= String(this.RegisterForm.value.v_telefono);
   const genero= String(this.RegisterForm.value.v_genero);
-  const edad= String(this.RegisterForm.value.v_edad);
+  const edad= Number(this.RegisterForm.value.v_edad);
   const usuario= String(this.RegisterForm.value.v_usuario);
   const password= String(this.RegisterForm.value.v_password);
+  const estado=Boolean(1);
+  const id_rol= Number(1);
+
+  const R_usuario={
+    nombre,  apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol
+  }
+
+
+  this.userService.addUser(R_usuario).subscribe({
+    next:(todos)=>{
+       this.todos = todos;
+  console.log(this.todos.Informacion);
+    },error: (error)=>{
+      console.log(error)
+    } 
+        
+    ,
+
+  })
 
 
   console.log("Datos a registrar:"+"\n"+nombre+"\n"+apellido+"\n"+documento+"\n"+telefono+"\n"+genero+"\n"+edad

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';//para usar ngModel
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';//Para usar router navigate
-import { Prueba } from '../../services/servicios';
+import { User, UsersService } from '../../services/usuarios.service';
+
 @Component({
   selector: 'app-login',
   imports: [RouterLink, FormsModule],
@@ -10,7 +11,7 @@ import { Prueba } from '../../services/servicios';
   styleUrl: './login.component.css'
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent  implements OnInit{
   //Se definen las variables
   loading: boolean = false;
   error: string | null = null;
@@ -19,69 +20,88 @@ export class LoginComponent implements OnInit {
   correo: string = '';
   password: string = '';
   nombre: string = '';
-  todos: any;
+  todos:  any =[];
   verificar: boolean=false;
 
   //Se crea un constructor, siempre va asi contructor (private nombre_variable){}  -->Segun entendi espera a que cargue el doom o algo asi
-  constructor(private prueba: Prueba, private router: Router) { }//supuestamente sirve para usar el router.navigate que evita recargar la pagina con window.location.href
-
-
+  constructor(private router: Router, private userService: UsersService) { }//supuestamente sirve para usar el router.navigate que evita recargar la pagina con window.location.href
 
   ngOnInit(): void {
-    this.prueba.getPrueba()
-      .subscribe({
-        next: (prueba: any) => {
-          this.todos = prueba
-          console.log(this.todos)
+      
+  }
 
-         
-
-        },
-        error: (err: any) => {
-          console.error(err)
-        },
-        complete: () => {
-          console.log('completado')
-        }
-      })
+  loadUsers(): void{
+     this.userService.getUsers().subscribe(todos =>{ this.todos = todos;
+      console.log(this.todos);
+    
+    });
   }
 
 
+
   iniciar() {
-    let todo= this.todos.users
-    console.log(todo[0].nombre)
+
+     const usuario = {
+  usuario: this.correo,
+  password: this.password
+};//this.userService.Login(usuario).subscribe(todos =>{ this.todos = todos;
+     this.userService.Login(usuario).subscribe({
+      next:(todos)=>{
+        console.log("entroo")
+  this.todos = todos;
+        if (this.todos.resultado && this.todos.resultado.length>0){
+      console.log(this.todos.resultado);
+
+
+    let todo= this.todos.resultado;
+    
+    console.log(todo[0].nombre);
     console.log(todo[0].usuario)
     console.log(todo[0].password)
     console.log(this.correo)
     console.log(this.password)
 
 
-    for (let i=0; i<todo.length; i++){
-    if (todo[i].usuario == this.correo && todo[i].password == this.password) {
+
     this.verificar=true;
-    console.log("*//////////////",todo[i].rol)
-        let encontrado = {nombre:todo[i].nombre, correo: this.correo, password: this.password };//sin el this. no funciona
+    console.log("*//////////////",todo[0].rol)
+        let encontrado = {nombre:todo[0].nombre, correo: this.correo, password: this.password };
             console.log("Imprimos el encontrado", encontrado);
             let miStorage = window.localStorage;
             miStorage.setItem("usuario", JSON.stringify(encontrado));
 
-            if (todo[i].rol == "Administrador") {
+            if (todo[0].rol == 1) {
 
               this.router.navigate(['administrador/principal']);
 
-            } else if (todo[i].rol == "Paciente") {
+            } else if (todo[0].rol == 2) {
               this.router.navigate(['pacientes/principal']);
 
             } else {
               this.router.navigate(['doctor/principal']);
             }
 
-          }
-    }
+       
+              
+          }else{
+                alert("La combinacion entre usuario y contraseña es incorrecta ehhh")
+              }
 
-    if (this.verificar!=true){
-      alert("La combinacion entre usuario y contraseña es incorrecta ehhh")
-    }
+
+        
+
+      },error:(error)=>{
+          if (error.status === 404) {
+      alert("Usuario o contraseña incorrectos."); // ❌ lógica del login fallido
+    } else {
+      alert("Error del servidor: " + error.status);
+    }}
+      
+    
+    
+    });
+
+
 
     
   
