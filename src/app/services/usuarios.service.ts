@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 export interface User{
     usuario:string,
-    password:string,
+    password?:string,
     id?:number,
     nombre:string,
     apellido:string,
@@ -17,10 +17,23 @@ export interface User{
     edad?:number
 }
 
+
+export interface Buscar {
+id: number
+}
+
+
 export interface Login {
   usuario: string;
   password: string;
 }
+
+
+
+
+
+
+
 
 @Injectable({
      providedIn: 'root'
@@ -35,14 +48,22 @@ export class UsersService{
         return this.http.get<User[]>('http://localhost:8000/get_users');
     }   
 
+    getUser(user: Buscar): Observable<User[]>{
+        return this.http.post<User[]>('http://localhost:8000/get_user', user);
+    }   
+
     Login(user: Login): Observable<User[]>{
         return this.http.post<User[]>('http://localhost:8000/login', user);
     }   
     
-   
     addUser(user: User): Observable<User[]>{
         return this.http.post<User[]>('http://localhost:8000/create_user', user);
-    }   
+    }
+    
+    
+    UpdateUser(user: User): Observable<User[]>{
+        return this.http.put<User[]>('http://localhost:8000/actualizaruser', user);
+    }  
 
   //  createUser (user: User): <>
 

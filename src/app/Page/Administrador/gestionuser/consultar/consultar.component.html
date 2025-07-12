@@ -2,40 +2,37 @@
 
 
 
-<div id="Mostrarusuario">
+<div id="Mostrarusuario" [hidden]="!mostrarPrimero">
   <div class="container py-4">
     <h2 class="mb-4 text-center"><b>¡Lista de usuarios!</b></h2>
-    <hr>  
- 
+    <hr>
+
     <!--if-->
     <div *ngIf="loading; else noloading">
       <div class="row g-2 justify-content-center">
         <p class="text-center col-lg-2 col-md-2 col-sm-2 col-12 col-xl-2">
           Cargando datos...
         </p>
-        <div
-          class="spinner-border col-lg-4 col-md-4 col-sm-4 col-12 col-xl-4"
-          role="status"
-        >
+        <div class="spinner-border col-lg-4 col-md-4 col-sm-4 col-12 col-xl-4" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
-      
+
     </div>
     <!--/if-->
 
     <!--/else if error-->
     <ng-template #noloading>
-        <div *ngIf="error; else noerror">
-      <p class="text-red-500">Error: {{error}}</p>
+      <div *ngIf="error; else noerror">
+        <p class="text-red-500">Error: {{error}}</p>
 
-        </div>
+      </div>
     </ng-template>
 
     <!--/else-->
     <ng-template #noerror>
- <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-300" id="myTable">
+    <div class=" d-flex justify-content-center">
+  <table class="table table-bordered table-striped w-auto" id="myTable">
           <thead>
             <tr class="bg-primary text-white">
               <th class="px-5 py-2 border">Usuario</th>
@@ -50,79 +47,64 @@
           </thead>
 
           <tbody>
-  <tr *ngFor="let todo of todos" class="hover:bg-gray-50">
-    <td class="py-2 border">{{ todo.usuario | uppercase }}</td>
-    <td class="py-2 border">{{ todo.nombre | titlecase   }}</td>
-    <td class="py-2 border">{{ todo.apellido | titlecase }}</td>
-    <td class="py-2 border">{{ todo.documento | number }}</td>
-    <td class="py-2 border">{{ todo.telefono  | number }}</td>
-    <td class="py-2 border">{{ todo.id_rol }}</td>
+            <tr *ngFor="let todo of todos" class="hover:bg-gray-50">
+              <td class="py-2 border">{{ todo.usuario | uppercase }}</td>
+              <td class="py-2 border">{{ todo.nombre | titlecase }}</td>
+              <td class="py-2 border">{{ todo.apellido | titlecase }}</td>
+              <td class="py-2 border">{{ todo.documento | number }}</td>
+              <td class="py-2 border">{{ todo.telefono | number }}</td>
+               @if (todo.id_rol==2){
+             <td class="py-2 border">{{ "Paciente" }}</td>
+              }@else{
+                <td class="py-2 border">{{ "Doctor" }}</td>
+              }
+              
 
-    <td class="py-2 border">
-      <span [ngClass]="todo.estado ? 'text-green-600' : 'text-red-600'">
-        {{ todo.estado ? 'Activo' : 'Desactivado' }}
-      </span>
-    </td>
-    <td class="py-2 border">
-      <button aria-label="editar"
-              class="btn btn-info"
-             >
-        <i class="bi bi-pencil-square"></i>
-      </button>
+              <td class="py-2 border">
+                <span [ngClass]="todo.estado ? 'text-green-600' : 'text-red-600'">
+                  {{ todo.estado ? 'Activo' : 'Desactivado' }}
+                </span>
+              </td>
+              <td class="py-2 border">
+                <button aria-label="editar" class="btn btn-info" (click)="editar(todo.id!)">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
 
-      <button *ngIf="todo.estado"
-              aria-label="desactivar"
-              class="btn btn-success"
-              >
-        <i class="bi bi-toggle-on"></i>
-      </button>
+                <button *ngIf="todo.estado" aria-label="desactivar" class="btn btn-success">
+                  <i class="bi bi-toggle-on"></i>
+                </button>
 
-      <button *ngIf="!todo.estado"
-              aria-label="activar"
-              class="btn btn-danger"
-             >
-        <i class="bi bi-toggle-off" ></i>
-      </button>
-    </td>
-  </tr>
-</tbody>
+                <button *ngIf="!todo.estado" aria-label="activar" class="btn btn-danger">
+                  <i class="bi bi-toggle-off"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
 
         </table>
       </div>
     </ng-template>
-    
+
   </div>
 </div>
-<div
-  class=""
-  id="nav-listado"
-  role="tabpanel"
-  aria-labelledby="nav-listado-tab"
->
+<div [hidden]="mostrarPrimero" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
   <div class="container text-center">
     <p class="text-orange"></p>
   </div>
   <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
     <div class="card-header row g-2">
       <h5 class="card-title col-lg-11"><b>Editando Usuario</b></h5>
-      <button class="btn btn-close col-lg-1"  aria-label="Cerrar edición de usuario"
-      ></button>
+      <button class="btn btn-close col-lg-1" aria-label="Cerrar edición de usuario" (click)="mostrarPrimero=true"></button>
     </div>
     <div class="card-body" style="margin-left: 10%;">
+     <form [formGroup]="ActualizarUserForm" (ngSubmit)="actualizar()">
       <div class="row">
         <div class="col-lg-2">
           <p class="card-text"><b>Nombre:</b></p>
         </div>
 
         <div class="col-lg-10">
-          <input
-            type="text"
-            value="Henry"
-            id="nombres"
-            maxlength="100"
-            style="border: none; width: 55%;"
-            
-          />
+          <input type="text" value="Henry" id="nombres" maxlength="100" style="border: none; width: 55%;" formControlName="v_nombre"/>
         </div>
       </div>
 
@@ -132,13 +114,7 @@
         </div>
 
         <div class="col-lg-10">
-          <input
-            type="text"
-            value="Romero"
-            id="apellidos"
-            style="border: none; width: 55%;"
-            
-          />
+          <input type="text" value="Romero" id="apellidos" style="border: none; width: 55%;" formControlName="v_apellido"/>
         </div>
       </div>
 
@@ -147,13 +123,7 @@
           <p class="card-text"><b>documento:</b></p>
         </div>
         <div class="col-lg-10">
-          <input
-            type="text"
-            id="documento"
-            value="123456789"
-            style="border: none; width: 55%;"
-            
-          />
+          <input type="text" id="documento" value="123456789" style="border: none; width: 55%;" formControlName="v_documento"/>
         </div>
       </div>
 
@@ -162,14 +132,7 @@
           <p class="card-text"><b>Telefono:</b></p>
         </div>
         <div class="col-lg-10">
-          <input
-            type="text"
-            id="telefono"
-            value="5551234"
-            maxlength="20"
-            style="border: none; width: 55%;"
-            
-          />
+          <input type="text" id="telefono" value="5551234" maxlength="20" style="border: none; width: 55%;"formControlName="v_telefono" />
         </div>
       </div>
 
@@ -178,24 +141,18 @@
           <p class="card-text"><b>Correo:</b></p>
         </div>
         <div class="col-lg-10">
-          <input
-            type="text"
-            value="hdavidromero@gmail.com"
-            id="correo"
-            style="border: none; width: 55%;"
-            
-          />
+          <input type="text" value="hdavidromero@gmail.com" id="correo" style="border: none; width: 55%;" formControlName="v_usuario"/>
         </div>
       </div>
-      
+
       <div class="row pt-3">
         <div class="col-lg-2">
           <p class="card-text"><b>Rol:</b></p>
         </div>
         <div class="col-lg-10">
           <select id="roles" required style="border: none; width: 55%;">
-            <option value="" selected>Administrador</option>
-        </select>
+            <option value="" selected>Paciente</option>
+          </select>
         </div>
       </div>
 
@@ -217,13 +174,11 @@
           cambios!
         </div>
         <div class="col-lg-3 text-end">
-          <button on:click={actualizar} class="btn btn-outline-info"
-            ><b>Actualizar</b></button
-          >
+          <button on:click={actualizar} class="btn btn-outline-info"><b>Actualizar</b></button>
         </div>
         <div id="estado" class="col-lg-10"></div>
       </div>
+      </form>
     </div>
   </div>
 </div>
-
