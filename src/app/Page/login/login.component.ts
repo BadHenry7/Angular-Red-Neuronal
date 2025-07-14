@@ -91,26 +91,14 @@ export class LoginComponent  implements OnInit{
         
 
       },error:(error)=>{
-          if (error.status === 404) {
-      alert("Usuario o contraseña incorrectos."); // ❌ lógica del login fallido
-    } else {
-      alert("Error del servidor: " + error.status);
-    }}
-      
-    
-    
+        if (error.status === 404) {
+          alert("Usuario o contraseña incorrectos."); // ❌ lógica del login fallido
+        } else {
+          alert("Error del servidor: " + error.status);
+        }
+      }
     });
-
-
-
-    
-  
-  
-
   }
-
-
-
 }
 
 

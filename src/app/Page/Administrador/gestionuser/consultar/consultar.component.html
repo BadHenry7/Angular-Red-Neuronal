@@ -2,10 +2,10 @@
 
 
 
-<div id="Mostrarusuario" [hidden]="!mostrarPrimero">
+<div id="Mostrarusuario" [hidden]="!mostrarTabla">
   <div class="container py-4">
-    <h2 class="mb-4 text-center"><b>¡Lista de usuarios!</b></h2>
-    <hr>
+
+    <h2 class="mb-4 text-center"><b>Gestión de usuarios</b></h2>
 
     <!--if-->
     <div *ngIf="loading; else noloading">
@@ -31,8 +31,8 @@
 
     <!--/else-->
     <ng-template #noerror>
-    <div class=" d-flex justify-content-center">
-  <table class="table table-bordered table-striped w-auto" id="myTable">
+      <div class=" d-flex justify-content-center">
+        <table class="table table-bordered table-striped w-auto" id="myTable">
           <thead>
             <tr class="bg-primary text-white">
               <th class="px-5 py-2 border">Usuario</th>
@@ -53,12 +53,12 @@
               <td class="py-2 border">{{ todo.apellido | titlecase }}</td>
               <td class="py-2 border">{{ todo.documento | number }}</td>
               <td class="py-2 border">{{ todo.telefono | number }}</td>
-               @if (todo.id_rol==2){
-             <td class="py-2 border">{{ "Paciente" }}</td>
+              @if (todo.id_rol==2){
+              <td class="py-2 border">{{ "Paciente" }}</td>
               }@else{
-                <td class="py-2 border">{{ "Doctor" }}</td>
+              <td class="py-2 border">{{ "Doctor" }}</td>
               }
-              
+
 
               <td class="py-2 border">
                 <span [ngClass]="todo.estado ? 'text-green-600' : 'text-red-600'">
@@ -70,11 +70,13 @@
                   <i class="bi bi-pencil-square"></i>
                 </button>
 
-                <button *ngIf="todo.estado" aria-label="desactivar" class="btn btn-success">
+                <button *ngIf="todo.estado" aria-label="desactivar" class="btn btn-success"
+                  (click)="activar_desactivar(todo.id!, false)">
                   <i class="bi bi-toggle-on"></i>
                 </button>
 
-                <button *ngIf="!todo.estado" aria-label="activar" class="btn btn-danger">
+                <button *ngIf="!todo.estado" aria-label="activar" class="btn btn-danger"
+                  (click)="activar_desactivar(todo.id!, true)">
                   <i class="bi bi-toggle-off"></i>
                 </button>
               </td>
@@ -87,98 +89,148 @@
 
   </div>
 </div>
-<div [hidden]="mostrarPrimero" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
-  <div class="container text-center">
-    <p class="text-orange"></p>
-  </div>
-  <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
-    <div class="card-header row g-2">
-      <h5 class="card-title col-lg-11"><b>Editando Usuario</b></h5>
-      <button class="btn btn-close col-lg-1" aria-label="Cerrar edición de usuario" (click)="mostrarPrimero=true"></button>
-    </div>
-    <div class="card-body" style="margin-left: 10%;">
-     <form [formGroup]="ActualizarUserForm" (ngSubmit)="actualizar()">
-      <div class="row">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Nombre:</b></p>
-        </div>
+<div [hidden]="mostrarTabla" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
+  <div class=" container mt-4">
+    <div class="card border-dark shadow">
+      <div class="card-header text-center">
+        <h5 class="card-title m-0  fs-4 "><b>Edición de usuario</b></h5>
 
-        <div class="col-lg-10">
-          <input type="text" value="Henry" id="nombres" maxlength="100" style="border: none; width: 55%;" formControlName="v_nombre"/>
-        </div>
+        <button class="btn btn-close position-absolute top-0 end-0 m-2" aria-label="Cerrar edición de usuario"
+          (click)="mostrarTabla = true"></button>
       </div>
+      <div class="card-body">
 
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Apellido:</b></p>
-        </div>
+        <form [formGroup]="ActualizarUserForm" (ngSubmit)="actualizar()">
+          <div class="row">
+            <div class="col-lg-6">
+              <img src="/assess/EditarPaciente.png" alt="" class=" w-100 h-100 img-fluid">
+            </div>
 
-        <div class="col-lg-10">
-          <input type="text" value="Romero" id="apellidos" style="border: none; width: 55%;" formControlName="v_apellido"/>
-        </div>
+
+            <div class="col-lg-6 px-3">
+
+              <div class="input-group">
+                <span class="input-group-text " style="width:125px;">
+                  <i class="bi bi-person me-2 text-primary"></i> Nombres
+                </span>
+                <input type="text" class="form-control" id="nombres" maxlength="100" formControlName="v_nombre" />
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['v_nombre'].invalid && ActualizarUserForm.controls['v_nombre'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un nombre valido</small>
+              </div>
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-person me-2 text-primary"></i> Apellidos
+                </span>
+                <input type="text" class="form-control" id="apellidos" formControlName="v_apellido" />
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['v_apellido'].invalid && ActualizarUserForm.controls['v_apellido'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un apellido valido</small>
+              </div>
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-card-list me-2 text-primary"></i> Documento
+                </span>
+                <input type="text" class="form-control" id="documento" formControlName="v_documento" />
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['v_documento'].invalid && ActualizarUserForm.controls['v_documento'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un documento valido</small>
+              </div>
+
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-telephone me-2 text-primary"></i> Teléfono
+                </span>
+                <input type="text" class="form-control" id="telefono" maxlength="20" formControlName="v_telefono" />
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['v_telefono'].invalid && ActualizarUserForm.controls['v_telefono'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un numero de telefono valido</small>
+              </div>
+
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text   " style="width:125px;">
+                  <i class="bi bi-envelope me-2 text-primary"></i> Correo
+                </span>
+                <input type="text" class="form-control" id="correo" formControlName="v_usuario" />
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['v_usuario'].invalid && ActualizarUserForm.controls['v_usuario'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un correo valido</small>
+              </div>
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-person-badge me-2 text-primary"></i> Rol
+                </span>
+                <select id="roles" required class="form-select" formControlName="id_rol">
+                  <option value="2">Paciente</option>
+                  <option value="3">Doctor</option>
+
+                </select>
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['id_rol'].invalid && ActualizarUserForm.controls['id_rol'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Seleccione un rol</small>
+              </div>
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-toggle-on me-2 text-primary"></i> Estado
+                </span>
+                <select id="estado" name="opciones" class="form-select" formControlName="v_estado">
+                  <option value="true">Activar</option>
+                  <option value="false">Desactivar</option>
+                </select>
+              </div>
+              <div
+                *ngIf="ActualizarUserForm.controls['v_estado'].invalid && ActualizarUserForm.controls['v_estado'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Seleccione un estado</small>
+              </div>
+
+
+
+            </div>
+
+          </div>
+
+          <div class="row text-center  " style="margin-top: 2%; ">
+            <div class="col-lg-12">
+              ¡Al terminar de editar, darle click en actualizar para guardar los
+              cambios!
+            </div>
+            <div class="col-lg-12 text-center mt-2"> 
+              
+        
+             <div *ngIf="ActualizarUserForm.invalid; else valido">
+          <button  class="btn btn-outline-secondary" [disabled]="ActualizarUserForm.invalid" ><b>Actualizar</b></button>
+             
+              </div>
+
+              <ng-template #valido>
+          <button  class="btn btn-outline-primary" [disabled]="ActualizarUserForm.invalid" ><b>Actualizar</b></button>
+
+              </ng-template>
+
+                  </div>
+
+            
+            <div id="estado" class="col-lg-10"></div>
+          </div>
+
+        </form>
       </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>documento:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <input type="text" id="documento" value="123456789" style="border: none; width: 55%;" formControlName="v_documento"/>
-        </div>
-      </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Telefono:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <input type="text" id="telefono" value="5551234" maxlength="20" style="border: none; width: 55%;"formControlName="v_telefono" />
-        </div>
-      </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Correo:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <input type="text" value="hdavidromero@gmail.com" id="correo" style="border: none; width: 55%;" formControlName="v_usuario"/>
-        </div>
-      </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Rol:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <select id="roles" required style="border: none; width: 55%;">
-            <option value="" selected>Paciente</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Estado:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <select id="estado" name="opciones" style="border: none; width: 55%;">
-            <option value="1">Activar</option>
-            <option value="0">Desactivar</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 4%;">
-        <div class="col-lg-9">
-          ¡Al terminar de editar, darle click en actualizar para guardar los
-          cambios!
-        </div>
-        <div class="col-lg-3 text-end">
-          <button on:click={actualizar} class="btn btn-outline-info"><b>Actualizar</b></button>
-        </div>
-        <div id="estado" class="col-lg-10"></div>
-      </div>
-      </form>
     </div>
   </div>
 </div>

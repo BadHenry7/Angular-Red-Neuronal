@@ -20,6 +20,7 @@ export interface User{
 
 export interface Buscar {
 id: number
+estado?: boolean
 }
 
 
@@ -28,9 +29,19 @@ export interface Login {
   password: string;
 }
 
+export interface especialidad {
+    id?:number
+    id_usuario?: number;
+    id_atributo?: number;
+    valor: string;
+    descripcion: string;
+    estado?:boolean
+}
 
-
-
+export interface Especialidades {
+    id?:number
+    nombre: string;
+}
 
 
 
@@ -60,10 +71,24 @@ export class UsersService{
         return this.http.post<User[]>('http://localhost:8000/create_user', user);
     }
     
-    
+    addAtrXUse(user:especialidad): Observable<User[]>{
+        return this.http.post<User[]>('http://localhost:8000/create_atributoxusuario', user);
+    }
+
+
     UpdateUser(user: User): Observable<User[]>{
         return this.http.put<User[]>('http://localhost:8000/actualizaruser', user);
     }  
+
+
+    EstadoUser(user: Buscar): Observable<User[]>{
+        return this.http.put<User[]>('http://localhost:8000/estado_user', user);
+    }  
+
+
+    getEspecialidades(): Observable<Especialidades[]> {
+        return this.http.get<Especialidades[]>('https://api-nodejs-buxf.onrender.com/api/especialidades/getespecialidades');
+    }
 
   //  createUser (user: User): <>
 
