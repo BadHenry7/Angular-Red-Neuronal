@@ -65,7 +65,6 @@ constructor (private rga: FormBuilder, private userService: UsersService){
     const documento= String(this.RegisterAdminForm.value.v_documento);
     const telefono= String(this.RegisterAdminForm.value.v_telefono);
     const genero= String(this.RegisterAdminForm.value.v_genero);
-    const cargo= String(this.RegisterAdminForm.value.v_cargo);
     const edad= Number(this.RegisterAdminForm.value.v_edad);
     const usuario= String(this.RegisterAdminForm.value.v_usuario);
     const password= String(this.RegisterAdminForm.value.v_password);
@@ -79,16 +78,16 @@ constructor (private rga: FormBuilder, private userService: UsersService){
  this.userService.addUser(doctor_creado).subscribe({
     next:(todos_resp)=>{
      this.todos_resp= todos_resp;
-     const newUserId= this.todos_resp.id
-     console.log(newUserId)
-      if (!newUserId) {
+     const id_usuario= this.todos_resp.id
+     console.log(id_usuario)
+      if (!id_usuario) {
           Swal.fire({ title: 'Error creando usuario', icon: 'error' });
           return;
         }
 
         const atributo = {
           id: 0,
-          id_usuario: newUserId,
+          id_usuario: id_usuario,
           id_atributo: 1,
           valor: this.RegisterAdminForm.value.v_especialidad,
           descripcion: this.RegisterAdminForm.value.v_especialidad,
@@ -106,23 +105,13 @@ constructor (private rga: FormBuilder, private userService: UsersService){
             this.RegisterAdminForm.reset();
           },
           error: () => {
-            Swal.fire({
-              title: 'Fallo la creacion',
-              icon: 'warning',
-              text: 'Revisa los registros del servidor'
-            });
+           
           }
         });
       },
       error: (err) => {
         console.error(err);
-        Swal.fire({
-          title: err.error?.Informacion === 'Ya_existe'
-            ? 'El usuario ya existe'
-            : 'Error creando usuario',
-          icon: 'error',
-          draggable: true
-        });
+        
       }
     });
   }

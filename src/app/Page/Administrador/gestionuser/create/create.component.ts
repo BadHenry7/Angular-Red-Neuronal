@@ -68,6 +68,9 @@ Swal.fire({
   draggable: true
 });
 
+    this.RegisterAdminForm.reset();
+
+
   }else{
 
   
@@ -77,6 +80,8 @@ Swal.fire({
         draggable: true
       });
     }
+
+
 
     },error: (error)=>{
       console.log(error)
