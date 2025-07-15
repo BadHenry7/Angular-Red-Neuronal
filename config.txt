@@ -47,26 +47,9 @@ Para ver la pagina:
 
 
 
+Email.js: https://www.emailjs.com/docs/sdk/installation/
+ npm install --save @emailjs/browser
 
-
-
-
-
-
-
-
-<p *ngIf="p===2 ; else otrovalor"> si es 2  </p>
-
-<ng-template #otrovalor>
-    <p>Da otro </p>
-</ng-template>
-
-
-
-p: number = 4;
-
-nsame(s:string) {
-let p_2: number = 4;
-  
-}  
-(click)="redirigir()"
+ sweet:https://sweetalert2.github.io/
+ npm install sweetalert2
+ import Swal from 'sweetalert2'

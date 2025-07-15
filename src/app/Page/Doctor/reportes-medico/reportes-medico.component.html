@@ -1,80 +1,107 @@
 <app-navbar-doctor></app-navbar-doctor>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.10.0/dist/css/coreui.min.css" />
+
 <div class="container d-flex justify-content-between mt-3">
-  <!-- Card weeeeeeeeeeeeey -->
-  <div class="card shadow-lg p-4" style="width: 500px; background: #f0f4f8; border-radius: 12px;">
-    <h3 class="text-center mb-4 text-danger">Reportes</h3>
+    <!-- Reportes -->
+    <div class="card shadow-lg p-4" style="width: 500px; background: #f0f4f8; border-radius: 12px;">
+        <h3 class="text-center mb-4 text-danger">Reportes</h3>
 
-    <select class="form-select mb-3" [(ngModel)]="opcion" name="opcion" required>
-      <option [value]="1">Citas registradas</option>
-      <option [value]="2">Diagnósticos de usuarios</option>
-      <option [value]="3">Usuarios que han tenido citas</option>
-    </select>
+        <select class="form-select mb-3" id="opcion" [(ngModel)]="opcion" required>
+            <option value="1">Citas registradas</option>
+            <option value="2">Diagnósticos de usuarios</option>
+            <option value="3">Usuarios que han tenido citas</option>
+        </select>
 
-    <!--Calendario -->
-    <div class="border rounded p-2 bg-white calendar-container mb-3">
-      <!-- aqui iria el calendario real -->
-       
-      <p class="text-center text-secondary ">
-        <input type="date" class="form-control">
-      </p>
-    </div>
-
-    <button class="btn btn-success mt-1" (click)="generar()">Generar</button>
-    <button class="btn btn-secondary mt-1" (click)="showModal()">Enviar correo</button>
-  </div>
-
-  <!-- Vista previa PDF -->
-  <div *ngIf="visualizar; else PdfAvisualizar" class="ms-4">
-    <iframe title="pdf" [src]="pdfUrl" style="width: 800px; height: 600px;"></iframe>
-  </div>
-  <ng-template #PdfAvisualizar>
-    <div class="card shadow-lg border-0 ms-4" style="width: 800px; height: 600px;">
-      <div class="card-body">
-        <h3 class="text-center text-primary fw-bold">Vista previa de documentos PDF</h3>
-        <p class="text-secondary mt-3" style="text-align: justify; line-height: 1.6;">
-          Aquí podrás visualizar tus archivos PDF antes de proceder con la descarga...
-        </p>
-      </div>
-    </div>
-  </ng-template>
-</div>
-
-<!-- Modal donde enviaremos el  correo -->
-<div class="modal fade" id="sendpdf" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <form class="modal-content" (submit)="formSubmit($event)">
-      <div class="modal-header">
-        <h3>Enviar correo</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="Ocultar()"></button>
-      </div>
-      <div class="modal-body row">
-        <label class="form-label">Doctores
-          <select class="form-control" (change)="select_change()">
-            <option value="" disabled selected>Seleccione un medico</option>
-            <!-- Opciones estáticas o *ngFor después -->
-          </select>
-        </label>
-
-        <div *ngIf="loading_select" class="mt-2">
-          <p>Correos a los cuales se les enviará:</p>
-          <span *ngFor="let email of a" class="d-block fw-bold">{{ email }}</span>
+        <div class="d-flex justify-content-center">
+            <div id="calendarElement" class="border rounded p-2 bg-white calendar-container"></div>
         </div>
 
-        <label class="form-label mt-3">Asunto del mensaje:
-          <input type="text" class="form-control" id="asunto_c" />
-        </label>
+        <button (click)=generar() class="btn btn-success mt-3">Generar</button>
+        <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#sendpdf" (click)="select_doctor()">Enviar correo</button>
+    </div>
 
-        <label class="form-label mt-2">Mensaje:
-          <input type="text" class="form-control" id="mensaje_c" />
-        </label>
+    <!-- Visualizador del PDF -->
+    @if(visualizar){
+    <div id="pdfContainer" class="ms-4">
+        <iframe title="pdf" id="pdfvista" style="width: 800px; height: 600px;"></iframe>
+    </div>
+    } @else{
+    <div class="">
+        <div class="card shadow-lg border-0 ms-4 " style="width: 800px; height: 600px;">
+            <div class="card-body">
+                <h3 class="text-center text-primary fw-bold">Vista previa de documentos PDF</h3>
+                <p class="text-secondary mt-3" style="text-align: justify; line-height: 1.6;">
+                    Aquí podrás visualizar tus archivos PDF antes de proceder con la descarga. Esta función te permitirá
+                    revisar cada detalle del documento para asegurarte de que toda la información es correcta y está
+                    bien organizada.
+                    <br /><br />
+                    Antes de descargarlo, puedes verificar nombres, fechas, contenido y cualquier otro dato relevante.
+                    De esta manera, evitamos errores y garantizamos que el documento final sea exactamente lo que
+                    necesitas.
+                    <br /><br />
+                    Si encuentras algún error o necesitas hacer modificaciones, puedes regresar y realizar los ajustes
+                    necesarios antes de obtener tu versión definitiva. La visualización previa también te ayudará a
+                    ahorrar tiempo, evitando descargas innecesarias y asegurando que solo almacenes los archivos
+                    correctos en tu dispositivo.
+                    <br /><br />
+                    Una vez estés seguro de que todo está en orden, podrás proceder a la descarga del PDF con total
+                    confianza. Recuerda que esta herramienta está diseñada para facilitar tu trabajo y brindarte una
+                    experiencia más eficiente y sin inconvenientes.
+                </p>
+            </div>
+        </div>
+    </div>
 
-        <label class="form-label mt-2">Link:
-          <input type="text" class="form-control" id="linking" />
-        </label>
+    }
 
-        <button type="submit" class="btn btn-info mt-3">Enviar</button>
-      </div>
-    </form>
-  </div>
+</div>
+
+
+<div class="modal fade" id="sendpdf" tabindex="-1" aria-labelledby="rModalLabel" data-bs-backdrop="static"
+    data-bs-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h3>Enviar correo</h3>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="Ocultar()"></button>
+            </div>
+            <div class="modal-body row">
+                <label>Doctores
+                    <select class="form-control" name="" id="select_email" [(ngModel)]="v_change" (change)="select_change()">
+                        <option value="" disabled selected class="form-select">Seleccione un medico</option>
+                    </select>
+                </label>
+
+                @if (loading_select){
+                <p style="margin-top: 2%;">
+                    Correos a los cuales se les enviara:
+                </p>
+                <div *ngFor="let todos_d of a; let i = index">
+
+
+                    <span class="mt-1" style="font-weight: bold;">{{todos_d}}</span>
+                </div>
+                }
+
+                <label class="mt-3">Asunto del mensaje:
+                    <input type="text" id="asunto_c" name="as" [(ngModel)]="asunto"  class="form-control" />
+                </label>
+
+                <label>Mensaje:
+                    <input type="text" name="" id="mensaje_c" [(ngModel)]="ms" class="form-control" />
+                </label>
+
+                <label for="">Link:
+                    <input type="text" id="linking" [(ngModel)]="enlace" class="form-control" />
+                </label>
+
+                <input type="submit" value="Enviar" class="mt-3 btn btn-info" (click)="sendEmail()" />
+            </div>
+        </div>
+    </div>
 </div>

@@ -55,17 +55,29 @@ export class UsersService{
     
     constructor(private http:HttpClient) { }
 
-    getUsers(): Observable<User[]>{
+    Login(user: Login): Observable<User[]>{
+        return this.http.post<User[]>('http://localhost:8000/login', user);
+    }  
+
+    getUsers(): Observable<User[]>{//Todos los usuarios
         return this.http.get<User[]>('http://localhost:8000/get_users');
     }   
 
-    getUser(user: Buscar): Observable<User[]>{
+    getUser(user: Buscar): Observable<User[]>{//Solo uno
         return this.http.post<User[]>('http://localhost:8000/get_user', user);
     }   
 
-    Login(user: Login): Observable<User[]>{
-        return this.http.post<User[]>('http://localhost:8000/login', user);
+   
+
+    getMedico(): Observable<User[]>{ //Medicos
+        return this.http.get<User[]>('http://localhost:8000/getmedico');
     }   
+    
+    getEspecialidades(): Observable<Especialidades[]> {
+        return this.http.get<Especialidades[]>('https://api-nodejs-buxf.onrender.com/api/especialidades/getespecialidades');
+    }
+
+     
     
     addUser(user: User): Observable<User[]>{
         return this.http.post<User[]>('http://localhost:8000/create_user', user);
@@ -86,9 +98,6 @@ export class UsersService{
     }  
 
 
-    getEspecialidades(): Observable<Especialidades[]> {
-        return this.http.get<Especialidades[]>('https://api-nodejs-buxf.onrender.com/api/especialidades/getespecialidades');
-    }
 
   //  createUser (user: User): <>
 

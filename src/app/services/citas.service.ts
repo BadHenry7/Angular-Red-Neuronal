@@ -2,17 +2,25 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-export interface Cita{
+export interface Reportes{
+    id?: number,
+    fecha:string,
+    fecha2:string,
+    
+}
 
-  id?: number,
-  fecha: string,
-  hora: string,
-  id_usuario?: number,
-  estado: true,
-  id_paciente?: number,
-  ubicacion: string
+export interface Citas{
+    
+    fecha:string,
+    hora:string,
+    medico:string,
+    paciente:string,
+    id?:number,
+    ubicacion:string,
+    salas:string,  
 
 }
+
 
 
 @Injectable ({
@@ -21,12 +29,34 @@ export interface Cita{
 
 export class CitasService {
 
-  private apiUrl = 'https://red-neuronal-api.onrender.com/';
+  private apiUrl = 'http://localhost:8000';
  
   constructor(private http:HttpClient) { }
 
-  getCita(): Observable<Cita[]>{
-      return this.http.get<Cita[]>('https://red-neuronal-api.onrender.com/get_cita')
+    get_cita_admin(): Observable<Citas[]>{
+        return this.http.get<Citas[]>(this.apiUrl + '/get_cita_admin/');
+        
     }
+
+    create_cita_admin(user: Citas): Observable<Citas[]>{
+        return this.http.post<Citas[]>('http://localhost:8000/create_cita/', user);
+        
+    }
+
+
+    getReportes_citas(user: Reportes): Observable<Reportes[]>{
+        return this.http.post<Reportes[]>('http://localhost:8000/reportes_citas/', user);
+    }   
+
+  
+    getReportes_historial(user: Reportes): Observable<Reportes[]>{
+        return this.http.post<Reportes[]>('http://localhost:8000/reportes_historial/', user);
+    }   
+
+    
+    getReportes_citas_medicos(user: Reportes): Observable<Reportes[]>{
+        return this.http.post<Reportes[]>('http://localhost:8000/reportes_citas_medicos', user);
+    }   
+
 
 }

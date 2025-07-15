@@ -60,8 +60,9 @@ ActualizarUserForm: FormGroup;
             order: []
         }); ;
 
-      // Destruye DataTable si ya existe
+     
     }, 1  );
+    
     });
     
   }
