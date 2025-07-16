@@ -1,45 +1,58 @@
 <app-navbar-paciente></app-navbar-paciente>
 
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-/>
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.10.0/dist/css/coreui.min.css"
-/> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.10.0/dist/css/coreui.min.css" />
+
 <div class="container d-flex justify-content-between mt-3">
-  <!-- Card weeeeeeeeeeeeey -->
-  <div class="card shadow-lg p-4" style="width: 500px; background: #f0f4f8; border-radius: 12px;">
-    <h3 class="text-center mb-4 text-danger">Reportes</h3>
+    <!-- Reportes -->
+    <div class="card shadow-lg p-4" style="width: 500px; background: #f0f4f8; border-radius: 12px;">
+        <h3 class="text-center mb-4 text-danger">Reportes</h3>
 
-    <select class="form-select mb-3" [(ngModel)]="opcion" name="opcion" required>
-      <option [value]="1">Ultima cita medica</option>
-      <option [value]="2">Citas agendadas</option>
-      <option [value]="3">Usuarios que han tenido citas</option>
-    </select>
+        <select class="form-select mb-3" id="opcion" [(ngModel)]="opcion" required>
+            <option value="1">Ultima cita medica</option>
+            <option value="2">Citas agendadas</option>
+            
+        </select>
 
-    <!--Calendario -->
-   <div class="d-flex justify-content-center">
-         <div id="calendarElement"></div>
-        </div>        
-
-
-    <button class="btn btn-success mt-1" (click)="generar()">Generar</button>
-  </div>
-
-  <!-- Vista previa PDF -->
-  <div *ngIf="visualizar; else PdfAvisualizar" class="ms-4">
-    <iframe title="pdf" [src]="pdfUrl" style="width: 800px; height: 600px;"></iframe>
-  </div>
-  <ng-template #PdfAvisualizar>
-    <div class="card shadow-lg border-0 ms-4" style="width: 800px; height: 600px;">
-      <div class="card-body">
-        <h3 class="text-center text-primary fw-bold">Vista previa de documentos PDF</h3>
-        <p class="text-secondary mt-3" style="text-align: justify; line-height: 1.6;">
-          Aquí podrás visualizar tus archivos PDF antes de proceder con la descarga...
-        </p>
-      </div>
+      
+        <button (click)=generar() class="btn btn-success mt-3">Generar</button>
+        
     </div>
-  </ng-template>
+
+    <!-- Visualizador del PDF -->
+    @if(visualizar){
+    <div id="pdfContainer" class="ms-4">
+        <iframe title="pdf" id="pdfvista" style="width: 800px; height: 600px;"></iframe>
+    </div>
+    } @else{
+    <div class="">
+        <div class="card shadow-lg border-0 ms-4 " style="width: 800px; height: 600px;">
+            <div class="card-body">
+                <h3 class="text-center text-primary fw-bold">Vista previa de documentos PDF</h3>
+                <p class="text-secondary mt-3" style="text-align: justify; line-height: 1.6;">
+                    Aquí podrás visualizar tus archivos PDF antes de proceder con la descarga. Esta función te permitirá
+                    revisar cada detalle del documento para asegurarte de que toda la información es correcta y está
+                    bien organizada.
+                    <br /><br />
+                    Antes de descargarlo, puedes verificar nombres, fechas, contenido y cualquier otro dato relevante.
+                    De esta manera, evitamos errores y garantizamos que el documento final sea exactamente lo que
+                    necesitas.
+                    <br /><br />
+                    Si encuentras algún error o necesitas hacer modificaciones, puedes regresar y realizar los ajustes
+                    necesarios antes de obtener tu versión definitiva. La visualización previa también te ayudará a
+                    ahorrar tiempo, evitando descargas innecesarias y asegurando que solo almacenes los archivos
+                    correctos en tu dispositivo.
+                    <br /><br />
+                    Una vez estés seguro de que todo está en orden, podrás proceder a la descarga del PDF con total
+                    confianza. Recuerda que esta herramienta está diseñada para facilitar tu trabajo y brindarte una
+                    experiencia más eficiente y sin inconvenientes.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    }
+
 </div>
+

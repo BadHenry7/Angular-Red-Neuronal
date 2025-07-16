@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
           this.verificar = true;
           console.log("*//////////////", todo[0].rol)
-          let encontrado = { nombre: todo[0].nombre, correo: this.correo, password: this.password, id: todo[0].id};
+          let encontrado = { name: todo[0].nombre, correo: this.correo, password: this.password, id: todo[0].id};
           console.log("Imprimos el encontrado", encontrado);
           let miStorage = window.localStorage;
           miStorage.setItem("usuario", JSON.stringify(encontrado));

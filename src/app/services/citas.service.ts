@@ -21,6 +21,10 @@ export interface Citas{
 
 }
 
+export interface ReportesUsuario{
+    id_paciente: number
+}
+
 
 
 @Injectable ({
@@ -56,6 +60,14 @@ export class CitasService {
     
     getReportes_citas_medicos(user: Reportes): Observable<Reportes[]>{
         return this.http.post<Reportes[]>('http://localhost:8000/reportes_citas_medicos', user);
+    }   
+
+    historia_clinica_user(user: ReportesUsuario): Observable<Reportes[]>{
+        return this.http.post<Reportes[]>('http://localhost:8000/historia_clinica_user', user);
+    }   
+
+    post_citas_users(user: ReportesUsuario): Observable<Reportes[]>{
+        return this.http.post<Reportes[]>('http://localhost:8000/post_citas_users/', user);
     }   
 
 
