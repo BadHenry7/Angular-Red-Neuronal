@@ -19,8 +19,12 @@ export interface User{
 
 
 export interface Buscar {
-id: number
-estado?: boolean
+    id: number
+    estado?: boolean
+}
+
+export interface BuscarxU {
+    id_usuario: number
 }
 
 
@@ -67,8 +71,6 @@ export class UsersService{
         return this.http.post<User[]>('http://localhost:8000/get_user', user);
     }   
 
-   
-
     getMedico(): Observable<User[]>{ //Medicos
         return this.http.get<User[]>('http://localhost:8000/getmedico');
     }   
@@ -77,7 +79,13 @@ export class UsersService{
         return this.http.get<Especialidades[]>('https://api-nodejs-buxf.onrender.com/api/especialidades/getespecialidades');
     }
 
-     
+    getAtributosXusuarios():Observable<especialidad[]> {
+        return this.http.get<especialidad[]>('http://localhost:8000/get_atributoxusuarios');
+    }
+
+     getAtributosXusuario(id_usuario: BuscarxU):Observable<especialidad[]> {
+        return this.http.post<especialidad[]>('http://localhost:8000/get_atributoxusuario', id_usuario);
+    }
     
     addUser(user: User): Observable<User[]>{
         return this.http.post<User[]>('http://localhost:8000/create_user', user);
@@ -96,6 +104,15 @@ export class UsersService{
     EstadoUser(user: Buscar): Observable<User[]>{
         return this.http.put<User[]>('http://localhost:8000/estado_user', user);
     }  
+
+    getpaciente(): Observable<User[]>{//Todos los usuarios
+        return this.http.get<User[]>(this.apiUrl + 'getpaciente');
+    }
+
+    getdoctor(): Observable<User[]>{//Todos los usuarios
+        return this.http.get<User[]>(this.apiUrl + 'getmedico');
+    }
+
 
 
 

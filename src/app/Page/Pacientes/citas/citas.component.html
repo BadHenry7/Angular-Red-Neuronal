@@ -1,187 +1,156 @@
 <app-navbar-paciente></app-navbar-paciente>
+<div class="container">
+  <p class="fs-3 mt-4 text-center"><b>Agendar cita</b></p>
 
-<div id="Mostrarcitas">
-  <div class="container py-4">
-    <h2 class="mb-4 text-center">¡Citas agendadas!</h2>
-    <hr>
-    @if (loading){
-      <div class="row g-2 justify-content-center">
-        <p class="text-center col-lg-2 col-md-2 col-sm-2 col-12 col-xl-2">
-          Cargando datos...
-        </p>
-        <div
-          class="spinner-border col-lg-4 col-md-4 col-sm-4 col-12 col-xl-4"
-          role="status"
-        >
-          <span class="visually-hidden">Loading...</span>
+
+
+
+  <hr>
+
+
+
+  <div class="d-flex justify-content-center mb-3 ">
+    <div class="input-group w-auto">
+      <span class="input-group-text bg-white">
+        Puedes activar el recordatorio de citas por telegram, dando click a la
+       <button  class="btn "> <i class="bi bi-bell text-primary" data-bs-toggle="modal" data-bs-target="#RecordatorioTelegram"></i></button>
+      </span>
+    </div>
+  </div>
+
+
+
+  <form [formGroup]="asigncita">
+    <div class="row pt-2">
+      <!--Primera columna-->
+      <div class="col-lg-3 col-md-4 col-sm-4 col-4 col-xl-4">
+        <div class="">
+          <label for=""><b>Seleccione una fecha</b></label>
+          <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " formControlName="v_fecha"
+            class="form-control"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
+
+          <div *ngIf="asigncita.controls['v_fecha'].invalid && asigncita.controls['v_fecha'].touched  ; ">
+            <small>⚠️Seleccione una fecha</small>
+          </div>
+
+
+        </div>
+        <!--Eliga un doctor-->
+        <div class="mt-5">
+          <label for=""><b>Elija un Doctor</b></label>
+        </div>
+        <select class="form-select" id="medico"  [(ngModel)]="doctorSeleccionado" (change)="cambiarNombreDoctor()"  required 
+          formControlName="v_doctor"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
+          <option value="" selected>Seleccione</option>
+          <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }}</option>
+        </select>
+        <div *ngIf="asigncita.controls['v_doctor'].invalid && asigncita.controls['v_doctor'].touched ">
+          <small>⚠️Seleccione un doctor</small>
+        </div>
+
+
+        <!--Eliga la ubicacion-->    
+          <div class="mt-5">
+            <label for=""><b>Elija una ubicacion</b></label>
+           </div>
+          <select id="ubicacion" class="form-select" [(ngModel)]="ubicacionSeleccionada" required formControlName="v_ubicacion">
+            <option value= "" selected>Seleccione</option>
+             <option *ngFor="let todo of ubicacion"  [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}</option>
+          </select>
+            <div *ngIf="asigncita.controls['v_ubicacion'].invalid && asigncita.controls['v_ubicacion'].touched  ; "> 
+              <small>⚠️Seleccione una ubicacion</small>
+            </div>
+
+      </div>
+
+      <!--Segunda columna-->
+      <div class="col-lg-5 col-md-4 col-sm-4 col-4 col-xl-4">
+        <label for=""><b>Seleccione una hora</b></label>
+        <div class="row">
+          <ng-container *ngFor="let hour of hours; let i=index">
+
+            <ng-container *ngIf="hour> v_horas">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-6 col-xl-6">
+                <div class="input-group">
+                  <i class="input-group-text bi bi-clock time-icon bg-primary" style="color: aliceblue;  "></i>
+                  <input type="time" [value]="hour" (click)="horaSeleccionada = hour" class="form-control" readonly>
+                </div>
+              </div>
+
+
+              <div *ngIf="(i + 1) % 2 === 0" class="mt-3"></div>
+            </ng-container>
+
+          </ng-container>
         </div>
       </div>
-    } @else if (error){
 
-    
-      <p class="text-red-500">Error: {{error}}</p>
-    } @else{
 
-      <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-300 table-striped" id="myTable">
-          <thead class="bg-primary text-white">
-            <tr>
-              <th class="px-4 py-2 border">Paciente</th>
-              <th class="px-4 py-2 border">Doctor</th>
-              <th class="px-4 py-2 border">Fecha</th>
-              <th class="px-4 py-2 border">Hora</th>
-              <th class="px-4 py-2 border">Hospital</th>
-              <th class="px-4 py-2 border">Ubicacion</th>
+      <!--Tercera columna-->
+      <div class="col-lg-4 col-md-4 col-sm-4 col-4 col-xl-4">
 
-              <th class="px-4 py-2 border">Opcion</th>
-            </tr>
-          </thead>
 
-          <tbody>
-           <tr *ngFor="let todo of todos" class="hover:bg-gray-50">
+        <div class="text-center fs-4">
+          <p><b>Detalles de la cita:</b></p>
+        </div>
+        <p><span><b>Fecha seleccionada:</b></span><span class="mx-3" id="mostrar_fecha">{{ fechaSeleccionada |
+            date:'fullDate' }}</span></p>
+
+        <p><b>Hora seleccionada:</b><span class="mx-3" id="mostrar_hora">
+            La cita será a las {{ horaSeleccionada ? (horaSeleccionada | slice:0:2) + ' horas con ' +
+            (horaSeleccionada | slice:3) + ' minutos' : '00:00' }}
+          </span>
+        </p>
+
+        <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor" > {{ NombreDoctor  | uppercase
+            }}</span></p>
             
+        <p><b>Ubicación:</b> <span class="mx-3">{{ ubicacionSeleccionada | uppercase }}</span></p>
 
-                
-              
-                <td class="px-4 py-2 border">{{todo.paciente}}</td>
-                <td class="px-4 py-2 border">{{todo.medico}}</td>
-                <td class="px-4 py-2 border">{{todo.fecha}}</td>
-                <td class="px-4 py-2 border">{{todo.hora}}</td>
-                <td class="px-4 py-2 border">{{todo.ubicacion}}</td>
-                <td class="px-4 py-2 border">{{todo.salas}}</td>
 
-                <td class="px-4 py-2 border">
-                  <button class="btn btn-info" 
-                    ><i class="bi bi-pencil-square"></i></button
-                  >
-                  <button class="btn btn-danger" 
-                    ><i class="bi-ban"></i></button
-                  >
-                </td>
-              </tr>
-          
-          </tbody>
-        </table>
+        <div class="d-flex" style="justify-content: center; align-items: center;">
+          <button class="btn btn-primary" [disabled]="asigncita.invalid" (click)="ConfirmarAgendar()">
+            Agendar
+          </button>
+        </div>
+
       </div>
-    }
-    
-  </div>
+      <div class="mt-5 fs-5">
+        <p class="text-center text-muted">Asegúrate de revisar cuidadosamente la información antes de confirmar
+          la
+          cita. Verifica que los datos del paciente, la fecha y la hora sean correctos para evitar
+          inconvenientes.
+        </p>
+      </div>
+
+    </div>
+  </form>
+
+
 </div>
 
-<div
-  class="fade"
-  id="nav-listado"
-  role="tabpanel"
-  aria-labelledby="nav-listado-tab"
-  >
-  <div class="container text-center">
-    <p class="text-orange"></p>
-  </div>
-  <div class="card border-dark shadow" style="width: 60%; margin-left: 20%;">
-    <div class="card-header row g-2">
-      <h5 class="card-title col-lg-11"><b>Editando cita</b></h5>
-      <button class="btn btn-close col-lg-1" 
-        aria-label="Cerrar edición de usuario"></button>
-    </div>
-    <div class="card-body" style="margin-left: 10%;">
-      <div class="row">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Paciente:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <input
-            type="text"
-            placeholder="Nombres"
-            id="paciente"
-            maxlength="100"
-            style="border: none; width: 55%;"
-            
-          />
-        </div>
+
+<div class="modal fade" id="RecordatorioTelegram" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Activación de las notificaciones por telegram</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="modal-body">
 
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Doctor:</b></p>
+        <div >
+         <i class="bi bi-person-badge"> ID de Telegram:</i>
+         <input type="text" [(ngModel)]="id_telegram" class="form-control mb-3" style="width: 302px;">
+
+         <p>Para obtener la ID de telegram realice los pasos del siguiente video</p>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/0JAiFWHcXP0?si=s5zu6xgV6T98dKE2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
 
-        <div class="col-lg-10">
-          <select class="form-select" id="Doctor_cita" style=" width: 55%;" required>
-            <option selected>Seleccione</option>
-          </select>
-        </div>
       </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Fecha:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <input class="form-control"
-            type="date"
-            id="Fecha_cita"
-            placeholder="Fecha de la cita"
-            style="width: 55%;"
-            
-          />
-        </div>
-      </div>
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Hora:</b></p>
-        </div>
-        <div class="col-lg-10">
-          <input class="form-control"
-            type="time"
-            id="hora_cita"
-            placeholder="hora de la cita"
-            maxlength="20"
-            style="width: 55%;"
-            
-          />
-        </div>
-      </div>
-
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Ubicacion:</b></p>
-        </div>
-        <div class="col-lg-10">
-         <select name="opciones" id="ubicacion" class="form-select" style="width: 55%;">
-          <option selected>Seleccione</option>
-         </select>
-        </div>
-      </div>
-
-
-      <div class="row pt-3">
-        <div class="col-lg-2">
-          <p class="card-text"><b>Sala:</b></p>
-        </div>
-        <div class="col-lg-10">
-         <select name="opciones" id="salas" class="form-select" style="width: 55%;">
-          <option selected >Seleccione</option>
-          
-         </select> 
-        </div>
-      </div>
-
-
-
-
-      <div class="row" style="margin-top: 4%;">
-        <div class="col-lg-9">
-          ¡Al terminar de editar, darle click en actualizar para guardar los
-          cambios!
-        </div>
-        <div class="col-lg-3 text-end">
-          <button  class="btn btn-outline-info"
-            ><b>Actualizar</b></button
-          >
-        </div>
-        <div id="estado" class="col-lg-10"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar()" >Aceptar</button>
       </div>
     </div>
   </div>

@@ -1,0 +1,31 @@
+
+  select:hover, input[type="time"]:hover {
+    border-color: blue; /* Verde */
+    }
+
+    
+    input[type="date"]:hover {
+    border-color: blue ; /* Verde */
+    }
+
+  
+    .time-icon {
+    
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+    
+   
+  
+    .input-group-text {
+      border: none;
+    }
+  
+   
+    input[type="time"] {
+      background-color: white !important;
+      color: black !important;
+      cursor: pointer;
+      border-radius: 8px;
+      text-align: center;
+    }

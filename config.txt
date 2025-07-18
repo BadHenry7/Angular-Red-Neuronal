@@ -50,6 +50,7 @@ Para ver la pagina:
 Email.js: https://www.emailjs.com/docs/sdk/installation/
  npm install --save @emailjs/browser
 
- sweet:https://sweetalert2.github.io/
+
+sweet:https://sweetalert2.github.io/
  npm install sweetalert2
  import Swal from 'sweetalert2'

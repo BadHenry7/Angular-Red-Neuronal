@@ -1,7 +1,7 @@
 <app-navbar-administrador></app-navbar-administrador>
 
 <div class="container">
-    <p class="fs-3 mt-4 text-center"><b>¡Agendar cita!</b></p>
+    <p class="fs-3 mt-4 text-center"><b>Agendar cita</b></p>
     <hr>
     <p class="text-center">Aquí puedes agendar las citas de los pacientes. Después de seleccionar los datos, haz clic en
         "Agendar" para completar el registro</p>
@@ -25,10 +25,9 @@
                 <div class="mt-5">
                     <label for=""><b>Elija un Doctor</b></label>
                 </div>
-                <select class="form-select" id="medico" required [(ngModel)]="doctorSeleccionado" formControlName="v_doctor"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
+                <select class="form-select" id="medico" required [(ngModel)]="doctorSeleccionado"(change)="cambiarNombreDoctor()" formControlName="v_doctor"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
                     <option value="" selected>Seleccione</option>
-                    <option value="Oscar Lopez">Oscar Lopez</option>
-                    <option value="Maria Gomez">Maria Gomez</option>
+                    <option *ngFor="let todo of doctor"  [value]="todo.id">{{ todo.nombre }}</option>
                 </select>
                  <div *ngIf="asigncita.controls['v_doctor'].invalid && asigncita.controls['v_doctor'].touched ">        
                     <small>⚠️Seleccione un doctor</small>
@@ -40,25 +39,21 @@
                 <div class="mt-5">
                     <label for=""><b>Elija un Paciente</b></label>
                 </div>
-                <select class="form-select" id="paciente" required [(ngModel)]="pacienteSeleccionado" formControlName="v_paciente">
+                <select class="form-select" id="paciente" required [(ngModel)]="pacienteSeleccionado"(change)="cambiarNombrePaciente()"  formControlName="v_paciente">
                     <option value=""  selected>Seleccione</option>
-                    <option value="Paula Vargas">Paula Vargas</option>
-                    <option value="Henry Romero">Henry Romero</option>
-                    <option value="Moises Diaz">moises diaz</option>
+                    <option *ngFor="let todo of todos"  [value]="todo.id">{{ todo.nombre }}</option>
                 </select>
                 <div *ngIf="asigncita.controls['v_paciente'].invalid && asigncita.controls['v_paciente'].touched  ; "> 
                         <small>⚠️Seleccione un paciente</small>
                     </div>
                    
-
+                <!--Eliga la ubicacion-->    
                 <div class="mt-5">
                     <label for=""><b>Elija una ubicacion</b></label>
                 </div>
-                <!--Eliga la ubicacion-->
                 <select id="ubicacion" class="form-select" [(ngModel)]="ubicacionSeleccionada" required formControlName="v_ubicacion">
-                    <option selected>Seleccione</option>
-                    <option value="Hospital Nazareth">Hospital Nazareth</option>
-                    <option value="Paso de la 21">Paso la 21</option>
+                    <option value= "" selected>Seleccione</option>
+                    <option *ngFor="let todo of ubicacion"  [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}</option>
                 </select>
                     <div *ngIf="asigncita.controls['v_ubicacion'].invalid && asigncita.controls['v_ubicacion'].touched  ; "> 
                         <small>⚠️Seleccione una ubicacion</small>
@@ -110,9 +105,9 @@
                     </span>
                 </p>
 
-                <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor"> {{ doctorSeleccionado | uppercase
+                <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor"> {{ NombreDoctor | uppercase
                         }}</span></p>
-                <p><b>Paciente seleccionado:</b><span class="mx-3" id="mostrar_paciente"> {{ pacienteSeleccionado |
+                <p><b>Paciente seleccionado:</b><span class="mx-3" id="mostrar_paciente"> {{ NombrePaciente |
                         titlecase }}</span></p>
                 <p><b>Ubicación:</b> <span class="mx-3">{{ ubicacionSeleccionada | uppercase }}</span></p>
 

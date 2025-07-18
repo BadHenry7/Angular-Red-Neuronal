@@ -214,16 +214,12 @@
               
         
              <div *ngIf="ActualizarUserForm.invalid; else valido">
-          <button  class="btn btn-outline-secondary" [disabled]="ActualizarUserForm.invalid" ><b>Actualizar</b></button>
-             
+              <button  class="btn btn-outline-secondary" [disabled]="ActualizarUserForm.invalid" ><b>Actualizar</b></button>
               </div>
-
               <ng-template #valido>
-          <button  class="btn btn-outline-primary" [disabled]="ActualizarUserForm.invalid" ><b>Actualizar</b></button>
-
+                <button  class="btn btn-outline-primary" [disabled]="ActualizarUserForm.invalid" ><b>Actualizar</b></button>
               </ng-template>
-
-                  </div>
+            </div>
 
             
             <div id="estado" class="col-lg-10"></div>

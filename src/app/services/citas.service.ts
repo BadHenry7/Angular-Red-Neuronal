@@ -9,21 +9,34 @@ export interface Reportes{
     
 }
 
+export interface Ubicacion{
+
+    nombre_hospital: string,
+
+}
+
 export interface Citas{
     
     fecha:string,
     hora:string,
-    medico:string,
-    paciente:string,
+    id_paciente?:number,
+    id_usuario?: number;
     id?:number,
     ubicacion:string,
-    salas:string,  
+    salas?:string,  
+    estado?: boolean
 
 }
 
 export interface ReportesUsuario{
     id_paciente: number
 }
+
+
+    export interface Buscar_telegram{
+        id: number
+        id_telegram: String
+    }
 
 
 
@@ -43,7 +56,7 @@ export class CitasService {
     }
 
     create_cita_admin(user: Citas): Observable<Citas[]>{
-        return this.http.post<Citas[]>('http://localhost:8000/create_cita/', user);
+        return this.http.post<Citas[]>(this.apiUrl + '/create_cita/', user);
         
     }
 
@@ -69,6 +82,15 @@ export class CitasService {
     post_citas_users(user: ReportesUsuario): Observable<Reportes[]>{
         return this.http.post<Reportes[]>('http://localhost:8000/post_citas_users/', user);
     }   
+
+    
+    notificaciones_telegram(user: Buscar_telegram): Observable<Buscar_telegram[]>{
+        return this.http.put<Buscar_telegram[]>('http://localhost:8000/telegram_id_user', user);
+    }   
+
+    getubicacion(): Observable<Ubicacion[]>{
+        return this.http.get<Ubicacion[]>('https://api-nodejs-buxf.onrender.com/api/hospitales/gethospitales');
+    } 
 
 
 }
