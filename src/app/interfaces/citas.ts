@@ -1,11 +1,36 @@
-export interface citas{
 
+export interface Reportes {
   id?: number,
   fecha: string,
-  hora: string,
-  id_usuario?: number,
-  estado: true,
-  id_paciente?: number,
-  ubicacion: string
+  fecha2: string,
 
+}
+
+export interface Ubicacion {
+
+  nombre_hospital: string,
+
+}
+
+export interface Citas {
+
+  fecha: string,
+  hora: string,
+  id_paciente?: number,
+  id_usuario?: number;
+  id?: number,
+  ubicacion: string,
+  salas?: string,
+  estado?: boolean
+
+}
+
+export interface ReportesUsuario {
+  id_paciente: number
+}
+
+
+export interface Buscar_telegram {
+  id: number
+  id_telegram: String
 }

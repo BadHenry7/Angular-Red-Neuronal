@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 import { CommonModule } from '@angular/common';
-import { CitasService, Citas } from '../../../../services/citas.service';
+import { CitasService } from '../../../../services/citas.service';
+import { Citas } from '../../../../interfaces/citas';
+
 //import { Prueba } from '../../../../services/servicios';
 declare var $: any;
 @Component({

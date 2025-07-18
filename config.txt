@@ -54,3 +54,12 @@ Email.js: https://www.emailjs.com/docs/sdk/installation/
 sweet:https://sweetalert2.github.io/
  npm install sweetalert2
  import Swal from 'sweetalert2'
+
+
+
+marca todas las validaciones:
+  if (this.RegisterForm.invalid) {
+    this.RegisterForm.markAllAsTouched();
+    return;
+  }
+    

@@ -1,51 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-//import {User} from "../interfaces/usuarios"
+import {User, Login, Buscar} from "../interfaces/usuarios"
 
-export interface User{
-    usuario:string,
-    password?:string,
-    id?:number,
-    nombre:string,
-    apellido:string,
-    documento:string,
-    telefono:string,
-    id_rol?:number,
-    estado?:boolean,
-    genero?:string,
-    edad?:number
-}
-
-
-export interface Buscar {
-    id: number
-    estado?: boolean
-}
-
-export interface BuscarxU {
-    id_usuario: number
-}
-
-
-export interface Login {
-  usuario: string;
-  password: string;
-}
-
-export interface especialidad {
-    id?:number
-    id_usuario?: number;
-    id_atributo?: number;
-    valor: string;
-    descripcion: string;
-    estado?:boolean
-}
-
-export interface Especialidades {
-    id?:number
-    nombre: string;
-}
 
 
 
@@ -75,26 +32,11 @@ export class UsersService{
         return this.http.get<User[]>('http://localhost:8000/getmedico');
     }   
     
-    getEspecialidades(): Observable<Especialidades[]> {
-        return this.http.get<Especialidades[]>('https://api-nodejs-buxf.onrender.com/api/especialidades/getespecialidades');
-    }
-
-    getAtributosXusuarios():Observable<especialidad[]> {
-        return this.http.get<especialidad[]>('http://localhost:8000/get_atributoxusuarios');
-    }
-
-     getAtributosXusuario(id_usuario: BuscarxU):Observable<especialidad[]> {
-        return this.http.post<especialidad[]>('http://localhost:8000/get_atributoxusuario', id_usuario);
-    }
     
     addUser(user: User): Observable<User[]>{
         return this.http.post<User[]>('http://localhost:8000/create_user', user);
     }
     
-    addAtrXUse(user:especialidad): Observable<User[]>{
-        return this.http.post<User[]>('http://localhost:8000/create_atributoxusuario', user);
-    }
-
 
     UpdateUser(user: User): Observable<User[]>{
         return this.http.put<User[]>('http://localhost:8000/actualizaruser', user);

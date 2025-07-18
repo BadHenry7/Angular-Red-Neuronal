@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { UsersService, Especialidades  } from '../../../../services/usuarios.service';
+import { UsersService  } from '../../../../services/usuarios.service';
+import { AtribxUsuario } from '../../../../services/atribxusuario.service';
+import { Especialidades } from '../../../../interfaces/atribxusaurio';
 import { CommonModule } from '@angular/common';
 declare var Swal : any
 
@@ -23,7 +25,7 @@ todos_resp: any
 valido: string="";
 RegisterAdminForm: FormGroup;
 
-constructor (private rga: FormBuilder, private userService: UsersService){
+constructor (private rga: FormBuilder, private userService: UsersService, private atribxUsuario: AtribxUsuario){
     this.RegisterAdminForm = this.rga.group({//requerido, valores nulos, expresiones regulares, minimo y maximo
     v_nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
     v_apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
@@ -42,7 +44,7 @@ constructor (private rga: FormBuilder, private userService: UsersService){
   }
 
   loadatributes():void{
-     this.userService.getEspecialidades().subscribe({
+     this.atribxUsuario.getEspecialidades().subscribe({
       next: (todos) => {
         this.todos_resp = todos;
         this.todos_especialidades= this.todos_resp.data
@@ -94,7 +96,7 @@ constructor (private rga: FormBuilder, private userService: UsersService){
           estado: true
         };
 
-        this.userService.addAtrXUse(atributo).subscribe({
+        this.atribxUsuario.addAtrXUse(atributo).subscribe({
           next: () => {
             Swal.fire({
               title: 'Medico registrado',

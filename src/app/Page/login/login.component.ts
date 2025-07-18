@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';//para usar ngModel
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';//Para usar router navigate
-import { User, UsersService } from '../../services/usuarios.service';
+import {  UsersService } from '../../services/usuarios.service';
+import {User} from '../../interfaces/usuarios'
 
 @Component({
   selector: 'app-login',

@@ -39,6 +39,7 @@ constructor (private rg: FormBuilder, private userService: UsersService){
 
   //
   registrar(){
+  
     //Obtencion del formulario:
   const nombre= String(this.RegisterForm.value.v_nombre);
   const apellido= String(this.RegisterForm.value.v_apellido);

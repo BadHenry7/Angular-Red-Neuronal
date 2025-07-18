@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 import { CommonModule } from '@angular/common';
-import { User, UsersService, Especialidades, especialidad } from '../../../../services/usuarios.service';
+import { UsersService } from '../../../../services/usuarios.service';
+import { AtribxUsuario } from '../../../../services/atribxusuario.service';
+import { User } from '../../../../interfaces/usuarios';
+import { Especialidad, Especialidades } from '../../../../interfaces/atribxusaurio';
+
 import { FormsModule, FormGroup, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 
 
@@ -26,6 +30,7 @@ export class BuscarMedicosComponent implements OnInit {
   todos_especialidades: any;
   todoseespecialidades: any;
   todos: any
+  
   todos_resp: any
   todoseespecialidades_editar: any
   todos_editar: any;
@@ -34,7 +39,7 @@ export class BuscarMedicosComponent implements OnInit {
   usuarioEditando = false
 
 
-  constructor(private doctorcalled: UsersService, private actdoc: FormBuilder) {
+  constructor(private doctorcalled: UsersService, private atribxUsuario: AtribxUsuario, private actdoc: FormBuilder) {
     this.ActualizarDocForm = this.actdoc.group({//requerido, valores nulos,       expresiones regulares, mínimo y máximo
       v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       v_nombre: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
@@ -66,7 +71,7 @@ export class BuscarMedicosComponent implements OnInit {
       }, 1);
     });
 
-    this.doctorcalled.getAtributosXusuarios().subscribe(todoseespecialidades => {
+    this.atribxUsuario.getAtributosXusuarios().subscribe(todoseespecialidades => {
       this.todoseespecialidades = todoseespecialidades;
       this.todoseespecialidades = this.todoseespecialidades.resultado;
       console.log(this.todoseespecialidades)
@@ -77,7 +82,7 @@ export class BuscarMedicosComponent implements OnInit {
   }
 
   loadEspecialidades(): void {
-    this.doctorcalled.getEspecialidades().subscribe({
+    this.atribxUsuario.getEspecialidades().subscribe({
       next: (data) => {
         this.todos_resp = data;
         this.todos_especialidades = this.todos_resp.data
@@ -117,7 +122,7 @@ export class BuscarMedicosComponent implements OnInit {
           //   v_id_especialidad: this.todos_especialidades
         });
 
-        this.doctorcalled.getAtributosXusuario(A_Doctor).subscribe({
+        this.atribxUsuario.getAtributosXusuario(A_Doctor).subscribe({
           next: (todoseespecialidades) => {
             this.todoseespecialidades_editar = todoseespecialidades;
             console.log("CUAL ESSSSSSSSSSSSSSSSSSSSSSSSS", this.todoseespecialidades_editar.valor)

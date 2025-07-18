@@ -17,7 +17,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Correo"
-                    [(ngModel)]="correo"
+                    [(ngModel)]="correo"  (keyup.enter)="passwordInput.focus()"
                 /><!--ngModel para reemplazar al bind value que teniamos con svelte-->
             </div>
 
@@ -27,7 +27,7 @@
                     class="form-control"
                     type="password"
                     placeholder="Contraseña"
-                    [(ngModel)]="password"
+                    [(ngModel)]="password"(keyup.enter)="iniciar()"  #passwordInput 
                 /><!--ngModel para reemplazar al bind value que teniamos con svelte-->
             </div>
 
@@ -71,7 +71,7 @@
         </div>
 
         <div class="text-center">
-            <button type="button" class="btn btn-primary mt-3" (click)="iniciar()">
+            <button type="button" class="btn btn-primary mt-3" (click)="iniciar()" >
                 Ingresar
             </button>
         </div>

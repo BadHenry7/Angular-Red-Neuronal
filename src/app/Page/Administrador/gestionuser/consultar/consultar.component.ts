@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
-import { User, UsersService } from '../../../../services/usuarios.service';
+import {UsersService } from '../../../../services/usuarios.service';
+import { User } from '../../../../interfaces/usuarios';
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 declare var $: any;

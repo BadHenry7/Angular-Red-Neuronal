@@ -13,7 +13,8 @@
     <div class="input-group w-auto">
       <span class="input-group-text bg-white">
         Puedes activar el recordatorio de citas por telegram, dando click a la
-       <button  class="btn "> <i class="bi bi-bell text-primary" data-bs-toggle="modal" data-bs-target="#RecordatorioTelegram"></i></button>
+        <button class="btn "> <i class="bi bi-bell text-primary" data-bs-toggle="modal"
+            data-bs-target="#RecordatorioTelegram"></i></button>
       </span>
     </div>
   </div>
@@ -39,8 +40,8 @@
         <div class="mt-5">
           <label for=""><b>Elija un Doctor</b></label>
         </div>
-        <select class="form-select" id="medico"  [(ngModel)]="doctorSeleccionado" (change)="cambiarNombreDoctor()"  required 
-          formControlName="v_doctor"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
+        <select class="form-select" id="medico" [(ngModel)]="doctorSeleccionado" (change)="cambiarNombreDoctor()"
+          required formControlName="v_doctor"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
           <option value="" selected>Seleccione</option>
           <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }}</option>
         </select>
@@ -49,17 +50,18 @@
         </div>
 
 
-        <!--Eliga la ubicacion-->    
-          <div class="mt-5">
-            <label for=""><b>Elija una ubicacion</b></label>
-           </div>
-          <select id="ubicacion" class="form-select" [(ngModel)]="ubicacionSeleccionada" required formControlName="v_ubicacion">
-            <option value= "" selected>Seleccione</option>
-             <option *ngFor="let todo of ubicacion"  [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}</option>
-          </select>
-            <div *ngIf="asigncita.controls['v_ubicacion'].invalid && asigncita.controls['v_ubicacion'].touched  ; "> 
-              <small>⚠️Seleccione una ubicacion</small>
-            </div>
+        <!--Eliga la ubicacion-->
+        <div class="mt-5">
+          <label for=""><b>Elija una ubicacion</b></label>
+        </div>
+        <select id="ubicacion" class="form-select" [(ngModel)]="ubicacionSeleccionada" required
+          formControlName="v_ubicacion">
+          <option value="" selected>Seleccione</option>
+          <option *ngFor="let todo of ubicacion" [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}</option>
+        </select>
+        <div *ngIf="asigncita.controls['v_ubicacion'].invalid && asigncita.controls['v_ubicacion'].touched  ; ">
+          <small>⚠️Seleccione una ubicacion</small>
+        </div>
 
       </div>
 
@@ -102,9 +104,9 @@
           </span>
         </p>
 
-        <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor" > {{ NombreDoctor  | uppercase
+        <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor"> {{ NombreDoctor | uppercase
             }}</span></p>
-            
+
         <p><b>Ubicación:</b> <span class="mx-3">{{ ubicacionSeleccionada | uppercase }}</span></p>
 
 
@@ -130,7 +132,8 @@
 </div>
 
 
-<div class="modal fade" id="RecordatorioTelegram" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="RecordatorioTelegram" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog  modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -139,18 +142,31 @@
       </div>
       <div class="modal-body">
 
-        <div >
-         <i class="bi bi-person-badge"> ID de Telegram:</i>
-         <input type="text" [(ngModel)]="id_telegram" class="form-control mb-3" style="width: 302px;">
+        <div>
+          <p>Para activar el recordatorio de las citas medicas mediante la aplicación de telegram, debera seguir los
+            siguientes pasos:</p>
+          <ol>
+            <li><b>Primero:</b> Ingrese la ID de telegram:</li>
+         
 
-         <p>Para obtener la ID de telegram realice los pasos del siguiente video</p>
-         <iframe width="560" height="315" src="https://www.youtube.com/embed/0JAiFWHcXP0?si=s5zu6xgV6T98dKE2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <i class="bi bi-person-badge"> ID de Telegram:</i>
+          <input type="text" [(ngModel)]="id_telegram" class="form-control mb-3" style="width: 302px;">
+
+          <li><b>Segundo:</b>Activar el asistente virtual mediante este enlace</li>
+            <a href="https://t.me/Tonyo_2025_bot"> https://t.me/Tonyo_2025_bot</a>
+          </ol>
+
+          <p>Para obtener la ID de telegram realice los pasos del siguiente video</p>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/0JAiFWHcXP0?si=s5zu6xgV6T98dKE2"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="guardar()" >Aceptar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar()">Aceptar</button>
       </div>
     </div>
   </div>
