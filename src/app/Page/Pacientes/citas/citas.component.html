@@ -27,7 +27,7 @@
       <div class="col-lg-3 col-md-4 col-sm-4 col-4 col-xl-4">
         <div class="">
           <label for=""><b>Seleccione una fecha</b></label>
-          <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " formControlName="v_fecha"
+          <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " (change)="mostrar_fecha()" formControlName="v_fecha" [min]="fecha"
             class="form-control"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
 
           <div *ngIf="asigncita.controls['v_fecha'].invalid && asigncita.controls['v_fecha'].touched  ; ">
@@ -75,7 +75,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 col-xl-6">
                 <div class="input-group">
                   <i class="input-group-text bi bi-clock time-icon bg-primary" style="color: aliceblue;  "></i>
-                  <input type="time" [value]="hour" (click)="horaSeleccionada = hour" class="form-control" readonly>
+                  <input type="time" [value]="hour"   (click)="horaSeleccionada = hour;" class="form-control" >
                 </div>
               </div>
 

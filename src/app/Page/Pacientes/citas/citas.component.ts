@@ -23,7 +23,7 @@ export class CitasComponent implements OnInit {
   error: string | null = null;
   id_telegram: string = ''
   id: number = 0
-  NombreDoctor=""
+  NombreDoctor = ""
 
 
   constructor(private ac: FormBuilder, private citasService: CitasService, private userService: UsersService) {
@@ -36,15 +36,15 @@ export class CitasComponent implements OnInit {
   }
 
 
-cambiarNombreDoctor() {
-    this.NombreDoctor = ''; 
-  for (let i = 0; i < this.doctor.length; i++) {
-    if (this.doctor[i].id == this.doctorSeleccionado) {
-      this.NombreDoctor = this.doctor[i].nombre;
-      break;
+  cambiarNombreDoctor() {
+    this.NombreDoctor = '';
+    for (let i = 0; i < this.doctor.length; i++) {
+      if (this.doctor[i].id == this.doctorSeleccionado) {
+        this.NombreDoctor = this.doctor[i].nombre;
+        break;
+      }
     }
   }
-}
 
   ngOnInit(): void {
 
@@ -91,14 +91,28 @@ cambiarNombreDoctor() {
   date = new Date();
 
   horas = this.date.getHours() < 10 ? '0' + this.date.getHours() : this.date.getHours().toString();
+  
   v_horas = this.horas + ":00"
+
+  year: number = this.date.getFullYear();
+
+  month: string = (this.date.getMonth() + 1) < 10 
+    ? '0' + (this.date.getMonth() + 1) 
+    : (this.date.getMonth() + 1).toString();
+
+  day: string = this.date.getDate() < 10 
+    ? '0' + this.date.getDate() 
+    : this.date.getDate().toString();
+
+  fecha: string = `${this.year}-${this.month}-${this.day}`;  
+
 
   hours: string[] = ["06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
     "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",]
 
   fechaSeleccionada: string = '';
   horaSeleccionada: string = '';
-  doctorSeleccionado: string='';
+  doctorSeleccionado: string = '';
   pacienteSeleccionado: string = '';
   ubicacionSeleccionada: string = '';
 
@@ -190,4 +204,32 @@ cambiarNombreDoctor() {
     })
   }
 
+
+// vhora='';
+//   mostrar_horas(hora_onclick: string) {
+//     this.vhora = hora_onclick;
+//     this.mostrar_fecha()
+//   }
+
+
+  mostrar_fecha() {
+
+
+
+    console.log("entro a mostrar fecha")
+    const vfecha = this.fechaSeleccionada;
+    console.log("v_fecha", vfecha)
+    console.log(this.fecha)
+    if (vfecha > String( this.fecha)) {
+      this.v_horas = "05:00"
+      console.log(this.v_horas)
+    } else {
+      this.v_horas = this.horas + ":00"
+      console.log("acaaa",this.v_horas)
+
+    }
+
+
+
+  }
 }

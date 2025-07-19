@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-4 col-xl-4">
                 <div class="">
                     <label for=""><b>Seleccione una fecha</b></label>
-                    <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " formControlName="v_fecha"
+                    <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " formControlName="v_fecha"  (change)="mostrar_fecha()" [min]="fecha"
                         class="form-control"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
                     
                     <div *ngIf="asigncita.controls['v_fecha'].invalid && asigncita.controls['v_fecha'].touched  ; "> 
