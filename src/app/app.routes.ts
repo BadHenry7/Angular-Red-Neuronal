@@ -14,6 +14,7 @@ import {PacientePrincipalComponent} from '../app/Page/Pacientes/paciente-princip
 import {IncapacidadComponent} from '../app/Page/Pacientes/incapacidad/incapacidad.component'
 import {ReportesPacienteComponent} from '../app/Page/Pacientes/reportes-paciente/reportes-paciente.component'
 import { CitasComponent } from './Page/Pacientes/citas/citas.component';
+import { VerCitasComponent } from './Page/Pacientes/ver-citas/ver-citas.component';
 //Doctor
 import {DoctorPrincipalComponent} from '../app/Page/Doctor/doctor-principal/doctor-principal.component'
 import {CitasMedicasComponent} from '../app/Page/Doctor/citas-medicas/citas-medicas.component'
@@ -49,6 +50,8 @@ export const routes: Routes = [
     {path: 'pacientes/incapacidad', component: IncapacidadComponent},
     {path: 'pacientes/reportes', component: ReportesPacienteComponent},
     {path: 'pacientes/citas', component: CitasComponent},
+    {path: 'pacientes/ver_citas', component: VerCitasComponent},
+    
     
     
     //Aca Rol medico

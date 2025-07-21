@@ -25,6 +25,10 @@ export interface Citas {
 
 }
 
+export interface Eliminar {
+  id: number
+}
+
 export interface ReportesUsuario {
   id_paciente: number
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import {Citas, Buscar_telegram,Reportes,ReportesUsuario,Ubicacion} from "../interfaces/citas"
+import {Citas, Buscar_telegram,Reportes,ReportesUsuario,Ubicacion, Eliminar} from "../interfaces/citas"
 
 
 @Injectable ({
@@ -24,32 +24,40 @@ export class CitasService {
         
     }
 
+    post_citas_doctor(user: ReportesUsuario): Observable<ReportesUsuario[]>{
+        return this.http.post<ReportesUsuario[]>(this.apiUrl + '/post_citas_doctor/', user);
+    }
+
 
     getReportes_citas(user: Reportes): Observable<Reportes[]>{
-        return this.http.post<Reportes[]>('http://localhost:8000/reportes_citas/', user);
+        return this.http.post<Reportes[]>(this.apiUrl + '/reportes_citas/', user);
     }   
 
+    eliminar_cita(user: Eliminar): Observable<Eliminar[]>{
+        return this.http.put<Eliminar[]>(this.apiUrl + '/eliminar_cita/', user);
+    }
+    
   
     getReportes_historial(user: Reportes): Observable<Reportes[]>{
-        return this.http.post<Reportes[]>('http://localhost:8000/reportes_historial/', user);
+        return this.http.post<Reportes[]>(this.apiUrl + '/reportes_historial/', user);
     }   
 
     
     getReportes_citas_medicos(user: Reportes): Observable<Reportes[]>{
-        return this.http.post<Reportes[]>('http://localhost:8000/reportes_citas_medicos', user);
+        return this.http.post<Reportes[]>(this.apiUrl + '/reportes_citas_medicos', user);
     }   
 
     historia_clinica_user(user: ReportesUsuario): Observable<Reportes[]>{
-        return this.http.post<Reportes[]>('http://localhost:8000/historia_clinica_user', user);
+        return this.http.post<Reportes[]>(this.apiUrl + '/historia_clinica_user', user);
     }   
 
-    post_citas_users(user: ReportesUsuario): Observable<Reportes[]>{
-        return this.http.post<Reportes[]>('http://localhost:8000/post_citas_users/', user);
+    post_citas_users(user: ReportesUsuario): Observable<ReportesUsuario[]>{
+        return this.http.post<ReportesUsuario[]>(this.apiUrl + '/post_citas_users/', user);
     }   
 
     
     notificaciones_telegram(user: Buscar_telegram): Observable<Buscar_telegram[]>{
-        return this.http.put<Buscar_telegram[]>('http://localhost:8000/telegram_id_user', user);
+        return this.http.put<Buscar_telegram[]>(this.apiUrl + '/telegram_id_user', user);
     }   
 
     getubicacion(): Observable<Ubicacion[]>{

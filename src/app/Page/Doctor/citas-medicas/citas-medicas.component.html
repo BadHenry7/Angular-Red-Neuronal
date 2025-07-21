@@ -28,7 +28,7 @@
                         <td class="px-4 py-2 border">{{todo.hora}}</td>
 
                         <td class="px-4 py-2 border">
-                            <button class="btn btn-outline-warning"> <i class="bi bi-check-circle-fill"></i> Cita
+                            <button class="btn btn-outline-warning" (click)="ConfirmarCita(todo.id_cita)"> <i class="bi bi-check-circle-fill"></i> Cita
                                 Realizada</button>
                         </td>
                     </tr>

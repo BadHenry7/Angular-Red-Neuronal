@@ -22,7 +22,7 @@ export class DiagnosticoService {
 
 
     getReportes_diagnosticos(user: Reportes): Observable<Reportes[]>{
-        return this.http.post<Reportes[]>('http://localhost:8000/reportes_diagnosticos/', user);
+        return this.http.post<Reportes[]>(this.apiUrl +'reportes_diagnosticos/', user);
     }   
 
 

@@ -1,0 +1,39 @@
+<app-navbar-paciente></app-navbar-paciente>
+
+<div id="Mostrarusuario">
+    <div class="container py-4">
+        <h2 class="mb-4">Citas agendadas</h2>
+        @if (loading){
+        <p class="text-center">Cargando datos...</p>
+        }@else if (error){
+        <p class="text-red-500">Error: {{error}}</p>
+        }@else{
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-600" id="myTable">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th class="px-4 py-2 border">Doctor</th>
+                        <th class="px-4 py-2 border">Fecha</th>
+                        <th class="px-4 py-2 border">Hora</th>
+                        <th class="px-4 py-2 border">Ubicación</th>
+                        <th class="px-4 py-2 border">Salas</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    
+                        <tr class="hover:bg-gray-50"  *ngFor="let todo of todos">
+                            <td class="px-4 py-2 border">{{todo.medico}}</td>
+                            <td class="px-4 py-2 border">{{todo.fecha}}</td>
+                            <td class="px-4 py-2 border">{{todo.hora}}</td>
+                            <td class="px-4 py-2 border">{{todo.ubicacion}}</td>
+                            <td class="px-4 py-2 border">{{todo.salas}}</td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>

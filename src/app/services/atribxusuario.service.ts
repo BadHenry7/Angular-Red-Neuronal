@@ -21,16 +21,16 @@ export class AtribxUsuario{
     }
 
     getAtributosXusuarios():Observable<Especialidad[]> {
-        return this.http.get<Especialidad[]>('http://localhost:8000/get_atributoxusuarios');
+        return this.http.get<Especialidad[]>(this.apiUrl +'get_atributoxusuarios');
     }
 
      getAtributosXusuario(id_usuario: BuscarxU):Observable<Especialidad[]> {
-        return this.http.post<Especialidad[]>('http://localhost:8000/get_atributoxusuario', id_usuario);
+        return this.http.post<Especialidad[]>(this.apiUrl +'get_atributoxusuario', id_usuario);
     }
     
     
     addAtrXUse(user:Especialidad): Observable<Especialidad[]>{
-        return this.http.post<Especialidad[]>('http://localhost:8000/create_atributoxusuario', user);
+        return this.http.post<Especialidad[]>(this.apiUrl +'create_atributoxusuario', user);
     }
 
 

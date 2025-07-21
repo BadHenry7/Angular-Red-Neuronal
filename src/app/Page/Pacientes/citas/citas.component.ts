@@ -62,7 +62,7 @@ export class CitasComponent implements OnInit {
         this.doctor = this.doctor.resultado;
       },
       error: (err) => {
-        this.error = 'no se pudo cargar los pacientes';
+        this.error = 'no se pudo cargar los medicos';
         console.error(err);
       }
     })
@@ -78,7 +78,7 @@ export class CitasComponent implements OnInit {
         this.ubicacion = this.ubicacion.data;
       },
       error: (err) => {
-        this.error = 'no se pudo cargar los pacientes';
+        this.error = 'no se pudo cargar las ubicaciones';
         console.error(err);
       }
     })

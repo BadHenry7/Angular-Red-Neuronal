@@ -17,34 +17,34 @@ export class UsersService{
     constructor(private http:HttpClient) { }
 
     Login(user: Login): Observable<User[]>{
-        return this.http.post<User[]>('http://localhost:8000/login', user);
+        return this.http.post<User[]>(this.apiUrl +'login', user);
     }  
 
     getUsers(): Observable<User[]>{//Todos los usuarios
-        return this.http.get<User[]>('http://localhost:8000/get_users');
+        return this.http.get<User[]>(this.apiUrl +'get_users');
     }   
 
     getUser(user: Buscar): Observable<User[]>{//Solo uno
-        return this.http.post<User[]>('http://localhost:8000/get_user', user);
+        return this.http.post<User[]>(this.apiUrl +'get_user', user);
     }   
 
     getMedico(): Observable<User[]>{ //Medicos
-        return this.http.get<User[]>('http://localhost:8000/getmedico');
+        return this.http.get<User[]>(this.apiUrl +'getmedico');
     }   
     
     
     addUser(user: User): Observable<User[]>{
-        return this.http.post<User[]>('http://localhost:8000/create_user', user);
+        return this.http.post<User[]>(this.apiUrl +'create_user', user);
     }
     
 
     UpdateUser(user: User): Observable<User[]>{
-        return this.http.put<User[]>('http://localhost:8000/actualizaruser', user);
+        return this.http.put<User[]>(this.apiUrl +'actualizaruser', user);
     }  
 
 
     EstadoUser(user: Buscar): Observable<User[]>{
-        return this.http.put<User[]>('http://localhost:8000/estado_user', user);
+        return this.http.put<User[]>(this.apiUrl +'estado_user', user);
     }  
 
     getpaciente(): Observable<User[]>{//Todos los usuarios
