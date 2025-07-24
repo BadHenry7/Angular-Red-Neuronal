@@ -5,7 +5,7 @@ import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-adm
 import {UsersService } from '../../../../services/usuarios.service';
 import { User } from '../../../../interfaces/usuarios';
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import emailjs from '@emailjs/browser'
 declare var $: any;
 declare var Swal: any;
 declare var toast: any;
@@ -147,7 +147,7 @@ export class ConsultarComponent implements OnInit {
 
   }
 
-  activar_desactivar(id: number, estado: boolean) {
+  activar_desactivar(id: number, estado: boolean, nombre: string, usuario: string) {
 
     this.v_id = id;
     const R_usuario = { id, estado }
@@ -207,7 +207,7 @@ export class ConsultarComponent implements OnInit {
             title: "usuario desactivado con exito",
           });
 
-
+this.enviar_correo(nombre, usuario)
 
           $('#myTable').DataTable().clear().destroy();//Como no podemos recargar, toca destruir la tabla
           this.loadUsers();
@@ -227,6 +227,23 @@ export class ConsultarComponent implements OnInit {
     });
 
 
+  }
+  serviceID = "service_acpug5r";
+   templateID = "template_bloqueouser";
+   apikey = "3bmpPn1S0SLhgotWj";
+  enviar_correo( nombre: string, usuario: string){
+    emailjs.init(this.apikey);
+          emailjs
+            .send(this.serviceID, this.templateID, {
+              nombre: nombre,
+              email: usuario,
+            })
+            .then((result) => {
+              console.log("Corro enviado con exito");
+            })
+            .catch((error) => {
+              console.log("Error al enviar el correo:", error.text);
+            });
   }
 
 

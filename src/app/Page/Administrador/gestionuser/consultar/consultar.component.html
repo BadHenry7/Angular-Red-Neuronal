@@ -71,12 +71,12 @@
                 </button>
 
                 <button *ngIf="todo.estado" aria-label="desactivar" class="btn btn-success"
-                  (click)="activar_desactivar(todo.id!, false)">
+                  (click)="activar_desactivar(todo.id!, false, todo.nombre, todo.usuario)">
                   <i class="bi bi-toggle-on"></i>
                 </button>
 
                 <button *ngIf="!todo.estado" aria-label="activar" class="btn btn-danger"
-                  (click)="activar_desactivar(todo.id!, true)">
+                  (click)="activar_desactivar(todo.id!, true, todo.nombre, todo.usuario)">
                   <i class="bi bi-toggle-off"></i>
                 </button>
               </td>

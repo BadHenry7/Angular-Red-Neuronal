@@ -4,7 +4,7 @@ import { NavbarindexComponent } from '../../Componentes/navbarindex/navbarindex.
 import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../../services/usuarios.service';
-
+import emailjs from '@emailjs/browser'
 @Component({
   selector: 'app-registrar',
   imports: [RouterLink, NavbarindexComponent, CommonModule, ReactiveFormsModule],
@@ -74,8 +74,32 @@ export class RegistrarComponent {
       + "\n" + usuario + "\n" + password
     )
 
+    this.enviar_correo()
+
 
   }
+
+  serviceID = 'service_acpug5r'
+  templateID = 'template_0hvvaww'
+  apikey = '3bmpPn1S0SLhgotWj'
+
+
+  enviar_correo() {
+    const v_nombre = String(this.RegisterForm.value.v_nombre);
+    const v_usuario = String(this.RegisterForm.value.v_usuario);
+    emailjs.init(this.apikey);
+    emailjs.send(this.serviceID, this.templateID, {
+      nombre: v_nombre,
+      email: v_usuario,
+    })
+      .then(result => {
+        alert('Correo enviado con éxito!');
+      })
+      .catch(error => {
+        console.log('Error al enviar el correo:', error.text);
+      });
+  }
+
 
   sender: string = '2'//POR AHORA PON CUALQUIER NUMERO
   message: string = ''
@@ -93,6 +117,7 @@ export class RegistrarComponent {
       next: (todos) => {
         this.todos = todos;
         console.log(this.todos.Informacion);
+        
       }, error: (error) => {
         console.log(error)
       }
@@ -101,7 +126,6 @@ export class RegistrarComponent {
 
     })
   }
-
 
 
 }

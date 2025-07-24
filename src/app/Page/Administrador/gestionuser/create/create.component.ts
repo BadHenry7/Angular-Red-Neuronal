@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';//Para usar ngIf o ngFor
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../../../../services/usuarios.service';
+import emailjs from '@emailjs/browser'
 declare var Swal : any
 
 @Component({
@@ -99,6 +100,27 @@ Swal.fire({
   )
  }
 
+
+ serviceID = 'service_acpug5r'
+  templateID = 'template_0hvvaww'
+  apikey = '3bmpPn1S0SLhgotWj'
+
+
+  enviar_correo() {
+    const v_nombre = String(this.RegisterAdminForm.value.v_nombre);
+    const v_usuario = String(this.RegisterAdminForm.value.v_usuario);
+    emailjs.init(this.apikey);
+    emailjs.send(this.serviceID, this.templateID, {
+      nombre: v_nombre,
+      email: v_usuario,
+    })
+      .then(result => {
+        alert('Correo enviado con éxito!');
+      })
+      .catch(error => {
+        console.log('Error al enviar el correo:', error.text);
+      });
+  }
 
 
 }

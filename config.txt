@@ -49,7 +49,7 @@ Para ver la pagina:
 
 Email.js: https://www.emailjs.com/docs/sdk/installation/
  npm install --save @emailjs/browser
-
+import emailjs from '@emailjs/browser'
 
 sweet:https://sweetalert2.github.io/
  npm install sweetalert2

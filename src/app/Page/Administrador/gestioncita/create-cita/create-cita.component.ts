@@ -5,6 +5,7 @@ import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-adm
 import Swal from 'sweetalert2'
 import { CitasService } from '../../../../services/citas.service';
 import { UsersService } from '../../../../services/usuarios.service';
+import emailjs from '@emailjs/browser'
 
 @Component({
   selector: 'app-create-cita',
@@ -13,27 +14,27 @@ import { UsersService } from '../../../../services/usuarios.service';
   styleUrl: './create-cita.component.css'
 })
 
- 
-export class CreateCitaComponent implements OnInit{
 
-    todos: any=[];
-    doctor: any=[];
-    ubicacion: any=[];
-    error: string | null=null;
+export class CreateCitaComponent implements OnInit {
 
-   
-  constructor (private ac: FormBuilder, private citasService: CitasService, private userService: UsersService){
-    this.asigncita = this.ac.group ({
+  todos: any = [];
+  doctor: any = [];
+  ubicacion: any = [];
+  error: string | null = null;
+
+
+  constructor(private ac: FormBuilder, private citasService: CitasService, private userService: UsersService) {
+    this.asigncita = this.ac.group({
       v_fecha: ['', [Validators.required]],
-      v_doctor: ['',[Validators.required]],
-      v_paciente:['',[Validators.required]],
-      v_ubicacion:['',[Validators.required]]
+      v_doctor: ['', [Validators.required]],
+      v_paciente: ['', [Validators.required]],
+      v_ubicacion: ['', [Validators.required]]
     })
   }
 
 
   ngOnInit(): void {
-  
+
     this.Obtenerpaciente();
     this.obtenerdoctor();
     this.obtenerUbicacion();
@@ -41,7 +42,7 @@ export class CreateCitaComponent implements OnInit{
 
   }
 
-  Obtenerpaciente(){
+  Obtenerpaciente() {
 
     this.userService.getpaciente().subscribe({
       next: (res) => {
@@ -56,9 +57,9 @@ export class CreateCitaComponent implements OnInit{
 
   }
 
-  obtenerdoctor(){
+  obtenerdoctor() {
 
-      this.userService.getMedico().subscribe({
+    this.userService.getMedico().subscribe({
       next: (res) => {
         this.doctor = res;
         this.doctor = this.doctor.resultado;
@@ -71,7 +72,7 @@ export class CreateCitaComponent implements OnInit{
 
   }
 
-  obtenerUbicacion(){
+  obtenerUbicacion() {
 
     this.citasService.getubicacion().subscribe({
       next: (res) => {
@@ -87,50 +88,50 @@ export class CreateCitaComponent implements OnInit{
 
   }
 
-  NombreDoctor: string=""
-  NombrePaciente:string=""
+  NombreDoctor: string = ""
+  NombrePaciente: string = ""
 
-cambiarNombreDoctor() {
-    this.NombreDoctor = ''; 
-  for (let i = 0; i < this.doctor.length; i++) {
-    if (this.doctor[i].id == this.doctorSeleccionado) {
-      this.NombreDoctor = this.doctor[i].nombre;
-      break;
+  cambiarNombreDoctor() {
+    this.NombreDoctor = '';
+    for (let i = 0; i < this.doctor.length; i++) {
+      if (this.doctor[i].id == this.doctorSeleccionado) {
+        this.NombreDoctor = this.doctor[i].nombre;
+        break;
+      }
     }
   }
-}
 
 
-cambiarNombrePaciente() {
-    this.NombrePaciente = ''; 
-  for (let i = 0; i < this.todos.length; i++) {
-    if (this.todos[i].id == this.pacienteSeleccionado) {
-      this.NombrePaciente = this.todos[i].nombre;
-      break;
+  cambiarNombrePaciente() {
+    this.NombrePaciente = '';
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i].id == this.pacienteSeleccionado) {
+        this.NombrePaciente = this.todos[i].nombre;
+        break;
+      }
     }
   }
-}
 
   date = new Date();
 
   horas = this.date.getHours() < 10 ? '0' + this.date.getHours() : this.date.getHours().toString();
-  v_horas= this.horas+":00"
+  v_horas = this.horas + ":00"
 
-year: number = this.date.getFullYear();
+  year: number = this.date.getFullYear();
 
-  month: string = (this.date.getMonth() + 1) < 10 
-    ? '0' + (this.date.getMonth() + 1) 
+  month: string = (this.date.getMonth() + 1) < 10
+    ? '0' + (this.date.getMonth() + 1)
     : (this.date.getMonth() + 1).toString();
 
-  day: string = this.date.getDate() < 10 
-    ? '0' + this.date.getDate() 
+  day: string = this.date.getDate() < 10
+    ? '0' + this.date.getDate()
     : this.date.getDate().toString();
 
-  fecha: string = `${this.year}-${this.month}-${this.day}`;  
+  fecha: string = `${this.year}-${this.month}-${this.day}`;
 
 
-  hours: string[]=["06:30", "07:00", "07:30", "08:00","08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", 
-  "12:30", "13:00","13:30", "14:00", "14:30", "15:00","15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",]
+  hours: string[] = ["06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
+    "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",]
 
   fechaSeleccionada: string = '';
   horaSeleccionada: string = '';
@@ -138,10 +139,10 @@ year: number = this.date.getFullYear();
   pacienteSeleccionado: string = '';
   ubicacionSeleccionada: string = '';
 
-  asigncita:FormGroup;
+  asigncita: FormGroup;
 
 
-  ConfirmarAgendar(){
+  ConfirmarAgendar() {
     Swal.fire({
       title: "¿Confirmas que quieres agendar esta cita?",
       text: "",
@@ -150,36 +151,37 @@ year: number = this.date.getFullYear();
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si, añadir cita",
-      }).then((result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Cita agendada!",
           icon: "success",
           draggable: true
         });
-         this.Agendar();           
+        this.Agendar();
       }
-      });    
-    
+    });
+
   }
 
 
-  Agendar(){
-    
-    const fecha=String(this.asigncita.value.v_fecha);
-    const id_usuario=Number(this.asigncita.value.v_doctor);
-    const id_paciente=Number(this.asigncita.value.v_paciente);
-    const ubicacion=String(this.asigncita.value.v_ubicacion);
-    const hora= String(this.horaSeleccionada);
-    const estado=Boolean(1);
-    const R_cita={fecha, id_usuario, id_paciente, ubicacion, hora, estado};
+  Agendar() {
+
+    const fecha = String(this.asigncita.value.v_fecha);
+    const id_usuario = Number(this.asigncita.value.v_doctor);
+    const id_paciente = Number(this.asigncita.value.v_paciente);
+    const ubicacion = String(this.asigncita.value.v_ubicacion);
+    const hora = String(this.horaSeleccionada);
+    const estado = Boolean(1);
+    const R_cita = { fecha, id_usuario, id_paciente, ubicacion, hora, estado };
     //console.log("Datos a registrar:"+"\n"+fecha+"\n"+doctor+"\n"+paciente+"\n"+ubicacion)
 
     this.citasService.create_cita_admin(R_cita).subscribe({
-      next: (todos)=>{
+      next: (todos) => {
         this.todos = todos;
+  
 
-      },error: (error)=>{
+      }, error: (error) => {
         console.log(error)
       }
       ,
@@ -191,8 +193,13 @@ year: number = this.date.getFullYear();
 
   }
 
+  serviceID = 'service_yev294m'
+  templateID = 'template_i73qkfa'
+  apikey = 'gVmq9ZyZNWP2_LzXW'
+  nb: string=''
+  ce: string=''
 
-  
+
   mostrar_fecha() {
 
 
@@ -201,12 +208,12 @@ year: number = this.date.getFullYear();
     const vfecha = this.fechaSeleccionada;
     console.log("v_fecha", vfecha)
     console.log(this.fecha)
-    if (vfecha > String( this.fecha)) {
+    if (vfecha > String(this.fecha)) {
       this.v_horas = "05:00"
       console.log(this.v_horas)
     } else {
       this.v_horas = this.horas + ":00"
-      console.log("acaaa",this.v_horas)
+      console.log("acaaa", this.v_horas)
 
     }
 

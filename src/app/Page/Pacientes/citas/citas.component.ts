@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { CitasService } from '../../../services/citas.service';
 import { UsersService } from '../../../services/usuarios.service';
 import Swal from 'sweetalert2'
-
+import emailjs from '@emailjs/browser'
 
 
 @Component({
@@ -164,6 +164,8 @@ export class CitasComponent implements OnInit {
     this.citasService.create_cita_admin(R_cita).subscribe({
       next: (todos) => {
         this.todos = todos;
+        this.enviar_correo()
+
 
       }, error: (error) => {
         console.log(error)
@@ -231,5 +233,41 @@ export class CitasComponent implements OnInit {
 
 
 
+  }
+
+
+  
+   serviceID = 'service_yev294m'
+  templateID = 'template_i73qkfa'
+  apikey = 'gVmq9ZyZNWP2_LzXW'
+  nb: string=''
+  ce: string=''
+  enviar_correo() {
+const usuarioGuardado = localStorage.getItem('usuario');
+
+    if (usuarioGuardado) {
+      const usuario = JSON.parse(usuarioGuardado);
+      this.nb = usuario.nombre;
+      this.ce= usuario.correo;
+
+    } 
+    const vfecha = String(this.asigncita.value.v_fecha);
+    const vhora = String(this.horaSeleccionada);
+
+
+    emailjs.init(this.apikey);
+    emailjs.send(this.serviceID, this.templateID, {
+      nombre: this.nb,
+      email: this.ce,
+      hora: vhora,
+      fecha: vfecha,
+      doctor: this.NombreDoctor
+    })
+      .then(result => {
+        alert('Correo enviado con éxito!');
+      })
+      .catch(error => {
+        console.log('Error al enviar el correo:', error.text);
+      });
   }
 }
