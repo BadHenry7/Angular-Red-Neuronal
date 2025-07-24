@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-red-neuronal",
+            "outputPath": "dist/Angular-Red-Neuronal",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

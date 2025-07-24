@@ -77,6 +77,30 @@ constructor (private rg: FormBuilder, private userService: UsersService){
 
   }
 
+sender: string=''
+message: string=''
+
+  enviar(){
+
+    const sender= this.sender;
+    const message= this.message;
+
+      const R_usuario={
+   sender, message
+  }
+
+      this.userService.Chatbox(R_usuario).subscribe({
+    next:(todos)=>{
+       this.todos = todos;
+  console.log(this.todos.Informacion);
+    },error: (error)=>{
+      console.log(error)
+    } 
+        
+    ,
+
+  })
+  }
 
 
 
