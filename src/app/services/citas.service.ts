@@ -10,7 +10,7 @@ import {Citas, Buscar_telegram,Reportes,ReportesUsuario,Ubicacion, Eliminar} fro
 
 export class CitasService {
 
-  private apiUrl = 'https://red-neuronal-api.onrender.com';
+  private apiUrl = 'http://localhost:8000';
  
   constructor(private http:HttpClient) { }
 

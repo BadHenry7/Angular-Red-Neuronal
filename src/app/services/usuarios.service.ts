@@ -12,7 +12,7 @@ import {User, Login, Buscar, Chatbox} from "../interfaces/usuarios"
  })
 
 export class UsersService{
-    private apiUrl = 'https://red-neuronal-api.onrender.com/'
+    private apiUrl = 'http://localhost:8000/'
     
     constructor(private http:HttpClient) { }
 

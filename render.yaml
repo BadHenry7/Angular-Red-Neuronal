@@ -1,0 +1,8 @@
+type: static
+name: angular-red-neuronal
+buildCommand: npm run build -- --configuration production
+staticPublishPath: dist/angular-red-neuronal/browser
+routes:
+  - type: rewrite
+    source: /.*
+    destination: /index.html

@@ -1,6 +1,6 @@
 <app-navbar-administrador></app-navbar-administrador>
 
-<div id="Mostrarcitas">
+<div id="Mostrarcitas" [hidden]="!mostrarTabla">
   <div class="container py-4">
     <h2 class="mb-4 text-center">¡Citas agendadas!</h2>
     <hr />
@@ -44,7 +44,7 @@
             <td class="px-4 py-2 border">{{ todo.ubicacion }}</td>
             <td class="px-4 py-2 border">{{ todo.salas }}</td>
             <td class="px-4 py-2 border">
-              <button class="btn btn-info">
+              <button class="btn btn-info" (click)="editarCitas()">
                 <i class="bi bi-pencil-square"></i>
               </button>
               <button class="btn btn-danger">
@@ -58,8 +58,137 @@
   </div>
 </div>
 
+
+
+<div [hidden]="mostrarTabla" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
+  <div class=" container mt-4">
+    <div class="card border-dark shadow">
+      <div class="card-header text-center">
+        <h5 class="card-title m-0  fs-4 "><b>Edición de cita</b></h5>
+
+        <button class="btn btn-close position-absolute top-0 end-0 m-2" aria-label="Cerrar edición de usuario"
+          (click)="mostrarTabla = true"></button>
+      </div>
+      <div class="card-body">
+
+        <form [formGroup]="ActualizarCitasForm" (ngSubmit)="actualizar()">
+          <div class="row">
+            <div class="col-lg-6">
+              <img src="/assess/EditarPaciente.png" alt="" class=" w-100 h-100 img-fluid">
+            </div>
+
+
+            <div class="col-lg-6 px-3">
+
+              <div class="input-group">
+                <span class="input-group-text " style="width:125px;">
+                  <i class="bi bi-person me-2 text-primary"></i> Paciente
+                </span>
+                <input type="text" class="form-control" id="nombres" maxlength="100" formControlName="v_paciente" />
+              </div>
+              <div
+                *ngIf="ActualizarCitasForm.controls['v_paciente'].invalid && ActualizarCitasForm.controls['v_paciente'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un nombre valido</small>
+              </div>
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-person me-2 text-primary"></i> Doctor
+                </span>
+                <input type="text" class="form-control" id="apellidos" formControlName="v_doctor" />
+              </div>
+              <div
+                *ngIf="ActualizarCitasForm.controls['v_doctor'].invalid && ActualizarCitasForm.controls['v_doctor'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un apellido valido</small>
+              </div>
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-card-list me-2 text-primary"></i> Fecha
+                </span>
+                <input type="date" class="form-control" id="documento" formControlName="v_fecha" />
+              </div>
+              <div
+                *ngIf="ActualizarCitasForm.controls['v_fecha'].invalid && ActualizarCitasForm.controls['v_fecha'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un documento valido</small>
+              </div>
+
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-telephone me-2 text-primary"></i> Hora
+                </span>
+                <input type="time" class="form-control" id="telefono" maxlength="20" formControlName="v_hora" />
+              </div>
+              <div
+                *ngIf="ActualizarCitasForm.controls['v_hora'].invalid && ActualizarCitasForm.controls['v_hora'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un numero de telefono valido</small>
+              </div>
+
+
+
+              <div class="input-group mt-4">
+                <span class="input-group-text   " style="width:125px;">
+                  <i class="bi bi-envelope me-2 text-primary"></i> Ubicación
+                </span>
+                <input type="text" class="form-control" id="correo" formControlName="v_ubicacion" />
+              </div>
+              <div
+                *ngIf="ActualizarCitasForm.controls['v_ubicacion'].invalid && ActualizarCitasForm.controls['v_ubicacion'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Ingrese un correo valido</small>
+              </div>
+
+              <div class="input-group mt-4">
+                <span class="input-group-text  " style="width:125px;">
+                  <i class="bi bi-person-badge me-2 text-primary"></i> Salas
+                </span>
+                <select id="roles" required class="form-select" formControlName="v_salas">
+                  <option value="2">Paciente</option>
+                  <option value="3">Doctor</option>
+
+                </select>
+              </div>
+              <div
+                *ngIf="ActualizarCitasForm.controls['v_salas'].invalid && ActualizarCitasForm.controls['v_salas'].touched;">
+                <small class="error" style="position: absolute;">&#10060;Seleccione un rol</small>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row text-center  " style="margin-top: 2%; ">
+            <div class="col-lg-12">
+              ¡Al terminar de editar, darle click en actualizar para guardar los
+              cambios!
+            </div>
+            <div class="col-lg-12 text-center mt-2"> 
+              
+        
+             <div *ngIf="ActualizarCitasForm.invalid; else valido">
+              <button  class="btn btn-outline-secondary" [disabled]="ActualizarCitasForm.invalid" ><b>Actualizar</b></button>
+              </div>
+              <ng-template #valido>
+                <button  class="btn btn-outline-primary" [disabled]="ActualizarCitasForm.invalid" ><b>Actualizar</b></button>
+              </ng-template>
+            </div>
+
+            
+            <div id="estado" class="col-lg-10"></div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- MODAL O SECCIÓN DE EDICIÓN -->
-<div class="fade" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
+<div class="fade" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab" >
   <div class="container text-center">
     <p class="text-orange"></p>
   </div>
