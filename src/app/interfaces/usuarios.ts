@@ -24,15 +24,5 @@ export interface Login {
   password: string;
 }
 
-export interface Chatbox {
-  sender: string;
-  message: string;
-}
-
-
-
-
-
-
 
 

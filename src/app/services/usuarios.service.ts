@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import {User, Login, Buscar, Chatbox} from "../interfaces/usuarios"
+import {User, Login, Buscar} from "../interfaces/usuarios"
 
 
 
@@ -56,9 +56,7 @@ export class UsersService{
     }
 
 
-    Chatbox(user: Chatbox): Observable<Chatbox[]>{//Todos los usuarios
-        return this.http.post<Chatbox[]>(this.apiUrl + 'http://localhost:5005/webhooks/rest/webhook', user);
-    }
+
 
     
 

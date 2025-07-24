@@ -44,7 +44,7 @@
             <td class="px-4 py-2 border">{{ todo.ubicacion }}</td>
             <td class="px-4 py-2 border">{{ todo.salas }}</td>
             <td class="px-4 py-2 border">
-              <button class="btn btn-info" (click)="editarCitas()">
+              <button class="btn btn-info" (click)="editarCitas(todo.id)">
                 <i class="bi bi-pencil-square"></i>
               </button>
               <button class="btn btn-danger">
@@ -67,7 +67,7 @@
         <h5 class="card-title m-0  fs-4 "><b>Edición de cita</b></h5>
 
         <button class="btn btn-close position-absolute top-0 end-0 m-2" aria-label="Cerrar edición de usuario"
-          (click)="mostrarTabla = true"></button>
+          (click)="obtenerCitas()"></button>
       </div>
       <div class="card-body">
 
@@ -84,22 +84,21 @@
                 <span class="input-group-text " style="width:125px;">
                   <i class="bi bi-person me-2 text-primary"></i> Paciente
                 </span>
-                <input type="text" class="form-control" id="nombres" maxlength="100" formControlName="v_paciente" />
-              </div>
-              <div
-                *ngIf="ActualizarCitasForm.controls['v_paciente'].invalid && ActualizarCitasForm.controls['v_paciente'].touched;">
-                <small class="error" style="position: absolute;">&#10060;Ingrese un nombre valido</small>
+                <input type="text" *ngFor="let todo of todos" [value]="todo.paciente" class="form-control" readonly style="background-color: white;">
               </div>
 
               <div class="input-group mt-4">
                 <span class="input-group-text  " style="width:125px;">
                   <i class="bi bi-person me-2 text-primary"></i> Doctor
                 </span>
-                <input type="text" class="form-control" id="apellidos" formControlName="v_doctor" />
+              <select class="form-select" id="medico" formControlName="v_doctor">
+                
+                <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }}</option>
+              </select>             
               </div>
               <div
                 *ngIf="ActualizarCitasForm.controls['v_doctor'].invalid && ActualizarCitasForm.controls['v_doctor'].touched;">
-                <small class="error" style="position: absolute;">&#10060;Ingrese un apellido valido</small>
+                <small class="error" style="position: absolute;">&#10060;Seleccione un doctor</small>
               </div>
 
 
@@ -111,7 +110,7 @@
               </div>
               <div
                 *ngIf="ActualizarCitasForm.controls['v_fecha'].invalid && ActualizarCitasForm.controls['v_fecha'].touched;">
-                <small class="error" style="position: absolute;">&#10060;Ingrese un documento valido</small>
+                <small class="error" style="position: absolute;">&#10060;Seleccione una fecha</small>
               </div>
 
 
@@ -124,20 +123,22 @@
               </div>
               <div
                 *ngIf="ActualizarCitasForm.controls['v_hora'].invalid && ActualizarCitasForm.controls['v_hora'].touched;">
-                <small class="error" style="position: absolute;">&#10060;Ingrese un numero de telefono valido</small>
+                <small class="error" style="position: absolute;">&#10060;Ingrese una hora</small>
               </div>
 
 
 
               <div class="input-group mt-4">
                 <span class="input-group-text   " style="width:125px;">
-                  <i class="bi bi-envelope me-2 text-primary"></i> Ubicación
+                  <i class="bi bi-envelope me-2 text-primary"></i> Hospital
                 </span>
-                <input type="text" class="form-control" id="correo" formControlName="v_ubicacion" />
+                <select id="ubicacion" class="form-select" required formControlName="v_ubicacion">
+                    <option *ngFor="let todo of ubicacion"  [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}</option>
+                </select>              
               </div>
               <div
                 *ngIf="ActualizarCitasForm.controls['v_ubicacion'].invalid && ActualizarCitasForm.controls['v_ubicacion'].touched;">
-                <small class="error" style="position: absolute;">&#10060;Ingrese un correo valido</small>
+                <small class="error" style="position: absolute;">&#10060;Seleccione una ubicación</small>
               </div>
 
               <div class="input-group mt-4">
@@ -145,8 +146,8 @@
                   <i class="bi bi-person-badge me-2 text-primary"></i> Salas
                 </span>
                 <select id="roles" required class="form-select" formControlName="v_salas">
-                  <option value="2">Paciente</option>
-                  <option value="3">Doctor</option>
+                
+                  <option *ngFor="let todo of ubicacion"  [value]="todo.salas">{{todo.salas}}</option>
 
                 </select>
               </div>

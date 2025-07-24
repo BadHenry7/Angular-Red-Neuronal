@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 <div class="" style="position: fixed;">
     <button class="btn btn-primary tonyo_select" ype="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
     
@@ -15,7 +22,7 @@
         <div class=" offcanvas-body" style="margin-bottom: 17%;">
                 <div class="row">
                     <ng-container *ngFor="let msg of mensajes">
-                        <div class="mt-2 d-flex" [ngClass]="msg.v_persona === 'user' ? 'justify-content-end' : 'justify-content-start'">
+                        <div class="mt-2 d-flex" [ngClass]="msg.emisor === 'user' ? 'justify-content-end' : 'justify-content-start'">
                         <div [ngClass]="msg.v_persona === 'user' ? 'mensaje-user' : 'mensaje-bot'">
                             <div *ngIf="msg.texto; else msg_image">
                             {{ msg.texto }}
@@ -37,14 +44,17 @@
         </div>
         
         <div class="offcanvas-footer text-black">
-            <div class="input-group input-area px-2 py-2" > <!--ngModel para reemplazar al bind value que teniamos con svelte-->
+            <div class="input-group input-area px-2 py-2" >
                 <input type="text"  [(ngModel)]="mensaje" placeholder="Escribe tu mensaje aca" class="form-control"   />
                 
-                <button  aria-label="enviar" style="background-color: white;">
+                <button  aria-label="enviar" style="background-color: white;" (click)="Enviar()">
                     <i class="bi bi-send input-group-text" style="background-color: white; border: none;"></i>
                 </button>
             </div>
         </div>
     </div>
  
-</div>
+</div> 
+
+
+

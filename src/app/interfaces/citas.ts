@@ -8,8 +8,13 @@ export interface Reportes {
 
 export interface Ubicacion {
 
-  nombre_hospital: string,
+  nombre_hospital?: string,
+  v_id_hospital?: Number
 
+}
+
+export interface Salas {
+  
 }
 
 export interface Citas {
@@ -28,6 +33,8 @@ export interface Citas {
 export interface Eliminar {
   id: number
 }
+
+//https://api-nodejs-buxf.onrender.com/api/salas/getsalaByNombre/${v_id_hospital}`
 
 export interface ReportesUsuario {
   id_paciente: number

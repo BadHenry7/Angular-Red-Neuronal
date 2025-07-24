@@ -11,6 +11,7 @@ import {Citas, Buscar_telegram,Reportes,ReportesUsuario,Ubicacion, Eliminar} fro
 export class CitasService {
 
   private apiUrl = 'http://localhost:8000';
+  private url = "https://api-nodejs-buxf.onrender.com/api/salas/getsalaByNombre/";
  
   constructor(private http:HttpClient) { }
 
@@ -26,6 +27,11 @@ export class CitasService {
 
     post_citas_doctor(user: ReportesUsuario): Observable<ReportesUsuario[]>{
         return this.http.post<ReportesUsuario[]>(this.apiUrl + '/post_citas_doctor/', user);
+    }
+
+    editar_cita(user: Eliminar){
+        return this.http.post<Eliminar[]>(this.apiUrl + '/editar_cita/', user);
+
     }
 
 
@@ -63,6 +69,12 @@ export class CitasService {
     getubicacion(): Observable<Ubicacion[]>{
         return this.http.get<Ubicacion[]>('https://api-nodejs-buxf.onrender.com/api/hospitales/gethospitales');
     } 
+
+    getsala(user: Ubicacion): Observable<Ubicacion[]>{
+        return this.http.post<Ubicacion[]>(`${this.url}${user.v_id_hospital}`, user);
+    }
+
+    
 
 
 }
