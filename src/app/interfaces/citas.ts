@@ -14,7 +14,7 @@ export interface Ubicacion {
 }
 
 export interface Salas {
-  
+
 }
 
 export interface Citas {
@@ -44,4 +44,25 @@ export interface ReportesUsuario {
 export interface Buscar_telegram {
   id: number
   id_telegram: String
+}
+
+export interface Buscar_historial_clinico {
+  documento?: string
+  id_paciente?: number
+}
+
+
+export interface create_diagnostico {
+  id_cita: number,
+  resultado: string,
+  descripcion: string,
+  Observacion: string,
+  estado: boolean
+}
+
+export interface create_sintomas {
+  nombre: string,
+  descripcion: string,
+  estado: boolean,
+  id_cita: number,
 }

@@ -1,74 +1,103 @@
- .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 20px;
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 30px;
 }
 
-.sintomas-box, .seleccionados-box {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    background: #f9f9f9;
+.text-center {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.sintomas-box {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
 }
 
 .search-box {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
-.sintomas-list {
+.sintomas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     max-height: 500px;
     overflow-y: auto;
-    padding: 5px;
 }
 
 .sintoma-item {
     display: flex;
     align-items: center;
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
+    gap: 8px;
+    background: #f7f7f7;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.seleccionados-box {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fafafa;
 }
 
 .seleccionados-box h3 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
 .seleccionado-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
+    background: #e3f2fd;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    margin-right: 29px;
 }
 
 .seleccionado-item button {
     background: none;
     border: none;
+    color: #d32f2f;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 14px;
-    color: red;
 }
 
 .btn {
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background: #007bff;
-    color: white;
-    cursor: pointer;
+    margin-top: 15px;
+    padding: 12px 20px;
     width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .btn:hover {
-    background: #0056b3;
+    background-color: #0056b3;
 }
 
 .btn:disabled {
-    background: #ccc;
+    background-color: #ccc;
     cursor: not-allowed;
 }

@@ -31,6 +31,7 @@ import { BuscarMedicosComponent } from './Page/Administrador/Doctor_adm/buscar-m
 import {ReportesComponent} from './Page/Administrador/reportes/reportes.component'
 import {DashboardComponent} from './Page/Administrador/dashboard/dashboard.component'
 import { RolesComponent } from './Page/Administrador/roles/roles.component';
+import { HistorialClinicoComponent } from './Page/historial-clinico/historial-clinico.component';
 
 
 export const routes: Routes = [ 
@@ -59,6 +60,7 @@ export const routes: Routes = [
     {path: 'doctor/citas_medico', component: CitasMedicasComponent},
     {path: 'doctor/reportes', component: ReportesMedicoComponent},
     {path: 'doctor/smartbot', component: BotciComponent},
+    {path:'medico_vista/historial_clinico', component: HistorialClinicoComponent},
     
     //Aca Rol Administrador
     {path: 'administrador/principal', component: AdministradorPrincipalComponent},
