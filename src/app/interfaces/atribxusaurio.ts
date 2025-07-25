@@ -18,3 +18,9 @@ export interface Especialidades {
 export interface BuscarxU {
     id_usuario: number
 }
+
+export interface UpdateAtributoxusuario {
+  id_usuario: number;
+  valor: string;
+  descripcion: string;
+}
