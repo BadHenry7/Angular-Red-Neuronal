@@ -12,7 +12,7 @@ import {VerifUser} from '../interfaces/sesionGoogleMicrosoft'
 
 export class SesionGoogleService {
 
-  private apiUrl = 'http://localhost:8000/';
+  private apiUrl = 'https://red-neuronal-api.onrender.com/';
  
   constructor(private http:HttpClient) { }
 
