@@ -102,7 +102,14 @@ export class HistorialClinicoComponent implements OnInit {
   }
 
 
-  capturar(){}
+  async capturar(){
+
+       await fetch('http://127.0.0.1:8000/detener_altura', {
+  method: 'GET'
+});
+
+  }
+
 
   videoSrc: string = '';
 
