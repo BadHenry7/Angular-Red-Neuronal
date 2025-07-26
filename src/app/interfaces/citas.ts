@@ -13,8 +13,9 @@ export interface Ubicacion {
 
 }
 
-export interface Salas {
-
+export interface Sala {
+  nombre_sala: string;
+  id_sala?: string;
 }
 
 export interface Citas {

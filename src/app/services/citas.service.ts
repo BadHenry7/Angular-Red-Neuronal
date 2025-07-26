@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Citas, Buscar_telegram, Reportes, ReportesUsuario, Ubicacion, Eliminar, Buscar_historial_clinico, create_diagnostico, create_sintomas } from "../interfaces/citas"
+import { Citas, Buscar_telegram, Sala ,Reportes, ReportesUsuario, Ubicacion, Eliminar, Buscar_historial_clinico, create_diagnostico, create_sintomas } from "../interfaces/citas"
 
 
 @Injectable({
@@ -31,7 +31,6 @@ export class CitasService {
 
     editar_cita(user: Eliminar) {
         return this.http.post<Eliminar[]>(this.apiUrl + '/editar_cita/', user);
-
     }
 
 
@@ -70,10 +69,10 @@ export class CitasService {
         return this.http.get<Ubicacion[]>('https://api-nodejs-buxf.onrender.com/api/hospitales/gethospitales');
     }
 
-    getsala(user: Ubicacion): Observable<Ubicacion[]> {
-        return this.http.post<Ubicacion[]>(`${this.url}${user.v_id_hospital}`, user);
+    getsala(user: string): Observable<Sala[]> {
+        const users= user
+        return this.http.post<Sala[]>(`${this.url}${users}`, user);
     }
-
 
     add_diagnostico(user: create_diagnostico): Observable<create_diagnostico[]> {
         return this.http.post<create_diagnostico[]>(this.apiUrl + '/create_diagnosticos', user);
@@ -90,6 +89,14 @@ export class CitasService {
 
     get_historia_clinica(user: Buscar_historial_clinico): Observable<Buscar_historial_clinico[]> {
         return this.http.post<Buscar_historial_clinico[]>(this.apiUrl + '/historia_clinica', user);
+    }
+
+    update_Cita(user: Citas): Observable<Citas[]>{
+        return this.http.put<Citas[]>(this.apiUrl + '/update_cita' ,user);
+    }
+
+    desactivar_cita(user: Eliminar): Observable<Eliminar[]> {
+        return this.http.put<Eliminar[]>(this.apiUrl + '/eliminar_cita' ,user);
     }
 
 

@@ -27,9 +27,9 @@ export class HistorialClinicoComponent implements OnInit {
   nombre: string = ''
   documento: string = ''
   telefono: string = ''
-
-
   buscardocumento_v: string = '';
+  mostrarhistorial: boolean = true
+
   buscar() {
     const documento = this.buscardocumento_v;
     const R_usuario = {
@@ -45,37 +45,39 @@ export class HistorialClinicoComponent implements OnInit {
         this.documento = this.todos.documento;
         this.telefono = this.todos.telefono;
 
-        const id_paciente= Number(this.todos.id);
+        const id_paciente = Number(this.todos.id);
         console.log(id_paciente)
 
-        const R_usuario={
+        const R_usuario = {
           id_paciente
         }
 
         this.h_clinicoService.get_historia_clinica(R_usuario).subscribe({
-          next: (data)=>{
-            this.todos2=data;
+          next: (data) => {
+            this.todos2 = data;
             console.log(this.todos2);
-            this.todos2=this.todos2.resultado;
+            this.todos2 = this.todos2.resultado;
 
-               setTimeout(() => {
-          ($("#myTable")as any).DataTable({
-          language: {
-            url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-          },
-          order: []
-        });;
-        },1)
+            setTimeout(() => {
+              ($("#myTable") as any).DataTable({
+                language: {
+                  url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+                },
+                order: []
+              });;
+            }, 1)
 
 
-          }, error: (error)=>{
+            this.comprobar = true;
+
+          }, error: (error) => {
             console.log(error)
           }
 
         })
 
 
-     
+
 
 
       }, error: (error) => {
@@ -95,11 +97,28 @@ export class HistorialClinicoComponent implements OnInit {
 
   guardar() {
 
+
+
   }
 
-  Camara() { }
 
-  editar() { }
+  capturar(){}
+
+  videoSrc: string = '';
+
+  Camara() {
+    let v_id = this.todos.id;
+
+    this.videoSrc = ''; // fuerza el reinicio
+    setTimeout(() => {
+      this.videoSrc = `http://127.0.0.1:8000/video_feed?id=${v_id}&cache=${Date.now()}`;
+    }, 200);
+  }
+
+  editar() {
+    this.mostrarhistorial = false;
+
+  }
 
 
 

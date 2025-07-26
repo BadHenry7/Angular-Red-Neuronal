@@ -24,16 +24,17 @@ export class ConsultarCitaComponent {
   loading = false;
   doctor: any = [];
   ubicacion: any = [];
+  salas: any = [];
   Id: any = [];
   error: string | null = null;
-  mostrarTabla: boolean=true
+  mostrarTabla: boolean = true
 
   ActualizarCitasForm: FormGroup;
 
-  constructor(private citasService: CitasService, private userService: UsersService ,private act_cita: FormBuilder) {
+  constructor(private citasService: CitasService, private userService: UsersService, private act_cita: FormBuilder) {
 
     this.ActualizarCitasForm = this.act_cita.group({//requerido, valores nulos,       expresiones regulares, mínimo y máximo
-      v_paciente: ['', [Validators.required]],
+
       v_doctor: ['', [Validators.required]],
       v_fecha: ['', [Validators.required]],
       v_hora: ['', [Validators.required]],
@@ -43,7 +44,88 @@ export class ConsultarCitaComponent {
 
   }
 
-  actualizar(){
+  Confirmar_eliminar(id: number){
+    Swal.fire({
+                title: "De verdad quieres eliminar esta cita?",
+                text: "Esto no se puede deshacer",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, cancelar cita",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.desactivar(id)
+                }
+            });
+  
+
+            }  
+
+  desactivar(id: number){
+
+    let cita_id = id
+
+    const R_cita = {id: cita_id}
+
+        this.citasService.desactivar_cita(R_cita).subscribe({
+        next: (res) => {
+        console.log('Cita actualizada', res);
+        this.mostrarTabla = true;
+        Swal.fire({
+          title: 'Cita actualizada',
+          text: 'Cita actualizado con exito',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.obtenerCitas();
+            console.log('Confirmado');
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error al actualizar cita', err);
+      }
+    });
+
+  }
+
+  actualizar() {
+
+    const R_cita = {
+      id: this.Id,
+      id_usuario: this.ActualizarCitasForm.value.v_doctor,
+      fecha: this.ActualizarCitasForm.value.v_fecha,
+      hora: this.ActualizarCitasForm.value.v_hora,
+      ubicacion: this.ActualizarCitasForm.value.v_ubicacion,
+      salas: this.ActualizarCitasForm.value.v_salas
+    }
+
+    
+
+    this.citasService.update_Cita(R_cita).subscribe({
+      next: (res) => {
+        console.log('Cita actualizada', res);
+        this.mostrarTabla = true;
+        Swal.fire({
+          title: 'Cita actualizada',
+          text: 'Cita actualizado con exito',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.obtenerCitas();
+            console.log('Confirmado');
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error al actualizar cita', err);
+      }
+    });
 
   }
 
@@ -53,36 +135,36 @@ export class ConsultarCitaComponent {
   }
 
 
-  editarCitas(id: number){//    editar_cita/"  -->POST
+  editarCitas(id: number) {//    editar_cita/"  -->POST
     console.log("entra")
-    this.mostrarTabla=false;
+    this.mostrarTabla = false;
     this.obtenerdoctor(id);
     this.obtenerUbicacion();
   }
 
-  editarPaciente(vid: number){
-    this.Id=vid
+  editarPaciente(vid: number) {
+    this.Id = vid
 
-  
+
     const id = Number(vid)
 
-    const R_cita = { id};
+    const R_cita = { id };
 
     this.citasService.editar_cita(R_cita).subscribe({
       next: (res) => {//editar_cita/"
         this.todos = res;
         this.todos = this.todos.resultado;
-        console.log("El usuario que se va a editar es este",this.todos)    
-        
+        console.log("El usuario que se va a editar es este", this.todos)
+
         this.ActualizarCitasForm.patchValue({
-          v_doctor: this.todos[0].id_usuario ,
-          v_fecha: this.todos[0].fecha, 
+          v_doctor: this.todos[0].id_usuario,
+          v_fecha: this.todos[0].fecha,
           v_hora: this.todos[0].hora,
           v_ubicacion: this.todos[0].ubicacion,
           v_salas: this.todos[0].salas
           //   v_id_especialidad: this.todos_especialidades
         });
-        
+
 
 
       },
@@ -94,14 +176,14 @@ export class ConsultarCitaComponent {
   }
 
 
-    obtenerdoctor(id: number) {
+  obtenerdoctor(id: number) {
 
     this.userService.getMedico().subscribe({
       next: (res) => {
         this.doctor = res;
         this.doctor = this.doctor.resultado;
         console.log("doctorrrrrrr", this.doctor)
-    this.editarPaciente(id)
+        this.editarPaciente(id)
 
       },
       error: (err) => {
@@ -112,21 +194,20 @@ export class ConsultarCitaComponent {
 
   }
 
+
+
   obtenerUbicacion() {
-
-        
-
-
     this.citasService.getubicacion().subscribe({
       next: (res) => {
         this.ubicacion = res;
         console.log(this.ubicacion)
         this.ubicacion = this.ubicacion.data;
-        console.log("ubicacion",this.ubicacion)
-        
-        const v_id_hospital=this.ubicacion[0].nombre_hospital
-      
-          this.citasService.getsala(v_id_hospital)
+        console.log("ubicacion", this.ubicacion)
+
+        const nombre_hospital = this.ActualizarCitasForm.value.v_ubicacion
+        console.log("la variable id hospitale es", nombre_hospital);//en vez de ID, Texto
+
+        this.mostrar_salas();
 
 
       },
@@ -139,21 +220,42 @@ export class ConsultarCitaComponent {
   }
 
 
+  mostrar_salas() {
+    const nombre_hospital = this.ActualizarCitasForm.value.v_ubicacion;
 
-  
+    this.citasService.getsala(nombre_hospital).subscribe({
+      next: (res) => {
+        this.salas = res;
+        this.salas = this.salas.data
+        console.log("salaas", this.salas)
+      },
+      error: (err) => {
+        this.error = 'No se pudo cargar las salas';
+        console.error(err);
+      }
+    })
+  }
+
+
   obtenerCitas(): void {
-    $('#myTable').DataTable().clear().destroy();//Como no podemos recargar, toca destruir la tabla
-    this.mostrarTabla=true
 
-    this.loading = true;
+    console.log("entra aca22")
+    $('#myTable').DataTable().clear().destroy();
+
+
+
     this.citasService.get_cita_admin().subscribe({
       next: (res) => {
         this.todos = res;
         this.todos = this.todos.resultado;
-        this.loading = false;
+
 
         //datatable:
         setTimeout(() => {
+          this.mostrarTabla = true;
+          this.loading = false;
+
+
           ($('#myTable') as any).DataTable({
             language: {
               url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
