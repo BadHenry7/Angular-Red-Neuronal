@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGoogleService } from '../../auth-google.service';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-google',
@@ -22,7 +23,7 @@ export class GoogleComponent implements OnInit {
       requireHttps: false,
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      clientId: '999799888239-k3m1pm050d31qpu4r6ko5huq6kfhhj39.apps.googleusercontent.com',
+      clientId: environment.googleClientId,
       redirectUri: window.location.origin + '/GoogleLogin',
       scope: 'openid profile email',
       customQueryParams: {
@@ -45,7 +46,7 @@ export class GoogleComponent implements OnInit {
         };
 
 
-        fetch("https://red-neuronal-api.onrender.com/verif_user", {
+        fetch("http://localhost:8000/verif_user", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(user),

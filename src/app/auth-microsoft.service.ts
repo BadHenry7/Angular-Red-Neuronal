@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { environment } from './environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,10 @@ export class AuthMicrosoftService {
       issuer: 'https://login.microsoftonline.com/1e9aabe8-67f8-4f1c-a329-a754e92499ae/v2.0',
 
         strictDiscoveryDocumentValidation: false,
-        clientId: '8ab487d5-977b-497e-b593-56c1326bebfd',
+        clientId: environment.microsoftClientID,
         redirectUri: window.location.origin + '/MicrosoftLogin',
         scope: 'openid profile email User.Read',
+        responseType: 'code',
         customQueryParams: {
         prompt: 'select_account'
         }

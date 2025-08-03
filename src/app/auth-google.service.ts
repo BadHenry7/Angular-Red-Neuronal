@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { environment } from './environment/environment';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class AuthGoogleService {
       requireHttps: false,
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      clientId: '999799888239-k3m1pm050d31qpu4r6ko5huq6kfhhj39.apps.googleusercontent.com',
+      clientId: environment.googleClientId,
       redirectUri: window.location.origin + '/GoogleLogin',
       scope: 'openid profile email',
    

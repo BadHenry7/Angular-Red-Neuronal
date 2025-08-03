@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthGoogleService } from '../../auth-google.service';
 import { Router } from '@angular/router';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-microsoft',
@@ -16,42 +17,67 @@ export class MicrosoftComponent {
     private oauthService: OAuthService
   ) { }//supuestamente sirve para usar el router.navigate que evita recargar la pagina con window.location.href
 
-  ngOnInit(): void {
+
+  async obtener(access_token: string) {
+    const datos = await fetch("https://graph.microsoft.com/v1.0/me", {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    const perfil = await datos.json()
+    console.log(perfil);
+    return perfil
+
+
+  }
+
+  ngOnInit() {
     console.log("ws")
-     const config: AuthConfig = {
-          requireHttps: false,
-    
-          issuer: 'https://login.microsoftonline.com/1e9aabe8-67f8-4f1c-a329-a754e92499ae/v2.0',
-    
-            strictDiscoveryDocumentValidation: false,
-            clientId: '8ab487d5-977b-497e-b593-56c1326bebfd',
-            redirectUri: window.location.origin + '/MicrosoftLogin',
-            scope: 'openid profile email User.Read',
-            customQueryParams: {
-            prompt: 'select_account'
-            }
-      
-          }
+    console.log(environment.microsoftClientID)
+    const config: AuthConfig = {
+      requireHttps: false,
+
+      issuer: 'https://login.microsoftonline.com/1e9aabe8-67f8-4f1c-a329-a754e92499ae/v2.0',
+
+      strictDiscoveryDocumentValidation: false,
+      clientId: environment.microsoftClientID,
+      redirectUri: window.location.origin + '/MicrosoftLogin',
+      scope: 'openid profile email User.Read',
+      responseType: 'code',
+      customQueryParams: {
+        prompt: 'select_account'
+      }
+
+    }
     this.oauthService.configure(config);
-      
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(async () => {
       const datos_user: any = this.oauthService.getIdentityClaims();
+      console.log(datos_user)
       if (datos_user) {
-        const user = {
-          google_id: datos_user.sub,
-          foto: datos_user.picture,
+
+
+        const access_token = this.oauthService.getAccessToken();
+        const user = await this.obtener(access_token);
+        console.log("sssssssssssss", user)
+
+        
+        const usuarioBD = {
+          google_id: user.id,
+          foto: '',
           access_token: this.oauthService.getAccessToken(),
           estado: 1,
-          usuario: datos_user.email,
-          nombre: datos_user.given_name,
-          apellido: datos_user.family_name ? datos_user.family_name : '',
+          usuario: user.mail || user.userPrincipalName,
+          nombre: user.givenName,
+          apellido: user.surname
+
         };
 
 
-        fetch("https://red-neuronal-api.onrender.com/verif_user", {
+        fetch("http://localhost:8000/verif_user", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(user),
+          body: JSON.stringify(usuarioBD),
         })
           .then(res => res.json())
           .then(data => {
@@ -65,8 +91,8 @@ export class MicrosoftComponent {
 
 
             let encontrado = {
-              name: datos_user.given_name, correo: datos_user.email,
-              id: v_id, apellido:  datos_user.family_name 
+              name: user.givenName, correo: user.userPrincipalName,
+              id: user.id, apellido: user.surname
             }
 
             let miStorage = window.localStorage;
