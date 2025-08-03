@@ -7,7 +7,7 @@ import { Sintomas } from '../interfaces/sintomas';
   providedIn: 'root'
 })
 export class SintomasService {
-  private apiUrl = 'http://localhost:8000/';
+  private apiUrl = 'https://red-neuronal-api.onrender.com/';
 
   constructor(private http: HttpClient) {}
 
