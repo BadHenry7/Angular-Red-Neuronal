@@ -88,7 +88,7 @@ export class CompletarInformacionComponent implements OnInit {
                         icon: "success",
                     });
                     setTimeout(() => {
-                    window.location.href = "/usuario";
+                   
                     this.router.navigate(['/pacientes/principal'])
 
                     }, 3000);

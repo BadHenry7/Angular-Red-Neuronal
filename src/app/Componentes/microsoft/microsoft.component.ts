@@ -87,7 +87,7 @@ export class MicrosoftComponent {
             const rol_v = data.rol_v ? data.rol_v : 1;
             const v_estado = data.estado ? data.estado : false;
             const estado_v = data.Informacion;
-
+            console.log(v_estado)
 
 
             let encontrado = {
