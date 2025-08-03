@@ -39,8 +39,8 @@
                 </div>
                 <div class="col-sm-5 col-md-5 col-xl-5 col-lg-5 col-5">
                     <div class="" >
-                        <form method="post" action="?/OAuth2">
-                            <button class="form-control btn btn_login" type="submit">
+                        <form method="post">
+                            <button class="form-control btn btn_login" type="button" (click)="loginGoogle()">
                                 <img src="https://ssl.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google" width="26">
                             </button>
                         </form>    
@@ -49,8 +49,8 @@
                 </div>
                 <div class="col-sm-5 col-md-5 col-xl-5 col-lg-5 col-5">
                     <div class="">
-                        <form method="post" action="?/OAuth2Microsoft">    
-                            <button class="form-control btn btn_login"  style="font-size: 14px;">
+                        <form method="post" >    
+                            <button class="form-control btn btn_login" (click)="loginMicrosoft()"  style="font-size: 14px;">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" width="26">
                             </button>   
                         </form>
