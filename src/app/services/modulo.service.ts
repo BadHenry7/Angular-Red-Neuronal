@@ -12,7 +12,7 @@ import { Modulo, BuscarId, Modelito } from "../interfaces/modulo"
 })
 
 export class UsersService {
-    private apiUrl = 'https://red-neuronal-api.onrender.com/'
+    private apiUrl = 'http://localhost:8000/'
 
     constructor(private http: HttpClient) { }
 

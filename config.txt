@@ -65,3 +65,8 @@ marca todas las validaciones:
     return;
   }
     
+
+
+Para google y microsoft login:
+npm i angular-oauth2-oidc
+

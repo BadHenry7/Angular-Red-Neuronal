@@ -74,7 +74,7 @@ export class MicrosoftComponent {
         };
 
 
-        fetch("https://red-neuronal-api.onrender.com/verif_user", {
+        fetch("http://localhost:8000/verif_user", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(usuarioBD),

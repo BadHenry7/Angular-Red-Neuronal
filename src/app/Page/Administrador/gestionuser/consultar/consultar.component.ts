@@ -50,19 +50,20 @@ export class ConsultarComponent implements OnInit {
     this.loadUsers();
   }
 
+
+   ngAfterViewInit(): void {
+    ($('#myTable') as any).DataTable({
+      language: {
+        url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+      },
+      order: []
+    });
+  }
+
   loadUsers(): void {
     this.userService.getUsers().subscribe(todos => {
       this.todos = todos;
-      setTimeout(() => {
-        ($('#myTable') as any).DataTable({
-          language: {
-            url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-          },
-          order: []
-        });;
-
-
-      }, 1);
+     
 
     });
 
