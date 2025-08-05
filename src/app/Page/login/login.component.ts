@@ -38,6 +38,10 @@ export class LoginComponent implements OnInit {
 
 
   //var onloadCallback = function() {grecaptcha.render('html_element', {'sitekey' : 'your_site_key'});
+
+
+
+
   ngOnInit(): void {
     if ((window as any).grecaptcha) {
       (window as any).grecaptcha.render(document.querySelector('.g-recaptcha'), {
@@ -99,7 +103,7 @@ export class LoginComponent implements OnInit {
             console.log("Imprimos el encontrado", encontrado);
             let miStorage = window.localStorage;
             miStorage.setItem("usuario", JSON.stringify(encontrado));
-
+           this.loading=true;
             if (todo[0].rol == 1) {
               Swal.fire({
                 //Popup window position, can be 'top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.

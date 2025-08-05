@@ -1,0 +1,16 @@
+.logos {
+  justify-content: center;
+  display: flex;
+  gap: 64px;
+  background-image: url(../../../../../public/assess/fondo2.png);
+  background-size: 40vh;
+  background-attachment: fixed;
+  padding: 5vh;
+  z-index: 1;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
