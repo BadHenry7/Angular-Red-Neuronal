@@ -11,14 +11,14 @@ import { RouterLink } from '@angular/router';
 
 export class NavbarPacienteComponent implements OnInit {
 
-  nombre: string = "";
+  nombre: string = "Paciente";
 
   ngOnInit(): void {
       const usuarioGuardado = localStorage.getItem('usuario');
 
     if (usuarioGuardado) {
       const usuario = JSON.parse(usuarioGuardado);
-      this.nombre = usuario.nombre;
+      this.nombre = usuario.name;
     } 
   }
 

@@ -1,17 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar-administrador',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './navbar-administrador.component.html',
   styleUrl: './navbar-administrador.component.css'
 })
-export class NavbarAdministradorComponent {
+export class NavbarAdministradorComponent implements OnInit {
+
+constructor (private router:Router){}
+
  henry : boolean= true
   image : String=''
-constructor (private router:Router){}
+name:string='Usuario'
+
+ngOnInit(): void {
+  
+     const usuarioGuardado = localStorage.getItem('usuario')
+
+     if (usuarioGuardado){
+      const usuario= JSON.parse(usuarioGuardado)
+      this.name= usuario.name;
+     }
+    
+    
+
+}
 
    confirmacion() {
         Swal.fire({

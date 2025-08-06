@@ -1,22 +1,262 @@
+<!-- 
+<div class="container">
+    <div class="row">
+        <div class="col-xl-6 pt-5 fs-1">
+            En esta página podrás acceder a tu usuario y ver tus
+            citas médicas, generar certificados, ver tu historial
+            médico y nuestros servicios y generar excusas medicas según la cita
+            por la que hayas asistido a la clínica, todo sin salir de tu casa​
+
+            
+        </div>
+        <Chatbot></Chatbot>
+        <div class="col-xl-6 ">
+            <img src="image5.png" alt="" style="height: 600px; width: 750px;"/>
+        </div>
+    </div>
+</div> -->
+
+
 <app-navbar-paciente></app-navbar-paciente>
 <app-chatbox></app-chatbox>
 
-<div class="container">
-    
-    <div class="row">
-        <div class="col-xl-6 pt-5 fs-1">
-             <h2 class="fw-bold mb-3">Bienvenido Administrador</h2>
-            <p>
-                En esta pagina podras acceder a las funcionalidades de administrador
-                y podras registrar, actualizar, buscar y desactivar usuarios.
-            </p>
 
-            <p>Podras generar reportes y ver un tablero</p>
-        </div>
+<div class="logos">
+    <div class="container">
+        <form [formGroup]="PerfilPacienteForm" (ngSubmit)="Actualizar()">
+            <div class="row">
+                <!-- Columna Izquierda: Formulario -->
+                <div class="col-lg-6">
+                    <div class="card shadow p-4  rounded border-0">
+                        <p class="fs-3 fw-bold mb-3 text-primary">👤 Perfil del Paciente</p>
+
+                        <div class="row">
+                            <!-- Nombres -->
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person me-2 text-primary"></i> Nombres
+                                    </span>
+                                    <input type="text" class="form-control" id="nombres" maxlength="100"
+                                        formControlName="v_nombre" readonly style="background-color: white;" />
+                                </div>
+                                <!-- <div
+                                    *ngIf="PerfilPacienteForm.controls['v_nombre'].invalid && PerfilPacienteForm.controls['v_nombre'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un nombre válido</small>
+                                </div> -->
+                            </div>
+
+                            <div class="col-lg-6">
+                                <!-- Apellidos -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person me-2 text-primary"></i> Apellidos
+                                    </span>
+                                    <input type="text" class="form-control" id="apellidos" formControlName="v_apellido"
+                                        readonly style="background-color: white;" />
+                                </div>
+                                <!-- <div
+                                    *ngIf="PerfilPacienteForm.controls['v_apellido'].invalid && PerfilPacienteForm.controls['v_apellido'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un apellido válido</small>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <!-- Documento -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-card-list me-2 text-primary"></i> Documento
+                                    </span>
+                                    <input type="text" class="form-control" id="documento" formControlName="v_documento"
+                                        readonly style="background-color: white;" />
+                                </div>
+                                <!-- <div
+                                    *ngIf="PerfilPacienteForm.controls['v_documento'].invalid && PerfilPacienteForm.controls['v_documento'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un documento válido</small>
+                                </div> -->
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <!-- Teléfono -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-telephone me-2 text-primary"></i> Teléfono
+                                    </span>
+                                    <input type="text" class="form-control" id="telefono" maxlength="20"
+                                        formControlName="v_telefono" readonly style="background-color: white;" />
+                                </div>
+                                <!-- <div
+                                    *ngIf="PerfilPacienteForm.controls['v_telefono'].invalid && PerfilPacienteForm.controls['v_telefono'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un número válido</small>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <!-- Estatura -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person-standing me-2 text-primary"></i> Estatura
+                                    </span>
+                                    <input type="text" class="form-control" id="estatura" formControlName="v_estatura"
+                                        readonly style="background-color: white;" />
+                                </div>
+                                <!-- <div
+                                    *ngIf="PerfilPacienteForm.controls['v_estatura'].invalid && PerfilPacienteForm.controls['v_estatura'].touched">
+                                    <small class="text-danger">&#10060; Ingrese una estatura válida</small>
+                                </div> -->
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <!-- Edad -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person-lines-fill me-2 text-primary"></i> Edad
+                                    </span>
+                                    <input type="text" class="form-control" id="edad" maxlength="20"
+                                        formControlName="v_edad" readonly style="background-color: white;" />
+                                </div>
+                                <!-- <div
+                                    *ngIf="PerfilPacienteForm.controls['v_edad'].invalid && PerfilPacienteForm.controls['v_edad'].touched">
+                                    <small class="text-danger">&#10060; Ingrese una edad valida</small>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
 
 
-        <div class="col-xl-6">
-            <img src="/assess/image5.png" alt="" style="height: 600px; width: 750px;" />
-        </div>
+                            <!-- Genero -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-gender-neuter me-2 text-primary"></i> Genero
+                                </span>
+                                <input type="text" class="form-control" id="password" formControlName="v_genero"
+                                    autocomplete="current-password" autocomplete="off" readonly
+                                    style="background-color: white;" />
+
+                            </div>
+                            <!-- <div
+                                *ngIf="PerfilPacienteForm.controls['v_genero'].invalid && PerfilPacienteForm.controls['v_genero'].touched;">
+                                <small class="error">&#10060;Seleccione un genero</small>
+                            </div> -->
+
+
+                            <!-- Correo -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-envelope me-2 text-primary"></i> Correo
+                                </span>
+                                <input type="text" class="form-control" id="correo" formControlName="v_usuario"
+                                    autocomplete="off" readonly style="background-color: white;" />
+                            </div>
+                            <!-- <div
+                                *ngIf="PerfilPacienteForm.controls['v_usuario'].invalid && PerfilPacienteForm.controls['v_usuario'].touched">
+                                <small class="text-danger">&#10060; Ingrese un correo válido</small>
+                            </div> -->
+
+
+
+
+
+
+                            <!-- Rol -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-person-badge me-2 text-primary"></i> Rol
+                                </span>
+                                <input type="text" class="form-control" id="password" formControlName="id_rol"
+                                    autocomplete="current-password" autocomplete="off" readonly
+                                    style="background-color: white;" />
+
+                            </div>
+                            <!-- <div
+                                *ngIf="PerfilPacienteForm.controls['id_rol'].invalid && PerfilPacienteForm.controls['id_rol'].touched">
+                                <small class="text-danger">&#10060; Seleccione un rol</small>
+                            </div> -->
+
+                        </div>
+
+
+
+
+                        <!-- Estado -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="width: 125px;">
+                                <i class="bi bi-toggle-on me-2 text-primary"></i> Estado
+                            </span>
+                            <input type="text" class="form-control" id="password" formControlName="v_estado"
+                                autocomplete="current-password" autocomplete="off" readonly
+                                style="background-color: white;" />
+
+                        </div>
+                        <!-- <div
+                            *ngIf="PerfilPacienteForm.controls['v_estado'].invalid && PerfilPacienteForm.controls['v_estado'].touched">
+                            <small class="text-danger">&#10060; Seleccione un estado</small>
+                        </div> -->
+
+
+
+                        <p class="mt-3 text-muted text-center">Recuerda que para cambiar tu informacion personal debes
+                            enviar un correo al hostipalinc.github&#64;gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 text-center" style="margin-top: 142px;">
+                    <h2 class="fw-bold mb-3 text-center">Bienvenido paciente</h2>
+
+                    <p class="text-muted mb-3">
+                        En esta página podrás acceder a tu usuario y ver tus
+                        citas médicas, ver tu historial
+                        médico, generar excusas medicas según la cita
+                        por la que hayas asistido a la clínica, todo sin salir de tu casa​
+
+                    </p>
+                    <p class="mb-4">
+                        También puedes generar reportes y generar excusas medicas
+                    </p>
+
+                    <div class="row">
+                        <div class="col-xl-6 d-flex justify-content-end">
+                            <a routerLink="/pacientes/citas" class="btn btn-primary  mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                                Ir a pedir citas
+                            </a>
+                        </div>
+                        <div class="col-xl-6 d-flex justify-content-start">
+                            <a routerLink="/pacientes/ver_citas" class="btn btn-primary mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                                Ir a consultar citas
+                            </a>
+                        </div>
+
+                        <div class="col-xl-6 d-flex justify-content-end">
+                            <a routerLink="/pacientes/reportes" class="btn btn-primary mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                                Ir a reportes
+                            </a>
+                        </div>
+                        <div class="col-xl-6 text-start">
+                            <a routerLink="/pacientes/incapacidad" class="btn btn-primary mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                                Ir a generar incapacidad
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </form>
     </div>
 </div>

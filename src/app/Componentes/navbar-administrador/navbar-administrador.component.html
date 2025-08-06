@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-1">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/administrador/principal" id="name" >Henry</a>
+      <a class="navbar-brand" routerLink="/administrador/principal" id="name" >{{name}}</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Menu-usuarios" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -75,7 +75,7 @@
     </div>
   </nav>
 
-  <div class="modal fade"  id="perfil_modal" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade"  id="perfil_modal" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,7 +91,7 @@
 
               <div class="row">
                 <div class="col-md-6">
-                  <!--Correo/usuario-->
+                
                   <div class="mb-3 mt-2 mx-2">
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
@@ -99,35 +99,35 @@
                     </div>
                  </div>
 
-                  <!--password-->
+                
                  <div class="mb-3 mt-2 mx-2" role="presentation">
                   <div class="input-group" >
                       <span class="input-group-text"><i class="bi bi-lock"></i></span>
                       <input type="password" class="form-control" name="password" id="nav_password" required autocomplete="off" readonly>
                   </div> 
                  </div>
-                 <!--nombre-->
+              
                  <div class="mb-3 mt-2 mx-2">
                   <div class="input-group">
                       <span class="input-group-text"><i class="bi bi-person"></i></span>
                       <input type="text" class="form-control" id="nav_nombre" required autocomplete="off" readonly>
                   </div> 
                  </div>
-                 <!--apellido-->
+               
                  <div class="mb-3 mt-2 mx-2">
                   <div class="input-group">
                       <span class="input-group-text"><i class="bi bi-person"></i></span>
                       <input type="text" class="form-control" id="nav_apellido" required autocomplete="off" readonly>
                   </div> 
                  </div>
-                  <!--Documento-->
+                
                   <div class="mb-3 mt-2 mx-2">
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-card-list"></i></span>
                         <input type="text" class="form-control" id="nav_documento" required autocomplete="off" readonly>
                     </div> 
                    </div>
-                   <!--Telefono-->
+                  
                   <div class="mb-3 mt-2 mx-2">
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-telephone"></i></span>
@@ -156,14 +156,14 @@
           
                 @if(henry){
                     
-                    <!-- Mostrar botón "Desactivar" si el usuario está activo -->
+                    Mostrar botón "Desactivar" si el usuario está activo 
                     <button class="btn btn-success">
                       Editar
                     </button>
                 }
                   @else{
 
-                      <!-- Mostrar botón "Activar" si el usuario está desactivado -->
+                      Mostrar botón "Activar" si el usuario está desactivado 
                       <button class="btn btn-outline-info" id="sendMessage">
                         Actualizar
                       </button>
@@ -176,4 +176,4 @@
           
         </div>
     </div>
-</div>
+</div> -->

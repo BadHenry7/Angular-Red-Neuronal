@@ -42,6 +42,10 @@ export class UsersService{
         return this.http.put<User[]>(this.apiUrl +'actualizaruser', user);
     }  
 
+    UpdateAdm(user: User): Observable<User[]>{
+        return this.http.put<User[]>(this.apiUrl +'update_adm', user);
+    }  
+
 
     EstadoUser(user: Buscar): Observable<User[]>{
         return this.http.put<User[]>(this.apiUrl +'estado_user', user);

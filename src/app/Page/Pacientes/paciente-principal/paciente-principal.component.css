@@ -1,0 +1,10 @@
+.logos {
+  justify-content: center;
+  display: flex;
+  gap: 64px;
+  background-image: url(../../../../../public/assess/fondo2.png);
+  background-size: 40vh;
+  background-attachment: fixed;
+  padding: 5vh;
+  z-index: 1;
+}

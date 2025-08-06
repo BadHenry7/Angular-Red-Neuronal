@@ -52,91 +52,189 @@
 </div> -->
 
 <app-navbar-administrador></app-navbar-administrador>
+
 <div class="logos">
     <div class="container">
-        <form [formGroup]="PerfilAdminForm">
+        <form [formGroup]="PerfilAdminForm" (ngSubmit)="Actualizar()">
             <div class="row">
                 <!-- Columna Izquierda: Formulario -->
                 <div class="col-lg-6">
                     <div class="card shadow p-4  rounded border-0">
-                        <p class="fs-3 fw-bold mb-4 text-primary">👤 Perfil del Administrador</p>
+                        <p class="fs-3 fw-bold mb-3 text-primary">👤 Perfil del Administrador</p>
 
-                        <!-- Nombres -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" style="width: 125px;">
-                                <i class="bi bi-person me-2 text-primary"></i> Nombres
-                            </span>
-                            <input type="text" class="form-control" id="nombres" maxlength="100"
-                                formControlName="v_nombre" />
-                        </div>
-                        <div
-                            *ngIf="PerfilAdminForm.controls['v_nombre'].invalid && PerfilAdminForm.controls['v_nombre'].touched">
-                            <small class="text-danger">&#10060; Ingrese un nombre válido</small>
-                        </div>
+                        <div class="row">
+                            <!-- Nombres -->
+                            <div class="col-lg-6">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person me-2 text-primary"></i> Nombres
+                                    </span>
+                                    <input type="text" class="form-control" id="nombres" maxlength="100"
+                                        formControlName="v_nombre" />
+                                </div>
+                                <div
+                                    *ngIf="PerfilAdminForm.controls['v_nombre'].invalid && PerfilAdminForm.controls['v_nombre'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un nombre válido</small>
+                                </div>
+                            </div>
 
-                        <!-- Apellidos -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" style="width: 125px;">
-                                <i class="bi bi-person me-2 text-primary"></i> Apellidos
-                            </span>
-                            <input type="text" class="form-control" id="apellidos" formControlName="v_apellido" />
-                        </div>
-                        <div
-                            *ngIf="PerfilAdminForm.controls['v_apellido'].invalid && PerfilAdminForm.controls['v_apellido'].touched">
-                            <small class="text-danger">&#10060; Ingrese un apellido válido</small>
-                        </div>
-
-                        <!-- Documento -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" style="width: 125px;">
-                                <i class="bi bi-card-list me-2 text-primary"></i> Documento
-                            </span>
-                            <input type="text" class="form-control" id="documento" formControlName="v_documento" />
-                        </div>
-                        <div
-                            *ngIf="PerfilAdminForm.controls['v_documento'].invalid && PerfilAdminForm.controls['v_documento'].touched">
-                            <small class="text-danger">&#10060; Ingrese un documento válido</small>
+                            <div class="col-lg-6">
+                                <!-- Apellidos -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person me-2 text-primary"></i> Apellidos
+                                    </span>
+                                    <input type="text" class="form-control" id="apellidos"
+                                        formControlName="v_apellido" />
+                                </div>
+                                <div
+                                    *ngIf="PerfilAdminForm.controls['v_apellido'].invalid && PerfilAdminForm.controls['v_apellido'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un apellido válido</small>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Teléfono -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" style="width: 125px;">
-                                <i class="bi bi-telephone me-2 text-primary"></i> Teléfono
-                            </span>
-                            <input type="text" class="form-control" id="telefono" maxlength="20"
-                                formControlName="v_telefono" />
-                        </div>
-                        <div
-                            *ngIf="PerfilAdminForm.controls['v_telefono'].invalid && PerfilAdminForm.controls['v_telefono'].touched">
-                            <small class="text-danger">&#10060; Ingrese un número válido</small>
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <!-- Documento -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-card-list me-2 text-primary"></i> Documento
+                                    </span>
+                                    <input type="text" class="form-control" id="documento"
+                                        formControlName="v_documento" />
+                                </div>
+                                <div
+                                    *ngIf="PerfilAdminForm.controls['v_documento'].invalid && PerfilAdminForm.controls['v_documento'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un documento válido</small>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <!-- Teléfono -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-telephone me-2 text-primary"></i> Teléfono
+                                    </span>
+                                    <input type="text" class="form-control" id="telefono" maxlength="20"
+                                        formControlName="v_telefono" />
+                                </div>
+                                <div
+                                    *ngIf="PerfilAdminForm.controls['v_telefono'].invalid && PerfilAdminForm.controls['v_telefono'].touched">
+                                    <small class="text-danger">&#10060; Ingrese un número válido</small>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Correo -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" style="width: 125px;">
-                                <i class="bi bi-envelope me-2 text-primary"></i> Correo
-                            </span>
-                            <input type="text" class="form-control" id="correo" formControlName="v_usuario" />
-                        </div>
-                        <div
-                            *ngIf="PerfilAdminForm.controls['v_usuario'].invalid && PerfilAdminForm.controls['v_usuario'].touched">
-                            <small class="text-danger">&#10060; Ingrese un correo válido</small>
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <!-- Estatura -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person-standing me-2 text-primary"></i> Estatura
+                                    </span>
+                                    <input type="text" class="form-control" id="estatura"
+                                        formControlName="v_estatura" />
+                                </div>
+                                <div
+                                    *ngIf="PerfilAdminForm.controls['v_estatura'].invalid && PerfilAdminForm.controls['v_estatura'].touched">
+                                    <small class="text-danger">&#10060; Ingrese una estatura válida</small>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+
+                                <!-- Edad -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" style="width: 125px;">
+                                        <i class="bi bi-person-lines-fill me-2 text-primary"></i> Edad
+                                    </span>
+                                    <input type="text" class="form-control" id="edad" maxlength="20"
+                                        formControlName="v_edad" />
+                                </div>
+                                <div
+                                    *ngIf="PerfilAdminForm.controls['v_edad'].invalid && PerfilAdminForm.controls['v_edad'].touched">
+                                    <small class="text-danger">&#10060; Ingrese una edad valida</small>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Rol -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" style="width: 125px;">
-                                <i class="bi bi-person-badge me-2 text-primary"></i> Rol
-                            </span>
-                            <select id="roles" class="form-select" formControlName="id_rol">
-                                <option value="1">Administrador</option>
-                        
-                            </select>
+                        <div class="row">
+
+
+                            <!-- Genero -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-gender-neuter me-2 text-primary"></i> Genero
+                                </span>
+                                <select class="form-select" required formControlName="v_genero">
+                                    <option value="">Seleccione Género</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
+                            </div>
+                            <div
+                                *ngIf="PerfilAdminForm.controls['v_genero'].invalid && PerfilAdminForm.controls['v_genero'].touched;">
+                                <small class="error">&#10060;Seleccione un genero</small>
+                            </div>
+
+
+                            <!-- Correo -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-envelope me-2 text-primary"></i> Correo
+                                </span>
+                                <input type="text" class="form-control" id="correo" formControlName="v_usuario" autocomplete="off" />
+                            </div>
+                            <div
+                                *ngIf="PerfilAdminForm.controls['v_usuario'].invalid && PerfilAdminForm.controls['v_usuario'].touched">
+                                <small class="text-danger">&#10060; Ingrese un correo válido</small>
+                            </div>
+
+
+                            <!-- password -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-lock me-2 text-primary"></i> Contraseña
+                                </span>
+                                <input type="password" class="form-control" id="password"
+                                    formControlName="v_password"  autocomplete="current-password" autocomplete="off" />
+                            </div>
+                            <div
+                                *ngIf="PerfilAdminForm.controls['v_password'].invalid && PerfilAdminForm.controls['v_password'].touched">
+                                <small class="error">&#10060;Ingrese una contraseña valida,
+                                    Recuerde que debe contener al menos:
+                                    <li>1 Mayuscula</li>
+                                    <li>1 miniscula</li>
+                                    <li>1 caracter especial</li>
+                                    <li>numeros(&#64;$!%*?&.)</li>
+                                </small>
+                            </div>
+
+
+
+                            <!-- Rol -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" style="width: 125px;">
+                                    <i class="bi bi-person-badge me-2 text-primary"></i> Rol
+                                </span>
+                                <select id="roles" class="form-select" formControlName="id_rol">
+                                    <option value="1">Administrador</option>
+
+                                </select>
+                            </div>
+                            <div
+                                *ngIf="PerfilAdminForm.controls['id_rol'].invalid && PerfilAdminForm.controls['id_rol'].touched">
+                                <small class="text-danger">&#10060; Seleccione un rol</small>
+                            </div>
+
                         </div>
-                        <div
-                            *ngIf="PerfilAdminForm.controls['id_rol'].invalid && PerfilAdminForm.controls['id_rol'].touched">
-                            <small class="text-danger">&#10060; Seleccione un rol</small>
-                        </div>
+
+
+
 
                         <!-- Estado -->
                         <div class="input-group mb-3">
@@ -144,8 +242,8 @@
                                 <i class="bi bi-toggle-on me-2 text-primary"></i> Estado
                             </span>
                             <select id="estado" class="form-select" formControlName="v_estado">
-                                <option value="true">Activar</option>
-                                <option value="false">Desactivar</option>
+                                <option value="true">Activo</option>
+
                             </select>
                         </div>
                         <div
@@ -153,8 +251,8 @@
                             <small class="text-danger">&#10060; Seleccione un estado</small>
                         </div>
 
-                        <!-- Botón -->
-                        <div class="text-center mt-4">
+
+                        <div class="text-center mt-2">
                             <div *ngIf="PerfilAdminForm.invalid; else valido">
                                 <button class="btn btn-outline-secondary rounded-pill px-4 py-2" disabled>
                                     <b>Actualizar</b>
@@ -167,7 +265,7 @@
                             </ng-template>
                         </div>
 
-                        <!-- Mensaje -->
+
                         <p class="mt-3 text-muted text-center">¡Al terminar de editar, dale click en actualizar para
                             guardar los cambios!</p>
                     </div>
@@ -185,23 +283,27 @@
 
                     <div class="row">
                         <div class="col-xl-6 d-flex justify-content-end">
-                            <a routerLink="/administrador/dasboard" class="btn btn-primary  mt-3" style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                            <a routerLink="/administrador/dasboard" class="btn btn-primary  mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
                                 Ir al Tablero
                             </a>
                         </div>
                         <div class="col-xl-6 d-flex justify-content-start">
-                            <a routerLink="/administrador/reportes" class="btn btn-primary mt-3" style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                            <a routerLink="/administrador/reportes" class="btn btn-primary mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
                                 Reportes
                             </a>
                         </div>
 
                         <div class="col-xl-6 d-flex justify-content-end">
-                            <a routerLink="/administrador/gestionuser/consultar_user" class="btn btn-primary mt-3" style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                            <a routerLink="/administrador/gestionuser/consultar_user" class="btn btn-primary mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
                                 Gestion de usuarios
                             </a>
                         </div>
                         <div class="col-xl-6 text-start">
-                            <a routerLink="/administrador/gestioncita/consultar_cita" class="btn btn-primary mt-3" style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
+                            <a routerLink="/administrador/gestioncita/consultar_cita" class="btn btn-primary mt-3"
+                                style="width: 182px; height: 54px;  display: flex; justify-content: center; align-items: center; ">
                                 Asignar citas
                             </a>
                         </div>

@@ -4,6 +4,8 @@ import { UsersService } from '../../../services/usuarios.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-administrador-principal',
@@ -14,9 +16,10 @@ import { RouterLink } from '@angular/router';
 export class AdministradorPrincipalComponent implements OnInit {
   henry: boolean = true
   image: String = ''
-  todos:any
+  todos: any
   PerfilAdminForm: FormGroup;
 
+id: number=0
 
 
 
@@ -30,40 +33,49 @@ export class AdministradorPrincipalComponent implements OnInit {
       v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       id_rol: ['', [Validators.required]],
       v_estado: ['', [Validators.required]],
+      v_genero: ['', [Validators.required]],
+      v_estatura: ['', [Validators.required]],
+      v_edad: ['', [Validators.required]],
+      v_password: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(20),Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')]]
+
 
     })
   }
 
-
   ngOnInit(): void {
     const usuarioGuardado = localStorage.getItem('usuario');
-    let id: number = 0
+    
     if (usuarioGuardado) {
       const usuario = JSON.parse(usuarioGuardado);
-      id = usuario.id;
+      this.id = usuario.id;
     }
 
 
     const R_usuario = {
-      id
+      id: this.id
     }
 
     this.userService.getUser(R_usuario).subscribe({
       next: (data) => {
 
         console.log(data)
-        this.todos=data
+        this.todos = data
         this.PerfilAdminForm.patchValue({
-        
+
           v_nombre: this.todos.nombre,
           v_apellido: this.todos.apellido,
           v_documento: this.todos.documento,
           v_telefono: this.todos.telefono,
           v_usuario: this.todos.usuario,
           id_rol: this.todos.id_rol,
-          v_estado: this.todos.estado
+          v_estado: this.todos.estado,
+          v_genero: this.todos.genero,
+          v_estatura: this.todos.estatura,
+          v_edad: this.todos.edad,
+          v_password: this.todos.password
 
-          
+
+
 
         })
 
@@ -74,6 +86,72 @@ export class AdministradorPrincipalComponent implements OnInit {
 
     });
 
+
+  }
+
+  Actualizar() {
+
+
+
+
+    //Obtencion del formulario:
+    const nombre = String(this.PerfilAdminForm.value.v_nombre);
+    const apellido = String(this.PerfilAdminForm.value.v_apellido);
+    const documento = String(this.PerfilAdminForm.value.v_documento);
+    const telefono = String(this.PerfilAdminForm.value.v_telefono);
+    const genero = String(this.PerfilAdminForm.value.v_genero);
+    const edad = Number(this.PerfilAdminForm.value.v_edad);
+    const usuario = String(this.PerfilAdminForm.value.v_usuario);
+    const password = String(this.PerfilAdminForm.value.v_password);
+    const estado = Boolean(1);
+    const id_rol =Number(this.PerfilAdminForm.value.id_rol);
+
+    const R_usuario = {
+      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol, id: this.id
+    }
+
+
+    this.userService.UpdateAdm(R_usuario).subscribe({
+      next: (todos) => {
+        this.todos = todos;
+        console.log(this.todos);
+
+        if (this.todos.resultado === "Usuario actualizado correctamente") {
+
+
+          Swal.fire({
+            title: "Usuario actualizado",
+            icon: "success",
+            draggable: true
+          });
+
+          
+
+
+        } else {
+
+
+          Swal.fire({
+            title: "Documento o correo ya se encuentra registrado",
+            icon: "error",
+            draggable: true
+          });
+        }
+
+
+
+      }, error: (error) => {
+        console.log(error)
+      }
+
+      ,
+
+    })
+
+
+    console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
+      + "\n" + usuario + "\n" + password
+    )
 
   }
 
