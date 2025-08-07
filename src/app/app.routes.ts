@@ -23,6 +23,8 @@ import { DoctorPrincipalComponent } from '../app/Page/Doctor/doctor-principal/do
 import { CitasMedicasComponent } from '../app/Page/Doctor/citas-medicas/citas-medicas.component'
 import { ReportesMedicoComponent } from "../app/Page/Doctor/reportes-medico/reportes-medico.component";
 import { BotciComponent } from "../app/Page/Doctor/botci/botci.component";
+import { HistorialClinicoComponent } from './Page/Doctor/historial-clinico/historial-clinico.component';
+
 //Administrador
 import { AdministradorPrincipalComponent } from '../app/Page/Administrador/administrador-principal/administrador-principal.component'
 import { CreateComponent } from '../app/Page/Administrador/gestionuser/create/create.component'
@@ -34,7 +36,6 @@ import { BuscarMedicosComponent } from './Page/Administrador/Doctor_adm/buscar-m
 import { ReportesComponent } from './Page/Administrador/reportes/reportes.component'
 import { DashboardComponent } from './Page/Administrador/dashboard/dashboard.component'
 import { RolesComponent } from './Page/Administrador/roles/roles.component';
-import { HistorialClinicoComponent } from './Page/historial-clinico/historial-clinico.component';
 
 
 

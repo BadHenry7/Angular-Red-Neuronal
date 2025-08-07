@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NavbarDoctorComponent } from '../../Componentes/navbar-doctor/navbar-doctor.component';
-import { CitasService } from '../../services/citas.service';
+import { NavbarDoctorComponent } from '../../../Componentes/navbar-doctor/navbar-doctor.component';
+import { CitasService } from '../../../services/citas.service';
 import DataTables from 'datatables.net';
 
 @Component({
