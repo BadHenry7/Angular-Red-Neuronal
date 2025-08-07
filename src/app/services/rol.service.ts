@@ -11,9 +11,9 @@ import { Rol } from '../interfaces/rol';
     providedIn: 'root'
 })
 
-export class SesionGoogleService {
+export class RolesService {
 
-    private apiUrl = 'http://localhost:8000/';
+    private apiUrl = 'https://red-neuronal-api.onrender.com/';
 
     constructor(private http: HttpClient) { }
 

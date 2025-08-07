@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UsersService  } from '../../../../services/usuarios.service';
-import { AtribxUsuario } from '../../../../services/atribxusuario.service';
+import { AtribxUsuarioService } from '../../../../services/atribxusuario.service';
 import { Especialidades } from '../../../../interfaces/atribxusaurio';
 import { CommonModule } from '@angular/common';
 import emailjs from '@emailjs/browser'
@@ -27,7 +27,7 @@ todos_resp: any
 valido: string="";
 RegisterAdminForm: FormGroup;
 
-constructor (private rga: FormBuilder, private userService: UsersService, private atribxUsuario: AtribxUsuario){
+constructor (private rga: FormBuilder, private userService: UsersService, private atribxUsuario: AtribxUsuarioService){
     this.RegisterAdminForm = this.rga.group({//requerido, valores nulos, expresiones regulares, minimo y maximo
     v_nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
     v_apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],

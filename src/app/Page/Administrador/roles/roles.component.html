@@ -1,2 +1,146 @@
 <app-navbar-administrador></app-navbar-administrador>
-<p>roles works!</p>
+
+<div class="card-body container">
+    <div class="container text-center"><b class="fs-4">Creación de roles!</b></div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <label for="">Nombre del rol</label>
+            <input type="text" id="name_m" class="form-control" />
+        </div>
+        <div class="col-xl-6">
+            <label for="">Descripción</label>
+            <input type="text" id="descripcion" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mt-1">
+        <div class="col-xl-12">
+            <button class="btn" data-bs-toggle="modal" data-bs-target="#RModal2">
+                <i class="fas fa-plus-square fa-2x " style="color: green;"></i><span class="mx-2 fs-5">Añadir
+                    modulo</span>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+<!--Asignacion de modulo de roles-->
+<div class="modal fade" id="RModal2" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Seleccione los modulos que tendran el rol</h3>
+
+
+
+                @if (loading){
+
+                <p class="text-center">Cargando...</p>
+                }@else if (error!=null){
+
+                <p class="text-red-500">Error: {{error}}</p>
+                }@else if (todos_modulos.length > 0){
+
+
+
+                <div *ngFor="let todo of todos_modulos">
+
+                    <label>
+                        <input type="checkbox" [value]="todo.id" [(ngModel)]="seleccionados">
+                        {{todo.submodelos}}
+                    </label>
+                    <br>
+                </div>
+                }@else{
+
+                <p class="text-center">No hay datos</p>
+                }
+
+
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-info" (click)="create_rol()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Esta es la tabla-->
+<div id="Mostrarroles">
+    <div class="container">
+
+
+
+        @if(loading){
+
+
+        <!---->
+        <div class="row g-2 justify-content-center">
+            <p class="text-center col-lg-2 col-md-2 col-sm-2 col-12 col-xl-2">
+                Cargando datos...
+            </p>
+            <div class="spinner-border col-lg-4 col-md-4 col-sm-4 col-12 col-xl-4" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        }@else if (error){
+
+        <p class="text-red-500">Error: {{error}}</p>
+        }@else{
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-300" id="myTable" >
+                <thead>
+                    <tr class="bg-primary text-white">
+                        <th class="py-2 border">Nombre</th>
+                        <th class="py-2 border">descripción</th>
+                        <th class="py-2 border">Estado</th>
+                        <th class="py-2 border">Opcion</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                   
+                
+
+
+                        <tr class="hover:bg-gray-50" *ngFor="let rol of t_roles">
+                            <td class="py-2 border">{{rol.nombre}}</td>
+                            <td class="py-2 border">{{rol.descripcion}}</td>
+
+                            <td class="py-2 border">
+                                <span class="rol.estado ? 'text-success' : 'text-danger'">
+                                    {{rol.estado ? "Activo" : "Desactivado"}}
+                                </span>
+                            </td>
+                            <td class=" py-2 border text-center">
+                                @if (rol.id!=1 && rol.id!=2 && rol.id!=3){
+
+
+                                <button aria-label="editar" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#RModaledit" (click)="modulos_asignados(rol.id)">
+                                    <i class="bi bi-pencil-square"></i> Editar</button>
+                                }@else{
+
+
+
+                                <button aria-label="editar" class="btn btn-info" data-bs-toggle="modal"
+                                    data-bs-target="#RModalver" (click)="rol_v=rol.id">
+                                    <i class="bi bi-eye"></i> Ver</button>
+
+                                }
+                            </td>
+                        </tr>
+               
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>

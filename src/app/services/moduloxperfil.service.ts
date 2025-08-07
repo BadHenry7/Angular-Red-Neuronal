@@ -11,9 +11,9 @@ import { ModuloxPerfil, BuscarId, BuscarIdRol } from '../interfaces/moduloxperfi
     providedIn: 'root'
 })
 
-export class SesionGoogleService {
+export class ModuloxPerfilService {
 
-    private apiUrl = 'http://localhost:8000/';
+    private apiUrl = 'https://red-neuronal-api.onrender.com/';
 
     constructor(private http: HttpClient) { }
 

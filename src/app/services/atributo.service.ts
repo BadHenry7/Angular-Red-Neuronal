@@ -11,8 +11,8 @@ import { Atributo } from "../interfaces/atributo"
     providedIn: 'root'
 })
 
-export class UsersService {
-    private apiUrl = 'http://localhost:8000/'
+export class AtributoService {
+    private apiUrl = 'https://red-neuronal-api.onrender.com/'
 
     constructor(private http: HttpClient) { }
 

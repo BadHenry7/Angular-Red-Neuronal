@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../../../services/usuarios.service';
-import { AtribxUsuario } from '../../../../services/atribxusuario.service';
+import { AtribxUsuarioService } from '../../../../services/atribxusuario.service';
 import { User } from '../../../../interfaces/usuarios';
 import { Especialidad, Especialidades } from '../../../../interfaces/atribxusaurio';
 
@@ -39,7 +39,7 @@ export class BuscarMedicosComponent implements OnInit {
   usuarioEditando = false
 
 
-  constructor(private doctorcalled: UsersService, private atribxUsuario: AtribxUsuario, private actdoc: FormBuilder) {
+  constructor(private doctorcalled: UsersService, private atribxUsuario: AtribxUsuarioService, private actdoc: FormBuilder) {
     this.ActualizarDocForm = this.actdoc.group({//requerido, valores nulos,       expresiones regulares, mínimo y máximo
       v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       v_nombre: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],

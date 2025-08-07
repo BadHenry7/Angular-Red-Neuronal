@@ -11,8 +11,8 @@ import { Especialidades, Especialidad, BuscarxU} from "../interfaces/atribxusaur
      providedIn: 'root'
  })
 
-export class AtribxUsuario{
-    private apiUrl = 'http://localhost:8000/'
+export class AtribxUsuarioService{
+    private apiUrl = 'https://red-neuronal-api.onrender.com/'
     
     constructor(private http:HttpClient) { }
 
