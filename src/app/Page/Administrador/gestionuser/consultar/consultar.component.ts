@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-administrador/navbar-administrador.component';
-import {UsersService } from '../../../../services/usuarios.service';
+import { UsersService } from '../../../../services/usuarios.service';
 import { User } from '../../../../interfaces/usuarios';
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import emailjs from '@emailjs/browser'
@@ -50,22 +50,30 @@ export class ConsultarComponent implements OnInit {
     this.loadUsers();
   }
 
-
-   ngAfterViewInit(): void {
-    ($('#myTable') as any).DataTable({
-      language: {
-        url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
-      },
-      order: []
-    });
-  }
-
   loadUsers(): void {
-    this.userService.getUsers().subscribe(todos => {
-      this.todos = todos;
-     
+    this.userService.getUsers().subscribe({
+      next: (data: any) => {
+
+        this.todos = data;
+        console.log(this.todos)
+        setTimeout(() => {
+          ($('#myTable') as any).DataTable({
+            language: {
+              url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json",
+            },
+            order: []
+          });;
+
+
+        }, 1);
+
+      }, error: (err) => {
+        console.error("Error en get_roles()", err);
+      }
 
     });
+
+
 
   }
 
@@ -208,7 +216,7 @@ export class ConsultarComponent implements OnInit {
             title: "usuario desactivado con exito",
           });
 
-this.enviar_correo(nombre, usuario)
+          this.enviar_correo(nombre, usuario)
 
           $('#myTable').DataTable().clear().destroy();//Como no podemos recargar, toca destruir la tabla
           this.loadUsers();
@@ -230,21 +238,21 @@ this.enviar_correo(nombre, usuario)
 
   }
   serviceID = "service_acpug5r";
-   templateID = "template_bloqueouser";
-   apikey = "3bmpPn1S0SLhgotWj";
-  enviar_correo( nombre: string, usuario: string){
+  templateID = "template_bloqueouser";
+  apikey = "3bmpPn1S0SLhgotWj";
+  enviar_correo(nombre: string, usuario: string) {
     emailjs.init(this.apikey);
-          emailjs
-            .send(this.serviceID, this.templateID, {
-              nombre: nombre,
-              email: usuario,
-            })
-            .then((result) => {
-              console.log("Corro enviado con exito");
-            })
-            .catch((error) => {
-              console.log("Error al enviar el correo:", error.text);
-            });
+    emailjs
+      .send(this.serviceID, this.templateID, {
+        nombre: nombre,
+        email: usuario,
+      })
+      .then((result) => {
+        console.log("Corro enviado con exito");
+      })
+      .catch((error) => {
+        console.log("Error al enviar el correo:", error.text);
+      });
   }
 
 
