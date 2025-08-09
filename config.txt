@@ -70,3 +70,9 @@ marca todas las validaciones:
 Para google y microsoft login:
 npm i angular-oauth2-oidc
 
+
+
+PDF:
+import jsPDF from 'jspdf';
+   const { jsPDF } = window.jspdf;                   import jsPDF from 'jspdf';
+        const doc = new jsPDF();             --->   const doc = new jsPDF();

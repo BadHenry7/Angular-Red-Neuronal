@@ -1,5 +1,4 @@
 export interface ModuloxPerfil {
-  id?: number;
   id_rol?: number;
   id_modulo: number[]; // Lista de IDs (equivale a List[int])
   estado: boolean;
