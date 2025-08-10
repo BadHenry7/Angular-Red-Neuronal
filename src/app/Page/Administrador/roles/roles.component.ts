@@ -32,6 +32,13 @@ export class RolesComponent implements OnInit {
   name_m: string = ""
   descripcion: string = ""
 
+  loading_estado: boolean = true
+
+
+  
+  nambre: string = 'ss'
+  descrition: string = ''
+  etado: boolean  = true
 
   ngOnInit(): void {
     this.loading = false;
@@ -149,24 +156,24 @@ export class RolesComponent implements OnInit {
       next: (data) => {
         console.log(data)
 
-         const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      Toast.fire({
-        icon: "success",
-        iconColor: "white",
-        color: "white",
-        background: "green",
-        title: "rol creado con exito",
-      });
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          background: "green",
+          title: "rol creado con exito",
+        });
 
       }, error: (error) => {
         console.log("error", error)
@@ -181,5 +188,134 @@ export class RolesComponent implements OnInit {
 
   modulos_asignados(rol_id: number) {
 
+    const usuarioGuardado = localStorage.getItem("usuario")
+    if (usuarioGuardado) {
+      const usuario = JSON.parse(usuarioGuardado)
+      let id = usuario.id
+
+      const R_modulo = { id: rol_id }
+
+      this.moduloService.getModulosAsignados(R_modulo).subscribe({
+
+        next: (data) => {
+
+          this.todos = data
+          this.todos = this.todos.resultado
+          this.todos_info = this.todos[0]
+          console.log("variables ", this.todos_info)
+          this.nambre = this.todos_info.nombre;
+          this.descrition = this.todos_info.descripcion;
+          this.etado = this.todos_info.estado_rol;
+          console.log("estados", this.etado)
+
+          try {
+            const R_mxp = {
+              id_rol: rol_id
+            }
+
+            this.moduloxPerfilService.get_mxp_id(R_mxp).subscribe({
+
+              next: (data_mxp) => {
+                this.todos_mxp = data_mxp
+                this.todos_mxp = this.todos_mxp.resultado
+                console.log("moduloxPerfilService", this.todos_mxp)
+                this.seleccionados = []
+                for (let i = 0; i < this.todos_mxp.length; i++) {
+
+                  if (this.todos_mxp[i].estado == 1) {
+                    this.seleccionados.push(this.todos_mxp[i].id_modulo)
+
+                  }
+
+                }
+                console.log(this.seleccionados)
+
+
+              }, error: (error) => {
+                console.log("error", error)
+              }
+
+
+            })
+
+
+          } catch (e) {
+            console.log("Error", e)
+          }
+
+
+
+        }, error: (error) => {
+          console.log("error", error)
+
+        }
+
+      })
+
+
+    }
+
   }
+
+
+  update_rol(id_rol: number) {
+
+
+    console.log("estados", this.etado)
+
+
+    const R_rol = {
+      id: id_rol, nombre: this.nambre, descripcion: this.descrition, estado: this.etado, modulo_seleccionado: this.seleccionados
+    }
+
+    this.moduloService.updateModuloSeleccionado(R_rol).subscribe({
+
+      next: (data) => {
+        console.log(data)
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          background: "#00bdff",
+          title: "rol actualizado con exito",
+        });
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+  }
+
+
+  cam_estado() {
+    console.log("cam_estado1",this.etado)
+    const estado= Number(this.etado)
+    if (estado!=0) {
+
+      this.loading_estado = true
+    console.log("cam_estado1",this.etado)
+
+    } else {
+      this.loading_estado = false
+    console.log("cam_estado2",this.etado)
+    console.log("cam_estado2",this.loading_estado)
+
+    }
+
+  }
+
 }

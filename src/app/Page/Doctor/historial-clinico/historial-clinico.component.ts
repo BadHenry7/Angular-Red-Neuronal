@@ -104,7 +104,7 @@ export class HistorialClinicoComponent implements OnInit {
 
   async capturar(){
 
-       await fetch('http://127.0.0.1:8000/detener_altura', {
+       await fetch('https://red-neuronal-api.onrender.com/detener_altura', {
   method: 'GET'
 });
 
@@ -118,7 +118,7 @@ export class HistorialClinicoComponent implements OnInit {
 
     this.videoSrc = ''; // fuerza el reinicio
     setTimeout(() => {
-      this.videoSrc = `http://127.0.0.1:8000/video_feed?id=${v_id}&cache=${Date.now()}`;
+      this.videoSrc = `https://red-neuronal-api.onrender.com/video_feed?id=${v_id}&cache=${Date.now()}`;
     }, 200);
   }
 

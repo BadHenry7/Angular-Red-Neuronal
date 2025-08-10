@@ -51,7 +51,7 @@
                 <div *ngFor="let todo of todos_modulos">
 
                     <label>
-                        <input type="checkbox" [value]="todo.id"    (change)="seleccionado($event, todo.id)">
+                        <input type="checkbox" [value]="todo.id" (change)="seleccionado($event, todo.id)">
                         {{todo.submodelos}}
                     </label>
                     <br>
@@ -95,7 +95,7 @@
         }@else{
 
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-300" id="myTable" >
+            <table class="min-w-full bg-white border border-gray-300" id="myTable">
                 <thead>
                     <tr class="bg-primary text-white">
                         <th class="py-2 border">Nombre</th>
@@ -106,41 +106,156 @@
                 </thead>
 
                 <tbody>
-                   
-                
-
-
-                        <tr class="hover:bg-gray-50" *ngFor="let rol of t_roles">
-                            <td class="py-2 border">{{rol.nombre}}</td>
-                            <td class="py-2 border">{{rol.descripcion}}</td>
-
-                            <td class="py-2 border">
-                                <span class="rol.estado ? 'text-success' : 'text-danger'">
-                                    {{rol.estado ? "Activo" : "Desactivado"}}
-                                </span>
-                            </td>
-                            <td class=" py-2 border text-center">
-                                @if (rol.id!=1 && rol.id!=2 && rol.id!=3){
-
-
-                                <button aria-label="editar" class="btn btn-info" data-bs-toggle="modal"
-                                    data-bs-target="#RModaledit" (click)="modulos_asignados(rol.id)">
-                                    <i class="bi bi-pencil-square"></i> Editar</button>
-                                }@else{
 
 
 
-                                <button aria-label="editar" class="btn btn-info" data-bs-toggle="modal"
-                                    data-bs-target="#RModalver" (click)="rol_v=rol.id">
-                                    <i class="bi bi-eye"></i> Ver</button>
 
-                                }
-                            </td>
-                        </tr>
-               
+                    <tr class="hover:bg-gray-50" *ngFor="let rol of t_roles">
+                        <td class="py-2 border">{{rol.nombre}}</td>
+                        <td class="py-2 border">{{rol.descripcion}}</td>
+
+                        <td class="py-2 border">
+                            <span class="rol.estado ? 'text-success' : 'text-danger'">
+                                {{rol.estado ? "Activo" : "Desactivado"}}
+                            </span>
+                        </td>
+                        <td class=" py-2 border text-center">
+                            @if (rol.id!=1 && rol.id!=2 && rol.id!=3){
+
+
+                            <button aria-label="editar" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#RModaledit" (click)="modulos_asignados(rol.id)">
+                                <i class="bi bi-pencil-square"></i> Editar</button>
+                            }@else{
+
+
+
+                            <button aria-label="editar" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#RModalver" (click)="rol_v=rol.id">
+                                <i class="bi bi-eye"></i> Ver</button>
+
+                            }
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
         }
+    </div>
+</div>
+
+
+<!--Editar roles-->
+<div class="modal fade" id="RModaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lx-4">
+                    <label for="">Nombre:</label>
+                    <input type="text" id="nambre" class="form-control" [(ngModel)]="nambre">
+                </div>
+
+                <div class="col-lx-4">
+                    <label for="">Descripción:</label>
+                    <input type="text" id="descrition" class="form-control" [(ngModel)]="descrition">
+                </div>
+
+                <div class="col-lx-4 mt-1">
+
+                    <label for="">Estado:</label><!--Cam es cambiar-->
+                    <select id="etado" name="opciones" [(ngModel)]="etado" (change)="cam_estado()" style="border: none; width: 55%;"
+                        class="form-control">
+                        <option value="1">Activar</option>
+                        <option value="0">Desactivar</option>
+                    </select>
+                </div>
+
+                @if (loading_estado){
+                <div>
+                    <label for="">Modulos:
+                    </label>
+                    <br>
+
+                    <div *ngFor="let todo of todos_modulos">
+
+
+
+                        <label>
+                            <input type="checkbox" value="todo.id" checked [value]="todo.id"
+                                (change)="seleccionado($event, todo.id)"    [checked]="seleccionados.includes(todo.id)">
+                            {{todo.submodelos}}
+                        </label>
+                        <br>
+
+
+                    </div>
+                </div>
+            }
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-info" (click)="update_rol(todos_info.id_rol)">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Mostrar roles exclusivo-->
+<div class="modal fade" id="RModalver" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @if (rol_v==1){
+
+
+                <p>Rol exclusivo del superadministrador</p>
+                <p>Acceso total al sistema.</p>
+                <ul>
+                    <li>Gestion de usuario</li>
+                    <li>Gestion de medico</li>
+                    <li>Gestion de roles</li>
+                    <li>Gestion de citas</li>
+                    <li>Realizar Reportes</li>
+                    <li>ver tablero</li>
+                </ul>
+                }@else if (rol_v==2){
+
+
+
+                <p>Rol exclusivo del paciente</p>
+                <p>Podra realizar: </p>
+
+                <ul>
+                    <li>Citas medicas</li>
+                    <li>Reportes</li>
+                    <li>Certificados</li>
+                    <li>Ver su perfil</li>
+                </ul>
+                }@else if (rol_v==3){
+
+
+                <p>Rol exclusivo del doctor</p>
+                <p>Podra realizar: </p>
+
+                <ul>
+                    <li>Ver citas</li>
+                    <li>Historial clinico</li>
+                    <li>Reportes</li>
+                    <li>Usar la red neuronal como apoyo para la deteccion de enfermedades basicas</li>
+                </ul>
+                }
+            </div>
+
+        </div>
     </div>
 </div>
