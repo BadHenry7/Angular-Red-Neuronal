@@ -30,7 +30,11 @@ export class NavbarAdministradorComponent implements OnInit {
       this.name = usuario.name;
       this.rol = usuario.rol;
     }
-    this.mostrar_modulos(this.rol)
+
+    if (this.rol!=1){
+
+      this.mostrar_modulos(this.rol)
+    }
 
   }
 

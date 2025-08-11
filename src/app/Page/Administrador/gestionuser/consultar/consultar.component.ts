@@ -6,6 +6,7 @@ import { UsersService } from '../../../../services/usuarios.service';
 import { User } from '../../../../interfaces/usuarios';
 import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import emailjs from '@emailjs/browser'
+import { RolesService } from '../../../../services/rol.service';
 declare var $: any;
 declare var Swal: any;
 declare var toast: any;
@@ -23,13 +24,13 @@ export class ConsultarComponent implements OnInit {
 
   error: String | null = null;
   loading: Boolean = false
-
   todos: User[] = []
   todos_editar: any;
   valido: boolean = false
   ActualizarUserForm: FormGroup;
+  dataroles: any=[]
 
-  constructor(private userService: UsersService, private act_usuario: FormBuilder) {
+  constructor(private userService: UsersService, private act_usuario: FormBuilder, private rolesService: RolesService) {
 
 
     this.ActualizarUserForm = this.act_usuario.group({//requerido, valores nulos,       expresiones regulares, mínimo y máximo
@@ -100,6 +101,26 @@ export class ConsultarComponent implements OnInit {
 
 
         });
+
+
+
+        this.rolesService.roles_get().subscribe({
+
+          next: (data) => {
+
+            this.dataroles=data
+            this.dataroles=this.dataroles.resultado
+            console.log("roles get",  this.dataroles)
+            
+
+          }, error: (error) => {
+            console.log("error", error)
+          }
+
+
+        })
+
+
 
 
       }, error: (error) => {

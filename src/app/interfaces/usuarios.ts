@@ -10,7 +10,8 @@ export interface User{
     estado?:boolean,
     genero?:string,
     edad?:number,
-    estatura?:string
+    estatura?:string,
+    nombre_rol?: string
 }
 
 
