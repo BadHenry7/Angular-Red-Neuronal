@@ -99,12 +99,12 @@ export class LoginComponent implements OnInit {
 
             this.verificar = true;
             console.log("*//////////////", todo[0].rol)
-            let encontrado = { name: todo[0].nombre, correo: this.correo, id: todo[0].id };
+            let encontrado = { name: todo[0].nombre, correo: this.correo, id: todo[0].id, rol: todo[0].rol };
             console.log("Imprimos el encontrado", encontrado);
             let miStorage = window.localStorage;
             miStorage.setItem("usuario", JSON.stringify(encontrado));
            this.loading=true;
-            if (todo[0].rol == 1) {
+            if (todo[0].rol == 1 || todo[0].rol > 3) {
               Swal.fire({
                 //Popup window position, can be 'top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.
                 position: "top",

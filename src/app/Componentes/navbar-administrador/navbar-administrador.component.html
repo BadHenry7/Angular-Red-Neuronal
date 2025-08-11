@@ -1,52 +1,59 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-1">
+<div [hidden]="rol!=1">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-1">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/administrador/principal" id="name" >{{name}}</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Menu-usuarios" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" routerLink="/administrador/principal" id="name">{{name}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Menu-usuarios"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="Menu-usuarios">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <!--Aca empieza otro-->
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Usuarios
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" routerLink="/administrador/gestionuser/create">Registrar usuario</a></li>
-              <li><a class="dropdown-item" routerLink="/administrador/gestionuser/consultar_user">Buscar usuario</a></li>
+              <li><a class="dropdown-item" routerLink="/administrador/gestionuser/consultar_user">Buscar usuario</a>
+              </li>
             </ul>
             <!--Aca empieza otro-->
           </li>
-           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               Citas medicas
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li><a class="dropdown-item" routerLink="/administrador/gestioncita/create_cita">Asignar citas</a></li>
-              <li><a class="dropdown-item" routerLink="/administrador/gestioncita/consultar_cita">Gestionar citas</a></li>
+              <li><a class="dropdown-item" routerLink="/administrador/gestioncita/consultar_cita">Gestionar citas</a>
+              </li>
             </ul>
-<!--Aca empieza otro-->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Medicos
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" routerLink="/administrador/Doctor_adm/regis_medicos">Registrar medico</a></li>
-                <li><a class="dropdown-item" routerLink="/administrador/Doctor_adm/buscar_medicos">Buscar medico</a></li>
+            <!--Aca empieza otro-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Medicos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" routerLink="/administrador/Doctor_adm/regis_medicos">Registrar medico</a>
+              </li>
+              <li><a class="dropdown-item" routerLink="/administrador/Doctor_adm/buscar_medicos">Buscar medico</a></li>
               <!--  <li><a class="dropdown-item" >Actualizar medico</a></li>
                 <li><a class="dropdown-item" >Desactivar medico</a></li> -->
-              </ul>
+            </ul>
 
-             </li>
+          </li>
           <!--Aca empieza otro-->
           <li class="nav-item">
             <a class="nav-link" routerLink="/administrador/reportes">Reportes</a>
           </li>
 
-          
+
           <li class="nav-item">
-            <a class="nav-link"   routerLink="/administrador/dasboard">Dashboard</a><!---->
+            <a class="nav-link" routerLink="/administrador/dasboard">Dashboard</a><!---->
           </li>
           <!--
           <li class="nav-item">
@@ -64,18 +71,83 @@
 
         </ul>
 
-        
 
-        
+
+
         <div class="d-flex   nav-item nav-link ms-auto">
-          <button class="btn btn-outline-dark  nav-item" (click)="confirmacion()"   aria-label="Cerrar edición de usuario">Cerrar sesion</button>
+          <button class="btn btn-outline-dark  nav-item" (click)="confirmacion()"
+            aria-label="Cerrar edición de usuario">Cerrar sesion</button>
         </div>
-       
+
       </div>
     </div>
   </nav>
+</div>
 
-  <!-- <div class="modal fade"  id="perfil_modal" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
+
+<div [hidden]="rol==1">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-1">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/administrador/principal" id="name">{{name}}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Menu-usuarios"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="Menu-usuarios">
+        <ul class="navbar-nav">
+
+          <div *ngFor="let todo of todos let i = index">
+            @if (todo.nombre_modulo !="Administrador" && (i==0 || todo.nombre_modulo!=todos[i-1].nombre_modulo)){
+
+
+
+            <!--Aca empieza-->
+            <li class="nav-item dropdown">
+              <!--Aca empieza otro-->
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{todo.nombre_modulo}}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div *ngFor="let subtodo of todos">
+                  @if(subtodo.nombre_modulo===todo.nombre_modulo){
+
+                  <li><a class="dropdown-item" [routerLink]="subtodo.url">{{subtodo.submodulo}}</a></li>
+                  }
+                </div>
+              </ul>
+            </li>
+            }
+            @else if (todo.nombre_modulo==="Administrador"){
+
+
+
+            <!--Aca empieza otro-->
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="todo.url">{{todo.submodulo}}</a>
+            </li>
+            }
+          </div>
+
+
+
+
+          <!--Aca termina-->
+
+        </ul>
+
+
+
+
+        <div class="d-flex   nav-item nav-link ms-auto">
+          <button class="btn btn-outline-dark  nav-item" (click)="confirmacion()"
+            aria-label="Cerrar edición de usuario">Cerrar sesion</button>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- <div class="modal fade"  id="perfil_modal" tabindex="-1" aria-labelledby="rModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

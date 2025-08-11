@@ -85,6 +85,25 @@ export const routes: Routes = [
     { path: 'administrador/create_rol', component: RolesComponent },
 
 
+
+    //Vista main
+    
+
+    { path: 'vista_main/Usuario/Crear_usuario', component: CreateComponent },
+    { path: 'vista_main/Usuario/Buscar_usuario', component: ConsultarComponent },
+
+    { path: 'vista_main/Citas_medicas/crear_citas', component: CreateCitaComponent },
+    { path: 'vista_main/Citas_medicas/buscar_citas', component: ConsultarCitaComponent },
+    { path: 'vista_main/Doctor_adm/regis_medicos', component: RegisMedicosComponent },
+    { path: 'vista_main/Doctor_adm/buscar_medicos', component: BuscarMedicosComponent },
+
+    
+    { path: 'vista_main/Reportes', component: ReportesComponent },
+    { path: 'vista_main/Dashboard', component: DashboardComponent },
+    
+
+
+
     ///GoogleLogin
     { path: 'GoogleLogin', component: GoogleComponent },
     {path: 'MicrosoftLogin', component: MicrosoftComponent},
