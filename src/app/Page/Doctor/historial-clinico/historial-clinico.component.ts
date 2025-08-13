@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { NavbarDoctorComponent } from '../../../Componentes/navbar-doctor/navbar-doctor.component';
 import { CitasService } from '../../../services/citas.service';
 import DataTables from 'datatables.net';
+import { SintomasService } from '../../../services/sintomas.service';
+import { DiagnosticoService } from '../../../services/diagnosticos';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-historial-clinico',
@@ -12,14 +15,12 @@ import DataTables from 'datatables.net';
   styleUrl: './historial-clinico.component.css'
 })
 export class HistorialClinicoComponent implements OnInit {
-  constructor(private h_clinicoService: CitasService) { }
+  constructor(private h_clinicoService: CitasService, private sintomasService: SintomasService, private diagnosticoService: DiagnosticoService) { }
 
-  ngOnInit(): void {
 
-  }
   todos: any = {};
   todos2: any = [];
-  citas: any[] = [];
+  citas: any = [];
   error = null;
   comprobar = false;
   loading = true;
@@ -29,6 +30,32 @@ export class HistorialClinicoComponent implements OnInit {
   telefono: string = ''
   buscardocumento_v: string = '';
   mostrarhistorial: boolean = true
+
+  citaSeleccionada: string = ''
+  sintomas: string = ''
+  descripcion_sintomas: string = ''
+  diagnostico: string = ''
+  descripcion_diagnostico: string = ''
+  Observaciontratamiento: string = ''
+
+
+  ngOnInit(): void {
+
+    this.h_clinicoService.get_cita_admin().subscribe({
+
+      next: (data) => {
+        this.citas = data
+        this.citas = this.citas.resultado
+        console.log(" this.citas", this.citas)
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+  }
+
+
 
   buscar() {
     const documento = this.buscardocumento_v;
@@ -97,16 +124,69 @@ export class HistorialClinicoComponent implements OnInit {
 
   guardar() {
 
+    const R_sintomas = {
+      nombre: this.sintomas, descripcion: this.descripcion_sintomas, estado: true, id_cita: Number(this.citaSeleccionada)
+    }
+    console.log("R_diagnostico", R_sintomas)
+    this.sintomasService.createSintoma(R_sintomas).subscribe({
+
+      next: (data) => {
+
+        console.log("la data de guardar sintomas", data)
+
+
+        const R_diagnostico = {
+          id_cita: Number(this.citaSeleccionada), resultado: this.diagnostico, descripcion: this.descripcion_diagnostico, Observacion: this.Observaciontratamiento, estado: true
+        }
+
+        this.diagnosticoService.createDiagnostico(R_diagnostico).subscribe({
+
+          next: (data) => {
+            console.log("data de guardar diagnostico", data)
+
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "bottom-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              },
+            });
+            Toast.fire({
+              icon: "success",
+              iconColor: "white",
+              color: "white",
+              background: "green",
+              title: "Historial clinico añadido",
+            });
+
+          }, error: (error) => {
+            console.log("error", error)
+          }
+
+        })
+
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+
 
 
   }
 
 
-  async capturar(){
+  async capturar() {
 
-       await fetch('https://red-neuronal-api.onrender.com/detener_altura', {
-  method: 'GET'
-});
+    await fetch('https://red-neuronal-api.onrender.com/detener_altura', {
+      method: 'GET'
+    });
 
   }
 

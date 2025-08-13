@@ -7,7 +7,8 @@
             <div class="input-group">
                 <button class="input-group-text" (click)="buscar()" aria-label="Buscar"><i class="bi bi-search"
                         style="color: steelblue"></i></button>
-                <input type="text" class="form-control Input_buscar" [(ngModel)]="buscardocumento_v" id="buscardocument_v" style="">
+                <input type="text" class="form-control Input_buscar" [(ngModel)]="buscardocumento_v"
+                    id="buscardocument_v" style="">
             </div>
         </div>
 
@@ -20,7 +21,7 @@
         <div class="card-header" style="background-color: cornflowerblue; color: white;">
             <!--Header-->
             <div class="fs-2 text-center">
-                Historial clinico de <span class=""  id="nombre">{{nombre}}</span>
+                Historial clinico de <span class="" id="nombre">{{nombre}}</span>
             </div>
         </div>
         <!--Fin del Header-->
@@ -29,7 +30,7 @@
             <!--Body-->
 
             <div>
-                <label for="" ><b>Documento:</b> <span id="documento"> {{documento}}</span></label>
+                <label for=""><b>Documento:</b> <span id="documento"> {{documento}}</span></label>
                 <br />
                 <label for=""><b>Telefono:</b> <span id="telefono"> {{telefono}}</span></label>
             </div>
@@ -155,7 +156,7 @@
                     <div class="input-group">
                         <span class="input-group-text text-danger"><i class="bi bi-heart-pulse"></i></span>
                         <input type="text" class="form-control" id="sintomas" placeholder="Síntomas del paciente"
-                             />
+                            [(ngModel)]="sintomas" />
                     </div>
                 </div>
 
@@ -165,7 +166,7 @@
                     <div class="input-group">
                         <span class="input-group-text text-warning"><i class="bi bi-file-earmark-text"></i></span>
                         <input type="text" class="form-control" id="descripcion_sintomas"
-                            placeholder="Descripción detallada"  />
+                            placeholder="Descripción detallada" [(ngModel)]="descripcion_sintomas" />
                     </div>
                 </div>
 
@@ -175,7 +176,7 @@
                     <div class="input-group">
                         <span class="input-group-text text-primary"><i class="bi bi-clipboard2-pulse"></i></span>
                         <input type="text" class="form-control" id="diagnostico" placeholder="Diagnóstico del usuario"
-                             />
+                            [(ngModel)]="diagnostico" />
                     </div>
                 </div>
 
@@ -185,7 +186,7 @@
                     <div class="input-group">
                         <span class="input-group-text text-info"><i class="bi bi-journal-text"></i></span>
                         <input type="text" class="form-control" id="descripcion_diagnostico"
-                            placeholder="Explicación del diagnóstico"  />
+                            placeholder="Explicación del diagnóstico" [(ngModel)]="descripcion_diagnostico" />
                     </div>
                 </div>
 
@@ -196,7 +197,7 @@
                         <span class="input-group-text"><i class="bi bi-capsule-pill"
                                 style="color: cadetblue;"></i></span>
                         <input type="text" class="form-control" id="Observaciontratamiento"
-                            placeholder="Recomendaciones médicas"  />
+                            placeholder="Recomendaciones médicas" [(ngModel)]="Observaciontratamiento" />
                     </div>
                 </div>
 
@@ -206,13 +207,14 @@
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-calendar-check"
                                 style="color: #6f42c1;"></i></span>
-                        <select id="citas" class="form-select">
+                        <select id="citas" class="form-select" [(ngModel)]="citaSeleccionada">
                             <option value="">Selecciona una cita</option>
-
-                            <div *ngFor="let cita of citas">
-                                <option value="cita.id">Fecha: {{cita.fecha}} - Hora: {{cita.hora}}</option>
-                            </div>
+                            <option *ngFor="let cita of citas" [value]="cita.id">
+                                Fecha: {{ cita.fecha }} - Hora: {{ cita.hora }} - Doctor: {{ cita.medico }} - Paciente:
+                                {{ cita.paciente }}
+                            </option>
                         </select>
+
                     </div>
                 </div>
 

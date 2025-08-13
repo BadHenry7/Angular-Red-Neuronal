@@ -35,6 +35,7 @@ export class BotciComponent implements OnInit {
 
       this.botciService.get_symptoms().subscribe({
         next: (data) => {
+          console.log(data)
           this.sintomas = [...data.sintomas];
         }, error: (error) => {
           console.log("error: ", error)
