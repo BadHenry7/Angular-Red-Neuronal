@@ -121,21 +121,15 @@ export class BotciComponent implements OnInit {
 
       this.botciService.predict_disease(R_botci).subscribe({
         next: (data) => {
+          console.log("daraaaaaaaaaaa",data)
+          this.mostrar(data);
 
         }, error: (error) => {
           console.log("error:", error)
         }
       })
 
-      const res = await fetch("https://red-neuronal-api.onrender.com/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ selected_symptoms: this.seleccionados }),
-      });
-      const data = await res.json();
-      // enfermedad = data.enfermedad;
-      // probabilidad= data.probabilidad;
-      this.mostrar(data);
+     
     } catch (error) {
       console.error("Error al predecir la enfermedad:", error);
     }

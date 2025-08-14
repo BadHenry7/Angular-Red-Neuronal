@@ -7,6 +7,7 @@ import DataTables from 'datatables.net';
 import { SintomasService } from '../../../services/sintomas.service';
 import { DiagnosticoService } from '../../../services/diagnosticos';
 import Swal from 'sweetalert2';
+import { DynamoDBService } from '../../../services/dynamodb.service';
 
 @Component({
   selector: 'app-historial-clinico',
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
   styleUrl: './historial-clinico.component.css'
 })
 export class HistorialClinicoComponent implements OnInit {
-  constructor(private h_clinicoService: CitasService, private sintomasService: SintomasService, private diagnosticoService: DiagnosticoService) { }
+  constructor(private h_clinicoService: CitasService, private sintomasService: SintomasService, private diagnosticoService: DiagnosticoService, private dynamoDBService: DynamoDBService) { }
 
 
   todos: any = {};
@@ -116,9 +117,61 @@ export class HistorialClinicoComponent implements OnInit {
 
   }
 
-
+v_descripcion:string=''
+v_dia_incapacidad:string=''
+v_observaciones:string=''
+id_doctor: number=0
 
   incapacidad() {
+
+    const usuarioguardado= localStorage.getItem("usuario")
+     if (usuarioguardado){
+      const usuario=JSON.parse(usuarioguardado)
+      this.id_doctor=usuario.id
+
+     }
+
+     const v_paciente= this.todos.id
+
+    const R_incapacidad={
+      descripcion: this.v_descripcion, dias_de_incapacidad: this.v_dia_incapacidad, id_usuario: v_paciente, id_doctor: this.id_doctor, observaciones: this.v_observaciones
+    }
+
+    this.dynamoDBService.añadirIncapacidad(R_incapacidad).subscribe({
+
+      next: (data) => {
+        console.log("data de añadir incapacidad", data)
+
+            const Toast = Swal.mixin({
+          toast: true,
+          position: "bottom-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          background: "green",
+          title: "Incapacidad medica añadida",
+        });
+
+
+
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+
+
+    })
+
 
   }
 
