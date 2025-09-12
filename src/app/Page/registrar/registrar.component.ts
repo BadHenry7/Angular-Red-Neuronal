@@ -50,7 +50,7 @@ export class RegistrarComponent {
     const usuario = String(this.RegisterForm.value.v_usuario);
     const password = String(this.RegisterForm.value.v_password);
     const estado = Boolean(1);
-    const id_rol = Number(1);
+    const id_rol = Number(2);
 
     const R_usuario = {
       nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol

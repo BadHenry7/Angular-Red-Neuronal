@@ -36,6 +36,7 @@ import { BuscarMedicosComponent } from './Page/Administrador/Doctor_adm/buscar-m
 import { ReportesComponent } from './Page/Administrador/reportes/reportes.component'
 import { DashboardComponent } from './Page/Administrador/dashboard/dashboard.component'
 import { RolesComponent } from './Page/Administrador/roles/roles.component';
+import { MovilComponent } from './movil/movil.component';
 
 
 
@@ -108,7 +109,16 @@ export const routes: Routes = [
     { path: 'GoogleLogin', component: GoogleComponent },
     {path: 'MicrosoftLogin', component: MicrosoftComponent},
 
+
+ //Movil
+   { path: 'movil', component: MovilComponent },
+
+
+
     { path: '**', component: DefaultComponent },
+
+
+   
 
 
 ];
