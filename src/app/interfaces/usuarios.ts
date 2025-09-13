@@ -26,5 +26,11 @@ export interface Login {
   password: string;
 }
 
+export interface SMS {
+  phoneNumber: string;
+  message: string;
+}
+
+
 
 

@@ -1,4 +1,4 @@
-<div class="slide">
+<!-- <div class="slide">
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -23,4 +23,58 @@
 </div>
 
 
-   
+    -->
+
+    <div class="carousel-container"
+     role="presentation"
+     (mouseenter)="stopAutoplay()"
+     (mouseleave)="startAutoplay()"
+     [ngStyle]="{'background-image': 'url(../../../../assess/fondo2.png)', 'background-size': '50vh'}">
+
+  <div class="carousel">
+    <div class="slides-wrapper">
+
+      <!-- Slide anterior -->
+      <div class="slide-card prev-card" role="presentation" (click)="prevSlide()">
+        <div class="card-inner">
+          <img [src]="slides[getPrevIndex(currentIndex)].image || '/placeholder.svg'" alt="Slide anterior">
+          <div class="preview-caption">
+            {{slides[getPrevIndex(currentIndex)].caption}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide actual -->
+      <div class="slide-card main-card">
+        <div class="card-inner">
+          <img [src]="slides[currentIndex].image || '/placeholder.svg'" alt="Slide actual">
+          <div class="caption">
+            {{slides[currentIndex].caption}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide siguiente -->
+      <div class="slide-card next-card" role="presentation" (click)="nextSlide()">
+        <div class="card-inner">
+          <img [src]="slides[getNextIndex(currentIndex)].image || '/placeholder.svg'" alt="Siguiente slide">
+          <div class="preview-caption">
+            {{slides[getNextIndex(currentIndex)].caption}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="nav-button prev" (click)="prevSlide()">&lt;</button>
+    <button class="nav-button next" (click)="nextSlide()">&gt;</button>
+  </div>
+
+  <div class="indicators">
+    <button aria-label="indicators"
+      *ngFor="let slide of slides; let i = index"
+      class="indicator"
+      [ngClass]="{'active': i === currentIndex}"
+      (click)="currentIndex = i">
+    </button>
+  </div>
+</div>

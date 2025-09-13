@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import {User, Login, Buscar} from "../interfaces/usuarios"
+import {User, Login, Buscar, SMS} from "../interfaces/usuarios"
 
 
 
@@ -60,6 +60,9 @@ export class UsersService{
     }
 
 
+    sendSMS(user: SMS):Observable<SMS[]>{//Todos los usuarios
+        return this.http.post<SMS[]>('https://api-nodejs-buxf.onrender.com/api/send-sms', user);
+    }
 
 
     

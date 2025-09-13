@@ -19,7 +19,7 @@ export class AdministradorPrincipalComponent implements OnInit {
   todos: any
   PerfilAdminForm: FormGroup;
 
-id: number=0
+  id: number = 0
 
 
 
@@ -36,7 +36,7 @@ id: number=0
       v_genero: ['', [Validators.required]],
       v_estatura: ['', [Validators.required]],
       v_edad: ['', [Validators.required]],
-      v_password: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(20),Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')]]
+      v_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')]]
 
 
     })
@@ -44,7 +44,7 @@ id: number=0
 
   ngOnInit(): void {
     const usuarioGuardado = localStorage.getItem('usuario');
-    
+
     if (usuarioGuardado) {
       const usuario = JSON.parse(usuarioGuardado);
       this.id = usuario.id;
@@ -104,10 +104,11 @@ id: number=0
     const usuario = String(this.PerfilAdminForm.value.v_usuario);
     const password = String(this.PerfilAdminForm.value.v_password);
     const estado = Boolean(1);
-    const id_rol =Number(this.PerfilAdminForm.value.id_rol);
+    const id_rol = Number(this.PerfilAdminForm.value.id_rol);
+    const estatura= String(this.PerfilAdminForm.value.v_estatura);
 
     const R_usuario = {
-      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol, id: this.id
+      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol, id: this.id, estatura
     }
 
 
@@ -125,7 +126,7 @@ id: number=0
             draggable: true
           });
 
-          
+          this.sendSMS()
 
 
         } else {
@@ -155,6 +156,26 @@ id: number=0
 
   }
 
+
+  sendSMS() {
+
+    const R_SMS = {
+      phoneNumber: "+573205158257",
+      message: "Hola, su informacion fue cambiada, revise su cuenta"
+    }
+    this.userService.sendSMS(R_SMS).subscribe({
+
+
+      next: (data) => {
+         console.log("Respuesta del servidor:", data);
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+  }
 
 
 }

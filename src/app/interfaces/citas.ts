@@ -27,7 +27,7 @@ export interface Citas {
   id?: number,
   ubicacion: string,
   salas?: string,
-  estado?: boolean
+  estado?: boolean,
 
 }
 

@@ -6,6 +6,7 @@ import { Citas } from '../../../../interfaces/citas';
 import { UsersService } from '../../../../services/usuarios.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+import emailjs from '@emailjs/browser'
 
 
 //import { Prueba } from '../../../../services/servicios';
@@ -44,32 +45,32 @@ export class ConsultarCitaComponent {
 
   }
 
-  Confirmar_eliminar(id: number){
+  Confirmar_eliminar(id: number, fecha: string, hora: string, paciente: string, email:string) {
     Swal.fire({
-                title: "De verdad quieres eliminar esta cita?",
-                text: "Esto no se puede deshacer",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Si, cancelar cita",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.desactivar(id)
-                }
-            });
-  
+      title: "De verdad quieres eliminar esta cita?",
+      text: "Esto no se puede deshacer",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, cancelar cita",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.desactivar(id, fecha, hora, paciente, email)
+      }
+    });
 
-            }  
 
-  desactivar(id: number){
+  }
+
+  desactivar(id: number, fecha: string,hora: string, paciente: string, email: string) {
 
     let cita_id = id
 
-    const R_cita = {id: cita_id}
+    const R_cita = { id: cita_id }
 
-        this.citasService.desactivar_cita(R_cita).subscribe({
-        next: (res) => {
+    this.citasService.desactivar_cita(R_cita).subscribe({
+      next: (res) => {
         console.log('Cita actualizada', res);
         this.mostrarTabla = true;
         Swal.fire({
@@ -77,11 +78,12 @@ export class ConsultarCitaComponent {
           text: 'Cita actualizado con exito',
           icon: 'success',
           confirmButtonText: 'Ok',
-          
+
         }).then((result) => {
           if (result.isConfirmed) {
             this.obtenerCitas();
             console.log('Confirmado');
+            this.enviar_correo(fecha, hora, paciente, email)  
           }
         });
       },
@@ -103,7 +105,7 @@ export class ConsultarCitaComponent {
       salas: this.ActualizarCitasForm.value.v_salas
     }
 
-    
+
 
     this.citasService.update_Cita(R_cita).subscribe({
       next: (res) => {
@@ -114,7 +116,7 @@ export class ConsultarCitaComponent {
           text: 'Cita actualizado con exito',
           icon: 'success',
           confirmButtonText: 'Ok',
-          
+
         }).then((result) => {
           if (result.isConfirmed) {
             this.obtenerCitas();
@@ -248,6 +250,8 @@ export class ConsultarCitaComponent {
       next: (res) => {
         this.todos = res;
         this.todos = this.todos.resultado;
+        console.log(this.todos)
+
 
 
         //datatable:
@@ -263,7 +267,7 @@ export class ConsultarCitaComponent {
             order: []
           });
 
-          // Destruye DataTable si ya existe
+
         }, 1);
 
 
@@ -276,6 +280,35 @@ export class ConsultarCitaComponent {
         console.error(err);
       }
     });
+  }
+
+  serviceID = 'service_cjysjeb'
+  templateID = 'template_omysd2v'
+  apikey = 'e4rSWNCpNM-Ie0gbQ'
+
+
+  enviar_correo(fecha: string,hora: string, paciente: string, email: string) {
+
+    const v_nombre = paciente
+    const v_fecha = fecha
+    const v_hora = hora
+    const v_email = email
+
+    emailjs.init(this.apikey);
+    emailjs.send(this.serviceID, this.templateID, {
+      name: v_nombre,
+      email: v_email,
+      fecha: v_fecha,
+      hora: v_hora,
+    })
+      .then(result => {
+        alert('Correo enviado con éxito!');
+      })
+      .catch(error => {
+        console.log('Error al enviar el correo:', error.text);
+      });
+
+   
   }
 
 

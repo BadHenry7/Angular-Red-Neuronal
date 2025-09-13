@@ -64,7 +64,7 @@ export class GoogleComponent implements OnInit {
 
             let encontrado = {
               name: datos_user.given_name, correo: datos_user.email,
-              id: v_id, apellido: datos_user.family_name
+              id: v_id, apellido: datos_user.family_name, rol: rol_v
             }
 
             let miStorage = window.localStorage;
