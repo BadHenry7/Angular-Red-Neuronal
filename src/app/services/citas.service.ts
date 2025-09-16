@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Citas, Buscar_telegram, Sala ,Reportes, ReportesUsuario, Ubicacion, Eliminar, Buscar_historial_clinico, create_diagnostico, create_sintomas } from "../interfaces/citas"
+import { Citas, Buscar_telegram, Sala ,Reportes, ReportesUsuario, Ubicacion, Eliminar, Buscar_historial_clinico, create_diagnostico, create_sintomas, validarHora } from "../interfaces/citas"
 
 
 @Injectable({
@@ -98,6 +98,12 @@ export class CitasService {
     desactivar_cita(user: Eliminar): Observable<Eliminar[]> {
         return this.http.put<Eliminar[]>(this.apiUrl + '/eliminar_cita' ,user);
     }
+
+    validarHora(): Observable<validarHora[]> {
+        return this.http.get<validarHora[]>(this.apiUrl + '/ValidarHora');
+    }
+
+
 
 
 }

@@ -18,10 +18,12 @@ import emailjs from '@emailjs/browser'
 export class CreateCitaComponent implements OnInit {
 
   todos: any = [];
+  todosHoras: any = []
   doctor: any = [];
   ubicacion: any = [];
   error: string | null = null;
 
+  validando: string[] = [];
 
   constructor(private ac: FormBuilder, private citasService: CitasService, private userService: UsersService) {
     this.asigncita = this.ac.group({
@@ -38,9 +40,69 @@ export class CreateCitaComponent implements OnInit {
     this.Obtenerpaciente();
     this.obtenerdoctor();
     this.obtenerUbicacion();
+    this.validarHora();
 
 
   }
+
+  validarHora() {
+
+
+    this.citasService.validarHora().subscribe({
+
+      next: (dataHora) => {
+
+        this.todosHoras = dataHora
+        this.todosHoras = this.todosHoras.resultado
+        console.log("dataHora", this.todosHoras)
+        //console.log("hora", this.hours)
+
+      
+        for (let i = 0; i < this.hours.length; i++) {
+        
+
+          for (let j = 0; j < this.todosHoras.length; j++) {
+
+            // console.log("fecha", this.fecha)
+            // console.log("fecha22", this.todosHoras[j].Fecha)
+            if (this.hours[i] == String(this.todosHoras[j].Hora) && String(this.fecha) == String(this.todosHoras[j].Fecha)) {
+             // console.log(this.todosHoras[j].Hora, "si es igual aca", this.hours[i])
+              this.validando.push(this.hours[i]);
+            }
+
+          }
+        }
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+
+  }
+
+
+  validarFecha(vfecha: string) {
+
+    this.validando.length = 0;
+
+    for (let i = 0; i < this.hours.length; i++) {
+      //console.log("dataHora", this.todosHoras[i].Hora)
+
+      for (let j = 0; j < this.todosHoras.length; j++) {
+
+        // console.log("fecha", this.fecha)
+        // console.log("fecha22", this.todosHoras[j].Fecha)
+        if (this.hours[i] == String(this.todosHoras[j].Hora) && String(vfecha) == String(this.todosHoras[j].Fecha)) {
+          // console.log(this.todosHoras[j].Hora, "si es igual aca", this.hours[i])
+          this.validando.push(this.hours[i]);
+        }
+
+      }
+    }
+  }
+
 
   Obtenerpaciente() {
 
@@ -115,7 +177,7 @@ export class CreateCitaComponent implements OnInit {
   date = new Date();
 
   horas = this.date.getHours() < 10 ? '0' + this.date.getHours() : this.date.getHours().toString();
-  v_horas = this.horas + ":00"
+  v_horas = this.horas + ":00:00"
 
   year: number = this.date.getFullYear();
 
@@ -130,8 +192,8 @@ export class CreateCitaComponent implements OnInit {
   fecha: string = `${this.year}-${this.month}-${this.day}`;
 
 
-  hours: string[] = ["06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
-    "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",]
+  hours: string[] = ["06:30:00", "07:00:00", "07:30:00", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+    "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00", "18:30:00",]
 
   fechaSeleccionada: string = '';
   horaSeleccionada: string = '';
@@ -179,7 +241,7 @@ export class CreateCitaComponent implements OnInit {
     this.citasService.create_cita_admin(R_cita).subscribe({
       next: (todos) => {
         this.todos = todos;
-  
+
 
       }, error: (error) => {
         console.log(error)
@@ -196,8 +258,8 @@ export class CreateCitaComponent implements OnInit {
   serviceID = 'service_yev294m'
   templateID = 'template_i73qkfa'
   apikey = 'gVmq9ZyZNWP2_LzXW'
-  nb: string=''
-  ce: string=''
+  nb: string = ''
+  ce: string = ''
 
 
   mostrar_fecha() {
@@ -206,13 +268,14 @@ export class CreateCitaComponent implements OnInit {
 
     console.log("entro a mostrar fecha")
     const vfecha = this.fechaSeleccionada;
+    this.validarFecha(vfecha)
     console.log("v_fecha", vfecha)
     console.log(this.fecha)
     if (vfecha > String(this.fecha)) {
-      this.v_horas = "05:00"
+      this.v_horas = "05:00:00"
       console.log(this.v_horas)
     } else {
-      this.v_horas = this.horas + ":00"
+      this.v_horas = this.horas + ":00:00"
       console.log("acaaa", this.v_horas)
 
     }

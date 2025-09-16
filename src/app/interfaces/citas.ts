@@ -67,3 +67,10 @@ export interface create_sintomas {
   estado: boolean,
   id_cita: number,
 }
+
+
+
+export interface validarHora {
+ fecha: string,
+ hora: string
+}
