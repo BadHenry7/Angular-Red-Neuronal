@@ -31,6 +31,12 @@ export interface SMS {
   message: string;
 }
 
+export interface ValidarIncapacidad {
+  id: number;
+  cedula: string;
+}
+
+
 
 
 
