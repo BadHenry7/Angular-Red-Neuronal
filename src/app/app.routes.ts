@@ -18,6 +18,7 @@ import { IncapacidadComponent } from '../app/Page/Pacientes/incapacidad/incapaci
 import { ReportesPacienteComponent } from '../app/Page/Pacientes/reportes-paciente/reportes-paciente.component'
 import { CitasComponent } from './Page/Pacientes/citas/citas.component';
 import { VerCitasComponent } from './Page/Pacientes/ver-citas/ver-citas.component';
+import { AsistenteVirtualComponent } from './Page/Pacientes/asistente-virtual/asistente-virtual.component';
 //Doctor
 import { DoctorPrincipalComponent } from '../app/Page/Doctor/doctor-principal/doctor-principal.component'
 import { CitasMedicasComponent } from '../app/Page/Doctor/citas-medicas/citas-medicas.component'
@@ -40,6 +41,7 @@ import { MovilComponent } from './movil/movil.component';
 
 
 
+
 export const routes: Routes = [
 
     //Aca paginas sin inicio de  sesion
@@ -59,6 +61,7 @@ export const routes: Routes = [
     { path: 'pacientes/reportes', component: ReportesPacienteComponent },
     { path: 'pacientes/citas', component: CitasComponent },
     { path: 'pacientes/ver_citas', component: VerCitasComponent },
+    {path: 'pacientes/AsistenteVirtual', component: AsistenteVirtualComponent},
 
 
 

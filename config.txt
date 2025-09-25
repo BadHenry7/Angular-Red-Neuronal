@@ -76,3 +76,8 @@ PDF:
 import jsPDF from 'jspdf';
    const { jsPDF } = window.jspdf;                   import jsPDF from 'jspdf';
         const doc = new jsPDF();             --->   const doc = new jsPDF();
+
+
+
+Por so esta desabilitada la ejecucion de script:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process

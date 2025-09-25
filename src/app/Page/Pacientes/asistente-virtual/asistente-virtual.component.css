@@ -1,0 +1,79 @@
+
+.fondo {
+    justify-content: center;
+    display: flex;
+    gap: 64px;
+    background-image: url(../../../../../public/assess/fondo2.png);
+    background-size: 40vh;
+    background-attachment: fixed;
+    padding: 5vh;
+    z-index: 1;
+    
+}
+
+
+.container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #1976d2;
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #555;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+
+.qr-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    width: 260px;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    color: #1565c0;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.btn {
+    display: inline-block;
+    background: #1976d2;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #0d47a1;
+}
