@@ -5,7 +5,7 @@ import { NavbarAdministradorComponent } from '../../../../Componentes/navbar-adm
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../../../../services/usuarios.service';
 import emailjs from '@emailjs/browser'
-declare var Swal : any
+declare var Swal: any
 
 @Component({
   selector: 'app-create',
@@ -15,93 +15,93 @@ declare var Swal : any
 })
 
 export class CreateComponent {
-v_same_password: string=''
-passwordInsegura:string=''
-todos: any=[]
-valido: string="";
-RegisterAdminForm: FormGroup;
+  v_same_password: string = ''
+  passwordInsegura: string = ''
+  todos: any = []
+  valido: string = "";
+  RegisterAdminForm: FormGroup;
 
-constructor (private rga: FormBuilder, private userService: UsersService){
+  constructor(private rga: FormBuilder, private userService: UsersService) {
 
     this.RegisterAdminForm = this.rga.group({//requerido, valores nulos,       expresiones regulares, mínimo y máximo
-    v_nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
-    v_apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
-    v_documento: ['', [Validators.required,Validators.pattern('^[0-9]{6,12}$')]],
-    v_telefono: ['', [Validators.required,Validators.pattern('^[0-9]{7,10}$')]],
-    v_genero: ['', [Validators.required]],
-    v_edad: ['', [Validators.required,Validators.min(0),Validators.max(120)]],
-    v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-    v_password: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(20),Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')
-  ]]
-  //v_nombre: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]+)?$')]],
-  })
-}
+      v_nombre: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
+      v_apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]{3,30}$')]],
+      v_documento: ['', [Validators.required, Validators.pattern('^[0-9]{6,12}$')]],
+      v_telefono: ['', [Validators.required, Validators.pattern('^[0-9]{7,10}$')]],
+      v_genero: ['', [Validators.required]],
+      v_edad: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
+      v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      v_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')
+      ]]
+      //v_nombre: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]+)?$')]],
+    })
+  }
 
- registrar(){
+  registrar() {
 
 
     //Obtencion del formulario:
-  const nombre= String(this.RegisterAdminForm.value.v_nombre);
-  const apellido= String(this.RegisterAdminForm.value.v_apellido);
-  const documento= String(this.RegisterAdminForm.value.v_documento);
-  const telefono= String(this.RegisterAdminForm.value.v_telefono);
-  const genero= String(this.RegisterAdminForm.value.v_genero);
-  const edad= Number(this.RegisterAdminForm.value.v_edad);
-  const usuario= String(this.RegisterAdminForm.value.v_usuario);
-  const password= String(this.RegisterAdminForm.value.v_password);
- const estado=Boolean(1);
-  const id_rol= Number(2);
+    const nombre = String(this.RegisterAdminForm.value.v_nombre);
+    const apellido = String(this.RegisterAdminForm.value.v_apellido);
+    const documento = String(this.RegisterAdminForm.value.v_documento);
+    const telefono = String(this.RegisterAdminForm.value.v_telefono);
+    const genero = String(this.RegisterAdminForm.value.v_genero);
+    const edad = Number(this.RegisterAdminForm.value.v_edad);
+    const usuario = String(this.RegisterAdminForm.value.v_usuario);
+    const password = String(this.RegisterAdminForm.value.v_password);
+    const estado = Boolean(1);
+    const id_rol = Number(2);
 
-  const R_usuario={
-    nombre,  apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol
-  }
-
-
- this.userService.addUser(R_usuario).subscribe({
-    next:(todos)=>{
-       this.todos = todos;
-  console.log(this.todos.Informacion);
-
-  if(this.todos.Informacion!="Ya_existe"){
-
-    
-Swal.fire({
-  title: "Registrado",
-  icon: "success",
-  draggable: true
-});
-
-    this.RegisterAdminForm.reset();
-
-
-  }else{
-
-  
-      Swal.fire({
-        title: "El usuario ya se encuentra registrado",
-        icon: "error",
-        draggable: true
-      });
+    const R_usuario = {
+      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol
     }
 
 
+    this.userService.addUser(R_usuario).subscribe({
+      next: (todos) => {
+        this.todos = todos;
+        console.log(this.todos.Informacion);
 
-    },error: (error)=>{
-      console.log(error)
-    } 
-        
-    ,
-
-  })
+        if (this.todos.Informacion != "Ya_existe") {
 
 
-  console.log("Datos a registrar:"+"\n"+nombre+"\n"+apellido+"\n"+documento+"\n"+telefono+"\n"+genero+"\n"+edad
-    +"\n"+usuario+"\n"+password
-  )
- }
+          Swal.fire({
+            title: "Usuario registrado",
+            icon: "success",
+            draggable: true
+          });
 
 
- serviceID = 'service_acpug5r'
+          this.enviar_correo()
+
+        } else {
+
+
+          Swal.fire({
+            title: "El usuario ya se encuentra registrado",
+            icon: "error",
+            draggable: true
+          });
+        }
+
+
+
+      }, error: (error) => {
+        console.log(error)
+      }
+
+      ,
+
+    })
+
+
+    console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
+      + "\n" + usuario + "\n" + password
+    )
+  }
+
+
+  serviceID = 'service_acpug5r'
   templateID = 'template_0hvvaww'
   apikey = '3bmpPn1S0SLhgotWj'
 
@@ -115,7 +115,8 @@ Swal.fire({
       email: v_usuario,
     })
       .then(result => {
-        alert('Correo enviado con éxito!');
+        console.log('Correo enviado con éxito!');
+        this.RegisterAdminForm.reset();
       })
       .catch(error => {
         console.log('Error al enviar el correo:', error.text);

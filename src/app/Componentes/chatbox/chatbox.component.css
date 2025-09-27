@@ -17,12 +17,12 @@
 
     .tonyo_select {
         position: fixed;
-        right: 1%;
+        right: 5%;
         top: 70%;
         width: 70px;
         height: 50px;
-        background-color: #007bff;
-        border-radius: 50%;
+        /* background-color: #007bff;
+        border-radius: 50%; */
         display: flex;
         justify-content: center;/* Alinea el contenido (texto o ícono) horizontalmente en el centro. */
         align-items: center;/*Alinea el contenido verticalmente en el centro.*/
@@ -31,14 +31,17 @@
         cursor: pointer;
         z-index: 1000;
         transition: width 0.5s ease;
+        background-color: transparent;
     }
+
+    
 
     .tonyo_select:hover {
         width: 150px;
-        height: 70px;
-        border-radius: 25px;
-        justify-content: space-around;
-        background-color: cornflowerblue;
+        height: 50px;
+        /* border-radius: 25px; */
+        /* justify-content: space-around; */
+        /* background-color: cornflowerblue; */
     }
 
     .tonyo-text {
@@ -108,3 +111,5 @@
         50% { opacity: 1; transform: translateY(-5px); }
         100% { opacity: 0.3; transform: translateY(0px); }
     }
+
+    

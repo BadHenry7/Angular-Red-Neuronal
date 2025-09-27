@@ -1,60 +1,59 @@
-
-
-
-
-
-
+<!-- <video src="/assess/Botci.mp4"  #miVideo  muted loop  width="600"></video> -->
 
 
 <div class="" style="position: fixed;">
-    <button class="btn btn-primary tonyo_select" ype="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-    
-        <i class="bi bi-chat-dots"></i>
-        <span class="tonyo-text">Tonyo, asistente virtual</span>
+    <button class=" tonyo_select" ype="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight">
+
+
+        <!-- <i class="bi bi-chat-dots"></i>
+        <span class="tonyo-text">HostipalBot, asistente virtual </span>-->
+        <!-- <img  src="/assess/BotciGIF.gif" width="150" alt="animación"> -->
+        <img   [hidden]="!mostrarImagen"  src="/assess/BotciGIF.gif" width="150" alt="animación" (click)="mostrarImagen = false" >
+
     </button>
 
-    <div class="offcanvas offcanvas-end tonyo_body" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header bg-primary"  style="border-top-left-radius: 12px;   border-top-right-radius: 12px;"  >
-            <img src="/assess/tonyo2.png"  class="img-fluid" style="height: 55px;" alt="">
+    <div class="offcanvas offcanvas-end tonyo_body" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header bg-primary" style="border-top-left-radius: 12px;   border-top-right-radius: 12px;">
+            <img src="/assess/HostipalBot.png" class="img-fluid" style="height: 55px;" alt="">
             <h2 class="offcanvas-title" id="offcanvasRightLabel " style="color: white;">hostipal</h2>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" (click)="mostrarImagen = true"></button>
         </div>
         <div class=" offcanvas-body" style="margin-bottom: 17%;">
-                <div class="row">
-                    <ng-container *ngFor="let msg of mensajes">
-                        <div class="mt-2 d-flex" [ngClass]="msg.emisor === 'user' ? 'justify-content-end' : 'justify-content-start'">
+            <div class="row">
+                <ng-container *ngFor="let msg of mensajes">
+                    <div class="mt-2 d-flex"
+                        [ngClass]="msg.emisor === 'user' ? 'justify-content-end' : 'justify-content-start'">
                         <div [ngClass]="msg.v_persona === 'user' ? 'mensaje-user' : 'mensaje-bot'">
                             <div *ngIf="msg.texto; else msg_image">
-                            {{ msg.texto }}
+                                {{ msg.texto }}
                             </div>
                             <ng-template #msg_image>
-                            <img [src]="msg.image" class="img-fluid" alt="">
+                                <img [src]="msg.image" class="img-fluid" alt="">
                             </ng-template>
                         </div>
-                        </div>
-                    </ng-container>
-
-                    <div *ngIf="loading === true">
-                        <div class="typing-dots">
-                        <span></span><span></span><span></span>
-                        </div>
                     </div>
-              </div>
-  
+                </ng-container>
+
+                <div *ngIf="loading === true">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
+
         <div class="offcanvas-footer text-black">
-            <div class="input-group input-area px-2 py-2" >
-                <input type="text"  [(ngModel)]="mensaje" placeholder="Escribe tu mensaje aca" class="form-control"   />
-                
-                <button  aria-label="enviar" style="background-color: white;" (click)="Enviar()">
+            <div class="input-group input-area px-2 py-2">
+                <input type="text" [(ngModel)]="mensaje" placeholder="Escribe tu mensaje aca" class="form-control" />
+
+                <button aria-label="enviar" style="background-color: white;" (click)="Enviar()">
                     <i class="bi bi-send input-group-text" style="background-color: white; border: none;"></i>
                 </button>
             </div>
         </div>
     </div>
- 
-</div> 
 
-
-
+</div>

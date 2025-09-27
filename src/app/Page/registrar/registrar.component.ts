@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../../services/usuarios.service';
 import emailjs from '@emailjs/browser'
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registrar',
   imports: [RouterLink, NavbarindexComponent, CommonModule, ReactiveFormsModule],
@@ -61,6 +62,19 @@ export class RegistrarComponent {
       next: (todos) => {
         this.todos = todos;
         console.log(this.todos.Informacion);
+        Swal.fire({
+          title: "Registrado!",
+          text: "Usuario ha sido registrado",
+          icon: "success",
+        });
+
+        console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
+          + "\n" + usuario + "\n" + password
+        )
+
+        this.RegisterForm.reset();
+        this.enviar_correo()
+
       }, error: (error) => {
         console.log(error)
       }
@@ -70,11 +84,7 @@ export class RegistrarComponent {
     })
 
 
-    console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
-      + "\n" + usuario + "\n" + password
-    )
 
-    this.enviar_correo()
 
 
   }
@@ -101,7 +111,7 @@ export class RegistrarComponent {
   }
 
 
- 
+
 
 
 }

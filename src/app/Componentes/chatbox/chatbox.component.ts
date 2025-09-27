@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatboxService } from '../../services/chatbox.service';
 
@@ -10,6 +10,20 @@ import { ChatboxService } from '../../services/chatbox.service';
   styleUrl: './chatbox.component.css'
 })
 export class ChatboxComponent {
+//  @ViewChild('miVideo') miVideo!: ElementRef<HTMLVideoElement>;
+ 
+//  ngAfterViewInit() {
+//     const video = this.miVideo.nativeElement;
+
+   
+//     video.play().catch(err => {
+//       console.log("Autoplay bloqueado, forzando muted play", err);
+//       video.muted = true; 
+//       video.play();
+//     });
+//   }
+
+
 
 constructor (private chatboxService:ChatboxService){}
 
@@ -19,12 +33,12 @@ v_persona: string=""
 image: string=""
 mensajes: any[] = [];
 data:any   
-
+mostrarImagen: boolean = true;
 
 
  sender: string = '2'//POR AHORA PON CUALQUIER NUMERO
 
-
+ 
   Enviar() {
 
     const sender = this.sender;

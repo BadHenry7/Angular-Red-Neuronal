@@ -6,7 +6,7 @@
   <div class="container py-4">
 
     <h2 class="mb-4 text-center"><b>Gestión de usuarios</b></h2>
-
+    <hr>
     <!--if-->
     <div *ngIf="loading; else noloading">
       <div class="row g-2 justify-content-center">
@@ -32,7 +32,7 @@
     <!--/else-->
     <ng-template #noerror>
       <div class=" d-flex justify-content-center">
-        <table class="table table-bordered table-striped w-auto" id="myTable">
+        <table class="table table-bordered w-auto border" id="myTable"><!--table-striped -->
           <thead>
             <tr class="bg-primary text-white">
               <th class="px-5 py-2 border">Usuario</th>
@@ -54,7 +54,7 @@
               <td class="py-2 border">{{ todo.documento | number }}</td>
               <td class="py-2 border">{{ todo.telefono | number }}</td>
               <td class="py-2 border">{{ todo.nombre_rol }}</td>
-              
+
 
 
               <td class="py-2 border">

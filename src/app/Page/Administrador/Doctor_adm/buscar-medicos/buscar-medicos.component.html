@@ -21,9 +21,9 @@
 
   <ng-template #userTable>
     <div class="overflow-x-auto">
-      <table class="table table-bordered table-striped text-center" id="myTable">
-        <thead class="bg-primary text-white">
-          <tr>
+      <table class="table table-bordered border  text-center" id="myTable"><!--table-striped -->
+        <thead >
+          <tr class="bg-primary text-white">
             <th>Usuario</th>
             <th>Nombre</th>
             <th>Apellido</th>
@@ -36,13 +36,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of todos">
-            <td>{{ user.usuario }}</td>
-            <td>{{ user.nombre }}</td>
-            <td>{{ user.apellido }}</td>
-            <td>{{ user.documento }}</td>
-            <td>{{ user.telefono }}</td>
+            <td class="py-2 border">{{ user.usuario }}</td>
+            <td class="py-2 border">{{ user.nombre }}</td>
+            <td class="py-2 border">{{ user.apellido }}</td>
+            <td class="py-2 border"> {{ user.documento }}</td>
+            <td class="py-2 border">{{ user.telefono }}</td>
 
-            <td>
+            <td class="py-2 border">
               <span *ngFor="let especialidad of todoseespecialidades">
                 @if(especialidad.id_usuario===user.id){
                 {{ especialidad.valor }}
@@ -52,7 +52,7 @@
             </td>
 
 
-            <td>
+            <td class="py-2 border"> 
               <span [ngClass]="user.estado ? 'text-success' : 'text-danger'">
                 {{ user.estado ? 'Activo' : 'Desactivado' }}
               </span>

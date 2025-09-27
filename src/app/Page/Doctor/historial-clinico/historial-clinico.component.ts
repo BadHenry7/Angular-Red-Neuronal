@@ -117,23 +117,23 @@ export class HistorialClinicoComponent implements OnInit {
 
   }
 
-v_descripcion:string=''
-v_dia_incapacidad:string=''
-v_observaciones:string=''
-id_doctor: number=0
+  v_descripcion: string = ''
+  v_dia_incapacidad: string = ''
+  v_observaciones: string = ''
+  id_doctor: number = 0
 
   incapacidad() {
 
-    const usuarioguardado= localStorage.getItem("usuario")
-     if (usuarioguardado){
-      const usuario=JSON.parse(usuarioguardado)
-      this.id_doctor=usuario.id
+    const usuarioguardado = localStorage.getItem("usuario")
+    if (usuarioguardado) {
+      const usuario = JSON.parse(usuarioguardado)
+      this.id_doctor = usuario.id
 
-     }
+    }
 
-     const v_paciente= this.todos.id
+    const v_paciente = this.todos.id
 
-    const R_incapacidad={
+    const R_incapacidad = {
       descripcion: this.v_descripcion, dias_de_incapacidad: this.v_dia_incapacidad, id_usuario: v_paciente, id_doctor: this.id_doctor, observaciones: this.v_observaciones
     }
 
@@ -142,7 +142,7 @@ id_doctor: number=0
       next: (data) => {
         console.log("data de añadir incapacidad", data)
 
-            const Toast = Swal.mixin({
+        const Toast = Swal.mixin({
           toast: true,
           position: "bottom-end",
           showConfirmButton: false,
@@ -253,6 +253,15 @@ id_doctor: number=0
     setTimeout(() => {
       this.videoSrc = `https://red-neuronal-api.onrender.com/video_feed?id=${v_id}&cache=${Date.now()}`;
     }, 200);
+  }
+
+
+  ngOnDestroy() {
+    console.log("destruir")
+    fetch('https://red-neuronal-api.onrender.com/detener_altura', {
+      method: 'GET'
+    });
+    this.videoSrc = '';
   }
 
   editar() {
