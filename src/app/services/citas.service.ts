@@ -20,6 +20,11 @@ export class CitasService {
 
     }
 
+    get_cita_doctor(user: ReportesUsuario): Observable<ReportesUsuario[]> {
+        return this.http.post<ReportesUsuario[]>(this.apiUrl + '/get_cita_doctor', user);
+
+    }
+
     create_cita_admin(user: Citas): Observable<Citas[]> {
         return this.http.post<Citas[]>(this.apiUrl + '/create_cita/', user);
 
@@ -107,3 +112,28 @@ export class CitasService {
 
 
 }
+
+// DELIMITER $$
+// CREATE TRIGGER cerrar_cita
+// AFTER INSERT ON sintomas
+// FOR EACH ROW
+// BEGIN
+//     UPDATE cita 
+//     SET estado = 0
+//     WHERE id = NEW.id_cita;
+// END$$
+
+
+// DELIMITER $$
+
+// CREATE TRIGGER auditar_cita_estado
+// AFTER UPDATE ON cita
+// FOR EACH ROW
+// BEGIN
+//     IF OLD.estado <> NEW.estado THEN
+//         INSERT INTO auditoria_cita (id_cita, estado_anterior, estado_nuevo, usuario)
+//         VALUES (OLD.id, OLD.estado, NEW.estado, NEW.id_usuario);
+//     END IF;
+// END$$
+
+// DELIMITER ;

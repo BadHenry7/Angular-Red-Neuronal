@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {NavbarindexComponent} from '../../Componentes/navbarindex/navbarindex.component'
 import {FooterComponent} from '../../Componentes/footer/footer.component'
 import { SlideComponent } from '../../Componentes/slide/slide.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -12,5 +12,11 @@ import { RouterLink } from '@angular/router';
 })
 export class InicioComponent {
 
-  redirigir(){}
+  constructor(private router: Router) {}
+
+  redirigir(){
+    const v_citas = "redireccion"; 
+    localStorage.setItem("Redirigir", v_citas); 
+    this.router.navigate(['/Login']);
+  }
 }

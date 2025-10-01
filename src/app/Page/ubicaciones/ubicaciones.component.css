@@ -1,4 +1,9 @@
+#map {
+    height: 580px;
+}
 
-    #map {
-        height: 580px;
-    }
+.fondo{
+    background-image: url(../../../../public/assess/fondo2.png);
+    background-size: 50vh;
+    background-attachment: fixed;
+}

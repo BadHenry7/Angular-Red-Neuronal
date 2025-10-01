@@ -103,7 +103,7 @@ export class LoginComponent implements OnInit {
             console.log("Imprimos el encontrado", encontrado);
             let miStorage = window.localStorage;
             miStorage.setItem("usuario", JSON.stringify(encontrado));
-           this.loading=true;
+            this.loading = true;
             if (todo[0].rol == 1 || todo[0].rol > 3) {
               Swal.fire({
                 //Popup window position, can be 'top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.
@@ -113,10 +113,18 @@ export class LoginComponent implements OnInit {
                 showConfirmButton: false,
               });
 
+              const v_redirigir = localStorage.getItem("Redirigir");
+              if (v_redirigir === "redireccion") {
+                this.router.navigate(['/administrador/gestioncita/create_cita']);
+                localStorage.removeItem("Redirigir");
+                return
+              }
+
+
               this.router.navigate(['/administrador/principal']);
 
             } else if (todo[0].rol == 2) {
-              this.router.navigate(['/pacientes/principal']);
+
               Swal.fire({
                 //Popup window position, can be 'top', 'top-start', 'top-end', 'center', 'center-start', 'center-end', 'bottom', 'bottom-start', or 'bottom-end'.
                 position: "top",
@@ -124,6 +132,15 @@ export class LoginComponent implements OnInit {
                 title: "Inicio de sesion exitoso, bienvenido " + todo[0].nombre,
                 showConfirmButton: false,
               });
+
+              const v_redirigir = localStorage.getItem("Redirigir");
+              if (v_redirigir === "redireccion") {
+                this.router.navigate(['/pacientes/citas']);
+                localStorage.removeItem("Redirigir");
+                return
+              }
+
+              this.router.navigate(['/pacientes/principal']);
 
             } else {
               this.router.navigate(['/doctor/principal']);

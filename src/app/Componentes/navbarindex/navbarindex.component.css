@@ -1,3 +1,23 @@
+.facebook, .whatsapp, .imstagram {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease; /* transición suave */
+}
+
+.facebook:hover {
+  color: #7bbefc;
+  transform: scale(1.3); /* se agranda mientras el cursor está encima */
+}
+
+.whatsapp:hover {
+  color: greenyellow;
+  transform: scale(1.3);
+}
+
+.imstagram:hover {
+  color: red;
+  transform: scale(1.3);
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -78,9 +98,6 @@ body {
   font-size: 18px;
 }
 
-.redes a:hover {
-  color: #000000;
-}
 
 #red{
   

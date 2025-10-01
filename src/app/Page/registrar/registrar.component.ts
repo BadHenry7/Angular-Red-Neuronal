@@ -31,7 +31,9 @@ export class RegistrarComponent {
       v_edad: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
       v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
       v_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')
-      ]]
+      ]],
+      v_same_password: ['', [Validators.required]],
+      v_check: [false, [Validators.requiredTrue]],
       //v_nombre: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]+)?$')]],
     })
 
@@ -50,8 +52,21 @@ export class RegistrarComponent {
     const edad = Number(this.RegisterForm.value.v_edad);
     const usuario = String(this.RegisterForm.value.v_usuario);
     const password = String(this.RegisterForm.value.v_password);
+    const v_same_password = String(this.RegisterForm.value.v_same_password);
     const estado = Boolean(1);
     const id_rol = Number(2);
+
+
+    
+    if (password !== v_same_password) {
+   
+      Swal.fire({
+        title: "No se pudo registrar",
+        text: "Por favor verifique que las contraseñas coincidan",
+        icon: "error",
+      });
+      return;
+    }
 
     const R_usuario = {
       nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol
@@ -62,21 +77,47 @@ export class RegistrarComponent {
       next: (todos) => {
         this.todos = todos;
         console.log(this.todos.Informacion);
-        Swal.fire({
-          title: "Registrado!",
-          text: "Usuario ha sido registrado",
-          icon: "success",
-        });
+        if (this.todos.Informacion === 'Ya_existe') {
 
-        console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
-          + "\n" + usuario + "\n" + password
-        )
+          Swal.fire({
+            title: "No se pudo registrar",
+            text: "El siguiente usuario ya se encuentra registrado en el sistema, por favor use otro",
+            icon: "error",
+          });
 
-        this.RegisterForm.reset();
-        this.enviar_correo()
+
+        } else if (this.todos.Informacion === 'Creado') {
+          Swal.fire({
+            title: "Registrado!",
+            text: "Usuario ha sido registrado",
+            icon: "success",
+          });
+
+          console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
+            + "\n" + usuario + "\n" + password
+          )
+
+          this.RegisterForm.reset();
+          this.enviar_correo()
+
+        }
+
+
 
       }, error: (error) => {
         console.log(error)
+
+        if (error.status === 409) {
+          return 'El usuario ya existe, por favor use otro nombre de usuario.';
+        } else {
+
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo registrar el usuario. Inténtalo de nuevo.',
+            icon: 'error',
+          });
+          return 'No se pudo registrar el usuario.';
+        }
       }
 
       ,

@@ -1,13 +1,19 @@
 <app-navbarindex></app-navbarindex>
-<br>
-<div class="container-fluid vh-100">
+<p></p>
+
+<div class="container-fluid vh-100 bodys">
 
     <div class="row h-100">
         <!-- Sección de la imagen -->
         <div class="col-md-6 d-none d-md-block p-0">
             <!--d-md-block significa que a partir del tamaño md (≥768px), el div se vuelve visible y se muestra como un bloque (display: block;).
 Junto con d-none, esto hace que el div esté oculto en móviles pero visible en pantallas medianas y grandes.-->
-            <img src="/assess/image4.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            <img src="/assess/image4.png" alt="Hospital" class="img-fluid "
+                style=" position: absolute; width: 752px; height: 792px; object-fit: cover;">
+            <!-- <img src="/assess/image4.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;"> -->
+
+
+
         </div>
 
         <!-- Sección del formulario -->
@@ -16,116 +22,146 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                 <h2 class="text-center fw-bold mb-4">Registro de paciente</h2>
 
                 <form [formGroup]="RegisterForm" class="container" (ngSubmit)="registrar()">
-                    <div class="mb-3">
+                    <div class="">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" placeholder="Nombre" formControlName="v_nombre">
-                           
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Nombre"
+                                formControlName="v_nombre">
+
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_nombre'].invalid && RegisterForm.controls['v_nombre'].touched;">
-                                <small class="error">&#10060;Ingrese un nombre valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_nombre'].invalid && RegisterForm.controls['v_nombre'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un nombre valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4 ">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off"  placeholder="Apellido" formControlName="v_apellido">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Apellido"
+                                formControlName="v_apellido">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_apellido'].invalid && RegisterForm.controls['v_apellido'].touched;">
-                                <small class="error">&#10060;Ingrese un apellido valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_apellido'].invalid && RegisterForm.controls['v_apellido'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un apellido valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-card-list"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off"  placeholder="Documento" formControlName="v_documento">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Documento"
+                                formControlName="v_documento">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_documento'].invalid && RegisterForm.controls['v_documento'].touched;">
-                            <small class="error">&#10060;Ingrese un documento valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_documento'].invalid && RegisterForm.controls['v_documento'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un documento valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" placeholder="Teléfono" formControlName="v_telefono">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Teléfono"
+                                formControlName="v_telefono">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_telefono'].invalid && RegisterForm.controls['v_telefono'].touched;">
-                            <small class="error">&#10060;Ingrese un telefono valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_telefono'].invalid && RegisterForm.controls['v_telefono'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un telefono valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                      <div class="input-group">
+                    <div class="mt-4">
+                        <div class="input-group">
                             <span class="input-group-text"> <i class="bi bi-gender-neuter"> </i></span>
-                            <select class="form-select"  required formControlName="v_genero">
+                            <select class="form-select" required formControlName="v_genero">
                                 <option value="">Seleccione Género</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
                                 <option value="Otro">Otro</option>
                             </select>
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_genero'].invalid && RegisterForm.controls['v_genero'].touched;">
-                            <small class="error">&#10060;Seleccione un genero</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_genero'].invalid && RegisterForm.controls['v_genero'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Seleccione un genero</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                            <input type="number" class="form-control" required autocomplete="off"  placeholder="Edad" formControlName="v_edad">
+                            <input type="number" class="form-control" required autocomplete="off" placeholder="Edad"
+                                formControlName="v_edad">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_edad'].invalid && RegisterForm.controls['v_edad'].touched;">
-                                <small class="error">&#10060;Ingrese un edad valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_edad'].invalid && RegisterForm.controls['v_edad'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un edad valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" placeholder="Usuario" formControlName="v_usuario">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Usuario"
+                                formControlName="v_usuario">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_usuario'].invalid && RegisterForm.controls['v_usuario'].touched;">
-                                <small class="error">&#10060;Ingrese un correo valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_usuario'].invalid && RegisterForm.controls['v_usuario'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un correo valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off"  placeholder="Contraseña" formControlName="v_password">
+                            <input type="password" class="form-control" required autocomplete="off"
+                                placeholder="Contraseña" formControlName="v_password">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_password'].invalid && RegisterForm.controls['v_password'].touched;">
-                            <small class="error">&#10060;Ingrese una contraseña valida,
-                                Recuerde que debe contener al menos: 
+                        <div style="margin-bottom: 112px;"
+                            *ngIf="RegisterForm.controls['v_password'].invalid && RegisterForm.controls['v_password'].touched;">
+                            <small class="error " style="position: absolute;">&#10060;Ingrese una contraseña valida,
+                                Recuerde que debe contener al menos:
                                 <li>1 Mayuscula</li>
                                 <li>1 miniscula</li>
                                 <li>1 caracter especial</li>
-                                <li>numeros(&#64;$!%*?&.)</li> 
+                                <li>numeros(&#64;$!%*?&.)</li>
                             </small>
                         </div>
                     </div>
 
 
-                     <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off" placeholder="Repetir la contraseña">
+                            <input type="password" class="form-control" required autocomplete="off"
+                                placeholder="Repetir la contraseña" formControlName="v_same_password">
+                        </div>
+                        <div
+                            *ngIf="RegisterForm.controls['v_same_password'].invalid && RegisterForm.controls['v_same_password'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Por favor, repita la
+                                contraseña</small>
                         </div>
                     </div>
 
-                    <div class="mb-3 ">
-                        <input type="checkbox" id="terminos" required />
-                        <a class="btn btn-link p-0" href="#" data-bs-toggle="modal" data-bs-target="#TerminosCondiciones">
+                    <div class="mt-4 ">
+                        <input type="checkbox" id="terminos" required formControlName="v_check" />
+                        <a class="btn btn-link p-0" href="#" data-bs-toggle="modal"
+                            data-bs-target="#TerminosCondiciones">
                             Acepto los términos y condiciones</a>
                         <a routerLink="/" class="mx-5">¿Ya tienes una cuenta?</a>
+
+                        <div
+                            *ngIf="RegisterForm.controls['v_check'].invalid && RegisterForm.controls['v_check'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Por favor, acepta los términos y
+                                condiciones</small>
+                        </div>
+
                     </div>
 
-                    
-                    
-                    <button type="submit"  [disabled]="RegisterForm.invalid"  class="btn btn-primary w-100">Registrar</button>
+
+
+                    <button type="submit" [disabled]="RegisterForm.invalid"
+                        class="btn btn-primary w-100 mt-4">Registrar</button>
                 </form>
             </div>
         </div>
@@ -146,10 +182,9 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                 <p>
                     <b>1. Aceptación de los Términos: </b>
 
-                    Al acceder y utilizar hospital, aceptas cumplir con estos
+                    Al acceder y utilizar el sistema Hostipal, aceptas cumplir con estos
                     términos y condiciones. Si no estás de acuerdo con alguno de
-                    los términos, te recomendamos que no utilices nuestros
-                    servicios.
+                    los términos, te recomendamos no continuar con el uso de la plataforma.
                 </p>
                 <p>
                     <b>2. Uso del Contenido: </b>
@@ -166,28 +201,28 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
 
                     Nuestra política de privacidad describe cómo recopilamos,
                     usamos y protegemos tu información personal. Al utilizar
-                    nuestros servicios, aceptas las sgtes practicas:
+                    nuestros servicios, aceptas las siguientes practicas:
                     <br />
                     - Los datos registrados no son vendidos ni utilizados para fines
                     comerciales mas allá de estar en esta pagina.
                     <br />
-                    - No tratamos con datos de manera intrinseca, por lo que no registramos
-                    datos tales como tarjetas de creditos o numeros de cuentas todos
-                    los datos que obtenemos son exlusivamente para funcionar la pagina
-                    y base de datos.
+                    - No tratamos con datos sensibles, por lo que no registramos
+                    datos tales como tarjetas de creditos o numeros de cuentas. Todos los datos que solicitamos son
+                    únicamente los necesarios para ofrecerte un mejor servicio dentro de la plataforma.
                     <br />
-                    - Su Privacidad es nuestra prioridad, por lo que garantizamos
-                    que nadie mas allá de los mismos administradores del gimnasio
-                    y nuestros ingenieros tienen acceso a sus datos personales
+                    - Su privacidad es nuestra prioridad, por lo que garantizamos la protección de los datos personales
+                    conforme a la normativa vigente en materia de protección de datos. La información recopilada será
+                    tratada de manera confidencial y utilizada exclusivamente para los fines relacionados con la
+                    prestación de los servicios de la plataforma, sin ser compartida con terceros salvo obligación legal
+                    o autorización expresa del titular.
                 </p>
 
                 <p>
                     <b>4. Responsabilidad: </b>
-
-                    No nos hacemos responsables por cualquier pérdida, daño o
-                    lesión resultante del uso en el gimnasio, solamente somos un
-                    medio facilitador de este. Utiliza los servicios bajo tu
-                    propio riesgo.
+                    Nos esforzamos por mantener la plataforma funcionando correctamente y de forma segura. Sin embargo,
+                    no podemos garantizar que siempre esté libre de errores o interrupciones. El uso de la plataforma es
+                    responsabilidad del usuario, quien debe asegurarse de utilizarla de manera adecuada y conforme a lo
+                    establecido en estos términos.
                 </p>
                 <p>
                     <b>5. Enlaces a Terceros: </b>
@@ -215,11 +250,7 @@ Junto con d-none, esto hace que el div esté oculto en móviles pero visible en 
                 </p>
             </div>
             <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">Cerrar</button
-                >
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

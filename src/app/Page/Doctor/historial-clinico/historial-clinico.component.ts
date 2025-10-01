@@ -42,18 +42,28 @@ export class HistorialClinicoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.h_clinicoService.get_cita_admin().subscribe({
+    const usuarioguardado = localStorage.getItem("usuario")
+    if (usuarioguardado) {
+      const usuario = JSON.parse(usuarioguardado)
+      this.id_doctor = usuario.id
 
-      next: (data) => {
-        this.citas = data
-        this.citas = this.citas.resultado
-        console.log(" this.citas", this.citas)
-      }, error: (error) => {
-        console.log("error", error)
+      const R_usuario = {
+        id_paciente: this.id_doctor
       }
 
-    })
+      this.h_clinicoService.get_cita_doctor(R_usuario).subscribe({
 
+        next: (data) => {
+          this.citas = data
+          this.citas = this.citas.resultado
+          console.log(" this.citas", this.citas)
+        }, error: (error) => {
+          console.log("error", error)
+        }
+
+      })
+
+    }
   }
 
 
