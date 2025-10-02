@@ -81,8 +81,8 @@ export class LoginComponent implements OnInit {
       };//this.userService.Login(usuario).subscribe(todos =>{ this.todos = todos;
       this.userService.Login(usuario).subscribe({
         next: (todos) => {
-          console.log("entroo")
           this.todos = todos;
+          console.log("entroo", this.todos)
           if (this.todos.resultado && this.todos.resultado.length > 0) {
             console.log(this.todos.resultado);
 
@@ -163,14 +163,15 @@ export class LoginComponent implements OnInit {
 
 
         }, error: (error) => {
-          if (error.status === 404) {
+          if (error.status === 404 || error.status === 400) {
             Swal.fire({
               title: "Error!",
               text: "La combinación entre usuario y contraseña es incorrecta",
               icon: "error",
               confirmButtonText: "Cool",
             });
-          } else {
+          }
+           else {
             console.log("Error del servidor: " + error.status);
           }
         }

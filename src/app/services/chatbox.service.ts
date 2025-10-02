@@ -14,7 +14,7 @@ import { Chatbox } from "../interfaces/chatbox"
 
 export class ChatboxService {
 
-    private apiUrl = 'https://red-neuronal-api.onrender.com/'
+    private apiUrl = 'http://localhost:8000/'
 
     constructor(private http: HttpClient) { }
 

@@ -36,7 +36,7 @@ export class AdministradorPrincipalComponent implements OnInit {
       v_genero: ['', [Validators.required]],
       v_estatura: ['', [Validators.required]],
       v_edad: ['', [Validators.required]],
-      v_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')]]
+      v_password: ['00000000']
 
 
     })
@@ -72,7 +72,7 @@ export class AdministradorPrincipalComponent implements OnInit {
           v_genero: this.todos.genero,
           v_estatura: this.todos.estatura,
           v_edad: this.todos.edad,
-          v_password: this.todos.password
+         
 
 
 

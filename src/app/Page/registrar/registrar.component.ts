@@ -98,7 +98,7 @@ export class RegistrarComponent {
           )
 
           this.RegisterForm.reset();
-          this.enviar_correo()
+          //this.enviar_correo()
 
         }
 

@@ -247,7 +247,7 @@ export class HistorialClinicoComponent implements OnInit {
 
   async capturar() {
 
-    await fetch('https://red-neuronal-api.onrender.com/detener_altura', {
+    await fetch('http://localhost:8000/detener_altura', {
       method: 'GET'
     });
 
@@ -261,14 +261,14 @@ export class HistorialClinicoComponent implements OnInit {
 
     this.videoSrc = ''; // fuerza el reinicio
     setTimeout(() => {
-      this.videoSrc = `https://red-neuronal-api.onrender.com/video_feed?id=${v_id}&cache=${Date.now()}`;
+      this.videoSrc = `http://localhost:8000/video_feed?id=${v_id}&cache=${Date.now()}`;
     }, 200);
   }
 
 
   ngOnDestroy() {
     console.log("destruir")
-    fetch('https://red-neuronal-api.onrender.com/detener_altura', {
+    fetch('http://localhost:8000/detener_altura', {
       method: 'GET'
     });
     this.videoSrc = '';
