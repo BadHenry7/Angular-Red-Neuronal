@@ -149,113 +149,139 @@
             </div>
 
             <div class="card-body">
+                <form [formGroup]="RegisterForm" (ngSubmit)="guardar()">
 
-
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Síntomas:</label>
-                    <div class="input-group">
-                        <span class="input-group-text text-danger"><i class="bi bi-heart-pulse"></i></span>
-                        <input type="text" class="form-control" id="sintomas" placeholder="Síntomas del paciente"
-                            [(ngModel)]="sintomas" />
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Síntomas:</label>
+                        <div class="input-group">
+                            <span class="input-group-text text-danger"><i class="bi bi-heart-pulse"></i></span>
+                            <input type="text" class="form-control" id="sintomas" placeholder="Síntomas del paciente"
+                                [(ngModel)]="sintomas" formControlName="v_sintomas"/>
+                        </div>
+                        <div
+                            *ngIf="RegisterForm.controls['v_sintomas'].invalid && RegisterForm.controls['v_sintomas'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese el síntoma del paciente</small>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Descripción de los síntomas:</label>
-                    <div class="input-group">
-                        <span class="input-group-text text-warning"><i class="bi bi-file-earmark-text"></i></span>
-                        <input type="text" class="form-control" id="descripcion_sintomas"
-                            placeholder="Descripción detallada" [(ngModel)]="descripcion_sintomas" />
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descripción de los síntomas:</label>
+                        <div class="input-group">
+                            <span class="input-group-text text-warning"><i class="bi bi-file-earmark-text"></i></span>
+                            <input type="text" class="form-control" id="descripcion_sintomas"
+                                placeholder="Descripción detallada" [(ngModel)]="descripcion_sintomas"  formControlName="v_desc_sintomas"/>
+                        </div>
+                         <div
+                            *ngIf="RegisterForm.controls['v_desc_sintomas'].invalid && RegisterForm.controls['v_desc_sintomas'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese una descripción al síntoma del paciente</small>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Diagnóstico:</label>
-                    <div class="input-group">
-                        <span class="input-group-text text-primary"><i class="bi bi-clipboard2-pulse"></i></span>
-                        <input type="text" class="form-control" id="diagnostico" placeholder="Diagnóstico del usuario"
-                            [(ngModel)]="diagnostico" />
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Diagnóstico:</label>
+                        <div class="input-group">
+                            <span class="input-group-text text-primary"><i class="bi bi-clipboard2-pulse"></i></span>
+                            <input type="text" class="form-control" id="diagnostico"
+                                placeholder="Diagnóstico del usuario" [(ngModel)]="diagnostico"  formControlName="v_diagnostico"/>
+                        </div>
+                         <div
+                            *ngIf="RegisterForm.controls['v_diagnostico'].invalid && RegisterForm.controls['v_diagnostico'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese el diagnóstico del paciente</small>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Descripción del diagnóstico:</label>
-                    <div class="input-group">
-                        <span class="input-group-text text-info"><i class="bi bi-journal-text"></i></span>
-                        <input type="text" class="form-control" id="descripcion_diagnostico"
-                            placeholder="Explicación del diagnóstico" [(ngModel)]="descripcion_diagnostico" />
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descripción del diagnóstico:</label>
+                        <div class="input-group">
+                            <span class="input-group-text text-info"><i class="bi bi-journal-text"></i></span>
+                            <input type="text" class="form-control" id="descripcion_diagnostico"
+                                placeholder="Explicación del diagnóstico" [(ngModel)]="descripcion_diagnostico"  formControlName="v_desc_diagnostico"/>
+                        </div>
+                          <div
+                            *ngIf="RegisterForm.controls['v_desc_diagnostico'].invalid && RegisterForm.controls['v_desc_diagnostico'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese una descripción al diagnóstico del paciente</small>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Observación o tratamiento:</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-capsule-pill"
-                                style="color: cadetblue;"></i></span>
-                        <input type="text" class="form-control" id="Observaciontratamiento"
-                            placeholder="Recomendaciones médicas" [(ngModel)]="Observaciontratamiento" />
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Observación o tratamiento:</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-capsule-pill"
+                                    style="color: cadetblue;"></i></span>
+                            <input type="text" class="form-control" id="Observaciontratamiento"
+                                placeholder="Recomendaciones médicas" [(ngModel)]="Observaciontratamiento"  formControlName="v_observacion" />
+                        </div>
+                          <div
+                            *ngIf="RegisterForm.controls['v_observacion'].invalid && RegisterForm.controls['v_observacion'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese la observación o tratamiento del paciente</small>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="mb-4">
-                    <label class="form-label fw-bold">Seleccione la cita:</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-calendar-check"
-                                style="color: #6f42c1;"></i></span>
-                        <select id="citas" class="form-select" [(ngModel)]="citaSeleccionada">
-                            <option value="">Selecciona una cita</option>
-                            <option *ngFor="let cita of citas" [value]="cita.id">
-                                Fecha: {{ cita.fecha }} - Hora: {{ cita.hora }} - Doctor: {{ cita.medico }} - Paciente:
-                                {{ cita.paciente }}
-                            </option>
-                        </select>
-
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Seleccione la cita:</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-calendar-check"
+                                    style="color: #6f42c1;"></i></span>
+                            <select id="citas" class="form-select" [(ngModel)]="citaSeleccionada"  formControlName="v_cita">
+                                <option value="">Selecciona una cita</option>
+                                <option *ngFor="let cita of citas" [value]="cita.id">
+                                    Fecha: {{ cita.fecha }} - Hora: {{ cita.hora }} - Doctor: {{ cita.medico }} -
+                                    Paciente:
+                                    {{ cita.paciente }}
+                                </option>
+                            </select>
+                        </div>
+                          <div
+                            *ngIf="RegisterForm.controls['v_cita'].invalid && RegisterForm.controls['v_cita'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Seleccione la cita de acuerdo con la fecha, la hora y el paciente atendido</small>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="text-center my-4">
+                    <div class="text-center my-4">
 
-                    <button (click)="Camara()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Camara">
-                        <i class="bi bi-camera-fill me-1"></i> Calcular estatura
-                    </button>
-                </div>
+                        <button (click)="Camara()" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#Camara">
+                            <i class="bi bi-camera-fill me-1"></i> Calcular estatura
+                        </button>
+                    </div>
 
-                <!-- Modal -->
-                <div class="modal fade" id="Camara" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="CamaraLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="CamaraLabel">Calculando estatura...</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img [src]="videoSrc" id="video" class="img-fluid w-100 object-fit-cover"
-                                    style="height: 400px;" />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" (click)="capturar()">Aceptar</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="Camara" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                        aria-labelledby="CamaraLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="CamaraLabel">Calculando estatura...</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img [src]="videoSrc" id="video" class="img-fluid w-100 object-fit-cover"
+                                        style="height: 400px;" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" (click)="capturar()">Aceptar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Guardar -->
-                <div class="text-center mt-5">
-                    <p class="text-muted">¡Al terminar, dale click en guardar para aplicar los cambios!</p>
-                    <button class="btn btn-success px-4" (click)=guardar()>
-                        <i class="bi bi-save me-1"></i> Guardar
-                    </button>
-                </div>
-
+                    <!-- Guardar -->
+                    <div class="text-center mt-5">
+                        <p class="text-muted">¡Al terminar, dale click en guardar para aplicar los cambios!</p>
+                        <button class="btn btn-success px-4" type="submit" [disabled]="RegisterForm.invalid"> 
+                            <i class="bi bi-save me-1"></i> Guardar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -278,21 +304,24 @@
                 <div class="row">
                     <div class="col-xl-12 text-center">
                         <label for="">Duracion de la incapacidad:
-                            <input type="text" class="form-control" id="v_dia_incapacidad" [(ngModel)]="v_dia_incapacidad">
+                            <input type="text" class="form-control" id="v_dia_incapacidad"
+                                [(ngModel)]="v_dia_incapacidad">
                         </label>
 
                     </div>
                     <div class="col-xl-12 text-center">
                         <label for="">Descripcion:
                         </label>
-                        <textarea type="text" class="form-control" id="v_descripcion"  [(ngModel)]="v_descripcion"></textarea>
+                        <textarea type="text" class="form-control" id="v_descripcion"
+                            [(ngModel)]="v_descripcion"></textarea>
                     </div>
 
                 </div>
                 <div class=" text-center"><!--Y como se pondria-->
                     <label for="">Observaciones
                     </label>
-                    <textarea type="text" class="form-control" id="v_observaciones"  [(ngModel)]="v_observaciones"></textarea>
+                    <textarea type="text" class="form-control" id="v_observaciones"
+                        [(ngModel)]="v_observaciones"></textarea>
                 </div>
 
             </div>

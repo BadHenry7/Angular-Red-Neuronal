@@ -50,6 +50,7 @@ export interface Buscar_telegram {
 export interface Buscar_historial_clinico {
   documento?: string
   id_paciente?: number
+  id_doctor?: number
 }
 
 
