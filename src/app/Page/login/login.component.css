@@ -50,3 +50,65 @@
             width: 100%; /* Hace que los inputs ocupen el 100% en pantallas pequeÃ±as */
         }
     }
+
+/* =====================
+   TABLET
+   ===================== */
+@media (max-width: 992px) {
+  .container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .fs-3 {
+    font-size: 20px;
+  }
+
+  .g-recaptcha {
+    padding-left: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* =====================
+   CELULAR
+   ===================== */
+@media (max-width: 600px) {
+  .container {
+   
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .fs-3 {
+    font-size: 18px;
+  }
+
+  .row {
+    gap: 10px;
+  }
+
+  .col-md-6, .col-5 {
+    
+  }
+
+  .btn_login {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .g-recaptcha {
+    transform: scale(0.85); /* recaptcha más pequeño */
+    transform-origin: center;
+    margin: 0 auto;
+    padding-left: 0 !important;
+  }
+
+  .btn-primary {
+    width: 100%; /* botón ingresar ocupa todo el ancho */
+  }
+}
+

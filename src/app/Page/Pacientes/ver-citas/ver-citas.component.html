@@ -2,12 +2,19 @@
 
 <div id="Mostrarusuario">
     <div class="container py-4">
-        <h2 class="mb-4">Citas agendadas</h2>
         @if (loading){
-        <p class="text-center">Cargando datos...</p>
-        }@else if (error){
-        <p class="text-red-500">Error: {{error}}</p>
+            <p class="text-center">Cargando datos...</p>
+        }@else if (error || todos.length === 0){
+            <!-- <p class="text-r ed-500">Error: {{error}}</p> -->
+            <div class="container img-fluid d-flex justify-content-center">
+                <img src="/assess/NoHayCitasPaciente.png" alt="" width="100%" height="658px">
+            </div>
+            
+            
+            
+            
         }@else{
+            <h2 class="mb-4">Citas agendadas</h2>
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-600" id="myTable">
                 <thead class="bg-primary text-white">

@@ -108,3 +108,76 @@ img{
     animation: flotar 3s ease-in-out infinite;
     transition: transform 0.3s, box-shadow 0.3s;
 }
+
+
+/* ====== TABLET ====== */
+@media (max-width: 992px) {
+  .footer-top {
+    flex-direction: column;   /* Apila en columna */
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .contact-info {
+    margin-left: 0 !important; /* quita el margin fijo */
+    text-align: center;
+  }
+
+  .footer-links {
+    padding: 0px 50px; /* menos padding */
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-links ul {
+    min-width: auto;
+    margin-bottom: 20px;
+  }
+
+  .img {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+}
+
+/* ====== CELULAR ====== */
+@media (max-width: 600px) {
+  .footer {
+    padding: 20px 10px 0;
+    text-align: center;
+  }
+
+  .footer-top {
+    gap: 20px;
+  }
+
+  .contact-info {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .footer-links ul {
+    width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .footer-bottom .social a {
+    margin: 0 10px;
+  }
+
+  .img img {
+    width: 200px;
+    height: auto;
+  }
+}

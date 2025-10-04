@@ -163,7 +163,7 @@ export class CitasComponent implements OnInit {
 
     this.citasService.create_cita_admin(R_cita).subscribe({
       next: (todos) => {
-        this.todos = todos;
+        console.log(todos);
         this.enviar_correo()
 
 

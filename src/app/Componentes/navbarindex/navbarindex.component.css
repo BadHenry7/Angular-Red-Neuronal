@@ -110,3 +110,64 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* sombra para realce */
 
 }
+
+
+/* =====================
+   TABLET
+   ===================== */
+@media (max-width: 992px) {
+  .navbar {
+    width: 90%;
+    padding: 10px 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .menu ul {
+    gap: 15px;
+    font-size: 15px;
+  }
+
+  .redes {
+    padding: 8px 12px;
+    gap: 15px;
+  }
+}
+
+/* =====================
+   CELULAR
+   ===================== */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 0; /* ocupa todo el ancho */
+    text-align: center;
+    gap: 20px;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .menu ul {
+    flex-direction: column;  /* menú en columna */
+    gap: 10px;
+  }
+
+  .menu a {
+    font-size: 14px;
+  }
+
+  .redes {
+    justify-content: center;
+    border-radius: 10px;
+    gap: 10px;
+  }
+
+  .redes a {
+    font-size: 16px;
+  }
+}

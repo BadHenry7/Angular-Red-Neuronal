@@ -1,0 +1,57 @@
+.card2{
+   width: 800px; height: 600px
+}
+
+/* 📱 Tablet */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .card {
+        width: 90% !important;
+        margin-bottom: 20px !important;
+    }
+
+    #pdfContainer,
+    #pdfContainer iframe {
+        width: 100% !important;
+        height: 500px !important;
+        margin-left: 0 !important;
+    }
+}
+
+/* 📱 Celulares */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column !important;
+        padding: 0 10px !important;
+    }
+
+    .card1 {
+        width: 100% !important;
+        padding: 15px !important;
+    }
+
+
+.card2{
+  height: 900px !important;    }
+
+    #pdfContainer,
+    #pdfContainer iframe {
+        width: 100% !important;
+        height: 400px !important;
+    }
+
+    button {
+        width: 100% !important;
+    }
+
+    select,
+    input {
+        font-size: 14px !important;
+    }
+
+
+}

@@ -2,9 +2,7 @@
 
 <div id="Mostrarcitas" [hidden]="!mostrarTabla">
   <div class="container py-4">
-    <h2 class="mb-4 text-center">¡Citas agendadas!</h2>
-    <hr />
-
+    
     <!-- Cargando -->
     <div *ngIf="loading" class="row g-2 justify-content-center">
       <p class="text-center col-lg-2 col-md-2 col-sm-2 col-12 col-xl-2">
@@ -14,15 +12,20 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-
+    
     <!-- Error -->
     <div *ngIf="!loading && error">
-      <p class="text-red-500">Error: {{ error }}</p>
+      <!-- <p class="text-red-500">Error: {{ error }}</p> -->
+      <div class="container img-fluid d-flex justify-content-center">
+        <img src="/assess/NoHayCitasDoctor.png" alt="" width="100%" height="658px">
+      </div>
     </div>
     
-
+    
     <!-- Tabla -->
     <div *ngIf="!loading && !error" class="overflow-x-auto">
+      <h2 class="mb-4 text-center">¡Citas agendadas!</h2>
+      <hr />
       <table class="min-w-full bg-white border border-gray-300 table-striped" id="myTable">
         <thead class="bg-primary text-white">
           <tr>
@@ -36,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let todo of todos"class="hover:bg-gray-50">
+          <tr *ngFor="let todo of todos" class="hover:bg-gray-50">
             <td class="px-4 py-2 border">{{ todo.paciente }}</td>
             <td class="px-4 py-2 border">{{ todo.medico }}</td>
             <td class="px-4 py-2 border">{{ todo.fecha }}</td>
@@ -47,7 +50,8 @@
               <button class="btn btn-info" (click)="editarCitas(todo.id)">
                 <i class="bi bi-pencil-square"></i>
               </button>
-              <button class="btn btn-danger" (click) = "Confirmar_eliminar(todo.id, todo.fecha, todo.hora, todo.paciente, todo.email)">
+              <button class="btn btn-danger"
+                (click)="Confirmar_eliminar(todo.id, todo.fecha, todo.hora, todo.paciente, todo.email)">
                 <i class="bi bi-ban"></i>
               </button>
             </td>
@@ -84,17 +88,18 @@
                 <span class="input-group-text " style="width:125px;">
                   <i class="bi bi-person me-2 text-primary"></i> Paciente
                 </span>
-                <input  type="text" *ngFor="let todo of todos" [value]="todo.paciente" class="form-control" readonly style="background-color: white;">
+                <input type="text" *ngFor="let todo of todos" [value]="todo.paciente" class="form-control" readonly
+                  style="background-color: white;">
               </div>
 
               <div class="input-group mt-4">
                 <span class="input-group-text  " style="width:125px;">
                   <i class="bi bi-person me-2 text-primary"></i> Doctor
                 </span>
-              <select class="form-select" id="medico" formControlName="v_doctor">
-                
-                <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }}</option>
-              </select>             
+                <select class="form-select" id="medico" formControlName="v_doctor">
+
+                  <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }}</option>
+                </select>
               </div>
               <div
                 *ngIf="ActualizarCitasForm.controls['v_doctor'].invalid && ActualizarCitasForm.controls['v_doctor'].touched;">
@@ -132,11 +137,13 @@
                 <span class="input-group-text   " style="width:125px;">
                   <i class="bi bi-envelope me-2 text-primary"></i> Hospital
                 </span>
-                <select id="ubicacion" class="form-select" required formControlName="v_ubicacion" (change)="mostrar_salas()">
-                    <option *ngFor="let todo of ubicacion"  [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}</option>
-                </select>              
+                <select id="ubicacion" class="form-select" required formControlName="v_ubicacion"
+                  (change)="mostrar_salas()">
+                  <option *ngFor="let todo of ubicacion" [value]="todo.nombre_hospital">{{ todo.nombre_hospital }}
+                  </option>
+                </select>
               </div>
-              <div  
+              <div
                 *ngIf="ActualizarCitasForm.controls['v_ubicacion'].invalid && ActualizarCitasForm.controls['v_ubicacion'].touched;">
                 <small class="error" style="position: absolute;">&#10060;Seleccione una ubicación</small>
               </div>
@@ -146,8 +153,8 @@
                   <i class="bi bi-person-badge me-2 text-primary"></i> Salas
                 </span>
                 <select id="roles" required class="form-select" formControlName="v_salas">
-                
-                  <option *ngFor="let todo of salas"  [value]="todo.salas_nombre">{{todo.salas_nombre}}</option>
+
+                  <option *ngFor="let todo of salas" [value]="todo.salas_nombre">{{todo.salas_nombre}}</option>
 
                 </select>
               </div>
@@ -165,18 +172,19 @@
               ¡Al terminar de editar, darle click en actualizar para guardar los
               cambios!
             </div>
-            <div class="col-lg-12 text-center mt-2"> 
-              
-        
-             <div *ngIf="ActualizarCitasForm.invalid; else valido">
-              <button  class="btn btn-outline-secondary" [disabled]="ActualizarCitasForm.invalid" ><b>Actualizar</b></button>
+            <div class="col-lg-12 text-center mt-2">
+
+
+              <div *ngIf="ActualizarCitasForm.invalid; else valido">
+                <button class="btn btn-outline-secondary"
+                  [disabled]="ActualizarCitasForm.invalid"><b>Actualizar</b></button>
               </div>
               <ng-template #valido>
-                <button  class="btn btn-outline-primary" (click) = actualizar()><b>Actualizar</b></button>
+                <button class="btn btn-outline-primary" (click)=actualizar()><b>Actualizar</b></button>
               </ng-template>
             </div>
 
-            
+
             <div id="estado" class="col-lg-10"></div>
           </div>
 
@@ -189,7 +197,7 @@
 
 
 <!-- MODAL O SECCIÓN DE EDICIÓN -->
-<div class="fade" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab" >
+<div class="fade" id="nav-listado" role="tabpanel" aria-labelledby="nav-listado-tab">
   <div class="container text-center">
     <p class="text-orange"></p>
   </div>
@@ -205,8 +213,7 @@
           <p class="card-text"><b>Paciente:</b></p>
         </div>
         <div class="col-lg-10">
-          <input type="text" placeholder="Nombres" id="paciente" maxlength="100"
-            style="border: none; width: 55%;" />
+          <input type="text" placeholder="Nombres" id="paciente" maxlength="100" style="border: none; width: 55%;" />
         </div>
       </div>
 
@@ -228,8 +235,7 @@
           <p class="card-text"><b>Fecha:</b></p>
         </div>
         <div class="col-lg-10">
-          <input class="form-control" type="date" id="Fecha_cita" placeholder="Fecha de la cita"
-            style="width: 55%;" />
+          <input class="form-control" type="date" id="Fecha_cita" placeholder="Fecha de la cita" style="width: 55%;" />
         </div>
       </div>
 
@@ -239,8 +245,8 @@
           <p class="card-text"><b>Hora:</b></p>
         </div>
         <div class="col-lg-10">
-          <input class="form-control" type="time" id="hora_cita" placeholder="hora de la cita"
-            maxlength="20" style="width: 55%;" />
+          <input class="form-control" type="time" id="hora_cita" placeholder="hora de la cita" maxlength="20"
+            style="width: 55%;" />
         </div>
       </div>
 

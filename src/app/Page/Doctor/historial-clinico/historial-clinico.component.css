@@ -1,3 +1,55 @@
  .Input_buscar:hover{
         border-color: blue;
     }
+
+  @media (max-width: 768px) {
+  table {
+    font-size: 13px;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+
+  .card-header {
+    font-size: 1.1rem;
+  }
+}
+
+/* Vista ultra-pequeña */
+@media (max-width: 576px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 250px
+    
+   
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 12px;
+    
+    border-radius: 8px;
+    padding: 8px;
+   
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  td {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #008b8b;
+    margin-right: 8px;
+  }
+}  

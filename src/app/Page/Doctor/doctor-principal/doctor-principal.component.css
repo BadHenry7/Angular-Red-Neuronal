@@ -8,3 +8,50 @@
   padding: 5vh;
   z-index: 1;
 }
+
+@media (max-width: 992px) {
+  .logos {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .logos .card {
+    width: 100%;
+  }
+
+  .logos img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Para pantallas pequeñas (celulares) */
+@media (max-width: 576px) {
+  .logos {
+    padding: 2vh;
+    background-size: cover;
+  }
+
+  .logos .card {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .logos h2 {
+    font-size: 20px;
+  }
+
+  .logos p {
+    font-size: 13px;
+  }
+
+  .logos .btn {
+    width: 100% !important;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}

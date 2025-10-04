@@ -240,7 +240,7 @@ export class CreateCitaComponent implements OnInit {
 
     this.citasService.create_cita_admin(R_cita).subscribe({
       next: (todos) => {
-        this.todos = todos;
+        console.log(todos);
 
 
       }, error: (error) => {
@@ -249,7 +249,7 @@ export class CreateCitaComponent implements OnInit {
       ,
     })
 
-    console.log()
+    
 
 
 
