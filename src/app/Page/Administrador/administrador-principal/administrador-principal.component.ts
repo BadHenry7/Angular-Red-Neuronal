@@ -102,13 +102,13 @@ export class AdministradorPrincipalComponent implements OnInit {
     const genero = String(this.PerfilAdminForm.value.v_genero);
     const edad = Number(this.PerfilAdminForm.value.v_edad);
     const usuario = String(this.PerfilAdminForm.value.v_usuario);
-    const password = String(this.PerfilAdminForm.value.v_password);
+    //const password = String(this.PerfilAdminForm.value.v_password);
     const estado = Boolean(1);
     const id_rol = Number(this.PerfilAdminForm.value.id_rol);
     const estatura= String(this.PerfilAdminForm.value.v_estatura);
 
     const R_usuario = {
-      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol, id: this.id, estatura
+      nombre, apellido, documento, telefono, genero, edad, usuario, estado, id_rol, id: this.id, estatura
     }
 
 
@@ -151,7 +151,7 @@ export class AdministradorPrincipalComponent implements OnInit {
 
 
     console.log("Datos a registrar:" + "\n" + nombre + "\n" + apellido + "\n" + documento + "\n" + telefono + "\n" + genero + "\n" + edad
-      + "\n" + usuario + "\n" + password
+      + "\n" + usuario + "\n"
     )
 
   }

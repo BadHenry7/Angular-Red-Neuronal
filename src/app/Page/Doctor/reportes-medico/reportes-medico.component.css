@@ -1,5 +1,6 @@
-.card2{
-   width: 800px; height: 600px
+.card2 {
+    width: 800px;
+    height: 600px
 }
 
 /* 📱 Tablet */
@@ -35,8 +36,9 @@
     }
 
 
-.card2{
-  height: 900px !important;    }
+    .card2 {
+        height: 900px !important;
+    }
 
     #pdfContainer,
     #pdfContainer iframe {

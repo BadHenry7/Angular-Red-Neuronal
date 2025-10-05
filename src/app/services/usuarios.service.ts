@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { User, Login, Buscar, SMS, ValidarIncapacidad } from "../interfaces/usuarios"
+import { User, Login, Buscar, SMS, ValidarIncapacidad, PasswordOlvidado } from "../interfaces/usuarios"
 
 
 
@@ -20,7 +20,7 @@ export class UsersService {
         return this.http.post<User[]>(this.apiUrl + 'login', user);
     }
 
-    getUsers(): Observable<User[]> {//Todos los usuarios
+    getUsers(): Observable<User[]> {
         return this.http.get<User[]>(this.apiUrl + 'get_users');
     }
 
@@ -51,21 +51,31 @@ export class UsersService {
         return this.http.put<User[]>(this.apiUrl + 'estado_user', user);
     }
 
-    getpaciente(): Observable<User[]> {//Todos los usuarios
+    getpaciente(): Observable<User[]> {
         return this.http.get<User[]>(this.apiUrl + 'getpaciente');
     }
 
-    getdoctor(): Observable<User[]> {//Todos los usuarios
+    getdoctor(): Observable<User[]> {
         return this.http.get<User[]>(this.apiUrl + 'getmedico');
     }
 
 
-    sendSMS(user: SMS): Observable<SMS[]> {//Todos los usuarios
+    sendSMS(user: SMS): Observable<SMS[]> {
         return this.http.post<SMS[]>('https://api-nodejs-buxf.onrender.com/api/send-sms', user);
     }
 
-    validarIncapacidad(user: ValidarIncapacidad): Observable<ValidarIncapacidad[]> {//Todos los usuarios
+    validarIncapacidad(user: ValidarIncapacidad): Observable<ValidarIncapacidad[]> {
         return this.http.post<ValidarIncapacidad[]>(this.apiUrl + 'ValidarIncapacidad', user);
+    }
+
+
+
+    olvidePassword(user: PasswordOlvidado): Observable<PasswordOlvidado[]> {
+        return this.http.post<PasswordOlvidado[]>(this.apiUrl + 'olvidePassword', user);
+    }
+
+    updatePassword(user: PasswordOlvidado): Observable<PasswordOlvidado[]> {
+        return this.http.put<PasswordOlvidado[]>(this.apiUrl + 'update_password', user);
     }
 
 

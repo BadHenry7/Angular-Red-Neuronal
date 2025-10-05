@@ -36,6 +36,12 @@ export interface ValidarIncapacidad {
   cedula: string;
 }
 
+export interface PasswordOlvidado {
+  usuario: string;
+  nuevo_password?: string;
+}
+  
+
 
 
 

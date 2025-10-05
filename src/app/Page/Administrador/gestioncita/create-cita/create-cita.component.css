@@ -42,4 +42,119 @@
 
 
 
-  
+  /* ==== Estilos generales (mantienes los tuyos) ==== */
+select:hover,
+input[type="time"]:hover {
+  border-color: blue;
+}
+
+input[type="date"]:hover {
+  border-color: blue;
+}
+
+.time-icon {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.input-group-text {
+  border: none;
+}
+
+input[type="time"] {
+  background-color: white !important;
+  color: black !important;
+  cursor: pointer;
+  border-radius: 8px;
+  text-align: center;
+}
+
+input[type="time"]:disabled {
+  background-color: #e9ecef !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* ==== 📱 Vista móvil (pantallas menores a 768px) ==== */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  form .row {
+    flex-direction: column;
+  }
+
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-md-4,
+  .col-sm-4,
+  .col-4,
+  .col-xl-4 {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  /* Inputs y selects más legibles */
+  select,
+  input[type="date"],
+  input[type="time"] {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  /* Ajuste visual para las horas */
+  .input-group {
+    margin-bottom: 10px;
+  }
+
+  /* Centramos los detalles */
+  .text-center.fs-4 {
+    font-size: 1.2rem;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button.btn {
+    width: 90%;
+    margin-top: 15px;
+  }
+
+  /* Espaciado más compacto */
+  .mt-5 {
+    margin-top: 1.5rem !important;
+  }
+
+  p.text-muted {
+    font-size: 0.9rem;
+    text-align: justify;
+  }
+}
+
+/* ==== 💻 Vista tablet (768px a 992px) ==== */
+@media (min-width: 768px) and (max-width: 992px) {
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5 {
+    width: 50%;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  input,
+  select {
+    font-size: 1rem;
+  }
+
+  button.btn {
+    width: 80%;
+  }
+}

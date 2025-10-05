@@ -14,3 +14,106 @@
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
+
+/* Estilos generales responsivos */
+@media (max-width: 992px) {
+
+  /* Fondo y espaciado general */
+  .logos {
+    flex-direction: column;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    gap: 24px;
+    padding: 3vh;
+  }
+
+  /* Tarjeta del formulario */
+  .card {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Encabezados */
+  .card .fs-3 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  h2.fw-bold {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  /* Inputs y selects */
+  .input-group-text {
+    width: 110px !important;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.9rem;
+  }
+
+  /* Espaciado entre filas */
+  .row {
+    margin-bottom: 10px;
+  }
+
+  /* Botones */
+  button.btn,
+  a.btn {
+    width: 100% !important;
+    height: auto !important;
+    margin-top: 10px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  /* Sección de bienvenida */
+  .col-lg-6.text-center {
+    margin-top: 40px !important;
+  }
+
+  .col-lg-6.text-center p {
+    text-align: justify;
+    padding: 0 10px;
+    font-size: 0.95rem;
+  }
+
+  /* Ajustar botones del grid final */
+  .col-xl-6.d-flex {
+    justify-content: center !important;
+  }
+
+  /* Evita scroll horizontal */
+  .container {
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 10px;
+  }
+}
+
+/* Extra pequeño: pantallas menores a 576px */
+@media (max-width: 576px) {
+  .input-group-text {
+    width: 100px !important;
+    font-size: 0.8rem;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.85rem;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  h2.fw-bold {
+    font-size: 1.3rem;
+  }
+}
