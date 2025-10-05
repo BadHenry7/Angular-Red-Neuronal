@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Citas, Buscar_telegram, Sala ,Reportes, ReportesUsuario, Ubicacion, Eliminar, Buscar_historial_clinico, create_diagnostico, create_sintomas, validarHora } from "../interfaces/citas"
+import { Citas, Buscar_telegram, Sala, Reportes, ReportesUsuario, Ubicacion,
+     Eliminar, Buscar_historial_clinico, create_diagnostico, create_sintomas,
+     DiagnosticoSintomas, validarHora } from "../interfaces/citas"
 
 
 @Injectable({
@@ -75,7 +77,7 @@ export class CitasService {
     }
 
     getsala(user: string): Observable<Sala[]> {
-        const users= user
+        const users = user
         return this.http.post<Sala[]>(`${this.url}${users}`, user);
     }
 
@@ -96,12 +98,23 @@ export class CitasService {
         return this.http.post<Buscar_historial_clinico[]>(this.apiUrl + '/historia_clinica', user);
     }
 
-    update_Cita(user: Citas): Observable<Citas[]>{
-        return this.http.put<Citas[]>(this.apiUrl + '/update_cita' ,user);
+
+    get_historia_clinica_id(user: Buscar_historial_clinico): Observable<Buscar_historial_clinico[]> {
+        return this.http.post<Buscar_historial_clinico[]>(this.apiUrl + '/historia_clinica_id', user);
     }
 
+    update_Cita(user: Citas): Observable<Citas[]> {
+        return this.http.put<Citas[]>(this.apiUrl + '/update_cita', user);
+    }
+
+
+    update_historialClinico(user: DiagnosticoSintomas): Observable<DiagnosticoSintomas[]> {
+        return this.http.put<DiagnosticoSintomas[]>(this.apiUrl + '/update_historialClinico', user);
+    }
+
+
     desactivar_cita(user: Eliminar): Observable<Eliminar[]> {
-        return this.http.put<Eliminar[]>(this.apiUrl + '/eliminar_cita' ,user);
+        return this.http.put<Eliminar[]>(this.apiUrl + '/eliminar_cita', user);
     }
 
     validarHora(): Observable<validarHora[]> {
@@ -118,7 +131,7 @@ export class CitasService {
 // AFTER INSERT ON sintomas
 // FOR EACH ROW
 // BEGIN
-//     UPDATE cita 
+//     UPDATE cita
 //     SET estado = 0
 //     WHERE id = NEW.id_cita;
 // END$$

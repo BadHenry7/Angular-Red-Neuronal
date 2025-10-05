@@ -40,6 +40,8 @@ import { ReportesComponent } from './Page/Administrador/reportes/reportes.compon
 import { DashboardComponent } from './Page/Administrador/dashboard/dashboard.component'
 import { RolesComponent } from './Page/Administrador/roles/roles.component';
 import { MarcoLegalComponent } from './Componentes/marco-legal/marco-legal.component';
+import { AsistenteVirtualMovilComponent } from './Page/Pacientes/asistente-virtual-movil/asistente-virtual-movil.component';
+import { OlvidePasswordComponent } from './Page/olvide-password/olvide-password.component';
 
 
 
@@ -56,6 +58,7 @@ export const routes: Routes = [
   { path: 'completar_informacion', component: CompletarInformacionComponent },
   { path: 'terminos', component: TerminosCondicionesComponent },
   { path: 'marcoLegal', component: MarcoLegalComponent },
+  { path: 'OlvidaPassword', component: OlvidePasswordComponent},
 
 
   //Aca paginas Paciente
@@ -65,6 +68,7 @@ export const routes: Routes = [
   { path: 'pacientes/citas', component: CitasComponent },
   { path: 'pacientes/ver_citas', component: VerCitasComponent },
   { path: 'pacientes/AsistenteVirtual', component: AsistenteVirtualComponent },
+  { path: 'chat-mobile', component: AsistenteVirtualMovilComponent },
 
 
 

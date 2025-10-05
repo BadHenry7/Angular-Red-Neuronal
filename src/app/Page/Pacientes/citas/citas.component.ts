@@ -24,7 +24,9 @@ export class CitasComponent implements OnInit {
   id_telegram: string = ''
   id: number = 0
   NombreDoctor = ""
-
+  todosHoras: any = []
+  validando: string[] = [];
+  todos_agendadas: any = []
 
   constructor(private ac: FormBuilder, private citasService: CitasService, private userService: UsersService) {
     this.asigncita = this.ac.group({
@@ -50,9 +52,68 @@ export class CitasComponent implements OnInit {
 
     this.obtenerdoctor();
     this.obtenerUbicacion();
-
+    this.validarHora();
 
   }///post_citas_users/
+
+  validarHora() {
+
+
+    this.citasService.validarHora().subscribe({
+
+      next: (dataHora) => {
+
+        this.todosHoras = dataHora
+        this.todosHoras = this.todosHoras.resultado
+        console.log("dataHora", this.todosHoras)
+        //console.log("hora", this.hours)
+
+
+        for (let i = 0; i < this.hours.length; i++) {
+
+
+          for (let j = 0; j < this.todosHoras.length; j++) {
+
+            console.log("fecha", this.fecha)
+            console.log("fecha22", this.todosHoras[j].Fecha)
+            if (this.hours[i] == String(this.todosHoras[j].Hora) && String(this.fecha) == String(this.todosHoras[j].Fecha)) {
+              console.log(this.todosHoras[j].Hora, "si es igual aca", this.hours[i])
+              this.validando.push(this.hours[i]);
+            }
+
+          }
+        }
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+
+  }
+
+
+  validarFecha(vfecha: string) {
+
+    this.validando.length = 0;
+
+    for (let i = 0; i < this.hours.length; i++) {
+      //console.log("dataHora", this.todosHoras[i].Hora)
+
+      for (let j = 0; j < this.todosHoras.length; j++) {
+
+        // console.log("fecha", this.fecha)
+        // console.log("fecha22", this.todosHoras[j].Fecha)
+        if (this.hours[i] == String(this.todosHoras[j].Hora) && String(vfecha) == String(this.todosHoras[j].Fecha)) {
+          // console.log(this.todosHoras[j].Hora, "si es igual aca", this.hours[i])
+          this.validando.push(this.hours[i]);
+        }
+
+      }
+    }
+  }
+
 
   obtenerdoctor() {
 
@@ -91,24 +152,25 @@ export class CitasComponent implements OnInit {
   date = new Date();
 
   horas = this.date.getHours() < 10 ? '0' + this.date.getHours() : this.date.getHours().toString();
-  
+
   v_horas = this.horas + ":00"
 
   year: number = this.date.getFullYear();
 
-  month: string = (this.date.getMonth() + 1) < 10 
-    ? '0' + (this.date.getMonth() + 1) 
+  month: string = (this.date.getMonth() + 1) < 10
+    ? '0' + (this.date.getMonth() + 1)
     : (this.date.getMonth() + 1).toString();
 
-  day: string = this.date.getDate() < 10 
-    ? '0' + this.date.getDate() 
+  day: string = this.date.getDate() < 10
+    ? '0' + this.date.getDate()
     : this.date.getDate().toString();
 
-  fecha: string = `${this.year}-${this.month}-${this.day}`;  
+  fecha: string = `${this.year}-${this.month}-${this.day}`;
 
 
-  hours: string[] = ["06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
-    "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",]
+  hours: string[] = ["06:30:00", "07:00:00", "07:30:00", "08:00:00", "08:30:00", "09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+    "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00",
+    "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00", "18:30:00",]
 
   fechaSeleccionada: string = '';
   horaSeleccionada: string = '';
@@ -131,11 +193,7 @@ export class CitasComponent implements OnInit {
       confirmButtonText: "Si, añadir cita",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Cita agendada!",
-          icon: "success",
-          draggable: true
-        });
+       
         this.Agendar();
       }
     });
@@ -144,6 +202,15 @@ export class CitasComponent implements OnInit {
 
 
   Agendar() {
+
+    if (this.horaSeleccionada == '') {
+      Swal.fire({
+        title: "Por favor, selecciona una hora",
+        icon: "warning",
+        draggable: true
+      });
+      return;
+    }
 
     const usuarioGuardado = localStorage.getItem('usuario');
     if (usuarioGuardado) {
@@ -163,8 +230,22 @@ export class CitasComponent implements OnInit {
 
     this.citasService.create_cita_admin(R_cita).subscribe({
       next: (todos) => {
+        this.todos_agendadas = todos;
+        this.todos_agendadas = this.todos_agendadas.resultado;
         console.log(todos);
-        this.enviar_correo()
+        if (this.todos_agendadas === "Cita añadida correctamente") {
+          
+          Swal.fire({ 
+            title: "Cita agendada!",
+            icon: "success",
+            draggable: true
+          });
+          this.enviar_correo()
+          this.horaSeleccionada = '';
+          this.asigncita.reset();
+          this.validando = [];
+          this.validarHora();
+        }
 
 
       }, error: (error) => {
@@ -207,11 +288,11 @@ export class CitasComponent implements OnInit {
   }
 
 
-// vhora='';
-//   mostrar_horas(hora_onclick: string) {
-//     this.vhora = hora_onclick;
-//     this.mostrar_fecha()
-//   }
+  // vhora='';
+  //   mostrar_horas(hora_onclick: string) {
+  //     this.vhora = hora_onclick;
+  //     this.mostrar_fecha()
+  //   }
 
 
   mostrar_fecha() {
@@ -220,14 +301,15 @@ export class CitasComponent implements OnInit {
 
     console.log("entro a mostrar fecha")
     const vfecha = this.fechaSeleccionada;
+    this.validarFecha(vfecha)
     console.log("v_fecha", vfecha)
     console.log(this.fecha)
-    if (vfecha > String( this.fecha)) {
-      this.v_horas = "05:00"
+    if (vfecha > String(this.fecha)) {
+      this.v_horas = "05:00:00"
       console.log(this.v_horas)
     } else {
-      this.v_horas = this.horas + ":00"
-      console.log("acaaa",this.v_horas)
+      this.v_horas = this.horas + ":00:00"
+      console.log("acaaa", this.v_horas)
 
     }
 
@@ -236,21 +318,21 @@ export class CitasComponent implements OnInit {
   }
 
 
-  
-   serviceID = 'service_yev294m'
+
+  serviceID = 'service_yev294m'
   templateID = 'template_i73qkfa'
   apikey = 'gVmq9ZyZNWP2_LzXW'
-  nb: string=''
-  ce: string=''
+  nb: string = ''
+  ce: string = ''
   enviar_correo() {
-const usuarioGuardado = localStorage.getItem('usuario');
+    const usuarioGuardado = localStorage.getItem('usuario');
 
     if (usuarioGuardado) {
       const usuario = JSON.parse(usuarioGuardado);
       this.nb = usuario.nombre;
-      this.ce= usuario.correo;
+      this.ce = usuario.correo;
 
-    } 
+    }
     const vfecha = String(this.asigncita.value.v_fecha);
     const vhora = String(this.horaSeleccionada);
 

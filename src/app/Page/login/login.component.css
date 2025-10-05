@@ -1,55 +1,85 @@
 .container {
-        max-width: 600px; /* Limita el ancho del contenedor */
-        margin: auto; /* Centra el contenedor horizontalmente */
-        padding: 20px; /* Agrega padding interno */
-        border-radius: 10px; /* Bordes redondeados */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
-        background-color: #f9f9f9; /* Color de fondo claro */
-    }
+  max-width: 600px;
+  /* Limita el ancho del contenedor */
+  margin: auto;
+  /* Centra el contenedor horizontalmente */
+  padding: 20px;
+  /* Agrega padding interno */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra para profundidad */
+  background-color: #f9f9f9;
+  /* Color de fondo claro */
+}
 
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5); /* Oscurecimiento del fondo */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1050; /* Asegurarse de que estÃ© sobre el contenido */
-    }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Oscurecimiento del fondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  /* Asegurarse de que estÃ© sobre el contenido */
+}
 
-    .form-control {
-        border-radius: 5px; /* Bordes redondeados para los inputs */
-        border: 1px solid #ced4da; /* Borde gris claro */
-    }
+.form-control {
+  border-radius: 5px;
+  /* Bordes redondeados para los inputs */
+  border: 1px solid #ced4da;
+  /* Borde gris claro */
+}
 
-    .form-control:focus {
-        border-color: #80bdff; /* Color del borde al enfocar */
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra al enfocar */
-    }
+.form-control:focus {
+  border-color: #80bdff;
+  /* Color del borde al enfocar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  /* Sombra al enfocar */
+}
 
-    .btn-primary {
-        background-color: #008b8b; /* Color de fondo del botÃ³n */
-        border: none; /* Sin borde */
-        padding: 10px 20px; /* Padding interno */
-    }
+.btn-primary {
+  background-color: #008b8b;
+  /* Color de fondo del botÃ³n */
+  border: none;
+  /* Sin borde */
+  padding: 10px 20px;
+  /* Padding interno */
+}
 
-    .btn-primary:hover {
-        background-color: #1bd1d1; /* Color de fondo al pasar el mouse */
-    }
+.btn-primary:hover {
+  background-color: #1bd1d1;
+  /* Color de fondo al pasar el mouse */
+}
 
-    .btn_login:hover {
-        background-color: rgb(27, 27, 27);
-        transition: all 0.4s ease; /* Añadir transición para suavizar el movimiento */
-    }
+.btn_login:hover {
+  background-color: rgb(27, 27, 27);
+  transition: all 0.4s ease;
+  /* Añadir transición para suavizar el movimiento */
+}
 
-    @media (max-width: 768px) {
-        .col-md-4 {
-            width: 100%; /* Hace que los inputs ocupen el 100% en pantallas pequeÃ±as */
-        }
-    }
+.link-forgot {
+  text-decoration: none;
+  font-weight: bold;
+  color: #0d6efd;
+  transition: color 0.3s ease;
+}
+
+.link-forgot:hover {
+  color: #084298;
+}
+
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    width: 100%;
+    /* Hace que los inputs ocupen el 100% en pantallas pequeÃ±as */
+  }
+}
 
 /* =====================
    TABLET
@@ -76,7 +106,7 @@
    ===================== */
 @media (max-width: 600px) {
   .container {
-   
+
     max-width: 100%;
     margin: 20px auto;
     padding: 15px;
@@ -91,9 +121,8 @@
     gap: 10px;
   }
 
-  .col-md-6, .col-5 {
-    
-  }
+  .col-md-6,
+  .col-5 {}
 
   .btn_login {
     font-size: 13px;
@@ -101,14 +130,15 @@
   }
 
   .g-recaptcha {
-    transform: scale(0.85); /* recaptcha más pequeño */
+    transform: scale(0.85);
+    /* recaptcha más pequeño */
     transform-origin: center;
     margin: 0 auto;
     padding-left: 0 !important;
   }
 
   .btn-primary {
-    width: 100%; /* botón ingresar ocupa todo el ancho */
+    width: 100%;
+    /* botón ingresar ocupa todo el ancho */
   }
 }
-

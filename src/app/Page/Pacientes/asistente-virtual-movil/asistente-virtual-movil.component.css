@@ -1,0 +1,100 @@
+/* Chatbox general */
+.tonyo_select {
+    position: fixed;
+    right: 5%;
+    bottom: 20px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 9999 !important;
+    background-color: transparent;
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.tonyo_select:hover {
+    width: 150px;
+}
+
+.tonyo_text {
+    display: none;
+    color: white;
+    font-size: 14px;
+}
+
+.tonyo_select:hover .tonyo_text {
+    display: block;
+}
+
+/* Ventana del chat */
+.tonyo_body {
+    position: fixed !important; /* clave para que siempre quede encima */
+    bottom: 90px;               /* arriba del botón flotante */
+    right: 5%;
+    width: 90%;
+    max-width: 400px;
+    height: 70%;
+    border-radius: 15px;
+    z-index: 9999 !important;
+    overflow-y: auto;
+}
+
+/* Input */
+.input-area {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 90%;
+}
+
+/* Footer */
+.offcanvas-footer {
+    padding: 1rem 1rem;
+    border-top: 1px solid #2bff00;
+    background-color: #007bff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Animación de "typing" */
+.typing-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 15px;
+    width: 60px;
+    height: 30px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.typing-dots span {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    background-color: #3498db;
+    border-radius: 50%;
+    animation: typingAnimation 1.5s infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingAnimation {
+    0% { opacity: 0.3; transform: translateY(0px); }
+    50% { opacity: 1; transform: translateY(-5px); }
+    100% { opacity: 0.3; transform: translateY(0px); }
+}
+
+/* Solo móvil */
+@media (max-width: 768px) {
+    .tonyo_body {
+        width: 95%;
+        right: 2.5%;
+        height: 75%;
+    }
+}

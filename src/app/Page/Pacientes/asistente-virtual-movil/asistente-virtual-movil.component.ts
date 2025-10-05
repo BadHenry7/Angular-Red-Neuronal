@@ -1,39 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { ChatboxService } from '../../../services/chatbox.service';
 import { FormsModule } from '@angular/forms';
-import { ChatboxService } from '../../services/chatbox.service';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-chatbox',
-  imports: [CommonModule, FormsModule],
-  templateUrl: './chatbox.component.html',
-  styleUrl: './chatbox.component.css'
+  selector: 'app-asistente-virtual-movil',
+  imports: [FormsModule,  CommonModule],
+  templateUrl: './asistente-virtual-movil.component.html',
+  styleUrl: './asistente-virtual-movil.component.css'
 })
-export class ChatboxComponent implements OnInit {
-   esMovil: boolean = false;
-  ngOnInit(): void {
-      
-  }
+export class AsistenteVirtualMovilComponent {
 
-
-
-  //  @ViewChild('miVideo') miVideo!: ElementRef<HTMLVideoElement>;
-
-  //  ngAfterViewInit() {
-  //     const video = this.miVideo.nativeElement;
-
-
-  //     video.play().catch(err => {
-  //       console.log("Autoplay bloqueado, forzando muted play", err);
-  //       video.muted = true; 
-  //       video.play();
-  //     });
-  //   }
-
-
-
-  constructor(private chatboxService: ChatboxService, private router: Router) { }
+ constructor(private chatboxService: ChatboxService) { }
 
   loading: boolean = false
   mensaje: string = ""
@@ -99,5 +77,8 @@ export class ChatboxComponent implements OnInit {
 
     })
   }
+
+
+
 
 }

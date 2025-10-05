@@ -18,8 +18,13 @@
 
 
 <app-navbar-paciente></app-navbar-paciente>
-<app-chatbox></app-chatbox>
 
+@if (esMovil){
+<app-asistente-virtual-movil></app-asistente-virtual-movil>
+}
+@else{
+<app-chatbox></app-chatbox>
+}
 
 <div class="logos">
     <div class="container">

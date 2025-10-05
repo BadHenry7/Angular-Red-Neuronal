@@ -29,3 +29,93 @@
       border-radius: 8px;
       text-align: center;
     }
+
+     input[type="time"]:disabled {
+      background-color:  #e9ecef !important;
+       color: #6c757d !important;
+      cursor: not-allowed;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+
+
+    /* Estilos generales móviles y tablet (<= 992px) */
+@media (max-width: 992px) {
+
+  .container {
+    padding: 15px;
+  }
+
+  p.fs-3 {
+    font-size: 1.5rem;
+  }
+
+  .input-group .input-group-text {
+    margin-left: 2.5rem;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .input-group .btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Columnas se apilan verticalmente */
+  .row > div[class*='col-'] {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  select.form-select,
+  input.form-control,
+  input[type="time"],
+  input[type="date"] {
+    width: 100% !important;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+  }
+
+  .time-icon {
+    padding: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  /* Ajuste de los detalles de la cita */
+  #mostrar_fecha,
+  #mostrar_hora,
+  #mostrar_doctor {
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  /* Botón agendar centrado y más grande en móvil */
+  .btn.btn-primary {
+    width: 100%;
+    padding: 0.7rem 0;
+    font-size: 1rem;
+  }
+
+  /* Texto de recordatorio de Telegram */
+  .input-group-text {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.85rem;
+  }
+
+  .input-group-text button {
+    margin-top: 0.3rem;
+  }
+
+  /* Video en modal responsive */
+  iframe {
+    width: 100% !important;
+    height: auto !important;
+  }
+}

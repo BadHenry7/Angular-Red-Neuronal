@@ -20,16 +20,16 @@ export class HistorialClinicoComponent implements OnInit {
 
   constructor(private h_clinicoService: CitasService, private sintomasService: SintomasService,
     private diagnosticoService: DiagnosticoService, private dynamoDBService: DynamoDBService,
-    private rg: FormBuilder) {
+    private rg: FormBuilder, private citasService: CitasService) {
 
 
     this.RegisterForm = this.rg.group({
-      v_sintomas: ['',  [Validators.required]],
-      v_desc_sintomas: ['',  [Validators.required]],
-      v_diagnostico: ['',  [Validators.required]],
-      v_desc_diagnostico: ['',  [Validators.required]],
-      v_observacion: ['',  [Validators.required]],
-      v_cita: ['',  [Validators.required]],
+      v_sintomas: ['', [Validators.required]],
+      v_desc_sintomas: ['', [Validators.required]],
+      v_diagnostico: ['', [Validators.required]],
+      v_desc_diagnostico: ['', [Validators.required]],
+      v_observacion: ['', [Validators.required]],
+      v_cita: [null, [Validators.required]],
 
     })
 
@@ -52,6 +52,7 @@ export class HistorialClinicoComponent implements OnInit {
   telefono: string = ''
   buscardocumento_v: string = '';
   mostrarhistorial: boolean = true
+  mostrarhistorialCitas: boolean = true
 
   citaSeleccionada: string = ''
   sintomas: string = ''
@@ -242,7 +243,7 @@ export class HistorialClinicoComponent implements OnInit {
     const R_sintomas = {
       nombre: sintomas, descripcion: descripcion_sintomas, estado: true, id_cita: Number(citaSeleccionada)
     }
-    
+
     console.log("R_diagnostico", R_sintomas)
     this.sintomasService.createSintoma(R_sintomas).subscribe({
 
@@ -333,9 +334,108 @@ export class HistorialClinicoComponent implements OnInit {
 
   editar() {
     this.mostrarhistorial = false;
+    this.mostrarhistorialCitas = true;
 
   }
 
+  editarHistorial(id: number) {
+    console.log("id a eliminar", id)
+    this.mostrarhistorialCitas = false;
+    this.mostrarhistorial = false;
+    this.citaSeleccionada = String(id);
 
+    const R_historial = {
+      id_cita: id
+    }
+    this.h_clinicoService.get_historia_clinica_id(R_historial).subscribe({
+      next: (data) => {
+        this.todos = data
+        this.todos = this.todos.resultado[0]
+        console.log("this.todos", this.todos)
+        console.log("this.todos", this.todos.sintomas)
+
+
+        console.log('Antes del patchValue', this.RegisterForm.value);
+        this.RegisterForm.patchValue({
+          v_sintomas: this.todos.sintomas,
+          v_desc_sintomas: this.todos.descripcion_sintomas,
+          v_diagnostico: this.todos.diagnostico,
+          v_desc_diagnostico: this.todos.descripcion,
+          v_observacion: this.todos.Observaciontratamiento,
+          v_cita: String(this.todos.id)
+        })
+        this.citaSeleccionada = String(this.todos.id)
+
+        console.log('Después del patchValue', this.RegisterForm.value);
+        console.log("this.RegisterForm", this.citaSeleccionada)
+
+      }, error: (error) => {
+        console.log("error", error)
+      }
+
+    })
+
+  }
+
+  guardarModificacion() {
+
+
+    const sintomas = String(this.RegisterForm.value.v_sintomas);
+    const descripcion_sintomas = String(this.RegisterForm.value.v_desc_sintomas);
+    const diagnostico = String(this.RegisterForm.value.v_diagnostico);
+    const descripcion_diagnostico = String(this.RegisterForm.value.v_desc_diagnostico);
+    const Observaciontratamiento = String(this.RegisterForm.value.v_observacion);
+    const citaSeleccionada = Number(this.RegisterForm.value.v_cita);
+    const R_historial = {
+      id_cita: citaSeleccionada,
+      resultado: diagnostico,
+      descripcion: descripcion_diagnostico,
+      Observacion: Observaciontratamiento,
+      nombre: sintomas,
+      descripcion_sintomas: descripcion_sintomas,
+
+
+    }
+    console.log("R_historial", R_historial)
+
+
+    this.citasService.update_historialClinico(R_historial).subscribe({
+
+      next: (data) => {
+        console.log("data de actualizar historial clinico", data)
+        this.todos = data
+        this.todos = this.todos.resultado?this.todos.resultado:"No hay data"
+        console.log(" this.todos", this.todos)
+
+        if (this.todos && this.todos == 'Historial_actualizada') {
+          this.mostrarhistorial = true;
+          this.mostrarhistorialCitas = true;
+          Swal.fire({
+            title: 'Historial clinico actualizado',
+            text: 'El historial clinico ha sido actualizado correctamente',
+            icon: 'success',
+          });
+
+          this.buscar();
+
+        }
+      }, error: (error) => {
+        console.log("error", error)
+        if (error.status === 404) {
+          Swal.fire({
+            title: 'Error al actualizar',
+            text: 'No se pudo actualizar el historial clinico, por favor intente de nuevo',
+            icon: 'error',
+          });}
+          else if (error.status === 500) {
+            Swal.fire({
+              title: 'Error del servidor',
+              text: 'Hubo un error en el servidor, por favor intente de nuevo más tarde',
+              icon: 'error',
+            });
+          }  
+      }
+    })
+  }
 
 }

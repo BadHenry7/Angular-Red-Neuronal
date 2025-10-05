@@ -18,6 +18,8 @@ declare var grecaptcha: any;
 })
 
 export class LoginComponent implements OnInit {
+
+
   //Se definen las variables
   loading: boolean = false;
   error: string | null = null;

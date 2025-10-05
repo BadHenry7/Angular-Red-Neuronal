@@ -9,9 +9,9 @@
 
 
 
-  <div class="d-flex justify-content-center mb-3 ">
+  <div class="d-flex justify-content-center mb-3 container ">
     <div class="input-group w-auto">
-      <span class="input-group-text bg-white">
+      <span class="input-group-text bg-white ">
         Puedes activar el recordatorio de citas por telegram, dando click a la
         <button class="btn "> <i class="bi bi-bell text-primary" data-bs-toggle="modal"
             data-bs-target="#RecordatorioTelegram"></i></button>
@@ -27,7 +27,8 @@
       <div class="col-lg-3 col-md-4 col-sm-4 col-4 col-xl-4">
         <div class="">
           <label for=""><b>Seleccione una fecha</b></label>
-          <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " (change)="mostrar_fecha()" formControlName="v_fecha" [min]="fecha"
+          <input type="date" id="c_m_d" [(ngModel)]="fechaSeleccionada " (change)="mostrar_fecha()"
+            formControlName="v_fecha" [min]="fecha"
             class="form-control"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
 
           <div *ngIf="asigncita.controls['v_fecha'].invalid && asigncita.controls['v_fecha'].touched  ; ">
@@ -68,6 +69,7 @@
       <!--Segunda columna-->
       <div class="col-lg-5 col-md-4 col-sm-4 col-4 col-xl-4">
         <label for=""><b>Seleccione una hora</b></label>
+        <div *ngIf="todosHoras && todosHoras.length && hours">
         <div class="row">
           <ng-container *ngFor="let hour of hours; let i=index">
 
@@ -75,7 +77,8 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 col-xl-6">
                 <div class="input-group">
                   <i class="input-group-text bi bi-clock time-icon bg-primary" style="color: aliceblue;  "></i>
-                  <input type="time" [value]="hour"   (click)="horaSeleccionada = hour;" class="form-control" >
+                  <input type="time" [value]="hour" (click)="horaSeleccionada = hour;" class="form-control" readonly
+                    [disabled]="validando.includes(hour)">
                 </div>
               </div>
 
@@ -86,47 +89,48 @@
           </ng-container>
         </div>
       </div>
+    </div>
 
 
-      <!--Tercera columna-->
-      <div class="col-lg-4 col-md-4 col-sm-4 col-4 col-xl-4">
+    <!--Tercera columna-->
+    <div class="col-lg-4 col-md-4 col-sm-4 col-4 col-xl-4">
 
 
-        <div class="text-center fs-4">
-          <p><b>Detalles de la cita:</b></p>
-        </div>
-        <p><span><b>Fecha seleccionada:</b></span><span class="mx-3" id="mostrar_fecha">{{ fechaSeleccionada |
-            date:'fullDate' }}</span></p>
-
-        <p><b>Hora seleccionada:</b><span class="mx-3" id="mostrar_hora">
-            La cita será a las {{ horaSeleccionada ? (horaSeleccionada | slice:0:2) + ' horas con ' +
-            (horaSeleccionada | slice:3) + ' minutos' : '00:00' }}
-          </span>
-        </p>
-
-        <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor"> {{ NombreDoctor | uppercase
-            }}</span></p>
-
-        <p><b>Ubicación:</b> <span class="mx-3">{{ ubicacionSeleccionada | uppercase }}</span></p>
-
-
-        <div class="d-flex" style="justify-content: center; align-items: center;">
-          <button class="btn btn-primary" [disabled]="asigncita.invalid" (click)="ConfirmarAgendar()">
-            Agendar
-          </button>
-        </div>
-
+      <div class="text-center fs-4">
+        <p><b>Detalles de la cita:</b></p>
       </div>
-      <div class="mt-5 fs-5">
-        <p class="text-center text-muted">Asegúrate de revisar cuidadosamente la información antes de confirmar
-          la
-          cita. Verifica que los datos del paciente, la fecha y la hora sean correctos para evitar
-          inconvenientes.
-        </p>
+      <p><span><b>Fecha seleccionada:</b></span><span class="mx-3" id="mostrar_fecha">{{ fechaSeleccionada |
+          date:'fullDate' }}</span></p>
+
+      <p><b>Hora seleccionada:</b><span class="mx-3" id="mostrar_hora">
+          La cita será a las {{ horaSeleccionada ? (horaSeleccionada | slice:0:2) + ' horas con ' +
+          (horaSeleccionada | slice:3) + ' minutos' : '00:00' }}
+        </span>
+      </p>
+
+      <p><b>Doctor seleccionado:</b><span class="mx-3" id="mostrar_doctor"> {{ NombreDoctor | uppercase
+          }}</span></p>
+
+      <p><b>Ubicación:</b> <span class="mx-3">{{ ubicacionSeleccionada | uppercase }}</span></p>
+
+
+      <div class="d-flex" style="justify-content: center; align-items: center;">
+        <button class="btn btn-primary" [disabled]="asigncita.invalid" (click)="ConfirmarAgendar()">
+          Agendar
+        </button>
       </div>
 
     </div>
-  </form>
+    <div class="mt-5 fs-5">
+      <p class="text-center text-muted">Asegúrate de revisar cuidadosamente la información antes de confirmar
+        la
+        cita. Verifica que los datos del paciente, la fecha y la hora sean correctos para evitar
+        inconvenientes.
+      </p>
+    </div>
+
+</div>
+</form>
 
 
 </div>
@@ -147,12 +151,12 @@
             siguientes pasos:</p>
           <ol>
             <li><b>Primero:</b> Ingrese la ID de telegram:</li>
-         
 
-          <i class="bi bi-person-badge"> ID de Telegram:</i>
-          <input type="text" [(ngModel)]="id_telegram" class="form-control mb-3" style="width: 302px;">
 
-          <li><b>Segundo:</b>Activar el asistente virtual mediante este enlace</li>
+            <i class="bi bi-person-badge"> ID de Telegram:</i>
+            <input type="text" [(ngModel)]="id_telegram" class="form-control mb-3" style="width: 302px;">
+
+            <li><b>Segundo:</b>Activar el asistente virtual mediante este enlace</li>
             <a href="https://t.me/Tonyo_2025_bot"> https://t.me/Tonyo_2025_bot</a>
           </ol>
 

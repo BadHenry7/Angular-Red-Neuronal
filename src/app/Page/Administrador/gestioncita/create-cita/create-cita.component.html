@@ -30,7 +30,7 @@
                     (change)="cambiarNombreDoctor()"
                     formControlName="v_doctor"><!--ngModel para reemplazar al bind value que teniamos con svelte-->
                     <option value="" selected>Seleccione</option>
-                    <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }}</option>
+                    <option *ngFor="let todo of doctor" [value]="todo.id">{{ todo.nombre }} {{todo.apellido}}</option>
                 </select>
                 <div *ngIf="asigncita.controls['v_doctor'].invalid && asigncita.controls['v_doctor'].touched ">
                     <small>⚠️Seleccione un doctor</small>
@@ -45,7 +45,7 @@
                 <select class="form-select" id="paciente" required [(ngModel)]="pacienteSeleccionado"
                     (change)="cambiarNombrePaciente()" formControlName="v_paciente">
                     <option value="" selected>Seleccione</option>
-                    <option *ngFor="let todo of todos" [value]="todo.id">{{ todo.nombre }}</option>
+                    <option *ngFor="let todo of todos" [value]="todo.id">{{ todo.nombre }} {{todo.apellido}}</option>
                 </select>
                 <div *ngIf="asigncita.controls['v_paciente'].invalid && asigncita.controls['v_paciente'].touched  ; ">
                     <small>⚠️Seleccione un paciente</small>

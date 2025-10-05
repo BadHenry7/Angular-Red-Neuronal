@@ -75,6 +75,8 @@ export class IncapacidadComponent {
 
 
 
+            }else{
+              Swal.fire("Error", "El número de cédula no coincide con el registrado", "error")
             }
 
           }, error: (error) => {

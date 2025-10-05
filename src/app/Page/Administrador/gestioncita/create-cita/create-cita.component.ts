@@ -19,6 +19,7 @@ export class CreateCitaComponent implements OnInit {
 
   todos: any = [];
   todosHoras: any = []
+  todos_agendadas: any = []
   doctor: any = [];
   ubicacion: any = [];
   error: string | null = null;
@@ -57,16 +58,16 @@ export class CreateCitaComponent implements OnInit {
         console.log("dataHora", this.todosHoras)
         //console.log("hora", this.hours)
 
-      
+
         for (let i = 0; i < this.hours.length; i++) {
-        
+
 
           for (let j = 0; j < this.todosHoras.length; j++) {
 
-            // console.log("fecha", this.fecha)
-            // console.log("fecha22", this.todosHoras[j].Fecha)
+            console.log("fecha", this.fecha)
+            console.log("fecha22", this.todosHoras[j].Fecha)
             if (this.hours[i] == String(this.todosHoras[j].Hora) && String(this.fecha) == String(this.todosHoras[j].Fecha)) {
-             // console.log(this.todosHoras[j].Hora, "si es igual aca", this.hours[i])
+              console.log(this.todosHoras[j].Hora, "si es igual aca", this.hours[i])
               this.validando.push(this.hours[i]);
             }
 
@@ -169,6 +170,9 @@ export class CreateCitaComponent implements OnInit {
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i].id == this.pacienteSeleccionado) {
         this.NombrePaciente = this.todos[i].nombre;
+        this.ce = this.todos[i].usuario;
+        console.log(this.todos[i])
+        console.log(this.ce)
         break;
       }
     }
@@ -215,11 +219,7 @@ export class CreateCitaComponent implements OnInit {
       confirmButtonText: "Si, añadir cita",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Cita agendada!",
-          icon: "success",
-          draggable: true
-        });
+
         this.Agendar();
       }
     });
@@ -228,6 +228,14 @@ export class CreateCitaComponent implements OnInit {
 
 
   Agendar() {
+    if (this.horaSeleccionada == '') {
+      Swal.fire({
+        title: "Por favor, selecciona una hora",
+        icon: "warning",
+        draggable: true
+      });
+      return;
+    }
 
     const fecha = String(this.asigncita.value.v_fecha);
     const id_usuario = Number(this.asigncita.value.v_doctor);
@@ -240,16 +248,34 @@ export class CreateCitaComponent implements OnInit {
 
     this.citasService.create_cita_admin(R_cita).subscribe({
       next: (todos) => {
-        console.log(todos);
+        console.log("todosssssssssssss", todos);
 
+        this.todos_agendadas = todos;
+        this.todos_agendadas = this.todos_agendadas.resultado;
+        if (this.todos_agendadas === "Cita añadida correctamente") {
 
+          Swal.fire({
+            title: "Cita agendada!",
+            icon: "success",
+            draggable: true
+          });
+          this.enviar_correo()
+          this.horaSeleccionada = '';
+          this.asigncita.reset();
+          this.validando = [];
+          this.validarHora();
+        }
       }, error: (error) => {
         console.log(error)
+        Swal.fire({
+          title: "Error al agendar la cita",
+          text: "Por favor, inténtalo de nuevo.",
+        });
       }
       ,
     })
 
-    
+
 
 
 
@@ -282,6 +308,29 @@ export class CreateCitaComponent implements OnInit {
 
 
 
+  }
+
+  enviar_correo() {
+
+    const vfecha = String(this.asigncita.value.v_fecha);
+    const vhora = String(this.horaSeleccionada);
+    const nombrePaciente = String(this.NombrePaciente);
+
+
+    emailjs.init(this.apikey);
+    emailjs.send(this.serviceID, this.templateID, {
+      nombre: nombrePaciente,
+      email: this.ce,
+      hora: vhora,
+      fecha: vfecha,
+      doctor: this.NombreDoctor
+    })
+      .then(result => {
+        alert('Correo enviado con éxito!');
+      })
+      .catch(error => {
+        console.log('Error al enviar el correo:', error.text);
+      });
   }
 
 }

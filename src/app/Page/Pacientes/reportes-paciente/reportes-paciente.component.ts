@@ -100,12 +100,12 @@ export class ReportesPacienteComponent implements OnInit {
             console.log(fecha_v, descsin_v, diag_v, sin_v, obsr_v, doctor_v, paciente_v)
 
 
-             doc.setFontSize(35);
+             doc.setFontSize(80);
                 doc.setFont("helvetica", "normal");
-                doc.addImage('/assess/favicon.png', 'PNG', 10, 10, 20, 20); // x, y, width, height
+                doc.addImage('/assess/image_otro_logo.png', 'PNG', 65, 10, 70, 20); // x, y, width, height
                 doc.setFontSize(14);
                 doc.setFont("helvetica", "bold");
-                doc.text("HOSTIPAL", 105, 20, { align: "center" });
+              
                 // Fin del encabezado
 
                 // Detalles de la cita

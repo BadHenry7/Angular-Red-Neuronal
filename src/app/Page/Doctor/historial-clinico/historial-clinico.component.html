@@ -103,6 +103,8 @@
                             <th class="px-4 py-2 border">Diagnostico</th>
                             <th class="px-4 py-2 border">Descripcion del diagnostico</th>
                             <th class="px-4 py-2 border">Observacion/tratamiento</th>
+                            <th class="px-4 py-2 border">Opciones</th>
+
                         </tr>
                     </thead>
 
@@ -110,14 +112,21 @@
 
 
                         <tr class="hover:bg-gray-50" *ngFor="let todo of todos2">
-                            <td class="px-4 py-2 border" data-label="Fecha del diagnóstico">{{todo.fecha_diagnostico}}</td>
+                            <td class="px-4 py-2 border" data-label="Fecha del diagnóstico">{{todo.fecha_diagnostico}}
+                            </td>
                             <td class="px-4 py-2 border" data-label="Síntomas">{{todo.sintomas}}</td>
-                            <td class="px-4 py-2 border" data-label="Descripción síntomas">{{todo.descripcion_sintomas}}</td>
+                            <td class="px-4 py-2 border" data-label="Descripción síntomas">{{todo.descripcion_sintomas}}
+                            </td>
                             <td class="px-4 py-2 border" data-label="Diagnóstico">{{todo.diagnostico}}</td>
                             <td class="px-4 py-2 border" data-label="Descripción diagnóstico">{{todo.descripcion}}</td>
-                            <td class="px-4 py-2 border" data-label="Observación/tratamiento">{{todo.Observaciontratamiento}}</td>
+                            <td class="px-4 py-2 border" data-label="Observación/tratamiento">
+                                {{todo.Observaciontratamiento}}</td>
+                            <td class="px-4 py-2 border" data-label="Opciones">
+                                <button class="btn btn-outline-primary" (click)="editarHistorial(todo.id)">
+                                    <i class="bi bi-pencil-square">Editar</i>
+                                </button>
+                            </td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -202,8 +211,7 @@
                         <div class="input-group">
                             <span class="input-group-text text-info"><i class="bi bi-journal-text"></i></span>
                             <input type="text" class="form-control" id="descripcion_diagnostico"
-                                placeholder="Explicación del diagnóstico" [(ngModel)]="descripcion_diagnostico"
-                                formControlName="v_desc_diagnostico" />
+                                placeholder="Explicación del diagnóstico" formControlName="v_desc_diagnostico" />
                         </div>
                         <div
                             *ngIf="RegisterForm.controls['v_desc_diagnostico'].invalid && RegisterForm.controls['v_desc_diagnostico'].touched;">
@@ -229,26 +237,28 @@
                         </div>
                     </div>
 
-
-                    <div class="mb-4">
-                        <label class="form-label fw-bold">Seleccione la cita:</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-calendar-check"
-                                    style="color: #6f42c1;"></i></span>
-                            <select id="citas" class="form-select" [(ngModel)]="citaSeleccionada"
-                                formControlName="v_cita">
-                                <option value="">Selecciona una cita</option>
-                                <option *ngFor="let cita of citas" [value]="cita.id">
-                                    Fecha: {{ cita.fecha }} - Hora: {{ cita.hora }} - Doctor: {{ cita.medico }} -
-                                    Paciente:
-                                    {{ cita.paciente }}
-                                </option>
-                            </select>
-                        </div>
-                        <div
-                            *ngIf="RegisterForm.controls['v_cita'].invalid && RegisterForm.controls['v_cita'].touched;">
-                            <small class="error" style="position: absolute;">&#10060;Seleccione la cita de acuerdo con
-                                la fecha, la hora y el paciente atendido</small>
+                    <div *ngIf="mostrarhistorialCitas">
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Seleccione la cita:</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-calendar-check"
+                                        style="color: #6f42c1;"></i></span>
+                                <select id="citas" class="form-select" [(ngModel)]="citaSeleccionada"
+                                    formControlName="v_cita">
+                                    <option value="">Selecciona una cita</option>
+                                    <option *ngFor="let cita of citas" [value]="cita.id">
+                                        Fecha: {{ cita.fecha }} - Hora: {{ cita.hora }} - Doctor: {{ cita.medico }} -
+                                        Paciente:
+                                        {{ cita.paciente }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div
+                                *ngIf="RegisterForm.controls['v_cita'].invalid && RegisterForm.controls['v_cita'].touched;">
+                                <small class="error" style="position: absolute;">&#10060;Seleccione la cita de acuerdo
+                                    con
+                                    la fecha, la hora y el paciente atendido</small>
+                            </div>
                         </div>
                     </div>
 
@@ -285,12 +295,24 @@
                     </div>
 
                     <!-- Guardar -->
-                    <div class="text-center mt-5">
-                        <p class="text-muted">¡Al terminar, dale click en guardar para aplicar los cambios!</p>
-                        <button class="btn btn-success px-4" type="submit" [disabled]="RegisterForm.invalid">
-                            <i class="bi bi-save me-1"></i> Guardar
-                        </button>
+                    <div *ngIf="mostrarhistorialCitas; else noGuardar">
+                        <div class="text-center mt-5">
+                            <p class="text-muted">¡Al terminar, dale click en guardar para aplicar los cambios!</p>
+                            <button class="btn btn-success px-4" type="submit" [disabled]="RegisterForm.invalid">
+                                <i class="bi bi-save me-1"></i> Guardar
+                            </button>
+                        </div>
                     </div>
+                    <ng-template #noGuardar>
+                        <div class="text-center mt-5">
+                            <p class="text-muted">¡Al terminar, dale click en guardar para aplicar los cambios!</p>
+                            <button  class="btn btn-success px-4" type="button" [disabled]="RegisterForm.invalid"
+                            (click)="guardarModificacion()">
+                                <i class="bi bi-save me-1"></i> Guardar
+                            </button>
+                        </div>
+                    </ng-template>
+
                 </form>
             </div>
         </div>

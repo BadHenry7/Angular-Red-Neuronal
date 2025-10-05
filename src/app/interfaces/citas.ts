@@ -51,6 +51,7 @@ export interface Buscar_historial_clinico {
   documento?: string
   id_paciente?: number
   id_doctor?: number
+  id_cita?: number
 }
 
 
@@ -74,4 +75,17 @@ export interface create_sintomas {
 export interface validarHora {
  fecha: string,
  hora: string
+}
+
+
+export interface DiagnosticoSintomas {
+  id_diagnostico?: number;
+  id_cita: number;
+  resultado: string;
+  descripcion: string;
+  observacion?: string;
+  fecha_diagnostico?: string;
+  id_sintomas?: number;
+  nombre: string;
+  descripcion_sintomas: string;
 }

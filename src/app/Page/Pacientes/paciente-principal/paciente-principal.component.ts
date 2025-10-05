@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarPacienteComponent } from "../../../Componentes/navbar-paciente/navbar-paciente.component";
 import { ChatboxComponent } from '../../../Componentes/chatbox/chatbox.component'
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../../services/usuarios.service';
 import { RouterLink } from '@angular/router';
+import { AsistenteVirtualMovilComponent } from '../asistente-virtual-movil/asistente-virtual-movil.component';
 @Component({
   selector: 'app-paciente-principal',
-  imports: [NavbarPacienteComponent, ChatboxComponent, ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [NavbarPacienteComponent, ChatboxComponent, ReactiveFormsModule, CommonModule, RouterLink, FormsModule, AsistenteVirtualMovilComponent ],
   templateUrl: './paciente-principal.component.html',
   styleUrl: './paciente-principal.component.css'
 })
 export class PacientePrincipalComponent implements OnInit {
+  
+  
+  
   image: String = ''
   todos: any
   id: number = 0
 
 
   PerfilPacienteForm: FormGroup;
+
+  
 
 
   constructor(private userService: UsersService, private PerfilPaciente: FormBuilder) {
@@ -40,8 +46,15 @@ export class PacientePrincipalComponent implements OnInit {
   }
 
 
-
+esMovil: boolean = false;
+  
   ngOnInit(): void {
+
+   
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      this.esMovil = true;
+      //this.router.navigate(['/chat-mobile']); // Redirige a la página para móviles
+    }
 
     const usuarioGuardado = localStorage.getItem("usuario");
 

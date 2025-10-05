@@ -8,3 +8,84 @@
   padding: 5vh;
   z-index: 1;
 }
+/* ✅ Diseño solo para tablet y móvil */
+@media (max-width: 991px) {
+  .logos {
+    flex-direction: column; /* los elementos se apilan */
+    align-items: center;
+    gap: 30px;
+    padding: 3vh;
+    
+    background-attachment: scroll; /* evita que se vea cortado en móviles */
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .card {
+    padding: 15px !important;
+  }
+
+  .card p.fs-3 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .input-group-text {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .input-group input {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .col-lg-6,
+  .col-xl-6 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  /* Botones: uno debajo del otro */
+  .row .col-xl-6 a {
+    width: 100% !important;
+    height: 50px !important;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .text-center h2 {
+    font-size: 1.5rem;
+  }
+
+  .text-muted {
+    font-size: 0.9rem;
+    text-align: justify;
+  }
+}
+
+/* ✅ Aún más compacto para móviles pequeños */
+@media (max-width: 576px) {
+  .logos {
+    gap: 20px;
+    padding: 2vh;
+  }
+
+  .card {
+    padding: 10px !important;
+  }
+
+  .card p.fs-3 {
+    font-size: 1.3rem;
+  }
+
+  .row .col-xl-6 a {
+    height: 45px !important;
+    font-size: 0.9rem;
+  }
+}
