@@ -12,7 +12,7 @@ import { Citas, Buscar_telegram, Sala, Reportes, ReportesUsuario, Ubicacion,
 
 export class CitasService {
 
-    private apiUrl = 'http://localhost:8000';
+    private apiUrl = 'https://red-neuronal-api.onrender.com';
     private url = "https://api-nodejs-buxf.onrender.com/api/salas/getsalaByNombre/";
 
     constructor(private http: HttpClient) { }

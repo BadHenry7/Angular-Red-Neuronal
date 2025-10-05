@@ -12,7 +12,7 @@ import { Especialidades, Especialidad, BuscarxU} from "../interfaces/atribxusaur
  })
 
 export class AtribxUsuarioService{
-    private apiUrl = 'http://localhost:8000/'
+    private apiUrl = 'https://red-neuronal-api.onrender.com/'
     
     constructor(private http:HttpClient) { }
 

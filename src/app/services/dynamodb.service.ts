@@ -10,7 +10,7 @@ import {incapacidad , incapacidad_add} from "../interfaces/dynamodb"
 
 export class DynamoDBService {
 
-    private apiUrl = 'http://localhost:8000/';
+    private apiUrl = 'https://red-neuronal-api.onrender.com/';
 
     constructor(private http: HttpClient) { }
 

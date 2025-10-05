@@ -13,7 +13,7 @@ import { Rol } from '../interfaces/rol';
 
 export class RolesService {
 
-    private apiUrl = 'http://localhost:8000/';
+    private apiUrl = 'https://red-neuronal-api.onrender.com/';
 
     constructor(private http: HttpClient) { }
 
