@@ -47,7 +47,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if ((window as any).grecaptcha) {
       (window as any).grecaptcha.render(document.querySelector('.g-recaptcha'), {
-        sitekey: '6LeeFo4qAAAAAFIb0Wb5mRE0KWPwaU7xmNEuPfWE'
+        // sitekey: '6LeeFo4qAAAAAFIb0Wb5mRE0KWPwaU7xmNEuPfWE'
+        sitekey: '6LdletYqAAAAAN1Insg4lQuDyDO8zO834KBO6nvs'
       });
     }
 
@@ -173,7 +174,7 @@ export class LoginComponent implements OnInit {
               confirmButtonText: "Cool",
             });
           }
-           else {
+          else {
             console.log("Error del servidor: " + error.status);
           }
         }
