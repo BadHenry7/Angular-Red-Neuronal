@@ -283,6 +283,10 @@ export class HistorialClinicoComponent implements OnInit {
               background: "green",
               title: "Historial clinico añadido",
             });
+            
+            this.mostrarhistorial = true;
+          this.mostrarhistorialCitas = true;
+          this.buscar()
 
           }, error: (error) => {
             console.log("error", error)
