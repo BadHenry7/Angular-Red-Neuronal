@@ -1,130 +1,165 @@
 
 <div class="container-fluid vh-100">
 
-    <div class="row h-100">
+   <div class="row h-100">
         <!-- Sección de la imagen -->
         <div class="col-md-6 d-none d-md-block p-0">
             <!--d-md-block significa que a partir del tamaño md (≥768px), el div se vuelve visible y se muestra como un bloque (display: block;).
 Junto con d-none, esto hace que el div esté oculto en móviles pero visible en pantallas medianas y grandes.-->
-            <img src="/assess/image4.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;">
+            <img src="/assess/image4.png" alt="Hospital" class="img-fluid "
+                style=" position: absolute; width: 752px; height: 792px; object-fit: cover;">
+            <!-- <img src="/assess/image4.png" alt="Hospital" class="img-fluid w-100 h-100" style="object-fit: cover;"> -->
+
+
+
         </div>
 
         <!-- Sección del formulario -->
         <div class="col-md-6 d-flex align-items-center justify-content-center">
             <div class="w-75">
-                <h2 class="text-center fw-bold mb-4">Completa tu información</h2>
+                <h2 class="text-center fw-bold mb-4">Registro de paciente</h2>
 
                 <form [formGroup]="RegisterForm" class="container" (ngSubmit)="registrar()">
-                    <div class="mb-3">
+                    <div class="">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control"  required autocomplete="off" placeholder="Nombre" formControlName="v_nombre">
-                           
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Nombre"
+                                formControlName="v_nombre">
+
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_nombre'].invalid && RegisterForm.controls['v_nombre'].touched;">
-                                <small class="error">&#10060;Ingrese un nombre valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_nombre'].invalid && RegisterForm.controls['v_nombre'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un nombre valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4 ">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off"  placeholder="Apellido" formControlName="v_apellido">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Apellido"
+                                formControlName="v_apellido">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_apellido'].invalid && RegisterForm.controls['v_apellido'].touched;">
-                                <small class="error">&#10060;Ingrese un apellido valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_apellido'].invalid && RegisterForm.controls['v_apellido'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un apellido valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-card-list"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off"  placeholder="Documento" formControlName="v_documento">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Documento"
+                                formControlName="v_documento">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_documento'].invalid && RegisterForm.controls['v_documento'].touched;">
-                            <small class="error">&#10060;Ingrese un documento valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_documento'].invalid && RegisterForm.controls['v_documento'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un documento valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                            <input type="text" class="form-control" required autocomplete="off" placeholder="Teléfono" formControlName="v_telefono">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Teléfono"
+                                formControlName="v_telefono">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_telefono'].invalid && RegisterForm.controls['v_telefono'].touched;">
-                            <small class="error">&#10060;Ingrese un telefono valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_telefono'].invalid && RegisterForm.controls['v_telefono'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un telefono valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                      <div class="input-group">
+                    <div class="mt-4">
+                        <div class="input-group">
                             <span class="input-group-text"> <i class="bi bi-gender-neuter"> </i></span>
-                            <select class="form-select"  required formControlName="v_genero">
+                            <select class="form-select" required formControlName="v_genero">
                                 <option value="">Seleccione Género</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
                                 <option value="Otro">Otro</option>
                             </select>
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_genero'].invalid && RegisterForm.controls['v_genero'].touched;">
-                            <small class="error">&#10060;Seleccione un genero</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_genero'].invalid && RegisterForm.controls['v_genero'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Seleccione un genero</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                            <input type="number" class="form-control" required autocomplete="off"  placeholder="Edad" formControlName="v_edad">
+                            <input type="number" class="form-control" required autocomplete="off" placeholder="Edad"
+                                formControlName="v_edad">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_edad'].invalid && RegisterForm.controls['v_edad'].touched;">
-                                <small class="error">&#10060;Ingrese un edad valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_edad'].invalid && RegisterForm.controls['v_edad'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un edad valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
-                            <input type="text"  readonly class="form-control" required autocomplete="off" placeholder="Usuario" formControlName="v_usuario">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="Usuario"
+                                formControlName="v_usuario">
                         </div>
-                         <div *ngIf="RegisterForm.controls['v_usuario'].invalid && RegisterForm.controls['v_usuario'].touched;">
-                                <small class="error">&#10060;Ingrese un correo valido</small>
+                        <div
+                            *ngIf="RegisterForm.controls['v_usuario'].invalid && RegisterForm.controls['v_usuario'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Ingrese un correo valido</small>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off"  placeholder="Contraseña" formControlName="v_password">
+                            <input type="password" class="form-control" required autocomplete="off"
+                                placeholder="Contraseña" formControlName="v_password">
                         </div>
-                        <div *ngIf="RegisterForm.controls['v_password'].invalid && RegisterForm.controls['v_password'].touched;">
-                            <small class="error">&#10060;Ingrese una contraseña valida,
-                                Recuerde que debe contener al menos: 
+                        <div style="margin-bottom: 112px;"
+                            *ngIf="RegisterForm.controls['v_password'].invalid && RegisterForm.controls['v_password'].touched;">
+                            <small class="error " style="position: absolute;">&#10060;Ingrese una contraseña valida,
+                                Recuerde que debe contener al menos:
                                 <li>1 Mayuscula</li>
                                 <li>1 miniscula</li>
-                                <li>1 caracter especial</li>
-                                <li>numeros(&#64;$!%*?&.)</li> 
+                                <li>1 caracter especial (&#64;$!%*?&.)</li>
+                                <li>1 numero</li>
                             </small>
                         </div>
                     </div>
 
 
-                     <div class="mb-3">
+                    <div class="mt-4">
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" required autocomplete="off" placeholder="Repetir la contraseña">
+                            <input type="password" class="form-control" required autocomplete="off"
+                                placeholder="Repetir la contraseña" formControlName="v_same_password">
+                        </div>
+                        <div
+                            *ngIf="RegisterForm.controls['v_same_password'].invalid && RegisterForm.controls['v_same_password'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Por favor, repita la
+                                contraseña</small>
                         </div>
                     </div>
 
-                    <div class="mb-3 ">
-                        <input type="checkbox" id="terminos" required />
-                        <a class="btn btn-link p-0" href="#" data-bs-toggle="modal" data-bs-target="#TerminosCondiciones">
+                    <div class="mt-4 ">
+                        <input type="checkbox" id="terminos" required formControlName="v_check" />
+                        <a class="btn btn-link p-0" href="#" data-bs-toggle="modal"
+                            data-bs-target="#TerminosCondiciones">
                             Acepto los términos y condiciones</a>
-                        <a routerLink="/" class="mx-5">¿Ya tienes una cuenta?</a>
+                        <a routerLink="/Login" class="mx-5">¿Ya tienes una cuenta?</a>
+
+                        <div
+                            *ngIf="RegisterForm.controls['v_check'].invalid && RegisterForm.controls['v_check'].touched;">
+                            <small class="error" style="position: absolute;">&#10060;Por favor, acepta los términos y
+                                condiciones</small>
+                        </div>
+
                     </div>
 
-                    
-                    
-                    <button type="submit"  [disabled]="RegisterForm.invalid"  class="btn btn-primary w-100">Registrar</button>
+
+
+                    <button type="submit" [disabled]="RegisterForm.invalid"
+                        class="btn btn-primary w-100 mt-4">Registrar</button>
                 </form>
             </div>
         </div>

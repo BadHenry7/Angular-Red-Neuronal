@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   //Se definen las variables
   loading: boolean = false;
   error: string | null = null;
-
+  todos2: any = [];
   //Del formulario
   correo: string = '';
   password: string = '';
@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if ((window as any).grecaptcha) {
       (window as any).grecaptcha.render(document.querySelector('.g-recaptcha'), {
-        sitekey: '6LeeFo4qAAAAAFIb0Wb5mRE0KWPwaU7xmNEuPfWE'
-        // sitekey: '6LdletYqAAAAAN1Insg4lQuDyDO8zO834KBO6nvs'
+        // sitekey: '6LeeFo4qAAAAAFIb0Wb5mRE0KWPwaU7xmNEuPfWE'
+        sitekey: '6LdletYqAAAAAN1Insg4lQuDyDO8zO834KBO6nvs'
       });
     }
 
@@ -62,6 +62,31 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+ async token(){
+    
+        const response = await fetch("http://127.0.0.1:8000/generate_token_google", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                usuario: this.correo,
+            }),
+        });
+
+        const data = await response.json();
+        //return {"access_token": access_token}
+        this.todos2 = data.access_token;
+         this.iniciar() 
+        // if(this.todos2!=null){
+        //     console.log("Revisando token2", this.todos2);
+        //     return (this.todos2)
+        // }else{
+        //     this.todos2="indefenido"
+        //     return (this.todos2)
+        // }
+  }
 
 
   iniciar() {
@@ -102,7 +127,7 @@ export class LoginComponent implements OnInit {
 
             this.verificar = true;
             console.log("*//////////////", todo[0].rol)
-            let encontrado = { name: todo[0].nombre, correo: this.correo, id: todo[0].id, rol: todo[0].rol };
+            let encontrado = { name: todo[0].nombre, correo: this.correo, id: todo[0].id, rol: todo[0].rol, token: this.todos2 };
             console.log("Imprimos el encontrado", encontrado);
             let miStorage = window.localStorage;
             miStorage.setItem("usuario", JSON.stringify(encontrado));

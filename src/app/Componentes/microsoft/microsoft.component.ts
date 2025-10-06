@@ -87,12 +87,13 @@ export class MicrosoftComponent {
             const rol_v = data.rol_v ? data.rol_v : 1;
             const v_estado = data.estado ? data.estado : false;
             const estado_v = data.Informacion;
+            const token= data.token;
             console.log(v_estado)
 
 
             let encontrado = {
               name: user.givenName, correo: user.userPrincipalName,
-              id: user.id, apellido: user.surname
+              id: v_id, apellido: user.surname, rol: rol_v, token: token
             }
 
             let miStorage = window.localStorage;

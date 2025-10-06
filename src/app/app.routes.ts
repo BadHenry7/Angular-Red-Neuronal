@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 //Aca paginas sin inicio de  sesion
 import { InicioComponent } from '../app/Page/inicio/inicio.component'
@@ -62,55 +63,55 @@ export const routes: Routes = [
 
 
   //Aca paginas Paciente
-  { path: 'pacientes/principal', component: PacientePrincipalComponent },
-  { path: 'pacientes/incapacidad', component: IncapacidadComponent },
-  { path: 'pacientes/reportes', component: ReportesPacienteComponent },
-  { path: 'pacientes/citas', component: CitasComponent },
-  { path: 'pacientes/ver_citas', component: VerCitasComponent },
-  { path: 'pacientes/AsistenteVirtual', component: AsistenteVirtualComponent },
-  { path: 'chat-mobile', component: AsistenteVirtualMovilComponent },
+  { path: 'pacientes/principal', component: PacientePrincipalComponent, canActivate: [AuthGuard]  },
+  { path: 'pacientes/incapacidad', component: IncapacidadComponent, canActivate: [AuthGuard] },
+  { path: 'pacientes/reportes', component: ReportesPacienteComponent, canActivate: [AuthGuard] },
+  { path: 'pacientes/citas', component: CitasComponent, canActivate: [AuthGuard] },
+  { path: 'pacientes/ver_citas', component: VerCitasComponent, canActivate: [AuthGuard] },
+  { path: 'pacientes/AsistenteVirtual', component: AsistenteVirtualComponent , canActivate: [AuthGuard]},
+  { path: 'chat-mobile', component: AsistenteVirtualMovilComponent , canActivate: [AuthGuard]},
 
 
 
   //Aca Rol medico
-  { path: 'doctor/principal', component: DoctorPrincipalComponent },
-  { path: 'doctor/citas_medico', component: CitasMedicasComponent },
-  { path: 'doctor/reportes', component: ReportesMedicoComponent },
-  { path: 'doctor/smartbot', component: BotciComponent },
-  { path: 'medico_vista/historial_clinico', component: HistorialClinicoComponent },
+  { path: 'doctor/principal', component: DoctorPrincipalComponent, canActivate: [AuthGuard] },
+  { path: 'doctor/citas_medico', component: CitasMedicasComponent , canActivate: [AuthGuard]},
+  { path: 'doctor/reportes', component: ReportesMedicoComponent, canActivate: [AuthGuard] },
+  { path: 'doctor/smartbot', component: BotciComponent , canActivate: [AuthGuard]},
+  { path: 'medico_vista/historial_clinico', component: HistorialClinicoComponent , canActivate: [AuthGuard]},
 
   //Aca Rol Administrador
-  { path: 'administrador/principal', component: AdministradorPrincipalComponent },
+  { path: 'administrador/principal', component: AdministradorPrincipalComponent , canActivate: [AuthGuard]},
 
   { path: 'administrador/gestionuser/create', component: CreateComponent },
-  { path: 'administrador/gestionuser/consultar_user', component: ConsultarComponent },
+  { path: 'administrador/gestionuser/consultar_user', component: ConsultarComponent , canActivate: [AuthGuard]},
 
-  { path: 'administrador/gestioncita/create_cita', component: CreateCitaComponent },
-  { path: 'administrador/gestioncita/consultar_cita', component: ConsultarCitaComponent },
-  { path: 'administrador/Doctor_adm/regis_medicos', component: RegisMedicosComponent },
-  { path: 'administrador/Doctor_adm/buscar_medicos', component: BuscarMedicosComponent },
+  { path: 'administrador/gestioncita/create_cita', component: CreateCitaComponent , canActivate: [AuthGuard]},
+  { path: 'administrador/gestioncita/consultar_cita', component: ConsultarCitaComponent , canActivate: [AuthGuard]},
+  { path: 'administrador/Doctor_adm/regis_medicos', component: RegisMedicosComponent , canActivate: [AuthGuard]},
+  { path: 'administrador/Doctor_adm/buscar_medicos', component: BuscarMedicosComponent , canActivate: [AuthGuard]},
 
-  { path: 'administrador/dasboard', component: DashboardComponent },
-  { path: 'administrador/reportes', component: ReportesComponent },
-  { path: 'administrador/dashboard', component: DashboardComponent },
-  { path: 'administrador/create_rol', component: RolesComponent },
+  { path: 'administrador/dasboard', component: DashboardComponent , canActivate: [AuthGuard]},
+  { path: 'administrador/reportes', component: ReportesComponent , canActivate: [AuthGuard]},
+  { path: 'administrador/dashboard', component: DashboardComponent , canActivate: [AuthGuard]},
+  { path: 'administrador/create_rol', component: RolesComponent , canActivate: [AuthGuard]},
 
 
 
   //Vista main
 
 
-  { path: 'vista_main/Usuario/Crear_usuario', component: CreateComponent },
-  { path: 'vista_main/Usuario/Buscar_usuario', component: ConsultarComponent },
+  { path: 'vista_main/Usuario/Crear_usuario', component: CreateComponent , canActivate: [AuthGuard]},
+  { path: 'vista_main/Usuario/Buscar_usuario', component: ConsultarComponent , canActivate: [AuthGuard]},
 
-  { path: 'vista_main/Citas_medicas/crear_citas', component: CreateCitaComponent },
-  { path: 'vista_main/Citas_medicas/buscar_citas', component: ConsultarCitaComponent },
-  { path: 'vista_main/Doctor_adm/regis_medicos', component: RegisMedicosComponent },
-  { path: 'vista_main/Doctor_adm/buscar_medicos', component: BuscarMedicosComponent },
+  { path: 'vista_main/Citas_medicas/crear_citas', component: CreateCitaComponent , canActivate: [AuthGuard]},
+  { path: 'vista_main/Citas_medicas/buscar_citas', component: ConsultarCitaComponent , canActivate: [AuthGuard]},
+  { path: 'vista_main/Doctor_adm/regis_medicos', component: RegisMedicosComponent , canActivate: [AuthGuard]},
+  { path: 'vista_main/Doctor_adm/buscar_medicos', component: BuscarMedicosComponent , canActivate: [AuthGuard]},
 
 
-  { path: 'vista_main/Reportes', component: ReportesComponent },
-  { path: 'vista_main/Dashboard', component: DashboardComponent },
+  { path: 'vista_main/Reportes', component: ReportesComponent , canActivate: [AuthGuard]},
+  { path: 'vista_main/Dashboard', component: DashboardComponent , canActivate: [AuthGuard]},
 
 
 

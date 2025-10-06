@@ -59,12 +59,13 @@ export class GoogleComponent implements OnInit {
             const rol_v = data.rol_v ? data.rol_v : 1;
             const v_estado = data.estado ? data.estado : false;
             const estado_v = data.Informacion;
+            const token= data.token;
 
 
 
             let encontrado = {
               name: datos_user.given_name, correo: datos_user.email,
-              id: v_id, apellido: datos_user.family_name, rol: rol_v
+              id: v_id, apellido: datos_user.family_name, rol: rol_v, token: token
             }
 
             let miStorage = window.localStorage;

@@ -8,7 +8,7 @@ import emailjs from '@emailjs/browser'
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-completar-informacion',
-  imports: [RouterLink, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './completar-informacion.component.html',
   styleUrl: './completar-informacion.component.css'
 })
@@ -32,8 +32,10 @@ export class CompletarInformacionComponent implements OnInit {
       v_genero: ['', [Validators.required]],
       v_edad: ['', [Validators.required, Validators.min(0), Validators.max(120)]],
       v_usuario: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      v_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')
-      ]]
+      v_password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20), Validators.pattern('^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*?&.])[A-Za-z+\\d@$!%*?&.]{6,}$')]],
+      v_same_password: ['', [Validators.required]],
+      v_check: [false, [Validators.requiredTrue]],
+
       //v_nombre: ['', [Validators.required, Validators.pattern('^[0-9]+(\\.[0-9]+)?$')]],
     })
 
@@ -56,9 +58,15 @@ export class CompletarInformacionComponent implements OnInit {
 
   }
 
-
+  id_id: number = 0
   //
   registrar() {
+
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (usuarioGuardado) {
+      const usuario = JSON.parse(usuarioGuardado);
+      this.id_id = usuario.id
+    }
 
     //Obtencion del formulario:
     const nombre = String(this.RegisterForm.value.v_nombre);
@@ -69,29 +77,52 @@ export class CompletarInformacionComponent implements OnInit {
     const edad = Number(this.RegisterForm.value.v_edad);
     const usuario = String(this.RegisterForm.value.v_usuario);
     const password = String(this.RegisterForm.value.v_password);
+    const v_same_password = String(this.RegisterForm.value.v_same_password);
     const estado = Boolean(1);
     const id_rol = Number(1);
+    const id = this.id_id
+
 
     const R_usuario = {
-      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol
+      nombre, apellido, documento, telefono, genero, edad, usuario, password, estado, id_rol, id
+    }
+    if (password !== v_same_password) {
+
+      Swal.fire({
+        title: "No se pudo registrar",
+        text: "Por favor verifique que las contraseñas coincidan",
+        icon: "error",
+      });
+      return;
     }
 
 
-    this.userService.addUser(R_usuario).subscribe({
+
+    this.userService.UpdateUser(R_usuario).subscribe({
       next: (todos) => {
         this.todos = todos;
-        console.log(this.todos.Informacion);
+        if (this.todos && this.todos.resultado == "Usuario actualizado correctamente") {
+
+          console.log(this.todos.resultado);
 
           Swal.fire({
-                        title: "Registrado!",
-                        text: "Usuario ha sido registrado",
-                        icon: "success",
-                    });
-                    setTimeout(() => {
-                   
-                    this.router.navigate(['/pacientes/principal'])
+            title: "Registrado!",
+            text: "Usuario ha sido registrado",
+            icon: "success",
+          });
+          setTimeout(() => {
 
-                    }, 3000);
+            this.enviar_correo();
+            this.router.navigate(['/pacientes/principal'])
+
+          }, 3000);
+        } else if (this.todos.resultado == "Ya_existe") {
+          Swal.fire({
+            title: "No se pudo registrar!",
+            text: "El siguiente usuario ya ha sido registrado",
+            icon: "error",
+          });
+        }
       }, error: (error) => {
         console.log(error)
       }
@@ -105,7 +136,6 @@ export class CompletarInformacionComponent implements OnInit {
       + "\n" + usuario + "\n" + password
     )
 
-    this.enviar_correo();
 
 
   }
