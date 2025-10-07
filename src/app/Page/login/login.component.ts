@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
  async token(){
     
-        const response = await fetch("http://127.0.0.1:8000/generate_token_google", {
+        const response = await fetch("https://red-neuronal-api.onrender.com/generate_token_google", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
