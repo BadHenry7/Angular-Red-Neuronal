@@ -25,7 +25,7 @@ export class IncapacidadComponent {
   todos2: any = {}
   v_name: string = ''
   random: string = ''
-  v_codigo: string=''
+  v_codigo: string = ''
 
   codigo() {
     this.random = (Math.random() + 1).toString(36).substring(4);
@@ -45,8 +45,8 @@ export class IncapacidadComponent {
       if (usuarioguardado) {
         const usuario = JSON.parse(usuarioguardado);
         const id = usuario.id
-        const email= usuario.correo
-        const name= usuario.name
+        const email = usuario.correo
+        const name = usuario.name
 
         const R_vIncapacidad = {
           id: id, cedula: cedula
@@ -66,16 +66,16 @@ export class IncapacidadComponent {
                 .send(this.serviceID, this.templateID, {
                   name: name,
                   code: this.random,
-                  email:email,
+                  email: email,
                 })
 
 
 
-                this.mostrarModalValidacion()
+              this.mostrarModalValidacion()
 
 
 
-            }else{
+            } else {
               Swal.fire("Error", "El número de cédula no coincide con el registrado", "error")
             }
 
@@ -93,41 +93,41 @@ export class IncapacidadComponent {
   }
 
 
-  mostrarModalValidacion(){
-     Swal.fire({
-            title: "Validacion",
-            html: `
+  mostrarModalValidacion() {
+    Swal.fire({
+      title: "Validacion",
+      html: `
                         <div class="card-header">Ingrese la clave enviada al correo<div/>
                         <input class="mt-2 form-control" id="v_codigo" ></input>
                     `,
-            icon: "warning",
-            showCancelButton: true,
-            allowOutsideClick: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Validar"
-        }).then((result) => {
-            const codigo  = (document.getElementById('v_codigo') as HTMLInputElement).value;
-            if (result.isConfirmed) {
-              console.log("validando esto")
-              console.log("validando esto", codigo)
-              console.log("validando esto", this.random)
-                if (codigo == this.random) {
-                    this.generarPDF()
+      icon: "warning",
+      showCancelButton: true,
+      allowOutsideClick: false,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Validar"
+    }).then((result) => {
+      const codigo = (document.getElementById('v_codigo') as HTMLInputElement).value;
+      if (result.isConfirmed) {
+        console.log("validando esto")
+        console.log("validando esto", codigo)
+        console.log("validando esto", this.random)
+        if (codigo == this.random) {
+          this.generarPDF()
 
-                } else {
-                    Swal.fire({
-                        title: "Error",
-                        text: "El codigo es incorrecto... Por favor, intentalo de nuevo.",
-                        icon: "error"
-                    }).then(() => {
-                        this.mostrarModalValidacion();
-                    });
-                }
-            } else if (result.isDismissed) {
-                           
-            }
-        });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "El codigo es incorrecto... Por favor, intentalo de nuevo.",
+            icon: "error"
+          }).then(() => {
+            this.mostrarModalValidacion();
+          });
+        }
+      } else if (result.isDismissed) {
+
+      }
+    });
   }
 
 
@@ -204,7 +204,17 @@ export class IncapacidadComponent {
               doc.text(`${this.todos2.nombre} ${this.todos2.apellido}`, 20, 155);
               doc.text("Médico General", 20, 165);
 
-              doc.save("Incapacidad_Medica.pdf");
+              const pdfBlob = doc.output("blob");
+              const pdfUrl = URL.createObjectURL(pdfBlob);
+
+              if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+               
+                window.open(pdfUrl, "_blank");
+              } else {
+                
+                doc.save("Incapacidad_Medica.pdf");
+              }
+
 
 
             }, error: (error) => {
