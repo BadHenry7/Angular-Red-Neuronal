@@ -68,7 +68,7 @@ export class ReportesPacienteComponent implements OnInit {
 
     try {
       this.visualizar = true;
-    
+
 
 
       console.log("opcion", this.opcion);
@@ -100,70 +100,76 @@ export class ReportesPacienteComponent implements OnInit {
             console.log(fecha_v, descsin_v, diag_v, sin_v, obsr_v, doctor_v, paciente_v)
 
 
-             doc.setFontSize(80);
-                doc.setFont("helvetica", "normal");
-                doc.addImage('/assess/image_otro_logo.png', 'PNG', 65, 10, 70, 20); // x, y, width, height
-                doc.setFontSize(14);
-                doc.setFont("helvetica", "bold");
-              
-                // Fin del encabezado
+            doc.setFontSize(80);
+            doc.setFont("helvetica", "normal");
+            doc.addImage('/assess/image_otro_logo.png', 'PNG', 65, 10, 70, 20); // x, y, width, height
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
 
-                // Detalles de la cita
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "bold");
-                doc.text ("Cita del dia: ",10, 50)
-                doc.setFont("helvetica", "normal");
-                doc.text(""+fecha_v, 50, 50, { maxWidth: 150});
+            // Fin del encabezado
 
-                doc.setFont("helvetica", "bold");
-                doc.text("Paciente:", 10,70,);
-                doc.setFont("helvetica", "normal");
-                doc.text(paciente_v, 50,70, { maxWidth: 150});
-                
-                // Descripcion del sintoma
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "bold");
-                doc.text("Descripcion de sintomas:", 10, 90, { maxWidth: 40})
-                doc.setFont("helvetica", "normal");
-                doc.text(descsin_v, 50, 90, { maxWidth: 150});
+            // Detalles de la cita
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Cita del dia: ", 10, 50)
+            doc.setFont("helvetica", "normal");
+            doc.text("" + fecha_v, 50, 50, { maxWidth: 150 });
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Paciente:", 10, 70,);
+            doc.setFont("helvetica", "normal");
+            doc.text(paciente_v, 50, 70, { maxWidth: 150 });
+
+            // Descripcion del sintoma
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Descripcion de sintomas:", 10, 90, { maxWidth: 40 })
+            doc.setFont("helvetica", "normal");
+            doc.text(descsin_v, 50, 90, { maxWidth: 150 });
 
 
-                // Diagnostico
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "bold");
-                doc.text("Diagnostico:", 10, 110);
-                doc.setFont("helvetica", "normal");
-                doc.text(diag_v, 50, 110, { maxWidth: 150});
+            // Diagnostico
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Diagnostico:", 10, 110);
+            doc.setFont("helvetica", "normal");
+            doc.text(diag_v, 50, 110, { maxWidth: 150 });
 
-                // Síntomas
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "bold");
-                doc.text("Sintomas:", 10, 130);
-                doc.setFont("helvetica", "normal");
-                doc.text(sin_v, 50, 130, { maxWidth: 150});
-                
-               // Observaciones
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "bold");
-                doc.text("Observaciones: ",10, 150);
-                doc.setFont("helvetica", "normal");
-                doc.text(obsr_v, 50, 150, { maxWidth: 150});
+            // Síntomas
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Sintomas:", 10, 130);
+            doc.setFont("helvetica", "normal");
+            doc.text(sin_v, 50, 130, { maxWidth: 150 });
 
-                // Pie de página
-                doc.setFontSize(10);
-                doc.setFont("helvetica", "bold");
-                doc.text("Doctor", 10, 280)
-                doc.setFont("helvetica", "normal");
-                doc.text(doctor_v, 25, 280);
+            // Observaciones
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text("Observaciones: ", 10, 150);
+            doc.setFont("helvetica", "normal");
+            doc.text(obsr_v, 50, 150, { maxWidth: 150 });
 
-                doc.text("Derechos reservados", 105, 280, { align: "center" });
+            // Pie de página
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bold");
+            doc.text("Doctor", 10, 280)
+            doc.setFont("helvetica", "normal");
+            doc.text(doctor_v, 25, 280);
+
+            doc.text("Derechos reservados", 105, 280, { align: "center" });
 
             const pdfBlob = doc.output("blob");
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
 
           }, error: (error) => {
             console.log(error)
@@ -186,35 +192,35 @@ export class ReportesPacienteComponent implements OnInit {
 
             const doc = new jsPDF();
 
-           
-                var body = [];
-                for (let i = 0; i < this.todos.length; i++) {
-                    console.log("´probando el for ");
-                    body.push([this.todos[i].fecha, this.todos[i].hora, this.todos[i].medico]);
-                }
-                doc.setFontSize(35);
-                doc.setFont("helvetica");
-                doc.text( "Hostipal", 76, 20,);
-                const docWidth = doc.internal.pageSize.getWidth();
-                doc.line(0, 30, docWidth, 30);
-                doc.setFontSize(18);
-                doc.text("Las citas medicas pendientes que tienes son", 12, 40);
-                var columns = ["fecha", "hora", "medico"];
+
+            var body = [];
+            for (let i = 0; i < this.todos.length; i++) {
+              console.log("´probando el for ");
+              body.push([this.todos[i].fecha, this.todos[i].hora, this.todos[i].medico]);
+            }
+            doc.setFontSize(35);
+            doc.setFont("helvetica");
+            doc.text("Hostipal", 76, 20,);
+            const docWidth = doc.internal.pageSize.getWidth();
+            doc.line(0, 30, docWidth, 30);
+            doc.setFontSize(18);
+            doc.text("Las citas medicas pendientes que tienes son", 12, 40);
+            var columns = ["fecha", "hora", "medico"];
 
 
-               autoTable( doc,{
-                startY: 50,
-                head: [['Fecha', 'Hora', 'Médico']], // Encabezados
-                body: body, // Tu array de arrays con datos
-                margin: { top: 70 },
-                styles: { fontSize: 10, cellPadding: 2 },
-                columnStyles: {
-                    0: { cellWidth: 40 }, 
-                    1: { cellWidth: 30 }, 
-                    2: { cellWidth: 60 }, 
-                },
-                theme: 'grid'
-                });
+            autoTable(doc, {
+              startY: 50,
+              head: [['Fecha', 'Hora', 'Médico']], // Encabezados
+              body: body, // Tu array de arrays con datos
+              margin: { top: 70 },
+              styles: { fontSize: 10, cellPadding: 2 },
+              columnStyles: {
+                0: { cellWidth: 40 },
+                1: { cellWidth: 30 },
+                2: { cellWidth: 60 },
+              },
+              theme: 'grid'
+            });
 
             const pdfBlob = doc.output("blob");
             this.pdfUrl = URL.createObjectURL(pdfBlob);
