@@ -18,8 +18,8 @@ export class ChatboxService {
 
     constructor(private http: HttpClient) { }
 
-    Chatbox(user: Chatbox): Observable<Chatbox[]> {//Todos los usuarios
-        return this.http.post<Chatbox[]>('https://4229cc3b5ee3.ngrok-free.app/webhooks/rest/webhook', user);
+    Chatbox(user: Chatbox): Observable<Chatbox[]> {//http://localhost:5005
+        return this.http.post<Chatbox[]>('https://c5b10104b573.ngrok-free.app/webhooks/rest/webhook', user);
     }
 
 
