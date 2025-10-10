@@ -52,7 +52,7 @@ export class ReportesMedicoComponent implements OnInit {
 
   todos: any = {};
   a: any = {}
-  doctores:any = {};
+  doctores: any = {};
   loading = true;
   error = null;
 
@@ -76,40 +76,40 @@ export class ReportesMedicoComponent implements OnInit {
 
 
   //Esto es cuando le de clic enviar correo
-  asunto: String=""
-  ms: String=""
-  enlace: String=""
+  asunto: String = ""
+  ms: String = ""
+  enlace: String = ""
 
-  seleccion_doctor: String[]= [];
+  seleccion_doctor: String[] = [];
   seleccionado = [];
   loading_select = false;
 
 
-  v_change: String=""
+  v_change: String = ""
 
   formSubmit(event: any) {
     event.preventDefault();
     this.sendEmail();
-   }//
+  }//
 
 
-  select_change() { 
+  select_change() {
 
-  try {
-            this.loading_select = false;
-            
-            
+    try {
+      this.loading_select = false;
 
-            console.log("funcion select_change", this.v_change);
-            this.seleccion_doctor.push(this.v_change);
-            this.a = this.seleccion_doctor;
-            console.log("funcion push", this.seleccion_doctor);
-        } catch (e: any) {
-            this.error = e.message;
-            console.log(this.error);
-        } finally {
-            this.loading_select = true;
-        }
+
+
+      console.log("funcion select_change", this.v_change);
+      this.seleccion_doctor.push(this.v_change);
+      this.a = this.seleccion_doctor;
+      console.log("funcion push", this.seleccion_doctor);
+    } catch (e: any) {
+      this.error = e.message;
+      console.log(this.error);
+    } finally {
+      this.loading_select = true;
+    }
 
 
   }
@@ -117,11 +117,11 @@ export class ReportesMedicoComponent implements OnInit {
 
 
   Ocultar() {
-     this.seleccion_doctor= []
-     this.a= {}
-     console.log(this.a, this.seleccion_doctor)
-this.loading_select=false
-   }
+    this.seleccion_doctor = []
+    this.a = {}
+    console.log(this.a, this.seleccion_doctor)
+    this.loading_select = false
+  }
 
 
 
@@ -144,17 +144,17 @@ this.loading_select=false
         const fecha = fecha_de;
         const fecha2 = fecha_hasta;
         console.log("fechas---------", fecha, fecha2);
-         let miStorage = window.localStorage;
-              
-                  let usuario = JSON.parse(miStorage.getItem("usuario")?? '{}');
-                  let id = usuario.id;
-              
-        const R_usuario = { fecha, fecha2,id }
+        let miStorage = window.localStorage;
+
+        let usuario = JSON.parse(miStorage.getItem("usuario") ?? '{}');
+        let id = usuario.id;
+
+        const R_usuario = { fecha, fecha2, id }
 
         this.citasService.getReportes_citas_medicos(R_usuario).subscribe({
           next: (todos) => {
 
-               
+
 
             this.todos = todos
             this.todos = this.todos.resultado;
@@ -193,11 +193,16 @@ this.loading_select=false
             });
 
             const pdfBlob = doc.output("blob");
+            const pdfUrl = URL.createObjectURL(pdfBlob);
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
+
 
           }, error: (error) => {
             console.log(error)
@@ -253,12 +258,17 @@ this.loading_select=false
               margin: { top: 70 },
             });
 
-            const pdfBlob = doc.output("blob");
+             const pdfBlob = doc.output("blob");
+             const pdfUrl = URL.createObjectURL(pdfBlob);
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+             if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
+
 
           }, error: (error) => {
             console.log(error)
@@ -290,9 +300,9 @@ this.loading_select=false
               console.log("´probando el for ");
 
               body.push([
-                 this. todos[i].nombre,
-                       this.  todos[i].numero_citas,
-                        this. todos[i].Ultimodiagnostio,
+                this.todos[i].nombre,
+                this.todos[i].numero_citas,
+                this.todos[i].Ultimodiagnostio,
               ]);
               console.log("´probando el for 2");
             }
@@ -314,12 +324,17 @@ this.loading_select=false
               margin: { top: 70 },
             });
 
-            const pdfBlob = doc.output("blob");
+             const pdfBlob = doc.output("blob");
+             const pdfUrl = URL.createObjectURL(pdfBlob);
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+             if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
+
 
           }, error: (error) => {
             console.log(error)
@@ -347,41 +362,41 @@ this.loading_select=false
   select_doctor() {
 
 
-     try {
-           
+    try {
+
       this.userService.getMedico().subscribe({
-          next: (todos) => {
+        next: (todos) => {
 
-           this.doctores = todos;
-           this.doctores=this.doctores.resultado;
+          this.doctores = todos;
+          this.doctores = this.doctores.resultado;
 
-            const select_doctor = document.getElementById("select_email")
-            if (select_doctor){
-              select_doctor.innerHTML = "<option>Eliga un medico</option>";
-              
-              console.log(this.doctores[0]);
-              for (let i = 0; i < this.doctores.length; i++) {
-                const doctor_v = this.doctores[i];
-                const option = document.createElement("option");
-                option.value = doctor_v.usuario;
-                option.textContent = doctor_v.nombre;
-                select_doctor.appendChild(option);
-              }
-              
+          const select_doctor = document.getElementById("select_email")
+          if (select_doctor) {
+            select_doctor.innerHTML = "<option>Eliga un medico</option>";
+
+            console.log(this.doctores[0]);
+            for (let i = 0; i < this.doctores.length; i++) {
+              const doctor_v = this.doctores[i];
+              const option = document.createElement("option");
+              option.value = doctor_v.usuario;
+              option.textContent = doctor_v.nombre;
+              select_doctor.appendChild(option);
             }
 
-
-          }, error: (error) => {
-            console.log(error)
-
           }
-        });
 
-           
-        } catch (e: any) {
-           this. error = e.message;
-            console.log(this.error);
+
+        }, error: (error) => {
+          console.log(error)
+
         }
+      });
+
+
+    } catch (e: any) {
+      this.error = e.message;
+      console.log(this.error);
+    }
 
 
 
@@ -393,37 +408,37 @@ this.loading_select=false
 
       emailjs.init(this.apikey);
       emailjs
-      .send(this.serviceID, this.templateID, {
+        .send(this.serviceID, this.templateID, {
           asunto: this.asunto,
           email: ce,
           file: this.enlace,
           message: this.ms,
-      })
-      .then((result) => {
-          
- const Toast = Swal.mixin({
-          toast: true,
-          position: "bottom-end",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast: any) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        });
-        Toast.fire({
-          icon: "success",
-          iconColor: "#000000",
-          color: "black",
-          background: "#76fa78",
-          title: "usuario activado con exito",
-        });
+        })
+        .then((result) => {
 
-      })
-      .catch((error) => {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast: any) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
+            icon: "success",
+            iconColor: "#000000",
+            color: "black",
+            background: "#76fa78",
+            title: "usuario activado con exito",
+          });
+
+        })
+        .catch((error) => {
           console.log("Error al enviar el correo:", error.text);
-      });
+        });
     }
   }
 

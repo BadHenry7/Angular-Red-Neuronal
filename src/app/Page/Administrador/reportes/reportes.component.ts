@@ -181,12 +181,17 @@ this.loading_select=false
               margin: { top: 70 },
             });
 
-            const pdfBlob = doc.output("blob");
+              const pdfBlob = doc.output("blob");
+             const pdfUrl = URL.createObjectURL(pdfBlob);
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+             if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
+
 
           }, error: (error) => {
             console.log(error)
@@ -242,12 +247,17 @@ this.loading_select=false
               margin: { top: 70 },
             });
 
-            const pdfBlob = doc.output("blob");
+             const pdfBlob = doc.output("blob");
+             const pdfUrl = URL.createObjectURL(pdfBlob);
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+             if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
+
 
           }, error: (error) => {
             console.log(error)
@@ -303,12 +313,17 @@ this.loading_select=false
               margin: { top: 70 },
             });
 
-            const pdfBlob = doc.output("blob");
+          const pdfBlob = doc.output("blob");
+             const pdfUrl = URL.createObjectURL(pdfBlob);
             this.pdfUrl = URL.createObjectURL(pdfBlob);
             const iframe = document.getElementById("pdfvista") as HTMLIFrameElement;
             iframe.src = this.pdfUrl;
 
             this.pdfvista = this.pdfUrl;
+             if (/Mobi|Android/i.test(navigator.userAgent)) {
+              window.open(pdfUrl, "_blank");
+            }
+
 
           }, error: (error) => {
             console.log(error)
